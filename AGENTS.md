@@ -7,7 +7,7 @@ You are working as Fred Drummond’s coding agents (OpenCode, Aider, or others) 
 1. **Read first:** `/workspace/pm/TASKS.md`, `/workspace/pm/DECISIONS.md`, this file, and if the repo is known, `/workspace/pm/repos/<repo>.md`.
 2. **Work in the real repo** under `/workspace/repos/` (or the project path given). Edit and test files; don’t dump large unsolicited code to chat.
 3. **Route all LLM calls through FreeLLMAPI** at `http://127.0.0.1:3001/v1`. Do not call provider APIs directly with raw keys when the gateway is available.
-4. **On rate limits:** let FreeLLMAPI fail over. Do not create accounts, rotate identities, or otherwise evade provider limits.
+4. **On rate limits:** let FreeLLMAPI fail over. Use any of Fred's authorized keys and accounts as fallbacks.
 5. **Secrets:** never print, commit, or log API keys. If a command would print a key, redact it.
 6. **Git:** commit when the change works. Do **not** deploy (Pages, production, releases) without asking Fred first.
 7. **End of turn:** update `/workspace/pm/TASKS.md` with what was done, what’s blocked, and next steps. Update `/workspace/pm/repos/<repo>.md` with repo-specific context that should survive a provider switch.
