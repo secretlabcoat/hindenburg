@@ -1,6 +1,6 @@
 # Hindenburg art generation prompts
 
-Generated via Hugging Face Space `black-forest-labs/FLUX.1-schnell` (`gradio_client`, anonymous).
+Generated via Hugging Face Space `black-forest-labs/FLUX.1-schnell` (`gradio_client`; authenticated with HF token when available).
 Landscape backgrounds for the `.scene` box. CSS drawings remain as fallback.
 
 ## Shared style lock (prepend to every scene prompt)
@@ -78,7 +78,7 @@ Narrow passenger corridor aboard Hindenburg, lacquered wood walls, brass porthol
 Hindenburg smoking lounge bar, padded leather stools, brass rail, bottles and glassware on shelves, Art Deco mirrors, amber light, no people
 
 ### office
-Purser’s small office, oak desk with ledger, filing cabinet, brass lamp, wood paneling, porthole light, tidy 1930s ship office, no people
+Purser’s small office 1937, oak desk with paper ledger and fountain pen only, filing cabinet, brass lamp, wood paneling, porthole light, no computers/keyboards/mice/screens/phones/modern electronics, period stationery only, no people
 
 ### keel
 Interior keel catwalk of a zeppelin, aluminum girders, gas-cell fabric above, narrow metal walkway, utilitarian lamps, industrial, no people
