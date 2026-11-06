@@ -134,6 +134,6 @@ High among the airship’s rings, cramped girder nook, eerie quiet, strange smal
 ## Generation settings
 
 - Space: `black-forest-labs/FLUX.1-schnell`
-- Size: 1024×576 (landscape)
+- Size: 768×432 (landscape, iPhone-friendly; WebP <150 KB)
 - Steps: 4
 - Output: `assets/art/<style>.webp` target &lt;150 KB (Pillow WebP quality tuned)
