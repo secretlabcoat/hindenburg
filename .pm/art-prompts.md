@@ -5,11 +5,15 @@ Landscape backgrounds for the `.scene` box. CSS drawings remain as fallback.
 
 ## Shared style lock (prepend to every scene prompt)
 
+**Style reference:** Cyberflix *Titanic: Adventure Out of Time* (1996) — first-person pre-rendered 3D CGI adventure look. Style reference only; do **not** copy Titanic assets or likenesses.
+
 ```
-1937 LZ 129 Hindenburg airship interior, historically accurate Art Deco, warm brass fittings, lacquered mahogany and cream panels, muted sepia-gold palette, soft warm tungsten lighting, painterly point-and-click adventure game background, first-person eye-level view, empty of text watermarks logos and UI, no modern objects
+first-person pre-rendered 3D CGI scene in mid-1990s adventure-game style like Titanic Adventure Out of Time, realistic period-accurate 1937 LZ 129 Hindenburg interior, historically researched Art Deco fittings, warm tungsten practical lighting, slightly soft grainy 1990s CG render with gentle plastic sheen on wood and metal, eye-level camera, empty room, no painterly brushstrokes, no illustration, no anime, no readable text watermarks logos or UI, no modern objects
 ```
 
-Negative intent (also woven into prompts): no readable text, no watermarks, no UI chrome, no anachronisms.
+Negative intent: no painterly/illustrated look, no text/UI, no Titanic ship interiors (this is Hindenburg), no anachronisms.
+
+**Portraits:** the game uses CSS `.hot-person` silhouettes, not portrait stills — no separate portrait assets to generate.
 
 ## Viewpoint → style → asset
 
@@ -89,7 +93,7 @@ Hindenburg control car gondola, ship’s wheel and engine telegraphs, large forw
 Passenger lounge facing tall slanted observation windows, blue-grey sky outside, polished wood and brass, lounge chairs at sides, no people
 
 ### people
-Passenger lounge seating with two 1930s passengers in period evening dress (one older woman, one young woman), Art Deco chairs and table, warm interior, faces not celebrity likenesses
+Passenger lounge seating with two 1930s passengers in period evening dress (one older woman, one young woman) as mid-90s pre-rendered 3D figures, Art Deco chairs and table, warm tungsten light, not celebrity likenesses, same 1990s CG sheen as the room
 
 ### promenade
 Hindenburg promenade deck, long slanted observation windows, handrail, clouds beyond, elegant wood trim, empty seating, no people
