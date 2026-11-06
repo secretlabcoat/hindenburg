@@ -1,0 +1,546 @@
+[
+  {
+    "label": "mobile",
+    "nodeCount": 76,
+    "locations": {
+      "B-Deck Washroom": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "washroom_stall",
+          "washroom_basins",
+          "washroom_door",
+          "washroom_wall"
+        ]
+      },
+      "Cabin B-6 (B deck)": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "cabin_bunk",
+          "cabin_window",
+          "cabin_door",
+          "cabin_desk"
+        ]
+      },
+      "Passenger Lounge": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "lounge_windows",
+          "lounge_people",
+          "lounge_side",
+          "lounge_aft"
+        ]
+      },
+      "Promenade": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "promenade",
+          "promenade_side",
+          "promenade_far",
+          "promenade_aft"
+        ]
+      },
+      "Passenger Corridor": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "corridor_forward",
+          "corridor_left",
+          "corridor_end",
+          "corridor_right"
+        ]
+      },
+      "Bar & Smoking Room": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bar_counter",
+          "bar_booths",
+          "bar_windows",
+          "bar_door"
+        ]
+      },
+      "Purser's Office": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "office_desk",
+          "office_cabinet",
+          "office_porthole",
+          "office_door"
+        ]
+      },
+      "B-Deck Corridor": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bdeck_corr_washdoor",
+          "bdeck_corr_stairs",
+          "bdeck_corr_office",
+          "bdeck_corr_cabins"
+        ]
+      },
+      "B Deck · Stair Landing": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bdeck_stairs_door",
+          "bdeck_stairs_up",
+          "bdeck_stairs_bar",
+          "bdeck_stairs_wall"
+        ]
+      },
+      "B-Deck Corridor · Cabins": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bdeck_cabins_door",
+          "bdeck_cabins_crew",
+          "bdeck_cabins_back",
+          "bdeck_cabins_wall"
+        ]
+      },
+      "B Deck · Crew Door": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "crew_door_in",
+          "crew_door_hall",
+          "crew_door_sign",
+          "crew_door_pipes"
+        ]
+      },
+      "Passenger Cabin (A deck)": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "adeck_cabin",
+          "adeck_cabin_door",
+          "adeck_cabin_curtain",
+          "adeck_cabin_wardrobe"
+        ]
+      },
+      "Keel Walkway": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "keel_walk",
+          "keel_hatch",
+          "keel_back",
+          "keel_up"
+        ]
+      },
+      "Control Car": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "control_helm",
+          "control_starboard",
+          "control_back",
+          "control_port"
+        ]
+      },
+      "High in the Rings": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "girder_nook",
+          "girder_nook_right",
+          "girder_nook_down",
+          "girder_nook_left"
+        ]
+      },
+      "Keel Tour · tour_shoes": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_shoes",
+          "tour_shoes_l",
+          "tour_shoes_r",
+          "tour_shoes_back"
+        ]
+      },
+      "Keel Tour · tour_cells": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_cells",
+          "tour_cells_l",
+          "tour_cells_r",
+          "tour_cells_back"
+        ]
+      },
+      "Keel Tour · tour_tanks": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_tanks",
+          "tour_tanks_l",
+          "tour_tanks_r",
+          "tour_tanks_back"
+        ]
+      },
+      "Keel Tour · tour_end": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_end",
+          "tour_end_l",
+          "tour_end_r",
+          "tour_end_back"
+        ]
+      }
+    },
+    "errors": [],
+    "failures": [],
+    "mainPathSmoke": [
+      {
+        "expect": "washroom_basins",
+        "view": "washroom_basins",
+        "ok": true
+      },
+      {
+        "expect": "washroom_door",
+        "view": "washroom_door",
+        "ok": true
+      },
+      {
+        "expect": "bdeck_corr_washdoor",
+        "view": "bdeck_corr_washdoor",
+        "ok": true
+      }
+    ]
+  },
+  {
+    "label": "desktop",
+    "nodeCount": 76,
+    "locations": {
+      "B-Deck Washroom": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "washroom_stall",
+          "washroom_basins",
+          "washroom_door",
+          "washroom_wall"
+        ]
+      },
+      "Cabin B-6 (B deck)": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "cabin_bunk",
+          "cabin_window",
+          "cabin_door",
+          "cabin_desk"
+        ]
+      },
+      "Passenger Lounge": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "lounge_windows",
+          "lounge_people",
+          "lounge_side",
+          "lounge_aft"
+        ]
+      },
+      "Promenade": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "promenade",
+          "promenade_side",
+          "promenade_far",
+          "promenade_aft"
+        ]
+      },
+      "Passenger Corridor": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "corridor_forward",
+          "corridor_left",
+          "corridor_end",
+          "corridor_right"
+        ]
+      },
+      "Bar & Smoking Room": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bar_counter",
+          "bar_booths",
+          "bar_windows",
+          "bar_door"
+        ]
+      },
+      "Purser's Office": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "office_desk",
+          "office_cabinet",
+          "office_porthole",
+          "office_door"
+        ]
+      },
+      "B-Deck Corridor": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bdeck_corr_washdoor",
+          "bdeck_corr_stairs",
+          "bdeck_corr_office",
+          "bdeck_corr_cabins"
+        ]
+      },
+      "B Deck · Stair Landing": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bdeck_stairs_door",
+          "bdeck_stairs_up",
+          "bdeck_stairs_bar",
+          "bdeck_stairs_wall"
+        ]
+      },
+      "B-Deck Corridor · Cabins": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "bdeck_cabins_door",
+          "bdeck_cabins_crew",
+          "bdeck_cabins_back",
+          "bdeck_cabins_wall"
+        ]
+      },
+      "B Deck · Crew Door": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "crew_door_in",
+          "crew_door_hall",
+          "crew_door_sign",
+          "crew_door_pipes"
+        ]
+      },
+      "Passenger Cabin (A deck)": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "adeck_cabin",
+          "adeck_cabin_door",
+          "adeck_cabin_curtain",
+          "adeck_cabin_wardrobe"
+        ]
+      },
+      "Keel Walkway": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "keel_walk",
+          "keel_hatch",
+          "keel_back",
+          "keel_up"
+        ]
+      },
+      "Control Car": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "control_helm",
+          "control_starboard",
+          "control_back",
+          "control_port"
+        ]
+      },
+      "High in the Rings": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "girder_nook",
+          "girder_nook_right",
+          "girder_nook_down",
+          "girder_nook_left"
+        ]
+      },
+      "Keel Tour · tour_shoes": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_shoes",
+          "tour_shoes_l",
+          "tour_shoes_r",
+          "tour_shoes_back"
+        ]
+      },
+      "Keel Tour · tour_cells": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_cells",
+          "tour_cells_l",
+          "tour_cells_r",
+          "tour_cells_back"
+        ]
+      },
+      "Keel Tour · tour_tanks": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_tanks",
+          "tour_tanks_l",
+          "tour_tanks_r",
+          "tour_tanks_back"
+        ]
+      },
+      "Keel Tour · tour_end": {
+        "facingCount": 4,
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true,
+        "ids": [
+          "tour_end",
+          "tour_end_l",
+          "tour_end_r",
+          "tour_end_back"
+        ]
+      }
+    },
+    "errors": [],
+    "failures": [],
+    "mainPathSmoke": [
+      {
+        "expect": "washroom_basins",
+        "view": "washroom_basins",
+        "ok": true
+      },
+      {
+        "expect": "washroom_door",
+        "view": "washroom_door",
+        "ok": true
+      },
+      {
+        "expect": "bdeck_corr_washdoor",
+        "view": "bdeck_corr_washdoor",
+        "ok": true
+      }
+    ]
+  }
+]
