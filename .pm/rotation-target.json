@@ -1,0 +1,170 @@
+{
+  "art_key": "node_id",
+  "cdn_note": "After pushing assets, set ART_COMMIT to that commit SHA; artUrl(style) becomes artUrl(view) using node id.",
+  "locations": [
+    {
+      "id": "washroom",
+      "name": "B-Deck Washroom",
+      "facings": [
+        {"id": "washroom_stall", "facing": "the shower stall · your hiding place", "style": "washshower", "forward": null, "keep": true},
+        {"id": "washroom_basins", "facing": "wash basins and mirror", "style": "washbasin", "forward": null, "keep": true},
+        {"id": "washroom_door", "facing": "door to the B-deck corridor", "style": "washdoor", "forward": "bdeck_corr_washdoor", "keep": true},
+        {"id": "washroom_wall", "facing": "tiled wall and towel rail", "style": "washwall", "forward": null, "keep": false}
+      ],
+      "loop": ["washroom_stall", "washroom_basins", "washroom_door", "washroom_wall"]
+    },
+    {
+      "id": "cabin_b6",
+      "name": "Cabin B-6 (B deck)",
+      "facings": [
+        {"id": "cabin_bunk", "keep": true},
+        {"id": "cabin_window", "keep": true},
+        {"id": "cabin_door", "keep": true, "forward": "bdeck_cabins_door"},
+        {"id": "cabin_desk", "keep": true}
+      ],
+      "loop": ["cabin_bunk", "cabin_window", "cabin_door", "cabin_desk"],
+      "note": "Already 4; only fix forward target if bdeck_cabins is renamed."
+    },
+    {
+      "id": "lounge",
+      "name": "Passenger Lounge",
+      "loop": ["lounge_windows", "lounge_people", "lounge_side", "lounge_aft"],
+      "note": "Already 4; keep."
+    },
+    {
+      "id": "promenade",
+      "name": "Promenade",
+      "loop": ["promenade", "promenade_side", "promenade_far", "promenade_aft"],
+      "note": "Already 4; keep. Distinct art per facing (stop sharing door.webp for aft)."
+    },
+    {
+      "id": "corridor_a",
+      "name": "Passenger Corridor",
+      "loop": ["corridor_forward", "corridor_left", "corridor_end", "corridor_right"],
+      "note": "Already 4; keep. Distinct art per facing."
+    },
+    {
+      "id": "bar",
+      "name": "Bar & Smoking Room",
+      "facings": [
+        {"id": "bar_counter", "facing": "the bar", "style": "bar_counter", "forward": null},
+        {"id": "bar_booths", "facing": "leather booths", "style": "bar_booths", "forward": null},
+        {"id": "bar_windows", "facing": "smoking-room windows", "style": "bar_windows", "forward": null},
+        {"id": "bar_door", "facing": "door to B-deck corridor", "style": "bar_door", "forward": "bdeck_stairs_door"}
+      ],
+      "loop": ["bar_counter", "bar_booths", "bar_windows", "bar_door"]
+    },
+    {
+      "id": "office",
+      "name": "Purser’s Office",
+      "facings": [
+        {"id": "office_desk", "facing": "the purser’s desk", "style": "office_desk", "forward": null},
+        {"id": "office_cabinet", "facing": "filing cabinets", "style": "office_cabinet", "forward": null},
+        {"id": "office_porthole", "facing": "porthole and chronometer", "style": "office_porthole", "forward": null},
+        {"id": "office_door", "facing": "door to B-deck corridor", "style": "office_door", "forward": "bdeck_corr_office"}
+      ],
+      "loop": ["office_desk", "office_cabinet", "office_porthole", "office_door"]
+    },
+    {
+      "id": "bdeck_corr",
+      "name": "B-Deck Corridor",
+      "facings": [
+        {"id": "bdeck_corr_washdoor", "facing": "washroom door", "style": "bdeck_corr_washdoor", "forward": "washroom_door", "replaces": "bdeck_washroom"},
+        {"id": "bdeck_corr_stairs", "facing": "stairs up to A deck", "style": "bdeck_corr_stairs", "forward": "corridor_right"},
+        {"id": "bdeck_corr_office", "facing": "purser’s office door", "style": "bdeck_corr_office", "forward": "office_door"},
+        {"id": "bdeck_corr_cabins", "facing": "toward the new cabins and crew door", "style": "bdeck_corr_cabins", "forward": "bdeck_cabins_door"}
+      ],
+      "loop": ["bdeck_corr_washdoor", "bdeck_corr_stairs", "bdeck_corr_office", "bdeck_corr_cabins"],
+      "note": "Replaces the old cross-room turn ring among bdeck_washroom/stairs/office/cabins for corridor movement. Stairs up still via forward on stairs facing. Crew/keel via cabins location."
+    },
+    {
+      "id": "bdeck_stairs_landing",
+      "name": "B Deck · Stair Landing",
+      "facings": [
+        {"id": "bdeck_stairs_door", "facing": "opening to B-deck corridor", "style": "bdeck_stairs_door", "forward": "bdeck_corr_stairs", "replaces": "bdeck_stairs"},
+        {"id": "bdeck_stairs_up", "facing": "stairs ascending to A deck", "style": "bdeck_stairs_up", "forward": "corridor_right"},
+        {"id": "bdeck_stairs_bar", "facing": "door to bar & smoking room", "style": "bdeck_stairs_bar", "forward": "bar_door"},
+        {"id": "bdeck_stairs_wall", "facing": "lacquered bulkhead", "style": "bdeck_stairs_wall", "forward": null}
+      ],
+      "loop": ["bdeck_stairs_door", "bdeck_stairs_up", "bdeck_stairs_bar", "bdeck_stairs_wall"]
+    },
+    {
+      "id": "bdeck_cabins_hall",
+      "name": "B-Deck Corridor · Cabins",
+      "facings": [
+        {"id": "bdeck_cabins_door", "facing": "cabin B-6 door", "style": "bdeck_cabins_door", "forward": "cabin_door", "replaces": "bdeck_cabins"},
+        {"id": "bdeck_cabins_crew", "facing": "crew door to the keel", "style": "bdeck_cabins_crew", "forward": "crew_door_in"},
+        {"id": "bdeck_cabins_back", "facing": "back toward the washroom corridor", "style": "bdeck_cabins_back", "forward": "bdeck_corr_cabins"},
+        {"id": "bdeck_cabins_wall", "facing": "cabin bulkheads", "style": "bdeck_cabins_wall", "forward": null}
+      ],
+      "loop": ["bdeck_cabins_door", "bdeck_cabins_crew", "bdeck_cabins_back", "bdeck_cabins_wall"]
+    },
+    {
+      "id": "crew_threshold",
+      "name": "B Deck · Crew Door",
+      "facings": [
+        {"id": "crew_door_in", "facing": "crew door · keel · no passengers", "style": "crew_door_in", "forward": "keel_walk", "replaces": "crew_door"},
+        {"id": "crew_door_hall", "facing": "back to cabin corridor", "style": "crew_door_hall", "forward": "bdeck_cabins_crew"},
+        {"id": "crew_door_sign", "facing": "crew-only notice board", "style": "crew_door_sign", "forward": null},
+        {"id": "crew_door_pipes", "facing": "service pipes and valves", "style": "crew_door_pipes", "forward": null}
+      ],
+      "loop": ["crew_door_in", "crew_door_hall", "crew_door_sign", "crew_door_pipes"]
+    },
+    {
+      "id": "adeck_cabin",
+      "name": "Passenger Cabin (A deck)",
+      "facings": [
+        {"id": "adeck_cabin", "facing": "someone else’s cabin · no window", "style": "adcabin_bunks", "forward": null, "keep": true},
+        {"id": "adeck_cabin_door", "facing": "door to the corridor", "style": "adcabin_door", "forward": "corridor_left"},
+        {"id": "adeck_cabin_curtain", "facing": "berth curtain", "style": "adcabin_curtain", "forward": null},
+        {"id": "adeck_cabin_wardrobe", "facing": "wardrobe niche", "style": "adcabin_wardrobe", "forward": null}
+      ],
+      "loop": ["adeck_cabin", "adeck_cabin_door", "adeck_cabin_curtain", "adeck_cabin_wardrobe"]
+    },
+    {
+      "id": "keel",
+      "name": "Keel Walkway",
+      "facings": [
+        {"id": "keel_walk", "facing": "catwalk toward the control car", "style": "keel_forward", "forward": "control_helm", "keep": true},
+        {"id": "keel_hatch", "facing": "a hatch in the outer cover", "style": "keelhatch", "forward": null, "keep": true},
+        {"id": "keel_back", "facing": "door back to B Deck", "style": "keel_back", "forward": "crew_door_in", "keep": true},
+        {"id": "keel_up", "facing": "looking up into the gas cells", "style": "keel_up", "forward": null}
+      ],
+      "loop": ["keel_walk", "keel_hatch", "keel_back", "keel_up"]
+    },
+    {
+      "id": "control",
+      "name": "Control Car",
+      "facings": [
+        {"id": "control_helm", "facing": "the helm", "style": "control_helm", "forward": null, "keep": true},
+        {"id": "control_back", "facing": "ladder up to the keel", "style": "control_ladder", "forward": "keel_walk", "keep": true},
+        {"id": "control_port", "facing": "port instruments", "style": "control_port", "forward": null},
+        {"id": "control_starboard", "facing": "starboard windows over the clouds", "style": "control_starboard", "forward": null}
+      ],
+      "loop": ["control_helm", "control_starboard", "control_back", "control_port"]
+    },
+    {
+      "id": "girder_nook",
+      "name": "High in the Rings",
+      "facings": [
+        {"id": "girder_nook", "facing": "something watching", "style": "nook_watch", "forward": null, "keep": true},
+        {"id": "girder_nook_down", "facing": "climb back down", "style": "nook_down", "forward": "keel_back"},
+        {"id": "girder_nook_left", "facing": "girders vanishing into shadow", "style": "nook_left", "forward": null},
+        {"id": "girder_nook_right", "facing": "cable runs along the ring", "style": "nook_right", "forward": null}
+      ],
+      "loop": ["girder_nook", "girder_nook_right", "girder_nook_down", "girder_nook_left"]
+    },
+    {
+      "id": "tour",
+      "name": "Keel Tour (escorted)",
+      "note": "Keep forward chain tour_shoes→cells→tanks→end→keel_walk. Add left/right look-around facings per stop (optional 4) without breaking forward. Minimum: each stop gets L/R to 3 look facings + return, OR treat as 4-facing locations with forward on one wall.",
+      "stops": ["tour_shoes", "tour_cells", "tour_tanks", "tour_end"]
+    }
+  ],
+  "aliases_for_saves": {
+    "bdeck_washroom": "bdeck_corr_washdoor",
+    "bdeck_stairs": "bdeck_stairs_door",
+    "bdeck_cabins": "bdeck_cabins_door",
+    "crew_door": "crew_door_in"
+  }
+}
