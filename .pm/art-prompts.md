@@ -3,6 +3,37 @@
 Generated via Hugging Face Space `black-forest-labs/FLUX.1-schnell` (`gradio_client`; authenticated with HF token when available).
 Landscape backgrounds for the `.scene` box. CSS drawings remain as fallback.
 
+
+## Style bible — Titanic AOOT consistent 4-facing rooms (2026-11-06)
+
+**Reference only:** Cyberflix *Titanic: Adventure Out of Time* (1996) first-person pre-rendered nodes. Do not copy Titanic assets.
+
+### Global lock (every facing)
+```
+first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only,
+realistic period-accurate 1937 LZ 129 Hindenburg interior, historically researched Art Deco,
+warm tungsten practical lighting, slightly soft grainy 1990s CG render, gentle plastic sheen on wood and metal,
+eye-level camera, 50mm equivalent lens, consistent horizon and camera height across all facings of the same room,
+empty of text watermarks logos UI, no modern objects, no computers keyboards mice screens phones tablets,
+not the Titanic ocean liner
+```
+
+### Per-deck material kits (keep identical across a room’s 4 walls)
+- **A-deck passenger (lounge, promenade, corridor, cabins):** lacquered mahogany, cream panels, brass fittings, patterned carpet runners, warm amber sconces.
+- **B-deck service (washroom, corridor, stairs, bar, office, crew):** slightly darker wood or tile; washroom = teal gloss tile + B/W check floor; bar = leather + brass rail; office = oak desk + porthole.
+- **Keel / control:** aluminum girders, fabric gas cells, utilitarian lamps (keel); polished wood gondola + brass instruments + cloud windows (control).
+
+### Room consistency rules
+1. Shared **room prefix** in every facing prompt for that location (same furniture vocabulary, same palette).
+2. **Seed family** per room: base seed S, facings use S, S+1, S+2, S+3.
+3. Turning left/right must feel like the same room — repeated landmarks visible from multiple angles when sensible.
+4. Size: 768×432 WebP, target &lt;150 KB.
+5. People only in lounge `people` facings (period dress, mid-90s CG figures).
+
+### Art file naming
+`assets/art/<nodeId>.webp` (one image per facing). Legacy style-named files may remain as fallbacks.
+
+
 ## Shared style lock (prepend to every scene prompt)
 
 **Style reference:** Cyberflix *Titanic: Adventure Out of Time* (1996) — first-person pre-rendered 3D CGI adventure look. Style reference only; do **not** copy Titanic assets or likenesses.
