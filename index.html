@@ -1,0 +1,878 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hindenburg — Prototype</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#12100e;color:#eadcc4;font:16px Georgia,serif}.shell{max-width:1100px;margin:auto;padding:10px}.top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 8px;color:#c9b38a}.top strong{letter-spacing:3px}.top button,.bottom button{background:#292019;color:#eadcc4;border:1px solid #9c7846;border-radius:4px;padding:9px;cursor:pointer}.scene{height:min(56vw,560px);min-height:300px;position:relative;overflow:hidden;border:7px ridge #8c6939;background:linear-gradient(180deg,#a7b6c7,#c4b5a2 58%,#5e4b3d 58%)}.sky{position:absolute;inset:0 0 42%;background:linear-gradient(#8098b5,#b9c9d8 65%,#f4d9b2)}.windows{position:absolute;inset:5% 3% 35%;display:flex;gap:8px;transform:skew(-5deg)}.window{flex:1;border:10px solid #726452;background:linear-gradient(#8fa8c3,#e3d4bd);box-shadow:inset 0 0 0 3px #c9b894;position:relative}.window:after{content:"";position:absolute;left:45%;top:0;height:100%;width:7px;background:#776653;transform:skew(-15deg)}.wall{position:absolute;inset:0;background:linear-gradient(90deg,#8c7866 0 11%,transparent 11% 88%,#8c7866 88%);pointer-events:none}.floor{position:absolute;inset:65% 0 0;background:repeating-linear-gradient(35deg,#594739,#594739 17px,#685242 18px,#685242 35px)}.table{position:absolute;bottom:13%;left:37%;width:25%;height:12%;background:radial-gradient(ellipse,#a98a63 0 55%,#4d3325 56%);border-radius:50%;box-shadow:0 17px 0 -8px #3b2d22}.chair{position:absolute;bottom:10%;width:17%;height:20%;border:9px solid #a1845b;border-radius:35% 35% 10% 10%;background:repeating-linear-gradient(90deg,#977d58 0 5px,#b39a70 6px 10px)}.chair.a{left:16%}.chair.b{right:14%}.person{position:absolute;bottom:22%;width:13%;height:45%;cursor:pointer;filter:drop-shadow(3px 5px 4px #382d2788)}.person:before{content:"";position:absolute;top:0;left:28%;width:44%;height:25%;border-radius:50% 50% 45% 45%;background:#d5ad8d;border-top:13px solid #45392e}.person:after{content:"";position:absolute;top:22%;left:8%;width:84%;height:75%;background:linear-gradient(90deg,#3b3a40,#777078,#38363c);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border-radius:20%}.person.damina{left:23%}.person.damina:before{border-top:17px solid #564638}.person.damina:after{background:linear-gradient(90deg,#48382f,#877360,#4c3833)}.person.snardy{right:25%;height:34%;bottom:23%}.person.snardy:after{background:linear-gradient(90deg,#433f50,#827b8c,#454051)}.hotspot{position:absolute;bottom:5%;right:3%;background:#261c15d9;color:#f1dcac;border:1px solid #b48b52;padding:9px;cursor:pointer}.tag{position:absolute;top:10px;left:12px;padding:5px 10px;background:#231d17bf;color:#f5e2b9}.bottom{display:grid;grid-template-columns:135px minmax(0,1fr) 175px;gap:8px;margin-top:8px}.panel{border:5px ridge #8c6939;background:#211916;padding:10px;min-height:260px}.verbs{display:flex;flex-direction:column;gap:7px}.verbs button{width:100%}.dialogue{height:125px;overflow:auto;line-height:1.5}.dialogue p{margin:0 0 9px}.dialogue .you{color:#a9c6d4}.dialogue .npc{color:#f4dcad}.entry{display:flex;gap:6px;margin-top:8px}.entry input{min-width:0;flex:1;background:#100f0d;color:#fff;border:1px solid #a38352;padding:11px;font:16px Georgia}.entry button{min-width:72px}.inv{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.item{border:1px solid #82613d;min-height:65px;display:flex;align-items:center;justify-content:center;font-size:29px;cursor:pointer}.item.selected{outline:2px solid #e6c47e}.small{font-size:12px;color:#bca783;margin-top:8px;line-height:1.4}.status{padding:8px 3px;color:#bca783;font-size:13px}.settings{display:none;margin:8px 0;padding:10px;border:1px solid #8c6939;background:#231b16}.settings.open{display:block}.settings input{width:100%;padding:9px;background:#100f0d;color:white;border:1px solid #80643f;margin:5px 0}.notice{font-size:13px;color:#e2bf87}@media(max-width:650px){.scene{min-height:275px}.bottom{grid-template-columns:85px 1fr;gap:5px}.panel{padding:7px;min-height:0}.verbs button{font-size:12px;padding:8px 2px}.inventory{grid-column:1 / -1}.inv{grid-template-columns:repeat(4,1fr)}.dialogue{height:150px}.person{width:19%}.person.damina{left:18%}.person.snardy{right:18%}}
+</style></head><body><main class="shell"><header class="top"><strong>HINDENBURG</strong><span id="clock">May 6, 1937 · Early evening</span><button id="settingsBtn">AI settings</button></header><div class="settings" id="settings"><div>Optional Cloudflare relay URL (the demo works offline with scripted responses):</div><input id="relay" placeholder="https://your-worker.workers.dev"><div class="notice">Do not enter an API key here. Connect only to a relay you control. The relay must support POST /talk.</div><button id="saveSettings">Save relay URL</button></div><section class="scene" id="scene"><div class="sky"></div><div class="windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div><div class="wall"></div><div class="floor"></div><div class="chair a"></div><div class="chair b"></div><div class="table"></div><div class="person damina" data-person="Damina Vontette" title="Talk to Damina Vontette"></div><div class="person snardy" data-person="Snardy Vontette" title="Talk to Snardy Vontette"></div><div class="tag" id="room">Passenger Lounge</div><button class="hotspot" id="move">Go to promenade →</button></section><div class="bottom"><aside class="panel verbs"><button id="talk">Talk</button><button id="examine">Examine</button><button id="take">Take</button><button id="use">Use</button><button id="back">Return</button></aside><section class="panel"><div class="dialogue" id="log" aria-live="polite"></div><form class="entry" id="form"><input id="say" autocomplete="off" maxlength="350" placeholder="Type anything you want to say…" aria-label="What do you say?"><button type="submit">Speak</button></form><div class="small" id="speaker">Select a passenger to speak with them.</div></section><aside class="panel inventory"><strong>YOUR POSSESSIONS</strong><div class="inv" id="inv"><div class="item" data-item="Notebook" title="Notebook">📓</div><div class="item" data-item="Key" title="Key">🗝️</div><div class="item" data-item="Scrap of paper" title="Scrap of paper">📜</div><div class="item" data-item="Empty pocket" title="Empty pocket">·</div></div><div class="small" id="itemnote">Click an item to examine it.</div></aside></div><div class="status" id="status">Prototype · One lounge and promenade · Offline dialogue is scripted; live AI requires a compatible relay.</div></main><script>
+const $=s=>document.querySelector(s),log=$('#log');let room='lounge',who='',selected='',turns=0;const histories={};const beliefs={'Damina Vontette':{trust:0,claims:[]},'Snardy Vontette':{trust:0,claims:[]}};
+function line(name,msg,cls='npc'){const p=document.createElement('p');p.className=cls;const b=document.createElement('b');b.textContent=name+': ';p.append(b,document.createTextNode(msg));log.append(p);log.scrollTop=log.scrollHeight}
+function narrate(s){line('Narrator',s,'narrator')}
+function choose(n){who=n;$('#speaker').textContent='Speaking with '+n;line(n,(typeof GREET!=='undefined'&&GREET[n])?GREET[n]:n.startsWith('Damina')?'You appear to have mistaken this lounge for somewhere you belong. Can I help you?':'I have been writing down the names of everyone I see. What is yours?');$('#say').focus()}
+document.querySelectorAll('.person').forEach(e=>e.onclick=()=>choose(e.dataset.person));
+function move(){room=room==='lounge'?'promenade':'lounge';$('#room').textContent=room==='lounge'?'Passenger Lounge':'Promenade Windows';$('#move').textContent=room==='lounge'?'Go to promenade →':'← Return to lounge';document.querySelectorAll('.person,.chair,.table').forEach(e=>e.style.display=room==='lounge'?'':'none');who='';$('#speaker').textContent='Select a passenger to speak with them.';narrate(room==='lounge'?'You return to the lounge. The passengers are still here.':'The airship hangs over a blue-grey landscape. Far below, the earth looks remarkably unconcerned.')}
+$('#move').onclick=move;$('#back').onclick=()=>room==='promenade'?move():narrate('You have nowhere else to go just yet.');$('#talk').onclick=()=>narrate('Tap a passenger in the scene to begin a conversation.');$('#examine').onclick=()=>narrate(room==='lounge'?'Wicker chairs, large angled windows, and two passengers who do not seem especially pleased to see you.':'The windows frame the countryside far below. The ship moves almost imperceptibly.');$('#take').onclick=()=>narrate('Nothing here looks unattended enough to pocket.');$('#use').onclick=()=>narrate(selected?'You consider using the '+selected+'. There is no obvious use for it here.':'Select something from your inventory first.');document.querySelectorAll('.item').forEach(e=>e.onclick=()=>{selected=e.dataset.item;document.querySelectorAll('.item').forEach(x=>x.classList.toggle('selected',x===e));$('#itemnote').textContent=selected==='Notebook'?'A few empty pages. Useful for keeping track of your invented life.':selected==='Key'?'An unmarked brass key. You do not know which door it opens.':selected==='Scrap of paper'?'A torn scrap bearing the words “Lakehurst — May 6”.':'Nothing in this pocket.'});
+function offline(n,s){const q=s.toLowerCase(),b=beliefs[n];b.claims.push(s);if(b.claims.length>8)b.claims.shift();if(/captain|officer|control car|bridge/.test(q))return n.startsWith('Damina')?'The officers have duties. I doubt they would interrupt them for a stranger.':'I saw an officer by the corridor. He looked as if he had misplaced something.';if(/fire|crash|disaster|danger|explode|die|evacuat/.test(q)){b.trust--;return n.startsWith('Damina')?'That is a very serious claim. What evidence do you have?':'Why do you think that? Did somebody tell you?'}if(/name|who am i|my name|i am |i’m |i'm /.test(q)){b.trust++;return n.startsWith('Damina')?'I see. And who might confirm that, if I were to ask?':'Interesting. I shall write that down. I hope it is true.'}if(/snardy|aunt|damina/.test(q))return n.startsWith('Damina')?'Snardy is my responsibility. Please tell me precisely what you want with her.':'My aunt notices nearly everything, except when I am listening.';if(/help|please|trust|believe/.test(q))return n.startsWith('Damina')?'Good manners are a beginning, not a credential. What exactly do you need?':'Perhaps. But you have not told me why.';return n.startsWith('Damina')?['I am not entirely convinced. Could you be more specific?','That is a curious thing to say to a person you have only just met.','And how, exactly, did you come to know that?'][turns%3]:['That sounds worth writing down.','Are you certain? My aunt says people invent things.','You speak as though you have been here before.'][turns%3]}
+const RELAY_DEFAULT='https://hindenburg-ai.secretlabcoat-0ba.workers.dev';
+const npcIds={'Damina Vontette':'aunt','Snardy Vontette':'snardy'};
+const relayStoreKey='hindenburg_relay_url';
+$('#relay').value=localStorage.getItem(relayStoreKey)||RELAY_DEFAULT;
+for(const n of Object.keys(beliefs)){beliefs[n].trust=30;beliefs[n].heard=[];}
+function showAIStatus(message){let el=document.getElementById('aiConnectionStatus');if(!el){el=document.createElement('div');el.id='aiConnectionStatus';el.className='notice';$('#settings').append(el)}el.textContent=message;}
+$('#form').onsubmit=async e=>{e.preventDefault();let s=$('#say').value.trim();if(!s)return;if(!who){narrate('Choose a passenger first.');return}$('#say').value='';line('You',s,'you');turns++;const n=who,url=$('#relay').value.trim().replace(/\/$/,'');if(!url){line(n,offline(n,s));showAIStatus('Offline scripted dialogue — enter a relay URL to use AI.');return}const b=beliefs[n],history=histories[n]||[];$('#speaker').textContent='Waiting for AI response from '+n+'…';try{const r=await fetch(url+'/talk',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({npc:npcIds[n],line:s,trust:b.trust,phase:'crossing',claims:b.claims,heard:b.heard,history:history.slice(-4)})});const data=await r.json();if(!r.ok)throw Error(data.error||'HTTP '+r.status);if(data.fallback)throw Error('AI relay returned its scripted fallback. Check the provider connection.');const reply=data.reply;if(typeof reply!=='string'||!reply.trim())throw Error('No dialogue returned');line(n,reply);histories[n]=[...history,{who:'player',text:s},{who:'npc',text:reply}].slice(-8);b.trust=Math.max(0,Math.min(100,b.trust+(Number(data.trust_delta)||0)));if(data.claim&&!b.claims.includes(data.claim))b.claims.push(data.claim);b.claims=b.claims.slice(-6);$('#speaker').textContent='Speaking with '+n+' · AI connected';showAIStatus('AI connected: last response from '+n+'.');}catch(err){line('Connection', 'AI unavailable: '+err.message+'. Open AI settings to check the relay.','narrator');$('#speaker').textContent='AI connection failed · '+n;showAIStatus('AI connection failed: '+err.message);}};
+
+$('#settingsBtn').onclick=()=>$('#settings').classList.toggle('open');$('#saveSettings').onclick=()=>{localStorage.setItem(relayStoreKey,$('#relay').value.trim());$('#settings').classList.remove('open');showAIStatus('Relay URL saved.');};narrate('You are aboard the Hindenburg without a ticket, and you know what is going to happen. Nobody else does. Find a way to be believed — or a way off.');
+</script><style>
+.scene{transition:filter .18s,opacity .18s;cursor:default}.scene.travel{filter:blur(5px) brightness(.7);opacity:.7}.navdock{display:flex;gap:7px;justify-content:center;padding:9px;background:#211916;border:3px ridge #8c6939;margin-top:7px}.navdock button{background:linear-gradient(#554331,#271c16);border:1px solid #b69563;color:#f5e4c6;border-radius:5px;padding:10px 17px;font:17px Georgia;min-width:62px}.navdock button:disabled{opacity:.28}.navdock .loc{align-self:center;flex:1;text-align:center;color:#d9bd8d;font-size:13px}.scene .paint{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#6c5b4c,#b4a38a 59%,#6b5140 60%,#34291f)}.scene .ceiling{position:absolute;top:0;left:0;width:100%;height:24%;background:repeating-linear-gradient(90deg,#9c886f 0 4px,#c2b198 5px 75px,#8e7b66 77px 82px);clip-path:polygon(0 0,100% 0,85% 100%,15% 100%)}.scene .perspective-floor{position:absolute;bottom:0;left:0;width:100%;height:43%;background:repeating-linear-gradient(100deg,#6e5140 0 3px,#4e382c 4px 35px);clip-path:polygon(0 100%,100% 100%,70% 0,30% 0)}.scene .sidewall{position:absolute;top:18%;bottom:20%;width:26%;background:linear-gradient(90deg,#665447,#bca98c,#786450)}.scene .sidewall.left{left:0;clip-path:polygon(0 0,100% 17%,100% 83%,0 100%)}.scene .sidewall.right{right:0;clip-path:polygon(0 17%,100% 0,100% 100%,0 83%)}.scene .porthole{position:absolute;top:27%;height:30%;width:15%;border:12px ridge #bda57e;border-radius:46%;background:linear-gradient(#839eb8,#d4d9d1 65%,#8b9a92);box-shadow:0 5px 20px #35271d}.scene .porthole.l{left:6%}.scene .porthole.r{right:6%}.scene .doorway{position:absolute;left:40%;top:26%;width:20%;height:47%;background:linear-gradient(90deg,#312a24,#655747 18%,#1c1b1b 26%,#252322 75%,#82715b 83%,#352e29);border:8px ridge #c1aa84;cursor:pointer}.scene .doorway:after{content:'ENTER';position:absolute;top:52%;left:28%;color:#dfc99c;font:12px Georgia}.scene .hot-person{position:absolute;bottom:18%;width:16%;height:49%;cursor:pointer;filter:drop-shadow(4px 8px 5px #251b1a)}.scene .hot-person:before{content:'';position:absolute;left:27%;top:0;width:46%;height:27%;border-radius:50% 50% 44% 44%;background:#d7ad8a;border-top:16px solid #3f342c}.scene .hot-person:after{content:'';position:absolute;left:5%;top:25%;width:90%;height:73%;background:linear-gradient(90deg,#302e35,#78717a,#34313b);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}.scene .hot-person.woman:after{background:linear-gradient(90deg,#3d2c35,#826978,#43303c)}.scene .hot-person.child{height:34%;width:12%}.scene .hot-person.child:after{background:linear-gradient(90deg,#333b52,#6d7590,#333a52)}.scene .hot-person span{position:absolute;bottom:-15px;left:-50%;width:200%;text-align:center;font:12px Georgia;background:#221b16c9;padding:4px;color:#f4e2bf}.scene .furniture{position:absolute;bottom:12%;height:18%;width:30%;border-radius:50% 50% 20% 20%;background:linear-gradient(#b49a72,#634a36);box-shadow:0 20px 0 -12px #2c211b}.scene .furniture.a{left:7%}.scene .furniture.b{right:7%}.scene .painting{position:absolute;top:28%;left:38%;width:24%;height:22%;border:10px ridge #ad8b5e;background:linear-gradient(145deg,#809ba2 0 45%,#c5aa7d 46% 60%,#566b5b 61%)}.scene .placard{position:absolute;left:12px;top:12px;background:#211912db;border:1px solid #ad885b;padding:7px 10px;color:#f2dfbb}.scene .hint{position:absolute;right:10px;bottom:9px;background:#211912d9;padding:6px 10px;font-size:12px;color:#e2c9a3}.scene .viewwindow{position:absolute;top:10%;left:13%;width:74%;height:65%;border:16px ridge #c4ae8e;background:linear-gradient(#819ab7,#c6d4d8 70%,#a6a49b 71%);transform:perspective(600px) rotateX(3deg)}.scene .viewwindow:after{content:'';position:absolute;left:48%;top:0;height:100%;width:14px;background:#ac987e}.scene .rail{position:absolute;top:65%;left:8%;width:84%;height:10px;background:#b9a47e;box-shadow:0 9px 0 #69543f}.scene .cloud{position:absolute;top:28%;left:25%;width:40%;height:15%;border-radius:50%;background:#e7e0d7a0;filter:blur(15px)}.scene .notehot{position:absolute;left:46%;bottom:23%;width:9%;height:10%;background:#d5c49c;transform:rotate(-9deg);cursor:pointer;box-shadow:1px 3px 5px #34251d}.scene .notehot:after{content:'✉';position:absolute;left:34%;top:20%;color:#4c3927}.scene .hoverlink{position:absolute;bottom:8%;right:3%;background:#261c15d9;border:1px solid #b48b52;padding:9px;color:#f1dcac;cursor:pointer}
+</style>
+<div class="navdock" aria-label="First-person movement controls"><button id="navleft" aria-label="Turn left">↶</button><button id="navforward" aria-label="Move forward">↑</button><button id="navright" aria-label="Turn right">↷</button><span class="loc" id="viewlabel">Passenger Lounge · facing windows</span></div>
+<script>
+/* Connected-viewpoint movement prototype. Each scene is a fixed camera node. */
+const nodes={cabin_bunk:{name:'Your Cabin',facing:'bunk and belongings',left:'cabin_desk',right:'cabin_window',forward:null,style:'cabin'},cabin_window:{name:'Your Cabin',facing:'small window',left:'cabin_bunk',right:'cabin_door',forward:null,style:'cabinwindow'},cabin_door:{name:'Your Cabin',facing:'door to corridor',left:'cabin_window',right:'cabin_desk',forward:'corridor_left',style:'cabindoor'},cabin_desk:{name:'Your Cabin',facing:'writing desk',left:'cabin_door',right:'cabin_bunk',forward:null,style:'cabindesk'},lounge_windows:{name:'Passenger Lounge',facing:'windows',left:'lounge_aft',right:'lounge_people',forward:'promenade',style:'windows'},lounge_people:{name:'Passenger Lounge',facing:'passengers',left:'lounge_windows',right:'lounge_side',forward:null,style:'people'},lounge_side:{name:'Passenger Lounge',facing:'seating area',left:'lounge_people',right:'lounge_aft',forward:null,style:'people'},lounge_aft:{name:'Passenger Lounge',facing:'aft doorway',left:'lounge_side',right:'lounge_windows',forward:'corridor_forward',style:'door'},promenade:{name:'Promenade',facing:'observation windows',left:'promenade_aft',right:'promenade_side',forward:'lounge_windows',style:'promenade'},promenade_side:{name:'Promenade',facing:'seating',left:'promenade',right:'promenade_far',forward:null,style:'promenade'},promenade_far:{name:'Promenade',facing:'forward windows',left:'promenade_side',right:'promenade_aft',forward:null,style:'promenade'},promenade_aft:{name:'Promenade',facing:'return passage',left:'promenade_far',right:'promenade',forward:'lounge_windows',style:'door'},corridor_forward:{name:'Passenger Corridor',facing:'forward',left:'corridor_left',right:'corridor_right',forward:'corridor_end',style:'corridor'},corridor_left:{name:'Passenger Corridor',facing:'port cabins',left:'corridor_end',right:'corridor_forward',forward:'cabin_door',style:'door'},corridor_right:{name:'Passenger Corridor',facing:'starboard cabins',left:'corridor_forward',right:'corridor_end',forward:null,style:'door'},corridor_end:{name:'Passenger Corridor',facing:'lounge entrance',left:'corridor_right',right:'corridor_left',forward:'lounge_aft',style:'corridor'}};
+// Who stands where. Damina keeps her niece in sight, so they share the lounge.
+const CAST_AT={lounge_people:['Damina Vontette','Snardy Vontette'],lounge_side:['Colonel Landry Stoppard','Vaunice Charles'],corridor_forward:['Manard Toxu'],promenade_side:['Potter McNare']}
+const LOOK={'Damina Vontette':'woman','Snardy Vontette':'child','Colonel Landry Stoppard':'colonel','Vaunice Charles':'woman actress','Manard Toxu':'uniform','Potter McNare':'reporter'}
+const SHORT={'Colonel Landry Stoppard':'Colonel Stoppard','Manard Toxu':'Chief Steward Toxu'}
+function castHTML(v){const c=CAST_AT[v]||[];return c.map((n,i)=>'<div class="hot-person '+(LOOK[n]||'')+'" style="left:'+(c.length===1?18:i===0?22:62)+'%" data-person="'+n+'" role="button" tabindex="0" title="Speak to '+n+'"><span>'+(SHORT[n]||n)+'</span></div>').join('')}
+let view='cabin_bunk',steps=0, busy=false;const scene=$('#scene');
+function scenery(v){let n=nodes[v],s='<div class="paint"><div class="ceiling"></div><div class="perspective-floor"></div>';
+if(n.style==='cabin'||n.style==='cabinwindow'||n.style==='cabindoor'||n.style==='cabindesk'){s+='<div class="cabinwall"></div><div class="cabinlamp"></div>';if(n.style==='cabindesk')s+='<div class="cabindesk"></div>';if(n.style==='cabin')s+='<div class="cabinbed"></div><div class="cabintrunk" data-object="trunk" title="Inspect trunk"></div>';if(n.style==='cabinwindow')s+='<div class="cabinport"></div><div class="cabindesk" data-object="desk" title="Inspect desk"></div>';if(n.style==='cabindoor'||n.style==='cabindesk')s+='<div class="cabindoorobj" data-move="corridor_left" title="Open cabin door"></div>';}
+if(n.style==='promenade'||n.style==='windows'){s+='<div class="viewwindow"><div class="cloud"></div></div><div class="rail"></div>';if(n.style==='windows')s+='<div class="furniture a"></div><div class="furniture b"></div>'}
+if(n.style==='corridor'||n.style==='door'){s+='<div class="sidewall left"></div><div class="sidewall right"></div><div class="porthole l"></div><div class="porthole r"></div><div class="doorway" data-move="'+(n.forward||'')+'" title="Approach doorway"></div>'}
+if(n.style==='people'){s+='<div class="painting"></div><div class="furniture a"></div><div class="furniture b"></div>';}s+=castHTML(v);
+if(n.style==='corridor'&&steps>=3&&steps<10&&!window.collectedNote)s+='<div class="notehot" title="Pick up steward’s note"></div>';
+s+='</div><div class="placard">'+n.name+'</div><div class="hint">'+n.facing+' · tap objects to interact</div>';return s}
+function draw(){let n=nodes[view];scene.innerHTML=scenery(view);$('#viewlabel').textContent=n.name+' · '+n.facing;$('#navleft').disabled=!n.left;$('#navright').disabled=!n.right;$('#navforward').disabled=!n.forward;room=n.name;scene.querySelectorAll('[data-person]').forEach(el=>{el.onclick=()=>choose(el.dataset.person);el.onkeydown=e=>{if(e.key==='Enter')choose(el.dataset.person)}});scene.querySelectorAll('[data-object]').forEach(el=>el.onclick=()=>{if(el.dataset.object==='trunk')narrate('An empty steamer trunk. This cabin is made up for a passenger who is not using it.');else narrate('The writing desk holds a glass of water and an old timetable. Nothing you can take.');});scene.querySelectorAll('[data-move]').forEach(el=>el.onclick=()=>travel(el.dataset.move));let note=scene.querySelector('.notehot');if(note)note.onclick=()=>{window.collectedNote=true;addItem('Steward’s note','✉️');narrate('You take the steward’s note. It reads: “Officer requested at the forward control car before landing.”');draw()}}
+function travel(dest){if(!dest||busy)return;busy=true;scene.classList.add('travel');setTimeout(()=>{view=dest;steps++;who='';$('#speaker').textContent='Select a passenger to speak with them.';draw();scene.classList.remove('travel');busy=false;if(steps===3)narrate('You hear footsteps in the corridor. Passengers are beginning to move about the ship.');},210)}
+$('#navleft').onclick=()=>travel(nodes[view].left);$('#navright').onclick=()=>travel(nodes[view].right);$('#navforward').onclick=()=>travel(nodes[view].forward);
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='ArrowLeft')travel(nodes[view].left);if(e.key==='ArrowRight')travel(nodes[view].right);if(e.key==='ArrowUp')travel(nodes[view].forward)});
+$('#back').onclick=()=>travel('lounge_windows');$('#talk').onclick=()=>narrate('Face the passengers and tap a character to talk.');$('#examine').onclick=()=>narrate('You examine the '+nodes[view].name.toLowerCase()+'. '+(nodes[view].style==='corridor'?'Narrow passages lead toward the passenger cabins.':'Every detail seems ordinary, which makes your knowledge of the approaching disaster harder to bear.'));
+$('#status').textContent='';draw();
+</script><style>
+/* Mobile-first compact HUD */
+html,body{height:100%;overflow-x:hidden}body{font-size:14px}.shell{width:100%;max-width:1100px;padding:5px;display:flex;flex-direction:column;gap:3px;min-height:100dvh}.top{flex:0 0 auto;padding:3px 4px;min-height:32px}.top strong{font-size:clamp(15px,4vw,22px);letter-spacing:2px}.top span{font-size:clamp(11px,2.8vw,16px)}.top button{font-size:12px;padding:5px 8px}.scene{flex:1 1 auto;min-height:145px;height:auto;max-height:none;border-width:4px}.navdock{order:1;flex:0 0 auto;margin:0;padding:3px;border-width:2px;gap:4px}.navdock button{padding:5px 12px;min-width:44px;font-size:18px}.navdock .loc{font-size:11px}.bottom{order:2;display:grid;grid-template-columns:54px minmax(0,1fr);gap:4px;margin:0;flex:0 0 auto}.panel{border-width:3px;padding:5px;min-height:0}.verbs{gap:3px}.verbs button{padding:5px 1px;font-size:10px;min-height:28px}.dialogue{height:clamp(70px,12dvh,110px);font-size:13px;line-height:1.3}.dialogue p{margin-bottom:5px}.entry{margin-top:4px;gap:4px}.entry input{padding:7px;font-size:16px}.entry button{padding:6px;min-width:53px;font-size:12px}.small{font-size:10px;margin-top:3px}.inventory{grid-column:1/-1;display:flex;align-items:center;gap:6px;padding:4px 6px}.inventory>strong{display:none}.inv{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:4px;flex:1}.item{min-height:0;height:37px;font-size:21px}.inventory .small{display:none}.status{order:3;padding:0 3px;font-size:9px;line-height:1.2;flex:0 0 auto;max-height:14px;overflow:hidden}.settings{order:0}.inventory-modal{display:none;position:fixed;inset:0;z-index:30;background:#090705d9;align-items:center;justify-content:center;padding:16px}.inventory-modal.open{display:flex}.inventory-window{background:#211916;border:6px ridge #a27d48;padding:12px;width:min(440px,100%);max-height:80dvh;overflow:auto}.inventory-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.inventory-head button{background:#38281c;color:#eadcc4;border:1px solid #a27d48;padding:6px 12px}.inventory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.inventory-grid button{background:#2b201a;border:1px solid #8c6939;color:#eadcc4;padding:12px 2px;min-height:75px;font-size:27px}.inventory-grid button span{display:block;font-size:10px;margin-top:4px}.moreitem{background:#3b2c20!important;font-size:20px!important}.scene .notehot{min-width:35px;min-height:35px}.keyboard-open .scene{min-height:70px;flex:1 1 auto}.keyboard-open .inventory,.keyboard-open .verbs,.keyboard-open .status{display:none}.keyboard-open .bottom{grid-template-columns:1fr}.keyboard-open .dialogue{height:clamp(60px,14dvh,110px)}.keyboard-open .navdock{padding:1px}.keyboard-open .navdock button{padding:2px 10px}
+@media(max-width:650px){.scene{min-height:145px}.bottom{grid-template-columns:54px minmax(0,1fr)}.inventory{grid-column:1/-1}.inv{grid-template-columns:repeat(4,1fr)}.dialogue{height:clamp(70px,12dvh,110px)}.panel{padding:5px}.verbs button{font-size:10px;padding:5px 1px}}
+@media(min-width:750px){.shell{max-height:100dvh}.scene{min-height:260px}.bottom{grid-template-columns:100px 1fr 200px}.inventory{grid-column:auto;display:block}.inventory>strong{display:block;font-size:12px}.inventory .small{display:block}.item{height:49px}.verbs button{font-size:13px}.dialogue{height:115px}}
+</style>
+<div class="inventory-modal" id="inventoryModal" role="dialog" aria-modal="true" aria-label="Inventory"><div class="inventory-window"><div class="inventory-head"><strong>YOUR POSSESSIONS</strong><button id="closeInventory">Close ×</button></div><div class="inventory-grid" id="inventoryGrid"></div><p class="small" id="inventoryInfo">Select an item to inspect it.</p></div></div>
+<script>
+const gameItems=[{name:'Notebook',icon:'📓',desc:'A notebook. A few empty pages are waiting for your invented life.'},{name:'Key',icon:'🗝️',desc:'An unmarked brass key. Which lock does it fit?'},{name:'Scrap of paper',icon:'📜',desc:'A torn scrap bearing the words “Lakehurst — May 6”.'}];
+function addItem(name,icon,desc='An object you picked up aboard the airship.'){if(!gameItems.some(i=>i.name===name))gameItems.push({name,icon,desc});renderInventory()}
+function inspectItem(item){selected=item.name;$('#itemnote').textContent=item.desc;$('#inventoryInfo').textContent=item.desc;narrate(item.desc)}
+function renderInventory(){const bar=$('#inv');bar.innerHTML='';gameItems.slice(0,3).forEach(item=>{const b=document.createElement('button');b.className='item';b.textContent=item.icon;b.title=item.name;b.onclick=()=>inspectItem(item);bar.append(b)});const more=document.createElement('button');more.className='item moreitem';more.textContent='•••';more.title='Open full inventory';more.onclick=()=>openInventory();bar.append(more);const grid=$('#inventoryGrid');grid.innerHTML='';gameItems.forEach(item=>{const b=document.createElement('button');const icon=document.createTextNode(item.icon);const caption=document.createElement('span');caption.textContent=item.name;b.append(icon,caption);b.onclick=()=>inspectItem(item);grid.append(b)})}
+function openInventory(){renderInventory();$('#inventoryModal').classList.add('open')}
+$('#closeInventory').onclick=()=>$('#inventoryModal').classList.remove('open');$('#inventoryModal').onclick=e=>{if(e.target.id==='inventoryModal')$('#inventoryModal').classList.remove('open')};document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#inventoryModal').classList.remove('open')});
+const viewport=window.visualViewport;function fitKeyboard(){const viewportHeight=viewport?viewport.height:window.innerHeight;const keyboardVisible=window.innerHeight-viewportHeight>130;document.body.classList.toggle('keyboard-open',keyboardVisible);if(keyboardVisible){document.querySelector('.shell').style.height=Math.max(270,viewportHeight)+'px';document.querySelector('.shell').style.minHeight='0'}else{document.querySelector('.shell').style.height='';document.querySelector('.shell').style.minHeight='100dvh'}}
+if(viewport){viewport.addEventListener('resize',fitKeyboard);viewport.addEventListener('scroll',fitKeyboard)}
+$('#say').addEventListener('focus',()=>{setTimeout(()=>{$('#say').scrollIntoView({block:'nearest',behavior:'smooth'});fitKeyboard()},250)});$('#say').addEventListener('blur',()=>setTimeout(fitKeyboard,150));
+// Avoid opening the keyboard just because a character was tapped: user chooses when to speak.
+const oldChoose=choose;choose=function(n){oldChoose(n);$('#say').blur()};
+renderInventory();fitKeyboard();
+</script>
+<style>
+.status{display:none!important}.shell{height:100dvh;min-height:0;overflow:hidden}.scene{min-height:120px}.cabinwall{position:absolute;inset:17% 6% 20%;background:repeating-linear-gradient(90deg,#907960 0 5px,#b9a58a 6px 70px,#806c55 71px 76px);box-shadow:inset 0 0 30px #443526}.cabinbed{position:absolute;left:10%;bottom:13%;width:75%;height:32%;border:8px solid #7b573e;background:linear-gradient(145deg,#eee0bf,#c0ae91 55%,#8d7560);transform:skew(-12deg);box-shadow:10px 13px 0 #3d2b22}.cabinbed:after{content:'';position:absolute;left:5%;top:9%;width:25%;height:48%;border-radius:35%;background:#e8dec6}.cabintrunk{position:absolute;right:7%;bottom:12%;width:25%;height:19%;background:linear-gradient(#785039,#3b291f);border:6px ridge #ac8756;cursor:pointer}.cabinlamp{position:absolute;top:19%;right:17%;height:14%;width:9%;border-radius:50% 50% 15% 15%;background:#e6c68b;box-shadow:0 0 32px #e4b86b99}.cabinport{position:absolute;left:29%;top:23%;width:42%;height:35%;border:14px ridge #bfa783;border-radius:10px;background:linear-gradient(#809bb8,#d7d8cf)}.cabindesk{position:absolute;bottom:12%;left:20%;width:60%;height:20%;background:linear-gradient(#a88a62,#634a32);border:8px ridge #745438;cursor:pointer}.cabindoorobj{position:absolute;top:19%;left:32%;height:65%;width:36%;background:linear-gradient(90deg,#3e3127,#8c7357 20%,#a58b6b 70%,#554132);border:10px ridge #c2a37a;cursor:pointer}.cabindoorobj:after{content:'●';position:absolute;right:10%;top:50%;color:#e7c67f}.titleoverlay{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 25%,#5b5146,#15110f 73%);display:flex;align-items:center;justify-content:center;padding:20px}.titlecard{width:min(550px,100%);border:6px ridge #b28a53;background:linear-gradient(#30261f,#130f0d);padding:24px 20px;text-align:center;box-shadow:0 15px 50px #000}.titlecard h1{font:clamp(32px,9vw,62px) Georgia;letter-spacing:5px;color:#e7cf9f;margin:14px 0}.titlecard .airship{line-height:0;padding:8px 0 14px;filter:drop-shadow(0 6px 10px #000a)}.titlecard .airship svg{max-width:80%;height:auto}.titlecard p{color:#cbb792;line-height:1.5}.titlecard button{background:linear-gradient(#806039,#34251b);color:#f6e6c9;border:2px solid #c39c5e;padding:13px 24px;font:20px Georgia;margin:10px;cursor:pointer}.soundbtn{position:fixed;right:9px;bottom:9px;z-index:15;background:#281e17e8;color:#e6d2a9;border:1px solid #a7834f;border-radius:6px;padding:5px 9px;font-size:12px}.titleoverlay[hidden]{display:none!important}@media(max-width:650px){.titlecard{padding:18px 10px}.top strong{font-size:15px}.navdock .loc{font-size:10px}}
+</style>
+<div id="titleoverlay" class="titleoverlay"><div class="titlecard"><div class="airship"><svg viewBox="0 0 240 100" width="230" height="96" role="img" aria-label="The airship Hindenburg"><defs><linearGradient id="hull" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1dcae"/><stop offset=".45" stop-color="#cdb184"/><stop offset="1" stop-color="#6f5639"/></linearGradient><linearGradient id="fin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8bd8c"/><stop offset="1" stop-color="#7a5f3f"/></linearGradient></defs><path d="M72 26 L36 6 L28 9 L40 34 Z M72 68 L36 88 L28 85 L40 60 Z" fill="url(#fin)" stroke="#5b452e" stroke-width="1.2"/><path d="M60 47 L14 41 L12 53 Z" fill="url(#fin)" stroke="#5b452e" stroke-width="1"/><ellipse cx="124" cy="47" rx="102" ry="27" fill="url(#hull)" stroke="#5b452e" stroke-width="1.6"/><g stroke="#8e734d" stroke-width=".9" fill="none" opacity=".75"><path d="M40 35 Q124 16 214 33"/><path d="M24 47 H226"/><path d="M40 60 Q124 79 214 61"/><path d="M64 23 V71 M92 20 V74 M120 20 V74 M148 20 V74 M176 22 V72 M200 27 V67"/></g><path d="M165 72 Q176 82 192 72 Z" fill="#6b5236" stroke="#4a3725" stroke-width="1"/><path d="M106 72 h28 q-2 6 -14 6 q-12 0 -14 -6 Z" fill="#7a5f3f" opacity=".9"/><ellipse cx="200" cy="38" rx="14" ry="5" fill="#fff6dc" opacity=".35"/></svg></div><div style="letter-spacing:4px;color:#c4ab80">AN ADVENTURE OUT OF TIME</div><h1>HINDENBURG</h1><p>May 6, 1937. You are aboard without a ticket.<br>You know how this journey ends.</p><button id="startgame">Begin Voyage</button><p style="font-size:12px">Headphones recommended · Sound is optional</p></div></div>
+<button id="soundbtn" class="soundbtn" aria-label="Toggle ambient sound">♫ Sound on</button>
+<script>
+/* Original generated ambience: a quiet waltz-like motif, mechanical drone and filtered noise. No recordings or copyrighted melodies. */
+let audioCtx=null,audioOn=true,master=null,audioLoop=null,noiseNode=null;
+function beginAudio(){if(!audioOn)return;try{if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();master=audioCtx.createGain();master.gain.value=.14;master.connect(audioCtx.destination);let drone=audioCtx.createOscillator(),dg=audioCtx.createGain();drone.type='sine';drone.frequency.value=58;dg.gain.value=.09;drone.connect(dg).connect(master);drone.start();let len=audioCtx.sampleRate*2,buffer=audioCtx.createBuffer(1,len,audioCtx.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<len;i++)data[i]=(Math.random()*2-1);let src=audioCtx.createBufferSource();src.buffer=buffer;src.loop=true;let low=audioCtx.createBiquadFilter();low.type='lowpass';low.frequency.value=220;let ng=audioCtx.createGain();ng.gain.value=.045;src.connect(low).connect(ng).connect(master);src.start();noiseNode=src;let t=0;audioLoop=setInterval(()=>{if(!audioCtx||!audioOn)return;const now=audioCtx.currentTime;const melody=[392,440,349.23,329.63,392,293.66,349.23,261.63,329.63,293.66,261.63,293.66];for(let j=0;j<3;j++){let osc=audioCtx.createOscillator(),g=audioCtx.createGain();osc.type='sine';osc.frequency.value=melody[(t+j)%melody.length];let at=now+j*.55;g.gain.setValueAtTime(.0001,at);g.gain.exponentialRampToValueAtTime(.024,at+.04);g.gain.exponentialRampToValueAtTime(.0001,at+.46);osc.connect(g).connect(master);osc.start(at);osc.stop(at+.5)}t=(t+3)%melody.length},1700)}audioCtx.resume()}catch(e){document.querySelector('#soundbtn').textContent='Sound unavailable'}}
+document.querySelector('#startgame').onclick=()=>{document.querySelector('#titleoverlay').hidden=true;beginAudio();log.innerHTML='';view='washroom_stall';steps=0;narrate('The B-deck washroom. You have spent the crossing hidden behind the curtain of the only shower aboard, listening to the engines hum through the thin walls. Out the door is the B-deck corridor. Up the stairs, the passengers are gathering for evening drinks. You know how this voyage ends.');draw()};
+document.querySelector('#soundbtn').onclick=()=>{audioOn=!audioOn;document.querySelector('#soundbtn').textContent=audioOn?'♫ Sound on':'♫ Sound off';if(audioOn)beginAudio();else if(audioCtx)audioCtx.suspend()};
+</script>
+<style>
+/* Relay + automatic notebook (added Nov 4) */
+.thinking{color:#d9bd8d;font-style:italic;opacity:.85}
+.thinking .dots:after{content:'';animation:dots 1.2s steps(4) infinite}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+.overheard{color:#c9b3e0;font-style:italic}
+.nb-entry{border-top:1px solid #8c6939;padding:8px 0;color:#eadcc4;font-size:13px;line-height:1.35}
+.nb-entry h3{margin:0 0 4px;font:bold 15px Georgia;color:#f4dcad}
+.nb-entry ul{margin:3px 0 3px 18px;padding:0}
+.nb-meta{color:#d9bd8d;font-size:12px}
+.nb-contra{color:#f0a58a}
+.nbflash{animation:nbflash 1.4s ease 2}
+@keyframes nbflash{50%{box-shadow:0 0 0 3px #f4dcad;transform:scale(1.08)}}
+#form button:disabled{opacity:.5}
+</style>
+<div class="inventory-modal" id="notebookModal" role="dialog" aria-modal="true" aria-label="Notebook"><div class="inventory-window"><div class="inventory-head"><strong>📓 YOUR NOTEBOOK</strong><button id="closeNotebook">Close ×</button></div><div id="notebookBody"></div></div></div>
+<script>
+/* ---------- Live AI relay + automatic notebook ----------
+   Talks to the hindenburg-ai Worker exactly as it expects:
+   POST /talk   {npc, line, trust, phase, claims, heard, history:[{who:'player'|'npc', text}]}
+   POST /gossip {a, b, claimsA, claimsB}
+   The browser keeps all state. Full history is sent; the relay keeps the last few
+   lines for the AI but scans all of it for "you're making that up" call-outs. */
+const NPC_IDS={'Damina Vontette':'aunt','Snardy Vontette':'snardy','Colonel Landry Stoppard':'colonel','Vaunice Charles':'actress','Manard Toxu':'steward','Potter McNare':'reporter'}
+const ai={}
+for(const n of Object.keys(NPC_IDS))ai[n]={met:false,metWhere:'',trust:30,claims:[],heard:[],history:[],mood:'',lastReply:'',suspects:[]}
+const contradictions=[]
+let talking=false,gossipBusy=false,gossipKeys={}
+const relayURL=()=>($('#relay').value||RELAY_DEFAULT).trim().replace(/\/+$/,'')
+function trustWord(t){return t>=70?'trusts you':t>=50?'warming to you':t>=30?'wary':t>=15?'suspicious':'deeply distrustful'}
+function flashNotebook(){const b=[...document.querySelectorAll('#inv .item')].find(x=>x.title==='Notebook');if(b){b.classList.remove('nbflash');void b.offsetWidth;b.classList.add('nbflash')}}
+function renderNotebook(){
+  const body=$('#notebookBody');body.innerHTML=''
+  const met=Object.keys(ai).filter(n=>ai[n].met)
+  if(!met.length){body.innerHTML='<p class="nb-entry">Nobody yet. Find someone to talk to.</p>';return}
+  for(const n of met){const s=ai[n],d=document.createElement('div');d.className='nb-entry'
+    const h=document.createElement('h3');h.textContent=n;d.append(h)
+    const m=document.createElement('div');m.className='nb-meta';m.textContent='Met: '+s.metWhere+' · '+trustWord(s.trust)+' ('+s.trust+'/100)'+(s.mood?' · mood: '+s.mood:'');d.append(m)
+    const add=(title,items,cls)=>{if(!items.length)return;const t=document.createElement('div');t.textContent=title;if(cls)t.className=cls;const ul=document.createElement('ul');items.forEach(x=>{const li=document.createElement('li');li.textContent=x;ul.append(li)});d.append(t,ul)}
+    add('What you told them:',s.claims)
+    add('What they seem to suspect:',s.suspects.slice(-3))
+    add('What they heard about you:',s.heard,'nb-contra')
+    if(s.lastReply){const l=document.createElement('div');l.className='nb-meta';l.textContent='Last said: “'+s.lastReply+'”';d.append(l)}
+    body.append(d)}
+  if(contradictions.length){const d=document.createElement('div');d.className='nb-entry';const h=document.createElement('h3');h.textContent='Contradictions caught';d.append(h);const ul=document.createElement('ul');contradictions.forEach(c=>{const li=document.createElement('li');li.className='nb-contra';li.textContent=c;ul.append(li)});d.append(ul);body.append(d)}
+}
+function openNotebook(){renderNotebook();$('#inventoryModal').classList.remove('open');$('#notebookModal').classList.add('open')}
+$('#closeNotebook').onclick=()=>$('#notebookModal').classList.remove('open')
+$('#notebookModal').onclick=e=>{if(e.target.id==='notebookModal')$('#notebookModal').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#notebookModal').classList.remove('open')})
+const nb=gameItems.find(i=>i.name==='Notebook');if(nb)nb.desc='Your notebook. It fills itself in as you meet people.'
+const _inspect=inspectItem;inspectItem=function(item){if(item.name==='Notebook'){selected='Notebook';openNotebook();return}_inspect(item)}
+renderInventory()
+// Meeting someone: record it, and keep their greeting in the shared history
+const _choose2=choose
+choose=function(n){_choose2(n);const s=ai[n];if(!s)return
+  if(!s.met){s.met=true;s.metWhere=(typeof room==='string'&&room)||'the ship';flashNotebook()}
+  const ps=log.querySelectorAll('p.npc');const greet=ps.length?ps[ps.length-1].textContent.replace(/^[^:]+:\s*/,''):''
+  const last=s.history[s.history.length-1];if(greet&&!(last&&last.text===greet))s.history.push({who:'npc',text:greet})}
+function thinkingLine(n){const p=document.createElement('p');p.className='thinking';p.textContent=n.split(' ')[0]+' is thinking';const d=document.createElement('span');d.className='dots';p.append(d);log.append(p);log.scrollTop=log.scrollHeight;return p}
+async function postRelay(path,body,ms){const r=await fetch(relayURL()+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(ms)});let data={};try{data=await r.json()}catch{}if(!r.ok)throw Error(data.error||(r.status===429?'relay busy':'HTTP '+r.status));return data}
+$('#form').onsubmit=async e=>{e.preventDefault()
+  const s=$('#say').value.trim();if(!s||talking)return
+  if(!who){narrate('Choose a passenger first.');return}
+  const n=who,st=ai[n];$('#say').value='';line('You',s,'you');turns++
+  if(window.gameOver){narrate('The voyage is over. Start a new one from the title screen.');return}
+  if(!st||!$('#relay').value.trim()){line(n,offline(n,s));afterTurn(n,s,null);return}
+  talking=true;const btn=$('#form button');btn.disabled=true
+  $('#speaker').textContent=n+' is thinking… (AI replies can take ~20s)'
+  const th=thinkingLine(n)
+  try{const data=await postRelay('/talk',{npc:NPC_IDS[n],line:s,trust:st.trust,phase:gamePhase(),claims:st.claims,heard:heardFor(n),history:st.history.slice(-40)},45000)
+    if(data.fallback||typeof data.reply!=='string'||!data.reply.trim())throw Error('AI busy')
+    th.remove();line(n,data.reply)
+    st.history.push({who:'player',text:s},{who:'npc',text:data.reply})
+    {const d=Number(data.trust_delta)||0;st.trust=Math.max(0,Math.min(100,st.trust+Math.round(d>0?d*3:d*2)))}
+    if(data.claim&&!st.claims.includes(data.claim)){st.claims.push(data.claim);st.claims=st.claims.slice(-6)}
+    if(data.mood)st.mood=data.mood
+    st.lastReply=data.reply
+    if(/\?/.test(data.reply)&&/suspic|wary|doubt|curious|annoy/i.test(data.mood||''))st.suspects.push(data.reply)
+    flashNotebook()
+    $('#speaker').textContent='Speaking with '+n+' · AI connected'
+    showAIStatus('AI connected: last response from '+n+'.')
+    afterTurn(n,s,data)
+    maybeGossip()
+  }catch(err){th.remove();const r=offline(n,s);line(n,r)
+    st.history.push({who:'player',text:s},{who:'npc',text:r})
+    // Still remember what you claimed, so the notebook and gossip keep working offline
+    if(/\b(i am|i'm|i’m|my name|i work|i was|i have)\b/i.test(s)){const c=s.replace(/\s+/g,' ').slice(0,80);if(!st.claims.includes(c)){st.claims.push(c);st.claims=st.claims.slice(-6)}}
+    $('#speaker').textContent='Speaking with '+n+' · scripted (AI unavailable: '+err.message+')'
+    showAIStatus('AI unavailable, used scripted line: '+err.message)
+    afterTurn(n,s,null)
+  }finally{talking=false;btn.disabled=false;saveGame()}}
+// Gossip: Damina and Snardy travel together, so once both have heard something from
+// you they compare notes (once per new set of claims): after a reply and when you move.
+const PAIRS=[['Damina Vontette','Snardy Vontette'],['Colonel Landry Stoppard','Vaunice Charles'],['Manard Toxu','Damina Vontette'],['Vaunice Charles','Potter McNare']]
+async function maybeGossip(){
+  if(gossipBusy||window.gameOver)return
+  const pair=PAIRS.find(([a,b])=>ai[a].claims.length&&ai[b].claims.length&&gossipKeys[a+'|'+b]!==JSON.stringify([ai[a].claims,ai[b].claims]))
+  if(!pair)return
+  const [a,b]=pair,A=ai[a],B=ai[b],pk=a+'|'+b
+  gossipBusy=true;gossipKeys[pk]=JSON.stringify([A.claims,B.claims])
+  const seen=gossipKeys[pk+'#seen'],nA=seen?A.claims.filter(c=>!seen[0].includes(c)):A.claims,nB=seen?B.claims.filter(c=>!seen[1].includes(c)):B.claims
+  const cA=(seen&&nA.length&&!nB.length)?nA:A.claims,cB=(seen&&nB.length&&!nA.length)?nB:B.claims
+  try{const g=await postRelay('/gossip',{a:NPC_IDS[a],b:NPC_IDS[b],claimsA:cA,claimsB:cB},45000)
+    window.lastGossip=g
+    if(g.fallback)throw Error('AI busy')
+    gossipKeys[pk+'#seen']=[A.claims.slice(),B.claims.slice()]
+    if(g.contradiction){
+      const pen=Number(g.trust_penalty)||0;A.trust=Math.max(0,A.trust-pen);B.trust=Math.max(0,B.trust-pen)
+      const what=g.what||'Your stories do not match.'
+      ;[A,B].forEach(x=>{if(!x.heard.includes(what))x.heard.push(what);x.heard=x.heard.slice(-6)})
+      contradictions.push(a.split(' ')[0]+' & '+b.split(' ')[0]+': '+what+(g.line?' (overheard: “'+g.line+'”)':''))
+      if(g.line)line('Overheard',g.line,'overheard')
+      narrate((SHORT[a]||a)+' and '+(SHORT[b]||b)+' have been comparing notes about you.')
+      flashNotebook();checkEndings()}
+  }catch(e){delete gossipKeys[pk];window.lastGossip={error:String(e)}}finally{gossipBusy=false;saveGame()}}
+// Also compare notes when you move on, in case the last check was skipped
+const _travel=travel;travel=function(d){maybeGossip();return _travel(d)}
+</script>
+<style>
+.scene .hot-person.uniform:before{border-top-color:#1d1a17}.scene .hot-person.uniform:after{background:linear-gradient(90deg,#1c2538,#4a5d80 50%,#1c2538);box-shadow:inset 0 -6px 0 #b89552}
+.scene .hot-person.colonel:before{border-top-color:#cfcac0}.scene .hot-person.colonel:after{background:linear-gradient(90deg,#4d4630,#8f8660,#4d4630)}
+.scene .hot-person.actress:before{border-top-color:#2a1611}.scene .hot-person.actress:after{background:linear-gradient(90deg,#561b27,#a3404f,#561b27)}
+.scene .hot-person.reporter:before{border-top-color:#5a3d22}.scene .hot-person.reporter:after{background:linear-gradient(90deg,#41352a,#7d6a50,#41352a)}
+.nb-goals{list-style:none;padding-left:4px;margin:6px 0}.nb-goals li{margin:4px 0}.nb-goals li.done{color:#a9cf8f}.nb-goals li:before{content:'○ ';color:#a88a5c}.nb-goals li.done:before{content:'✓ ';color:#a9cf8f}
+.endkind{letter-spacing:4px;color:#c4ab80;font-size:13px}.endstats{font-size:13px;color:#b9a47e}.titlecard .secondary{background:#2a1f18;font-size:16px;padding:10px 18px}
+</style>
+<div id="endoverlay" class="titleoverlay" hidden><div class="titlecard"><div class="endkind" id="endkind"></div><h1 id="endtitle" style="font-size:clamp(24px,7vw,40px)"></h1><p id="endtext"></p><p class="endstats" id="endstats"></p><button id="endrestart">Start a new voyage</button></div></div>
+<script>
+/* ---------- Cast greetings, time, goals, endings and browser save ---------- */
+const GREET={
+ 'Manard Toxu':'Good evening. Manard Toxu, Chief Steward. I know every name on the passenger list, and I do not believe I know yours. Which cabin are you in?',
+ 'Colonel Landry Stoppard':'Ah! Fresh ears! Colonel Landry Stoppard, retired. Sit down, sit down. And who might you be, soldier?',
+ 'Vaunice Charles':'Darling. You know who I am, of course. Vaunice Charles? The stage? ...You do know who I am?',
+ 'Potter McNare':'Potter McNare, newspaperman. Everybody aboard is a story if you ask the right way. What is yours?'}
+const CANNED={
+ 'Manard Toxu':['Manard smiles and checks his list.','One moment. I am consulting the passenger list.','Rules exist for everyone’s comfort, you understand.'],
+ 'Colonel Landry Stoppard':['The Colonel is mid-story and does not stop.','Reminds me of a campaign I once led. Where was I?','Hmph. Speak up, soldier.'],
+ 'Vaunice Charles':['Vaunice waves a gloved hand and sighs.','Darling, how terribly dramatic.','Tell me more. Slowly. With feeling.'],
+ 'Potter McNare':['Potter scribbles something and does not show you.','Can I quote you on that?','Interesting. My editor would want a second source.']}
+const _offline=offline;offline=function(n,s){if(beliefs[n])return _offline(n,s);const c=CANNED[n]||['They look at you, unsure what to say.'];return c[turns%c.length]}
+
+const TURN_LIMIT=22,STEWARD='Manard Toxu'
+const WARN_RE=/\b(fire|burn|flame|explo|hydrogen|crash|disaster|danger|landing|lakehurst|evacuat|spark|leak)/i
+const clockTime=()=>turns+Math.floor(steps/8)
+const period=()=>{const t=clockTime();return t<8?'Early evening':t<16?'Evening':'Approaching Lakehurst'}
+const gamePhase=()=>clockTime()>=16?'approach':'crossing'
+let lastPeriod='Early evening'
+function updateClock(){const p=period();$('#clock').textContent='May 6, 1937 · '+p
+  if(p!==lastPeriod){lastPeriod=p
+    narrate(p==='Evening'?'The light outside is going gold. The evening wears on, and Lakehurst is getting closer.':'Through the windows: the coast of New Jersey. The ship is beginning its approach to Lakehurst. Not much time left.')}}
+// Good word travels: anyone who trusts you puts in a word with the others
+function heardFor(n){const v=Object.keys(ai).filter(m=>m!==n&&ai[m].met&&ai[m].trust>=60).map(m=>'rumour: '+(SHORT[m]||m)+' seems to think well of the stranger')
+  return [...ai[n].heard.slice(-(6-Math.min(v.length,3))),...v.slice(0,3)]}
+function afterTurn(n,s,data){const st=ai[n];if(!st)return
+  if(n===STEWARD&&((data&&data.claim_type==='warning')||WARN_RE.test(s))){if(!st.warned)narrate('You have told the Chief Steward about the danger. Now he has to believe you.');st.warned=true}
+  if(n===STEWARD||n===PURSER){const CONF=/\b(stow ?away|stowed|sneak|snuck|sneaked|no ticket|without a ticket|no cabin|not a passenger|in a crate|i lied)\b/i,RUDE=/\b(idiot|idiotic|fool|stupid|pompous|clerk|shut up|get out of my way)\b/i;let pen=0;if(CONF.test(s))pen+=15;if(RUDE.test(s))pen+=8;if(pen){st.trust=Math.max(0,st.trust-pen);{const W=n===STEWARD?'The Chief Steward':'The Purser';narrate(CONF.test(s)?W+' writes something in '+(n===STEWARD?'his':'her')+' ledger, slowly.':W+'’s smile goes thin.')}}}
+  if(data&&data.secret_revealed&&!st.secret){st.secret=data.reply;narrate(n.split(' ')[0]+' has told you something private. It is in your notebook.')}
+  updateClock();checkEndings();saveGame()}
+
+// ---------- Endings ----------
+const ENDINGS={
+ hero:{kind:'ENDING · HEROISM',title:'The Warning Carried Forward',text:'Manard Toxu straightens his jacket, tucks your warning into his list, and carries it to the control car himself. Nobody can prove you right. But as Lakehurst comes into view, the stewards quietly gather the passengers by the low promenade windows, coats on, ready. When the moment comes, they are close to the ground and close to the exits. Everyone you spoke to walks away.'},
+ capture:{kind:'ENDING · CAPTURED',title:'No Such Passenger',text:'The Chief Steward closes his ledger. “There is no passenger by that name, or by any of the others you have used.” You spend the rest of the crossing locked in the mail room with a sack of postcards, rehearsing a warning nobody will hear.'},
+ failure:{kind:'ENDING · OUT OF TIME',title:'Lakehurst',text:'Through the promenade windows the mooring mast grows larger, and the ground crew runs out beneath the ship. You knew exactly what was coming. You could not make the right person believe you in time.'}}
+function checkEndings(){if(window.gameOver)return;const S=ai[STEWARD]
+  if(S.met&&S.warned&&S.trust>=65)return endGame('hero')
+  if(S.met&&S.trust<=10)return endGame('capture')
+  if(clockTime()>=TURN_LIMIT)return endGame('failure')}
+function endGame(k){window.gameOver=k;const e=ENDINGS[k]
+  try{const v=typeof endingArtKey==='function'?endingArtKey(k):k,f=foundEndings();window.newEnding=!f.includes(v);if(window.newEnding){f.push(v);localStorage.setItem('hindenburg_endings_v2',JSON.stringify(f))}}catch{}
+  saveGame()
+  setTimeout(()=>{$('#endkind').textContent=e.kind;$('#endtitle').textContent=e.title;$('#endtext').textContent=e.text
+    const met=Object.keys(ai).filter(n=>ai[n].met).length
+    $('#endstats').textContent='People met: '+met+' · Contradictions caught: '+contradictions.length+' · Endings found: '+foundEndings().length+' of '+ENDING_TOTAL+(window.newEnding?' (new!)':'')
+    $('#endoverlay').hidden=false},2500)}
+// 7 endings: hero_steward, hero_officer, hero_captain, capture_steward, capture_purser, escape, failure.
+// Saved across playthroughs under hindenburg_endings_v2. From the old 4-kind list only the unambiguous ones carry over.
+const ENDING_TOTAL=7
+const foundEndings=()=>{try{let f=JSON.parse(localStorage.getItem('hindenburg_endings_v2')||'null');if(!Array.isArray(f)){f=JSON.parse(localStorage.getItem('hindenburg_endings')||'[]').filter(k=>k==='escape'||k==='failure');localStorage.setItem('hindenburg_endings_v2',JSON.stringify(f))}return [...new Set(f)]}catch{return[]}}
+$('#endrestart').onclick=()=>{localStorage.removeItem(SAVE_KEY);location.reload()}
+
+// ---------- Goals in the notebook ----------
+const _renderNB=renderNotebook;renderNotebook=function(){_renderNB();const S=ai[STEWARD],met=Object.keys(ai).filter(n=>ai[n].met).length
+  const goals=[[met+' of '+Object.keys(ai).length+' people aboard met',met>=3],['Earn someone’s trust (60+)',Object.values(ai).some(x=>x.trust>=60)],['Find the Chief Steward (A-deck passenger corridor, up the stairs from B deck)',S.met],['Warn him about the landing',!!S.warned],['Win his trust (65+). Now: '+(S.met?S.trust:'?'),S.met&&S.trust>=65],['Or save yourself: someone on the crew may know a way off (Bunny trust '+(ai[BUNNY].met?ai[BUNNY].trust:'?')+'/55)',!!ai[BUNNY].route]]
+  const d=document.createElement('div');d.className='nb-entry';const h=document.createElement('h3');h.textContent='Your goal: be believed before Lakehurst';d.append(h)
+  const m=document.createElement('div');m.className='nb-meta';m.textContent='Time: '+period()+' · about '+Math.max(0,TURN_LIMIT-clockTime())+' conversations left · endings found: '+foundEndings().length+'/'+ENDING_TOTAL;d.append(m)
+  const ul=document.createElement('ul');ul.className='nb-goals';goals.forEach(([t,ok])=>{const li=document.createElement('li');li.textContent=t;if(ok)li.className='done';ul.append(li)});d.append(ul)
+  const body=$('#notebookBody');body.prepend(d)
+  Object.keys(ai).forEach(n=>{if(!ai[n].secret)return;[...body.querySelectorAll('h3')].filter(x=>x.textContent===n).forEach(x=>{const c=document.createElement('div');c.className='nb-meta';c.textContent='They confided: “'+ai[n].secret+'”';x.parentNode.append(c)})})}
+
+// ---------- Save progress in this browser ----------
+const SAVE_KEY='hindenburg_save_v1';let logEntries=[],restoring=false
+const _line=line;line=function(name,msg,cls){_line(name,msg,cls);if(!restoring){logEntries.push([name,msg,cls||'npc']);if(logEntries.length>40)logEntries.shift()}}
+function saveGame(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({v:1,ai,contradictions,gossipKeys,view,steps,turns,items:gameItems,note:!!window.collectedNote,log:logEntries,over:window.gameOver||false,lastPeriod}))}catch{}}
+function loadSave(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');return d&&d.v===1?d:null}catch{return null}}
+function restore(d){for(const n of Object.keys(ai))if(d.ai[n])Object.assign(ai[n],d.ai[n])
+  contradictions.length=0;contradictions.push(...d.contradictions);gossipKeys=d.gossipKeys||{};view=nodes[d.view]?d.view:'washroom_stall';steps=d.steps|0;turns=d.turns|0
+  gameItems.length=0;gameItems.push(...d.items);renderInventory();window.collectedNote=d.note;lastPeriod=(d.lastPeriod==='Afternoon'?'Early evening':d.lastPeriod)||period()
+  log.innerHTML='';restoring=true;d.log.forEach(([a,b,c])=>_line(a,b,c));restoring=false;logEntries=d.log.slice()
+  narrate('You pick up where you left off.');updateClock();draw()}
+const _addItem=addItem;addItem=function(...a){_addItem(...a);saveGame()}
+const _travel2=travel;travel=function(d){_travel2(d);setTimeout(()=>{updateClock();checkEndings();saveGame()},300)}
+const _start=$('#startgame').onclick
+const saved=loadSave()
+if(saved&&!saved.over){$('#startgame').textContent='Continue Voyage';const nb2=document.createElement('button');nb2.id='newgame';nb2.className='secondary';nb2.textContent='New Voyage';$('#startgame').after(nb2)
+  nb2.onclick=()=>{localStorage.removeItem(SAVE_KEY);newGame()}
+  $('#startgame').onclick=()=>{$('#titleoverlay').hidden=true;beginAudio();restore(saved)}}
+else{if(saved)localStorage.removeItem(SAVE_KEY);$('#startgame').onclick=()=>newGame()}
+function newGame(){logEntries=[];_start();narrate('Your goal: get someone with authority to believe you before the ship reaches Lakehurst. The Chief Steward works the passenger corridor on A deck, up the stairs from B deck. Your notebook keeps track of everything.');updateClock();saveGame()}
+</script>
+<style>
+/* ---------- Round 2 rooms: B deck, keel, control car ---------- */
+.scene .paint.xroom{background:linear-gradient(#3b2f26,#5a4838 60%,#2a211b)}
+.scene .bar-wall{position:absolute;inset:0 0 38%;background:repeating-linear-gradient(90deg,#5b3d28 0 6px,#7a5536 7px 60px,#4e3422 61px 66px)}
+.scene .bar-shelf{position:absolute;left:12%;right:12%;top:16%;height:22%;border-bottom:6px solid #3a271a;background:repeating-linear-gradient(90deg,transparent 0 14px,#3e6b4d 14px 22px,transparent 22px 34px,#8c3b2e 34px 41px,transparent 41px 52px,#c9a45c 52px 58px,transparent 58px 70px)}
+.scene .bar-counter{position:absolute;left:5%;right:5%;bottom:10%;height:27%;background:linear-gradient(#a7804f,#6b4a2d 30%,#3f2b1b);border-top:8px solid #c9a35f;border-radius:4px;box-shadow:0 10px 0 #20170f}
+.scene .office-wall{position:absolute;inset:0 0 38%;background:linear-gradient(#c3b08d,#9c8866)}
+.scene .office-desk{position:absolute;left:30%;right:8%;bottom:10%;height:24%;background:linear-gradient(#8a6640,#4b3420);border:6px ridge #a6824f}
+.scene .office-ledger{position:absolute;left:52%;bottom:31%;width:16%;height:6%;background:#5d1f1f;border:2px solid #c9a35f;transform:skew(-20deg)}
+.scene .office-cabinet{position:absolute;left:5%;bottom:10%;width:18%;height:55%;background:repeating-linear-gradient(#6f6a5e 0 30%,#4b473f 30% 33%);border:4px solid #3a3730}
+.scene .keel-cells{position:absolute;inset:0 0 40%;background:radial-gradient(ellipse 40% 60% at 15% 30%,#cfc9bd,#8e897f 60%,transparent 62%),radial-gradient(ellipse 40% 60% at 85% 30%,#cfc9bd,#8e897f 60%,transparent 62%),#1d1a17}
+.scene .keel-girders{position:absolute;inset:0;background:repeating-linear-gradient(60deg,transparent 0 38px,#8f8a80 38px 41px),repeating-linear-gradient(-60deg,transparent 0 38px,#8f8a80 38px 41px);opacity:.45;pointer-events:none}
+.scene .keel-walk{position:absolute;bottom:0;left:0;width:100%;height:42%;background:repeating-linear-gradient(90deg,#6d5a43 0 3px,#8c7556 4px 22px);clip-path:polygon(30% 100%,70% 100%,54% 0,46% 0)}
+.scene .keel-lamp{position:absolute;top:8%;left:48%;width:4%;height:6%;border-radius:50%;background:#f1d08a;box-shadow:0 0 30px 10px #f1d08a66}
+.scene .hatch{position:absolute;left:36%;bottom:8%;width:28%;height:20%;border-radius:50%;background:radial-gradient(#2c2925,#55504a 60%,#8f877a 62%);border:5px ridge #a69a85;cursor:pointer}
+.scene .hatch.open{background:radial-gradient(#9bb07c,#4e6a3c 55%,#8f877a 62%);box-shadow:0 0 25px #e7c47e}
+.scene .actbtn{position:absolute;right:3%;bottom:30%;background:#261c15e6;color:#f1dcac;border:1px solid #b48b52;padding:8px 10px;font:13px Georgia;cursor:pointer;max-width:42%}
+.scene .ctrl-windows{position:absolute;inset:6% 4% 45%;background:linear-gradient(#5d7393,#c3b48f 75%,#6f7f62);border:10px ridge #8f8a80;clip-path:polygon(0 0,100% 0,94% 100%,6% 100%)}
+.scene .ctrl-windows:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 18%,#8f8a80 18% 20%)}
+.scene .ctrl-wheel{position:absolute;left:43%;bottom:16%;width:14%;aspect-ratio:1;border-radius:50%;border:7px dashed #a77c48;box-shadow:0 0 0 4px #5b3f24 inset}
+.scene .ctrl-panel{position:absolute;left:8%;right:8%;bottom:6%;height:14%;background:linear-gradient(#5a4f45,#2e2924);border-top:4px solid #8f8a80}
+.scene .hot-person.deckhand:before{border-top-color:#6b4f30}.scene .hot-person.deckhand:after{background:linear-gradient(90deg,#3a4652,#6b7a87,#3a4652)}
+.scene .hot-person.purser:before{border-top-color:#8a8174}.scene .hot-person.purser:after{background:linear-gradient(90deg,#1e2433,#3f4a66,#1e2433);box-shadow:inset 0 -5px 0 #b89552}
+.scene .hot-person.bartender:before{border-top-color:#2b2420}.scene .hot-person.bartender:after{background:linear-gradient(90deg,#bdb6a6,#efe9dc,#bdb6a6);box-shadow:inset 0 -8px 0 #2b2420}
+.scene .hot-person.captain:before{border-top:16px solid #14161e;box-shadow:0 -4px 0 #c9a35f}.scene .hot-person.captain:after{background:linear-gradient(90deg,#141b2b,#33405e,#141b2b);box-shadow:inset 0 -6px 0 #c9a35f}
+</style>
+<script>
+/* ---------- Round 2: B deck, keel walkway, Bunny and the escape ending ---------- */
+Object.assign(nodes,{
+ bdeck_stairs:{name:'B Deck',facing:'stairs up to the passenger deck',left:'office_desk',right:'bar_counter',forward:'corridor_right',style:'door'},
+ bar_counter:{name:'Bar & Smoking Room',facing:'the bar',left:'bdeck_stairs',right:'crew_door',forward:null,style:'bar'},
+ crew_door:{name:'B Deck',facing:'crew door · keel · no passengers',left:'bar_counter',right:'office_desk',forward:'keel_walk',style:'door'},
+ office_desk:{name:'Purser’s Office',facing:'the purser’s desk',left:'crew_door',right:'bdeck_stairs',forward:null,style:'office'},
+ keel_walk:{name:'Keel Walkway',facing:'catwalk toward the control car',left:'keel_hatch',right:'keel_back',forward:'control_helm',style:'keel'},
+ keel_hatch:{name:'Keel Walkway',facing:'a hatch in the outer cover',left:'keel_back',right:'keel_walk',forward:null,style:'keelhatch'},
+ keel_back:{name:'Keel Walkway',facing:'door back to B Deck',left:'keel_walk',right:'keel_hatch',forward:'crew_door',style:'keel'},
+ control_helm:{name:'Control Car',facing:'the helm',left:'control_back',right:'control_back',forward:null,style:'control'},
+ control_back:{name:'Control Car',facing:'ladder up to the keel',left:'control_helm',right:'control_helm',forward:'keel_walk',style:'door'}})
+// The starboard corridor now has stairs down to B deck
+nodes.corridor_right.forward='bdeck_stairs';nodes.corridor_right.facing='starboard cabins · stairs down'
+const BUNNY='Bunny Treemont'
+NPC_IDS[BUNNY]='deckhand'
+ai[BUNNY]={met:false,metWhere:'',trust:30,claims:[],heard:[],history:[],mood:'',lastReply:'',suspects:[]}
+CAST_AT.keel_walk=[BUNNY];LOOK[BUNNY]='deckhand';SHORT[BUNNY]='Bunny (deckhand)'
+GREET[BUNNY]='Passengers don’t come down here. I’m Bunny, deckhand. Are you lost, or hiding?'
+CANNED[BUNNY]=['Bunny looks over his shoulder.','Keep your voice down. Officers walk this catwalk.','I could get in real trouble for talking to you.']
+ENDINGS.escape={kind:'ENDING · ESCAPE',title:'Down the Landing Rope',text:'The landing ropes drop toward the wet sand of Lakehurst. Bunny swings the hatch open and grips your wrist: “Now. Don’t look down, and don’t stop.” You slide, burn your palms, hit the ground and run for the hangar. You do not turn around until the sky behind you goes orange. You are alive. You will spend the rest of your life wondering who else you could have saved.'}
+
+const XROOM={
+ bar:()=>'<div class="bar-wall"></div><div class="bar-shelf"></div><div class="bar-counter"></div>',
+ office:()=>'<div class="office-wall"></div><div class="office-cabinet"></div><div class="office-desk"></div><div class="office-ledger"></div>',
+ keel:()=>'<div class="keel-cells"></div><div class="keel-girders"></div><div class="keel-lamp"></div><div class="keel-walk"></div>',
+ keelhatch:()=>{const B=ai[BUNNY],open=B.route&&gamePhase()==='approach'
+   return '<div class="keel-cells"></div><div class="keel-girders"></div><div class="keel-lamp"></div><div class="keel-walk"></div><div class="hatch'+(open?' open':'')+'" data-act="hatch" title="Hatch"></div>'+(B.route&&!open?'<div class="actbtn" data-act="wait">Wait here until the approach</div>':'')+(open?'<div class="actbtn" data-act="hatch">Go down the rope with Bunny</div>':'')},
+ control:()=>'<div class="ctrl-windows"></div><div class="ctrl-panel"></div><div class="ctrl-wheel"></div>'}
+const ACTS={
+ hatch(){if(window.gameOver)return;const B=ai[BUNNY]
+  if(!B.route){narrate('A round hatch in the outer cover, bolted shut. Someone who knows the ship could open it.');return}
+  if(gamePhase()!=='approach'){narrate('Bunny’s hatch. Below it there is only the ocean. Wait for the approach to Lakehurst.');return}
+  narrate('Bunny appears at your shoulder and unbolts the hatch.');endGame('escape')},
+ wait(){if(window.gameOver)return;turns=Math.max(turns,16-Math.floor(steps/8))
+  narrate('You sit with your back to a girder and wait. Hours pass in the drone of the engines.');updateClock();checkEndings();saveGame();draw()}}
+const _scenery=scenery
+scenery=function(v){const n=nodes[v];if(!XROOM[n.style])return _scenery(v)
+ return '<div class="paint xroom">'+XROOM[n.style](v)+castHTML(v)+'</div><div class="placard">'+n.name+'</div><div class="hint">'+n.facing+' · tap objects to interact</div>'}
+const _draw=draw
+draw=function(){_draw();scene.querySelectorAll('[data-act]').forEach(el=>el.onclick=()=>ACTS[el.dataset.act]())
+ if(view==='keel_walk'&&!window.keelWarned){window.keelWarned=true;narrate('Crew only. Narrow catwalks, girders and the great silver gas cells. A passenger has no business here.')}}
+// Bunny shows you the way once he trusts you (or lets his secret slip)
+const _afterTurn=afterTurn
+afterTurn=function(n,s,data){const st=ai[n]
+ if(n===BUNNY&&st&&!st.route&&(st.trust>=55||(data&&data.secret_revealed))){st.route=true
+  narrate('Bunny leans in close: “There’s a hatch on the keel, by the forward landing ropes. When we’re over the field and the ropes go down, I’ll open it for you. Not before.”')}
+ _afterTurn(n,s,data)}
+const _updateClock=updateClock
+updateClock=function(){const before=lastPeriod;_updateClock()
+ if(before!==lastPeriod&&gamePhase()==='approach'&&ai[BUNNY].route&&!window.gameOver&&view!=='keel_hatch')narrate('Somewhere on the keel, Bunny will be waiting by the hatch.')}
+</script>
+<script>
+/* ---------- Round 2: Helen Karens, the Purser, a second person who can catch you ---------- */
+const PURSER='Helen Karens'
+NPC_IDS[PURSER]='purser'
+ai[PURSER]={met:false,metWhere:'',trust:25,claims:[],heard:[],history:[],mood:'',lastReply:'',suspects:[],contraSeen:0}
+CAST_AT.office_desk=[PURSER];LOOK[PURSER]='purser';SHORT[PURSER]='Purser Karens'
+GREET[PURSER]='Helen Karens, Purser. Every soul aboard appears on my manifest, by regulation. Your name and ticket number, please.'
+CANNED[PURSER]=['Helen opens her ledger and frowns.','Regulations exist for a reason.','Name. Ticket. Cabin. In that order, please.']
+PAIRS.push(['Manard Toxu',PURSER])
+const CAPTURE_STEWARD=ENDINGS.capture
+const CAPTURE_PURSER={kind:'ENDING · CAPTURED',title:'Not on the Manifest',text:'Helen Karens runs her pen down the manifest twice, then closes it. “Regulation requires me to report a person not on my list.” Two crewmen walk you to the mail room. Through the little window you watch the lights of New Jersey appear, holding a warning nobody will hear.'}
+const _checkEndings=checkEndings
+checkEndings=function(){if(window.gameOver)return;const H=ai[PURSER]
+ // Every lie caught anywhere on the ship eventually reaches the purser's office
+ if(contradictions.length>(H.contraSeen||0)){const d=contradictions.length-(H.contraSeen||0);H.contraSeen=contradictions.length
+  H.trust=Math.max(H.met?0:12,H.trust-5*d);const r='rumour: a stranger aboard is telling different people different stories'
+  if(!H.heard.includes(r)){H.heard.push(r);H.heard=H.heard.slice(-6)}
+  narrate('Word of your mixed-up stories is reaching the purser’s office.')}
+ if(H.met&&H.trust<=10){ENDINGS.capture=CAPTURE_PURSER;return endGame('capture')}
+ ENDINGS.capture=CAPTURE_STEWARD;_checkEndings()}
+const _renderNB3=renderNotebook
+renderNotebook=function(){_renderNB3();const H=ai[PURSER],g=$('#notebookBody .nb-goals');if(!g)return
+ const w=document.createElement('div');w.className='nb-meta nb-contra'
+ w.textContent='Danger: the Purser, Helen Karens (B deck office), checks every name against her manifest. '+(H.met?'Her trust: '+H.trust+'/100. At 10 or below, she has you.':'Lies caught anywhere on the ship reach her office.')
+ g.after(w)}
+</script>
+<script>
+/* ---------- Round 2: the bar (Oreo Malloy) and the control car (Captain Kyle, First Officer Estavant) ---------- */
+const OREO='Oreo Malloy',CAPTAIN='Captain Swanson Kyle',FIRST='Emilio Estavant'
+Object.assign(NPC_IDS,{[OREO]:'bartender',[CAPTAIN]:'captain',[FIRST]:'first'})
+const blank=t=>({met:false,metWhere:'',trust:t,claims:[],heard:[],history:[],mood:'',lastReply:'',suspects:[]})
+ai[OREO]=blank(35);ai[CAPTAIN]=blank(20);ai[FIRST]=blank(30)
+CAST_AT.bar_counter=[OREO];CAST_AT.control_helm=[CAPTAIN,FIRST]
+Object.assign(LOOK,{[OREO]:'bartender',[CAPTAIN]:'captain',[FIRST]:'uniform'})
+Object.assign(SHORT,{[OREO]:'Oreo (bar)',[CAPTAIN]:'Captain Kyle',[FIRST]:'First Officer'})
+GREET[OREO]='Evening. Oreo Malloy. What will it be, and what is the story that comes with it?'
+GREET[CAPTAIN]='This is the control car. Passengers are not permitted here. I am Captain Kyle. State your business.'
+GREET[FIRST]='Emilio Estavant, First Officer. You have about one minute. Give me something I can check.'
+CANNED[OREO]=['Oreo polishes a glass and says nothing.','Now why would you want to know that?','A story for a story. That is how this bar works.']
+CANNED[CAPTAIN]=['The Captain does not look up from his schedule.','Captain Kyle, if you please.','I will not discuss the ship with a passenger.']
+CANNED[FIRST]=['Emilio taps his logbook. “Later.”','Numbers, please. Not feelings.','I can check a figure. I cannot check a rumour.']
+PAIRS.push([CAPTAIN,FIRST],[OREO,'Vaunice Charles'])
+const HERO_STEWARD=ENDINGS.hero
+const HERO_OFFICER={kind:'ENDING · HEROISM',title:'Checked Twice',text:'Emilio Estavant writes your warning in his logbook, then checks the ship against it, line by line. At his word, Captain Kyle holds the landing until the weather settles, and the stewards gather the passengers by the low promenade windows, coats on. When the moment comes, everyone is close to the ground and close to the exits. Nobody will ever know you were right. Everyone you spoke to walks away.'}
+const HERO_CAPTAIN={kind:'ENDING · HEROISM',title:'The Captain’s Word',text:'Captain Kyle lets his monocle drop and is quiet for a long moment. Then he orders the landing held until the weather settles and the passengers gathered at the low windows, coats on. He does not thank you. He does not need to. When the moment comes, everyone you spoke to walks away.'}
+const OFFICERS={[FIRST]:60,[CAPTAIN]:70}
+const _afterTurn6=afterTurn
+afterTurn=function(n,s,data){const st=ai[n]
+ if(st&&OFFICERS[n]&&((data&&data.claim_type==='warning')||WARN_RE.test(s))){if(!st.warned)narrate('You have warned '+(n===FIRST?'the First Officer':'the Captain')+'. Now you have to be believed.');st.warned=true}
+ _afterTurn6(n,s,data)}
+const _checkEndings6=checkEndings
+checkEndings=function(){if(window.gameOver)return
+ for(const [n,g] of Object.entries(OFFICERS)){const o=ai[n];if(o.met&&o.warned&&o.trust>=g){ENDINGS.hero=n===FIRST?HERO_OFFICER:HERO_CAPTAIN;return endGame('hero')}}
+ ENDINGS.hero=HERO_STEWARD;_checkEndings6()}
+const _renderNB6=renderNotebook
+renderNotebook=function(){_renderNB6();const g=$('#notebookBody .nb-goals');if(!g)return;const F=ai[FIRST],C=ai[CAPTAIN]
+ const li=document.createElement('li');li.textContent='Or warn and convince an officer in the control car (First Officer 60+, Captain '+OFFICERS[CAPTAIN]+'+). Now: '+(F.met?F.trust:'?')+' / '+(C.met?C.trust:'?')
+ if((F.warned&&F.trust>=60)||(C.warned&&C.trust>=70))li.className='done';g.children[4]?g.children[4].after(li):g.append(li)}
+</script>
+<style>
+#endoverlay{overflow-y:auto;align-items:flex-start}#endoverlay .titlecard{margin:auto}
+#endart{margin:0 auto 12px;border:3px double #b28a53;border-radius:4px;overflow:hidden;line-height:0;background:#1c1712}
+#endart svg,#endart img{display:block;width:100%;height:auto;max-height:34vh;object-fit:cover}
+</style>
+<script>
+/* ---------- Ending pictures: placeholder SVG scenes, one slot per ending ----------
+   To swap in finished art later, put an image path in ENDING_ART_IMG, e.g.
+   ENDING_ART_IMG.escape='art/end-escape.webp'. The image is then used instead of the SVG. */
+const ENDING_ART_IMG={hero_steward:'',hero_officer:'',hero_captain:'',capture_steward:'',capture_purser:'',escape:'',failure:''}
+const EA={cream:'#efe6d2',brass:'#c9a35f',sepia:'#3a2a1c',navy:'#1c2538',dusk:'#e9b97a'}
+const eaSvg=(defs,body)=>'<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img"><defs>'+defs+'</defs>'+body+'<rect x="3" y="3" width="314" height="194" fill="none" stroke="'+EA.brass+'" stroke-width="2"/></svg>'
+const eaSky=(id,top,bot)=>'<linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+top+'"/><stop offset="1" stop-color="'+bot+'"/></linearGradient>'
+// a standing figure: x = centre, y = feet; c = coat colour; hat: 'cap','hat','hair','none'
+function eaPerson(x,y,c,hat,s){s=s||1;const h=60*s,w=16*s,hd=7*s;let o='<g>'
+ o+='<path d="M'+(x-w/2)+' '+y+'L'+(x-w/2.6)+' '+(y-h*0.78)+'Q'+x+' '+(y-h*0.86)+' '+(x+w/2.6)+' '+(y-h*0.78)+'L'+(x+w/2)+' '+y+'Z" fill="'+c+'"/>'
+ o+='<circle cx="'+x+'" cy="'+(y-h*0.78-hd)+'" r="'+hd+'" fill="#e2bf98"/>'
+ if(hat==='cap')o+='<rect x="'+(x-hd*1.2)+'" y="'+(y-h*0.78-hd*2.1)+'" width="'+(hd*2.4)+'" height="'+(hd*0.8)+'" fill="'+EA.navy+'"/><rect x="'+(x-hd*1.2)+'" y="'+(y-h*0.78-hd*1.4)+'" width="'+(hd*2.4)+'" height="'+(hd*0.25)+'" fill="'+EA.brass+'"/>'
+ if(hat==='hat')o+='<ellipse cx="'+x+'" cy="'+(y-h*0.78-hd*1.5)+'" rx="'+(hd*1.6)+'" ry="'+(hd*0.35)+'" fill="#2b2420"/><rect x="'+(x-hd*0.9)+'" y="'+(y-h*0.78-hd*2.3)+'" width="'+(hd*1.8)+'" height="'+(hd*0.9)+'" rx="2" fill="#2b2420"/>'
+ if(hat==='hair')o+='<path d="M'+(x-hd)+' '+(y-h*0.78-hd)+'A'+hd+' '+hd+' 0 0 1 '+(x+hd)+' '+(y-h*0.78-hd)+'Z" fill="#2b2420"/>'
+ return o+'</g>'}
+const eaWindow=(x,y,w,h,fill)=>'<path d="M'+x+' '+y+'L'+(x+w)+' '+y+'L'+(x+w-14)+' '+(y+h)+'L'+(x+14)+' '+(y+h)+'Z" fill="'+fill+'" stroke="#d9cdb4" stroke-width="4"/>'+[1,2,3].map(i=>'<line x1="'+(x+w*i/4)+'" y1="'+y+'" x2="'+(x+w*i/4)+'" y2="'+(y+h)+'" stroke="#d9cdb4" stroke-width="3"/>').join('')
+const eaAirship=(cx,cy,len,glow)=>'<g><ellipse cx="'+cx+'" cy="'+cy+'" rx="'+len/2+'" ry="'+len/7+'" fill="#b8b4aa" stroke="#6f6a60" stroke-width="1.5"/>'+[-.3,-.1,.1,.3].map(f=>'<line x1="'+(cx+f*len)+'" y1="'+(cy-len/7.6)+'" x2="'+(cx+f*len)+'" y2="'+(cy+len/7.6)+'" stroke="#8d897f" stroke-width="1"/>').join('')+'<path d="M'+(cx+len*0.42)+' '+cy+'l'+len*0.1+' -'+len/9+'v'+len*2/9+'Z" fill="#8d897f"/><rect x="'+(cx-len*0.25)+'" y="'+(cy+len/7.4)+'" width="'+len*0.1+'" height="'+len/30+'" fill="#4a4338"/>'+(glow?'<ellipse cx="'+(cx+len*0.4)+'" cy="'+(cy-len/14)+'" rx="'+len*0.12+'" ry="'+len*0.09+'" fill="url(#glow)"/>':'')+'</g>'
+const eaMast=(x,y,h)=>'<g stroke="#4a4338" stroke-width="2" fill="none"><path d="M'+(x-10)+' '+y+'L'+x+' '+(y-h)+'L'+(x+10)+' '+y+'"/>'+[.25,.5,.75].map(f=>'<line x1="'+(x-10*(1-f))+'" y1="'+(y-h*f)+'" x2="'+(x+10*(1-f))+'" y2="'+(y-h*f)+'"/>').join('')+'</g>'
+const ENDING_ART={
+ // Hero via the Chief Steward: passengers gathered by the low windows, coats on, airfield close below
+ hero_steward:()=>eaSvg(eaSky('s1','#f0c98a','#b9845a'),'<rect width="320" height="200" fill="#4a3a2c"/>'+eaWindow(20,22,280,92,'url(#s1)')+'<path d="M38 96Q160 80 286 96L282 112H38Z" fill="#6f8a4c"/>'+eaMast(240,104,26)+'<rect y="140" width="320" height="60" fill="#5e4a36"/><rect y="138" width="320" height="4" fill="'+EA.brass+'"/>'+eaPerson(64,182,EA.navy,'none',1.15)+'<circle cx="64" cy="140" r="1.6" fill="'+EA.brass+'"/><circle cx="64" cy="150" r="1.6" fill="'+EA.brass+'"/>'+eaPerson(130,180,'#7b5a3a','hat')+eaPerson(160,180,'#8c3f35','hair')+eaPerson(190,180,'#3f5a4a','hat')+eaPerson(220,182,'#6b5d4f','hair',0.8)+eaPerson(256,180,'#584638','hat')),
+ // Hero via the First Officer: logbook checked, wheel and gauges, calm sky
+ hero_officer:()=>eaSvg(eaSky('s2','#f3d39b','#c88f5e'),'<rect width="320" height="200" fill="#3a2f26"/>'+eaWindow(14,14,292,86,'url(#s2)')+'<rect y="118" width="320" height="82" fill="#4d3d2e"/><circle cx="88" cy="128" r="26" fill="none" stroke="'+EA.brass+'" stroke-width="6"/>'+[0,45,90,135].map(a=>'<line x1="88" y1="128" x2="'+(88+30*Math.cos(a*Math.PI/180))+'" y2="'+(128+30*Math.sin(a*Math.PI/180))+'" stroke="'+EA.brass+'" stroke-width="3" transform="rotate(0)"/>').join('')+'<circle cx="88" cy="128" r="5" fill="'+EA.brass+'"/>'+[34,58].map(x=>'<circle cx="'+x+'" cy="170" r="9" fill="'+EA.cream+'" stroke="'+EA.brass+'" stroke-width="2"/><line x1="'+x+'" y1="170" x2="'+(x+5)+'" y2="165" stroke="#222" stroke-width="1.5"/>').join('')+eaPerson(196,186,EA.navy,'cap',1.2)+'<path d="M222 150h70l-4 20h-62Z" fill="'+EA.cream+'" stroke="#7a6446"/><line x1="257" y1="150" x2="257" y2="170" stroke="#7a6446"/>'+[155,160,165].map(y=>'<line x1="230" y1="'+y+'" x2="252" y2="'+y+'" stroke="#8b7a60"/>').join('')+'<path d="M262 160l6 6 14 -14" stroke="#4f7d3a" stroke-width="3" fill="none"/>'),
+ // Hero via the Captain: the order to hold the landing; mast waiting, ship steady
+ hero_captain:()=>eaSvg(eaSky('s3','#f2cf93','#d29a64'),'<rect width="320" height="200" fill="#3a2f26"/>'+eaWindow(14,14,292,96,'url(#s3)')+'<path d="M30 92Q160 84 292 92L288 108H32Z" fill="#6f8a4c"/>'+eaMast(220,100,40)+eaAirship(120,48,90)+'<rect y="124" width="320" height="76" fill="#4d3d2e"/><circle cx="250" cy="150" r="24" fill="none" stroke="'+EA.brass+'" stroke-width="6"/><circle cx="250" cy="150" r="5" fill="'+EA.brass+'"/>'+eaPerson(150,192,EA.navy,'cap',1.3)+'<line x1="158" y1="134" x2="182" y2="112" stroke="'+EA.navy+'" stroke-width="7" stroke-linecap="round"/><circle cx="183" cy="111" r="4" fill="#e2bf98"/><line x1="146" y1="132" x2="145" y2="150" stroke="'+EA.brass+'" stroke-width="1"/><circle cx="145" cy="152" r="3" fill="none" stroke="'+EA.brass+'"/>'),
+ // Captured by the Chief Steward: locked in the mail room with postcards
+ capture_steward:()=>eaSvg(eaSky('s4','#e6a56a','#5e4b6b'),'<rect width="320" height="200" fill="#2f251d"/>'+[0,1,2,3].map(r=>[0,1,2,3,4].map(c=>'<rect x="'+(18+c*22)+'" y="'+(20+r*20)+'" width="18" height="16" fill="#46372a" stroke="#6a5540"/>').join('')).join('')+'<circle cx="236" cy="62" r="30" fill="url(#s4)" stroke="'+EA.brass+'" stroke-width="6"/><rect x="290" y="30" width="20" height="150" fill="#3e3127" stroke="#5c4a39"/><circle cx="294" cy="110" r="2.5" fill="'+EA.brass+'"/><rect y="168" width="320" height="32" fill="#4a3a2c"/>'+'<ellipse cx="70" cy="168" rx="36" ry="22" fill="#a89270"/><ellipse cx="116" cy="174" rx="28" ry="17" fill="#958060"/><ellipse cx="226" cy="172" rx="34" ry="20" fill="#a89270"/>'+[[150,184,12],[168,190,-8],[260,186,20],[40,190,-15]].map(([x,y,a])=>'<rect x="'+x+'" y="'+y+'" width="14" height="9" fill="'+EA.cream+'" transform="rotate('+a+' '+x+' '+y+')"/>').join('')+eaPerson(226,160,'#6b5d4f','hair',1.05)),
+ // Captured by the Purser: the manifest closed, no such name
+ capture_purser:()=>eaSvg('<radialGradient id="lamp"><stop offset="0" stop-color="#f7dc9a" stop-opacity=".7"/><stop offset="1" stop-color="#f7dc9a" stop-opacity="0"/></radialGradient>','<rect width="320" height="200" fill="#3b2f25"/>'+[0,1].map(i=>'<rect x="'+(232+i*40)+'" y="26" width="34" height="96" fill="#5a4838" stroke="#7a6446"/>'+[0,1,2].map(j=>'<rect x="'+(240+i*40)+'" y="'+(36+j*30)+'" width="18" height="4" fill="'+EA.brass+'"/>').join('')).join('')+'<circle cx="64" cy="96" r="60" fill="url(#lamp)"/>'+eaPerson(150,140,EA.navy,'hair',1.25)+'<rect x="20" y="128" width="280" height="14" fill="#7b5a3a"/><rect x="30" y="142" width="260" height="58" fill="#5e4430"/><path d="M58 128V94h-8l14-14 14 14h-8v34" fill="'+EA.brass+'"/><rect x="110" y="112" width="84" height="16" rx="2" fill="#6b2f28" stroke="'+EA.brass+'"/><text x="152" y="124" font-family="Georgia,serif" font-size="9" fill="'+EA.brass+'" text-anchor="middle" letter-spacing="1">MANIFEST</text><g transform="rotate(-10 248 160)"><rect x="210" y="146" width="80" height="26" fill="none" stroke="#a8372c" stroke-width="2.5"/><text x="250" y="164" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#a8372c" text-anchor="middle">NOT LISTED</text></g>'),
+ // Escape: down the landing rope from the keel hatch to the field
+ escape:()=>eaSvg(eaSky('s5','#3d4a6b','#e7b177'),'<rect width="320" height="200" fill="url(#s5)"/><ellipse cx="160" cy="6" rx="230" ry="44" fill="#b8b4aa" stroke="#6f6a60" stroke-width="2"/>'+[40,100,160,220,280].map(x=>'<line x1="'+x+'" y1="0" x2="'+x+'" y2="46" stroke="#8d897f"/>').join('')+'<rect x="146" y="40" width="28" height="8" fill="#e8f0a8" stroke="#4a4338"/><path d="M160 48Q166 110 158 170" stroke="#d9cdb4" stroke-width="2.5" fill="none"/>'+eaPerson(162,128,'#7b5a3a','hat',0.6)+'<path d="M0 170Q160 158 320 170V200H0Z" fill="#5f7a42"/>'+[40,62,262,280].map(x=>eaPerson(x,186,'#3a3a3a','cap',0.28)).join('')),
+ // Out of time: arrival at Lakehurst under storm clouds; a first warning glow at the tail. No people harmed on screen.
+ failure:()=>eaSvg(eaSky('s6','#2a2c3a','#8a6a58')+'<radialGradient id="glow"><stop offset="0" stop-color="#ffb347" stop-opacity=".95"/><stop offset=".5" stop-color="#e86a2a" stop-opacity=".5"/><stop offset="1" stop-color="#e86a2a" stop-opacity="0"/></radialGradient>','<rect width="320" height="200" fill="url(#s6)"/>'+[[60,30,70],[170,22,90],[280,36,70]].map(([x,y,r])=>'<ellipse cx="'+x+'" cy="'+y+'" rx="'+r+'" ry="20" fill="#232430" opacity=".85"/>').join('')+eaAirship(140,92,170,true)+eaMast(268,168,64)+'<path d="M0 166Q160 156 320 166V200H0Z" fill="#3e4a30"/>'+[100,120,140,190,210].map(x=>eaPerson(x,182,'#2a2a2a','cap',0.26)).join(''))}
+function endingArtKey(k){if(k==='hero')return ENDINGS.hero===HERO_OFFICER?'hero_officer':ENDINGS.hero===HERO_CAPTAIN?'hero_captain':'hero_steward'
+ if(k==='capture')return ENDINGS.capture&&ENDINGS.capture.title==='Not on the Manifest'?'capture_purser':'capture_steward'
+ return k}
+function showEndingArt(k){let box=$('#endart');if(!box){box=document.createElement('div');box.id='endart';$('#endkind').before(box)}
+ const key=endingArtKey(k),img=ENDING_ART_IMG[key];box.dataset.art=key
+ box.innerHTML=img?'<img src="'+img+'" alt="">':(ENDING_ART[key]?ENDING_ART[key]():'')}
+const _endGame8=endGame
+endGame=function(k){_endGame8(k);try{showEndingArt(k)}catch(e){console.warn('ending art',e)}}
+</script>
+<style>.nb-leads{margin:8px 0 4px;padding:8px;border:1px dashed #a88a5c;border-radius:4px}.nb-leads h4{margin:0 0 4px;font-size:14px;color:#e3cfa6}.nb-leads li{margin:3px 0;font-size:13px}</style>
+<script>
+/* ---------- Round 9: every character has a secret or want that matters ----------
+   A secret is earned when the AI says it was revealed, or when trust reaches the gate.
+   Each one helps (a clue, a good word to someone, a lower bar) or can hurt (gossip). */
+const COLONEL='Colonel Landry Stoppard',VAUNICE='Vaunice Charles',POTTER='Potter McNare',SNARDY='Snardy Vontette',DAMINA='Damina Vontette'
+function vouch(from,to,amt,why){const t=ai[to];if(!t)return;t.trust=Math.min(100,t.trust+amt);t.heard.push('rumour: '+why);t.heard=t.heard.slice(-8)
+ narrate((SHORT[from]||from.split(' ')[0])+' will put in a good word for you with '+(SHORT[to]||to)+'. (Their trust in you: +'+amt+')')}
+function dent(to,amt,why){const t=ai[to];if(!t)return;t.trust=Math.max(t.met?0:12,t.trust-amt);t.heard.push('rumour: '+why);t.heard=t.heard.slice(-8)}
+const SECRETS={
+ [COLONEL]:{gate:60,clue:'The Colonel was a supply officer and never saw a battle. He dines with the Captain, and his word carries weight there.',fx:()=>vouch(COLONEL,CAPTAIN,20,'Colonel Stoppard calls the stranger a sound sort')},
+ [VAUNICE]:{gate:60,clue:'Vaunice has not had a good review in two years. The Chief Steward adores her films.',fx:()=>vouch(VAUNICE,STEWARD,12,'Miss Charles says the stranger is charming company')},
+ [POTTER]:{gate:55,clue:'Potter is about to be fired. He noticed cabin B-6 was booked for an “E. Ellery” who never boarded. The steward and the purser might accept that name.',fx:()=>{ai[POTTER].ellery=true}},
+ [OREO]:{gate:60,clue:'Oreo’s gossip: the Purser once misplaced an official document and dreads it coming out. Kindness about it may win her over. Also: the First Officer sings beautifully but hides it.',fx:()=>{ai[OREO].tipped=true}},
+ [BUNNY]:{gate:55,clue:'Bunny plans to slip off at Lakehurst himself, down the landing ropes from the keel hatch.',fx:()=>{}},
+ [PURSER]:{gate:75,clue:'Helen Karens once misplaced an official document. She is on your side now and will not report you.',fx:()=>helenAlly()},
+ [CAPTAIN]:{gate:70,clue:'Captain Kyle feels pushed to land on schedule, and his late wife always told him to wait out a storm. He needs less convincing now (60+).',fx:()=>{OFFICERS[CAPTAIN]=60}},
+ [FIRST]:{gate:55,clue:'Emilio sings, and keeps his own weather notes. He will back a warning to the Captain if it fits his numbers.',fx:()=>vouch(FIRST,CAPTAIN,15,'the First Officer says the stranger talks sense')},
+ [STEWARD]:{gate:60,clue:'The Chief Steward bends rules for tippers. He has quietly written you into his cabin list.',fx:()=>vouch(STEWARD,PURSER,15,'the stranger is on the Chief Steward’s cabin list')},
+ [SNARDY]:{gate:50,clue:'Snardy showed you her notebook: everything you have told everyone. It is copied into your notebook below, so you can keep your stories straight.',fx:()=>{}},
+ [DAMINA]:{gate:60,clue:'Damina worries she is out of her depth. She knows the Purser from her society column.',fx:()=>vouch(DAMINA,PURSER,15,'Mrs. Vontette vouches for the stranger')}}
+function helenAlly(){const H=ai[PURSER];if(H.ally)return;H.ally=true;H.trust=Math.min(100,Math.max(H.trust,50)+10);narrate('Whatever Helen Karens says aloud, she has gone pale. A little later she slips you a folded note: she will not report you, so long as her secret stays safe.');vouch(PURSER,STEWARD,10,'the Purser has no complaint about the stranger')}
+const _afterTurn9=afterTurn
+afterTurn=function(n,s,data){const st=ai[n],live=data&&!data.fallback
+ if(st&&live){const S=SECRETS[n]
+  if(S&&!st.secretEarned&&(data.secret_revealed||st.trust>=S.gate)){st.secretEarned=true;st.clue=S.clue;narrate((SHORT[n]||n.split(' ')[0])+' confides something. It is in your notebook.');S.fx()}
+  // Oreo's tip lets you reach Helen through kindness
+  if(n===PURSER&&ai[OREO].tipped&&!ai[PURSER].ally&&/\b(document|paper|papers|misplac|mislaid|lost)\b/i.test(s)&&!/\b(report|expose|tell everyone|unless)\b/i.test(s)){st.secretEarned=true;st.clue=SECRETS[PURSER].clue;helenAlly()}
+  // Potter's empty berth: a name the crew can't disprove
+  if((n===STEWARD||n===PURSER)&&ai[POTTER].ellery&&!st.elleryUsed&&/\b(ellery|b-?6)\b/i.test(s)){st.elleryUsed=true;st.trust=Math.min(100,st.trust+12);narrate('The name matches a booked berth. That helps. (+12)')}
+  // Potter repeats disaster talk to anyone, until he trusts you
+  if(n===POTTER&&!st.secretEarned&&!st.spread&&WARN_RE.test(s)){st.spread=true;dent(STEWARD,6,'a passenger is telling everyone the ship is in danger');dent(PURSER,6,'a passenger is spreading alarming talk');narrate('Potter hurries off to repeat your warning to anyone who will listen. Talk like that reaches the crew. (Steward and Purser trust: -6)')}}
+ // Snardy, treated badly, shows her notes to the grown-ups
+ if(n===SNARDY&&st&&st.met&&st.trust<=15&&!st.told){st.told=true;dent(STEWARD,10,'the Vontette girl has notes on everything the stranger said');dent(DAMINA,10,'Snardy says the stranger tells different stories');narrate('Snardy marches off with her notebook to show her aunt and the Chief Steward what you have been saying. (Their trust: -10)')}
+ _afterTurn9(n,s,data)}
+const _checkEndings9=checkEndings
+checkEndings=function(){OFFICERS[CAPTAIN]=ai[CAPTAIN].secretEarned?60:70
+ const H=ai[PURSER];if(H.ally&&H.trust<=10)H.trust=11
+ _checkEndings9()}
+const _renderNB9=renderNotebook
+renderNotebook=function(){_renderNB9();const g=$('#notebookBody .nb-goals');if(!g)return
+ const box=document.createElement('div');box.className='nb-leads';const h=document.createElement('h4');h.textContent='Secrets and leads';box.append(h)
+ const ul=document.createElement('ul');const got=Object.keys(SECRETS).filter(n=>ai[n]&&ai[n].secretEarned)
+ got.forEach(n=>{const li=document.createElement('li');li.textContent=(SHORT[n]||n)+': '+ai[n].clue;ul.append(li)})
+ if(!got.length){const li=document.createElement('li');li.textContent='Everyone aboard wants something or hides something. Earn their trust to find out. Careful: some people repeat what you tell them.';ul.append(li)}
+ box.append(ul)
+ if(ai[SNARDY].secretEarned){const h2=document.createElement('h4');h2.textContent='Snardy’s notes: what you told whom';box.append(h2);const u2=document.createElement('ul')
+  Object.keys(ai).filter(n=>ai[n].claims.length).forEach(n=>{const li=document.createElement('li');li.textContent=(SHORT[n]||n)+': '+ai[n].claims.join(' / ');u2.append(li)});box.append(u2)}
+ g.after(box)}
+</script>
+<style>
+/* ---------- Round 10: B-deck washroom start (simple placeholder art) ---------- */
+.scene .wash-wall{position:absolute;inset:0;background:repeating-linear-gradient(0deg,#d9d6c8 0 22px,#b9b5a6 22px 24px),#d9d6c8;background-blend-mode:multiply}
+.scene .wash-wall:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 22px,#b9b5a6 22px 24px)}
+.scene .wash-floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:repeating-conic-gradient(#2f2a26 0 25%,#d8d2c2 0 50%) 0 0/28px 28px}
+.scene .wash-rail{position:absolute;left:18%;right:18%;top:12%;height:6px;background:#8c8678;border-radius:3px}
+.scene .wash-curtain{position:absolute;left:18%;width:64%;top:13%;bottom:22%;background:repeating-linear-gradient(90deg,#e9e2cf 0 14px,#c9bfa6 14px 20px);border-bottom:4px solid #9d927a;cursor:pointer}
+.scene .wash-curtain.open{width:22%}
+.scene .wash-head{position:absolute;left:58%;top:16%;width:9%;height:6%;background:#9a958a;border-radius:0 0 50% 50%}
+.scene .wash-mirror{position:absolute;left:30%;top:14%;width:40%;height:30%;border:8px solid #8a7556;background:linear-gradient(135deg,#c9d3d6,#8c999c);cursor:pointer}
+.scene .wash-basin{position:absolute;bottom:22%;width:26%;height:20%;background:linear-gradient(#f4f1e8,#bdb8ab);border-radius:6px 6px 40% 40%;box-shadow:0 6px 0 #6f6a60}
+.scene .wash-basin.a{left:18%}.scene .wash-basin.b{right:18%}
+.scene .wash-door{position:absolute;left:32%;top:14%;width:36%;bottom:22%;background:linear-gradient(90deg,#4d3a2b,#8b6f52 20%,#a1855f 70%,#5a4432);border:8px ridge #b39268;cursor:pointer}
+.scene .wash-door:after{content:'WASCHRAUM · B';position:absolute;top:10%;left:0;right:0;text-align:center;font:bold 9px Georgia,serif;color:#f1e3c2;letter-spacing:1px}
+.scene .wash-door:before{content:'●';position:absolute;right:9%;top:52%;color:#e7c67f}
+</style>
+<script>
+/* Start hidden in the B-deck washroom (the real ship's washrooms, toilets and only shower were on B deck) */
+Object.assign(nodes,{
+ washroom_stall:{name:'B-Deck Washroom',facing:'the shower stall · your hiding place',left:'washroom_basins',right:'washroom_door',forward:null,style:'washshower'},
+ washroom_basins:{name:'B-Deck Washroom',facing:'wash basins and mirror',left:'washroom_door',right:'washroom_stall',forward:null,style:'washbasin'},
+ washroom_door:{name:'B-Deck Washroom',facing:'door to the B-deck corridor',left:'washroom_stall',right:'washroom_basins',forward:'bdeck_washroom',style:'washdoor'},
+ bdeck_washroom:{name:'B-Deck Corridor',facing:'washroom door',left:'office_desk',right:'bdeck_stairs',forward:'washroom_door',style:'door'}})
+nodes.bdeck_stairs.left='bdeck_washroom';nodes.office_desk.right='bdeck_washroom'
+nodes.bdeck_stairs.name='B-Deck Corridor';nodes.crew_door.name='B-Deck Corridor'
+// A-deck cabins belong to paying passengers; the stowaway has none. The old start room is now an unused cabin.
+;['cabin_bunk','cabin_window','cabin_door','cabin_desk'].forEach(k=>nodes[k].name='Empty Cabin (A deck)');nodes.cabin_bunk.facing='a made-up bunk nobody is using'
+XROOM.washshower=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-rail"></div><div class="wash-head"></div><div class="wash-curtain" data-wash="shower" title="Shower curtain"></div>'
+XROOM.washbasin=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-mirror" data-wash="mirror" title="Mirror"></div><div class="wash-basin a"></div><div class="wash-basin b"></div>'
+XROOM.washdoor=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-door" data-move="bdeck_washroom" title="Step out into the corridor"></div>'
+const WASH_TEXT={shower:'The only shower aboard any airship, and the one place nobody looks twice at a closed curtain. You have been hiding behind it since Frankfurt.',
+ mirror:'Your reflection looks like someone who has not slept in three days. No ticket, no cabin, no name on the manifest. Just what you know about tonight.'}
+const _draw10=draw
+draw=function(){_draw10();scene.querySelectorAll('[data-wash]').forEach(el=>el.onclick=()=>narrate(WASH_TEXT[el.dataset.wash]))}
+</script>
+<!-- r11-sleeping-tour -->
+<style>
+.scene .r11-wall { position: absolute; inset: 0; background: #dcd4c5; }
+.scene .r11-adwall { position: absolute; inset: 0; background: #b8c4cb; }
+.scene .r11-keelbg { position: absolute; inset: 0; background: #1a1e24; }
+.scene .r11-panel { position: absolute; background: #cbbba0; border: 1px solid #998a72; }
+.scene .r11-berth { position: absolute; background: #4a5d6e; border-radius: 4px; cursor: pointer; }
+.scene .r11-sheet { position: absolute; background: #f0ede6; }
+.scene .r11-pillow { position: absolute; background: #ffffff; border-radius: 3px; }
+.scene .r11-case { position: absolute; background: #6e472a; border-radius: 3px; border: 1px solid #3d2614; cursor: pointer; }
+.scene .r11-wardrobe { position: absolute; background: #8c7663; border-left: 2px solid #57483a; cursor: pointer; }
+.scene .r11-window-frame { position: absolute; background: #3d4956; border: 4px solid #232a32; border-radius: 6px; overflow: hidden; }
+.scene .r11-sea { position: absolute; inset: 0; background: linear-gradient(#8ca0b3 50%, #4a5c6d 50%); }
+.scene .r11-bell { position: absolute; width: 14px; height: 22px; background: #b59449; border-radius: 7px; cursor: pointer; border: 1px solid #665022; }
+.scene .r11-door { position: absolute; background: #5c4533; border: 3px solid #38291c; cursor: pointer; }
+.scene .r11-card { position: absolute; background: #d9c49c; border: 1px solid #826e49; font: 10px Georgia, serif; color: #222; text-align: center; line-height: 14px; }
+.scene .r11-desk { position: absolute; background: #73573f; border: 1px solid #453323; cursor: pointer; }
+.scene .r11-basin { position: absolute; background: #f7f7f7; border: 2px solid #ccc; border-radius: 0 0 12px 12px; cursor: pointer; }
+.scene .r11-tap { position: absolute; width: 4px; height: 8px; background: #b59449; }
+.scene .r11-shoes { position: absolute; width: 20px; height: 10px; background: #222; border-radius: 4px 8px 0 0; cursor: pointer; }
+.scene .r11-walkway { position: absolute; left: 45%; width: 10%; top: 0; bottom: 0; background: #333a42; border-left: 1px solid #555e69; border-right: 1px solid #555e69; }
+.scene .r11-girder { position: absolute; background: #707e8c; opacity: 0.6; }
+.scene .r11-cell { position: absolute; background: radial-gradient(circle at 50% 30%, #e8e3d5, #aa9f8c); border-radius: 50%; opacity: 0.85; }
+.scene .r11-bench { position: absolute; background: #544436; border: 1px solid #30261e; }
+.scene .r11-overshoe { position: absolute; background: #666; border-radius: 6px; cursor: pointer; }
+.scene .r11-rules { position: absolute; background: #fffbe8; border: 1px solid #aa9966; padding: 6px; font: 10px Georgia, serif; color: #333; }
+.scene .r11-tank { position: absolute; background: linear-gradient(90deg, #444, #777, #333); border-radius: 6px; }
+.scene .r11-tent { position: absolute; background: #c2b193; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+.scene .r11-flicker { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(235, 245, 255, 0.7); box-shadow: 0 0 10px #fff; opacity: 0.35; cursor: pointer; animation: r11Pulse 3s infinite ease-in-out; }
+.scene .r11-flicker::after { content: ''; position: absolute; inset: -14px; }
+@keyframes r11Pulse { 0%, 100% { opacity: 0.2; transform: scale(0.9); } 50% { opacity: 0.7; transform: scale(1.2); } }
+.scene .r11-watcher { position: absolute; width: 70px; height: 40px; left: calc(50% - 35px); top: 38%; background: radial-gradient(ellipse at center, rgba(230,240,255,0.95) 0%, rgba(180,210,240,0.4) 50%, rgba(0,0,0,0) 75%); border-radius: 50%; cursor: pointer; animation: r11Glow 4s infinite ease-in-out; }
+@keyframes r11Glow { 0%, 100% { opacity: 0.6; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1.05); } }
+.scene .r11-pupil { position: absolute; width: 12px; height: 12px; left: 29px; top: 14px; background: #1a2636; border-radius: 50%; box-shadow: 0 0 6px #fff; }
+.scene .r11-lbl { position: absolute; font: 10px Georgia, serif; color: #ddd; text-align: center; width: 100%; pointer-events: none; }
+</style>
+<script>
+(function(){
+  const EYE = 'The Watcher in the Rings';
+  if (typeof NPC_IDS !== 'undefined') NPC_IDS[EYE] = 'eye';
+  if (typeof ai !== 'undefined') ai[EYE] = ai[EYE] || (typeof blank === 'function' ? blank(35) : {});
+  if (typeof SHORT !== 'undefined') SHORT[EYE] = 'The Watcher';
+  if (typeof GREET !== 'undefined') GREET[EYE] = '…you came up out of the light, small one. I have been watching your little door since Frankfurt.';
+  if (typeof CANNED !== 'undefined') CANNED[EYE] = [
+    'A cold draft. The girders hum, and something like a word is lost in it.',
+    '…sixteen breaths held above you… one of them is tired…',
+    'The glow dims, as if it has looked away. Or looked through you.'
+  ];
+
+  const TEXT11 = {
+    b6berth: 'Two berths, neatly made up and completely unused. Passenger E. Ellery never boarded in Frankfurt.',
+    b6case: 'A small suitcase sits under the lower berth. Freight and bags were stowed away while the berth stayed empty.',
+    b6wardrobe: 'A small curtained wardrobe space. Suits and dresses hang behind thin light fabric.',
+    b6window: 'A real glass window showing grey sea and sky — a major addition for the nine new B-deck cabins in 1937.',
+    b6bell: 'A brass push-button call bell for the steward. You don’t dare press it, because a steward would come.',
+    b6desk: 'A small wooden fold-down desk flap, set into thin fabric-covered wall panels.',
+    b6basin: 'A compact white plastic washbasin with hot and cold taps. Toilets remain down the hall.',
+    adberth: 'A fixed lower berth, 78 by 66 inches. The upper berth folds flush against the fabric wall by day.',
+    adbasin: 'A white plastic washbasin tucked into the tiny cabin wall. Space inside A-deck cabins is extremely tight.',
+    addesk: 'A small fold-down desk flap. A-deck cabins sit deep inside the hull with no windows.',
+    adcloset: 'A narrow closet alcove hidden behind a light fabric curtain.',
+    adshoes: 'A pair of leather shoes left outside the door for the steward to polish during the night.'
+  };
+
+  function tourOpen(){
+    return !window.gameOver && ai[BUNNY] && !ai[BUNNY].toured && clockTime() < 16 && (clockTime() >= 8 || (ai[BUNNY].met && ai[BUNNY].trust >= 50));
+  }
+
+  // Update nodes map
+  nodes.cabin_bunk = { name: 'Cabin B-6 (B deck)', facing: 'two berths, made up, unused', left: 'cabin_desk', right: 'cabin_window', forward: null, style: 'b6bunk' };
+  nodes.cabin_window = { name: 'Cabin B-6 (B deck)', facing: 'a real window — new B-deck cabins have them', left: 'cabin_bunk', right: 'cabin_door', forward: null, style: 'b6window' };
+  nodes.cabin_door = { name: 'Cabin B-6 (B deck)', facing: 'door to the B-deck corridor', left: 'cabin_window', right: 'cabin_desk', forward: 'bdeck_cabins', style: 'b6door' };
+  nodes.cabin_desk = { name: 'Cabin B-6 (B deck)', facing: 'fold-down desk and washbasin', left: 'cabin_door', right: 'cabin_bunk', forward: null, style: 'b6desk' };
+
+  nodes.bdeck_cabins = { name: 'B-Deck Corridor', facing: 'the new 1937 cabins · B-6', left: 'crew_door', right: 'office_desk', forward: 'cabin_door', style: 'door' };
+  if (nodes.crew_door) {
+    nodes.crew_door.right = 'bdeck_cabins';
+    nodes.crew_door.style = 'crewdoor11';
+  }
+  if (nodes.office_desk) nodes.office_desk.left = 'bdeck_cabins';
+
+  nodes.adeck_cabin = { name: 'Passenger Cabin (A deck)', facing: 'someone else’s cabin · no window', left: null, right: null, forward: 'corridor_left', style: 'adcabin' };
+  if (nodes.corridor_left) {
+    nodes.corridor_left.forward = 'adeck_cabin';
+    nodes.corridor_left.facing = 'inside cabins · port side';
+  }
+
+  nodes.tour_shoes = { name: 'Keel Tour (escorted)', facing: 'felt overshoes and the safety rules', left: null, right: null, forward: 'tour_cells', style: 'tour1' };
+  nodes.tour_cells = { name: 'Keel Tour (escorted)', facing: 'looking up into the hull', left: null, right: null, forward: 'tour_tanks', style: 'tour2' };
+  nodes.tour_tanks = { name: 'Keel Tour (escorted)', facing: 'fuel and water tanks, crew bunks', left: null, right: null, forward: 'tour_end', style: 'tour3' };
+  nodes.tour_end = { name: 'Keel Tour (escorted)', facing: 'the guide turns back · the forward keel', left: null, right: null, forward: 'keel_walk', style: 'tour4' };
+
+  nodes.girder_nook = { name: 'High in the Rings', facing: 'something watching · climb back down', left: null, right: null, forward: 'keel_back', style: 'nook' };
+
+  // XROOM art rendering
+  XROOM.b6bunk = function() {
+    return '<div class="r11-wall"></div>' +
+      '<div class="r11-wardrobe" style="top:10%;left:5%;width:18%;height:75%;" data-x11="b6wardrobe" title="Wardrobe"></div>' +
+      '<div class="r11-berth" style="top:25%;left:28%;width:65%;height:18%;" data-x11="b6berth" title="Upper Berth"><div class="r11-sheet" style="inset:3px 3px 3px 20%;"></div><div class="r11-pillow" style="top:5px;left:5px;width:12%;height:60%;"></div></div>' +
+      '<div class="r11-berth" style="top:60%;left:28%;width:65%;height:22%;" data-x11="b6berth" title="Lower Berth"><div class="r11-sheet" style="inset:3px 3px 3px 20%;"></div><div class="r11-pillow" style="top:6px;left:6px;width:12%;height:60%;"></div></div>' +
+      '<div class="r11-case" style="top:84%;left:35%;width:22%;height:10%;" data-x11="b6case" title="Suitcase"></div>';
+  };
+
+  XROOM.b6window = function() {
+    return '<div class="r11-wall"></div>' +
+      '<div class="r11-window-frame" style="top:20%;left:25%;width:50%;height:45%;" data-x11="b6window" title="Cabin Window"><div class="r11-sea"></div></div>' +
+      '<div class="r11-bell" style="top:35%;right:12%;" data-x11="b6bell" title="Call Steward"></div>';
+  };
+
+  XROOM.b6door = function() {
+    return '<div class="r11-wall"></div>' +
+      '<div class="r11-door" style="top:15%;left:30%;width:40%;height:75%;" data-move="bdeck_cabins" title="Exit to B-Deck Corridor">' +
+        '<div class="r11-card" style="top:15%;left:30%;width:40%;height:22px;line-height:22px;">B 6</div>' +
+      '</div>';
+  };
+
+  XROOM.b6desk = function() {
+    return '<div class="r11-wall"></div>' +
+      '<div class="r11-basin" style="top:30%;left:15%;width:25%;height:22%;" data-x11="b6basin" title="Washbasin"><div class="r11-tap" style="top:-6px;left:6px;"></div><div class="r11-tap" style="top:-6px;right:6px;"></div></div>' +
+      '<div class="r11-desk" style="top:55%;left:45%;width:42%;height:28%;" data-x11="b6desk" title="Fold-down Desk"></div>';
+  };
+
+  XROOM.adcabin = function() {
+    return '<div class="r11-adwall"></div>' +
+      '<div class="r11-berth" style="top:62%;left:5%;width:60%;height:22%;" data-x11="adberth" title="Fixed Lower Berth"><div class="r11-sheet" style="inset:3px 3px 3px 20%;"></div></div>' +
+      '<div class="r11-berth" style="top:20%;left:5%;width:60%;height:8%;opacity:0.7;" data-x11="adberth" title="Folded Upper Berth"></div>' +
+      '<div class="r11-wardrobe" style="top:15%;right:5%;width:22%;height:65%;" data-x11="adcloset" title="Curtained Closet"></div>' +
+      '<div class="r11-basin" style="top:35%;left:40%;width:18%;height:16%;" data-x11="adbasin" title="Washbasin"></div>' +
+      '<div class="r11-desk" style="top:52%;left:40%;width:20%;height:14%;" data-x11="addesk" title="Desk Flap"></div>' +
+      '<div class="r11-bell" style="top:25%;left:30%;" data-x11="b6bell" title="Call Button"></div>' +
+      '<div class="r11-door" style="top:10%;left:75%;width:20%;height:80%;" data-move="corridor_left" title="Door to Corridor"></div>' +
+      '<div class="r11-shoes" style="top:86%;left:70%;" data-x11="adshoes" title="Shoes for Polishing"></div>';
+  };
+
+  XROOM.crewdoor11 = function() {
+    const tourBtn = tourOpen() ? '<div class="actbtn" data-act="tour">Join the passengers’ escorted keel tour</div>' : '';
+    return '<div class="r11-keelbg"></div>' +
+      '<div class="r11-door" style="top:20%;left:35%;width:30%;height:65%;background:#111;border-color:#444;" data-move="keel_walk" title="Crew Door"><div style="color:#aaa;font:11px Georgia;text-align:center;margin-top:10px;">CREW ONLY</div></div>' +
+      '<div class="r11-rules" style="top:40%;left:5%;width:22%;" data-x11="notice" title="Notice">Keel tours by arrangement · soft shoes · no flames</div>' + tourBtn;
+  };
+
+  XROOM.tour1 = function() {
+    return '<div class="r11-keelbg"></div><div class="r11-walkway"></div>' +
+      '<div class="r11-bench" style="top:50%;left:15%;width:30%;height:20%;"></div>' +
+      '<div class="r11-overshoe" style="top:46%;left:18%;width:10%;height:8%;" title="Felt Overshoes"></div>' +
+      '<div class="r11-rules" style="top:25%;right:15%;width:35%;"><strong>SAFETY RULES</strong><br>• No matches<br>• No lighters<br>• Soft shoes only<br>• Stay with guide</div>';
+  };
+
+  XROOM.tour2 = function() {
+    const flick = '<div class="r11-flicker" style="top:15%;left:48%;" data-x11="flicker" title="High in the girders..."></div>';
+    const climbBtn = (ai[EYE] && ai[EYE].noticed) ? '<div class="actbtn" data-act="climb" style="bottom:70px;">Climb the crew ladder (quietly)</div>' : '';
+    return '<div class="r11-keelbg"></div>' +
+      '<div class="r11-cell" style="top:-10%;left:5%;width:42%;height:55%;"></div>' +
+      '<div class="r11-cell" style="top:-10%;right:5%;width:42%;height:55%;"></div>' +
+      '<div class="r11-girder" style="top:0;bottom:0;left:20%;width:4px;"></div>' +
+      '<div class="r11-girder" style="top:0;bottom:0;right:20%;width:4px;"></div>' +
+      '<div class="r11-girder" style="top:30%;left:0;right:0;height:3px;"></div>' +
+      '<div class="r11-walkway" style="top:70%;height:30%;"></div>' +
+      '<div style="position:absolute;top:75%;left:48%;width:6px;height:14px;background:#e2c9a0;border-radius:3px;" title="Tour Group"></div>' +
+      flick + climbBtn;
+  };
+
+  XROOM.tour3 = function() {
+    return '<div class="r11-keelbg"></div><div class="r11-walkway"></div>' +
+      '<div class="r11-tank" style="top:20%;left:10%;width:25%;height:40%;" title="Diesel Fuel Tank"></div>' +
+      '<div class="r11-tank" style="top:20%;right:10%;width:25%;height:40%;" title="Water Ballast Tank"></div>' +
+      '<div class="r11-tent" style="top:65%;left:10%;width:25%;height:25%;" title="Crew Sleeping Quarters"></div>';
+  };
+
+  XROOM.tour4 = function() {
+    return '<div class="r11-keelbg"></div><div class="r11-walkway"></div>' +
+      '<div style="position:absolute;bottom:20%;left:40%;width:20%;height:20px;border-radius:50%;background:#222;border:1px solid #555;" title="Floor Hatch"></div>' +
+      '<div class="actbtn" data-act="tourend">Hang back as the group returns</div>';
+  };
+
+  XROOM.nook = function() {
+    return '<div class="r11-keelbg"></div>' +
+      '<div class="r11-cell" style="top:10%;left:-15%;width:55%;height:80%;"></div>' +
+      '<div class="r11-cell" style="top:10%;right:-15%;width:55%;height:80%;"></div>' +
+      '<div class="r11-girder" style="top:0;bottom:0;left:40%;width:2px;"></div>' +
+      '<div class="r11-girder" style="top:0;bottom:0;right:40%;width:2px;"></div>' +
+      '<div class="r11-watcher" data-person="The Watcher in the Rings" role="button" tabindex="0" title="Speak to it"><div class="r11-pupil"></div></div>' +
+      '<div class="r11-lbl" style="top:49%;">?</div>';
+  };
+
+  const _k = XROOM.keel;
+  XROOM.keel = function(v) {
+    let base = _k ? _k(v) : '';
+    if (v === 'keel_back' && ai[BUNNY] && ai[BUNNY].toured) {
+      base += '<div class="r11-flicker" style="top:15%;left:48%;" data-x11="flicker2" title="High in the girders..."></div>';
+      if (ai[EYE] && ai[EYE].noticed) {
+        base += '<div class="actbtn" data-act="climb" style="bottom:70px;">Climb the crew ladder (quietly)</div>';
+      }
+    }
+    return base;
+  };
+
+  // ACTS handlers
+  if (typeof ACTS !== 'undefined') {
+    ACTS.tour = function() {
+      if (!tourOpen()) return;
+      narrate('A crew guide gathers a few passengers near the crew door. Nobody checks tickets; you slip into the back of the group.');
+      view = 'tour_shoes'; steps++; draw(); saveGame();
+    };
+
+    ACTS.tourend = function() {
+      if (ai[BUNNY]) {
+        ai[BUNNY].toured = true;
+        ai[BUNNY].trust = Math.min(100, (ai[BUNNY].trust || 0) + 10);
+      }
+      window.keelWarned = true;
+      narrate('The other passengers file back to B deck. You hang back on the keel walkway; Bunny notices you, but doesn’t shout.');
+      view = 'keel_walk'; steps++; draw(); saveGame();
+    };
+
+    ACTS.climb = function() {
+      window.nookReturn = view;
+      if (nodes.girder_nook) nodes.girder_nook.forward = window.nookReturn;
+      view = 'girder_nook'; steps++; draw(); saveGame();
+    };
+  }
+
+  // heardFor wrapping for EYE
+  if (typeof heardFor === 'function') {
+    const _hf = heardFor;
+    heardFor = function(n) {
+      if (n === EYE) {
+        const res = [];
+        for (const m in ai) {
+          if (m !== EYE && ai[m] && ai[m].claims) {
+            for (let i = ai[m].claims.length - 1; i >= 0; i--) {
+              if (res.length < 5) res.push('told ' + m + ': ' + ai[m].claims[i]);
+            }
+          }
+        }
+        res.push('known to the Watcher alone (the stranger never said it): the ship will burn at the Lakehurst mooring');
+        if (res.length === 1) res.unshift('the stowaway has hidden in the B-deck shower since Frankfurt');
+        return res.slice(0, 6);
+      }
+      const orig = _hf(n) || [];
+      return orig.filter(s => typeof s !== 'string' || !s.includes('Watcher'));
+    };
+  }
+
+  let prevView = null;
+  const _draw11 = draw;
+  draw = function() {
+    _draw11();
+    if (window.gameOver) return;
+
+    if (window.nookReturn && nodes.girder_nook) {
+      nodes.girder_nook.forward = window.nookReturn;
+    }
+
+    if (view === 'keel_walk' && prevView === 'tour_end' && ai[BUNNY] && !ai[BUNNY].toured) {
+      ai[BUNNY].toured = true;
+      ai[BUNNY].trust = Math.min(100, (ai[BUNNY].trust || 0) + 10);
+      window.keelWarned = true;
+      narrate('The other passengers file back to B deck. You hang back on the keel walkway; Bunny notices you, but doesn’t shout.');
+    }
+
+    if (tourOpen() && ai[BUNNY] && !ai[BUNNY].tourAnnounced) {
+      ai[BUNNY].tourAnnounced = true;
+      narrate('A steward passes through, ringing a little hand bell: “The evening keel tour gathers at the B-deck crew door. Soft shoes, please, and no matches.”');
+    }
+
+    window.r11Seen = window.r11Seen || new Set();
+    if (!window.r11Seen.has(view)) {
+      if (view === 'tour_shoes') {
+        window.r11Seen.add('tour_shoes');
+        narrate('You put on soft felt overshoes for the narrow walkway. Passengers handed over all matches and lighters at boarding.');
+      } else if (view === 'tour_cells') {
+        window.r11Seen.add('tour_cells');
+        narrate('High overhead, 16 gas cells hold seven million cubic feet of hydrogen inside duralumin rings. Only crew in spark-proof suits climb up top.');
+      } else if (view === 'tour_tanks') {
+        window.r11Seen.add('tour_tanks');
+        narrate('Diesel and water-ballast tanks sit along the catwalk beside freight rooms and the crew’s tent quarters.');
+      } else if (view === 'tour_end') {
+        window.r11Seen.add('tour_end');
+        narrate('Bunny points out landing-rope gear near a hatch — “that’s where the ropes go down at Lakehurst” — then turns the group back.');
+      } else if (view === 'girder_nook') {
+        window.r11Seen.add('girder_nook');
+        if (ai[EYE] && !ai[EYE].nookVisited) {
+          ai[EYE].nookVisited = true;
+          narrate('You climb until the catwalk lamps are pinpricks below. The gas cells breathe around you like sleeping animals. Here, where no passenger is ever allowed, the dark is looking back.');
+          narrate('It does not speak the way people do. Ask it what you like, but do not expect plain answers.');
+        }
+      }
+    }
+
+    const sc = document.querySelector('.scene');
+    if (sc) {
+      sc.querySelectorAll('[data-x11]').forEach(el => {
+        el.addEventListener('click', e => {
+          e.stopPropagation();
+          const k = el.getAttribute('data-x11');
+          if (k === 'flicker' || k === 'flicker2') {
+            if (ai[EYE]) ai[EYE].noticed = true;
+            narrate('A cold draft touches your neck. High in the rings, something glimmers — and the guide, mid-sentence about gas cells, does not see it. A rubber-shod crew ladder leads up between two cells.');
+            draw();
+          } else if (k === 'notice') {
+            if (clockTime() >= 16 && ai[BUNNY] && !ai[BUNNY].toured) {
+              narrate('A typed card: Tours suspended for landing.');
+            } else {
+              narrate('A typed card: keel tours are given in the evening, by arrangement with the crew.');
+            }
+          } else if (TEXT11[k]) {
+            narrate(TEXT11[k]);
+          }
+        });
+      });
+    }
+
+    prevView = view;
+  };
+})();
+</script>
+</body></html>

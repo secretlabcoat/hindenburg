@@ -1,0 +1,7 @@
+Probed https://hindenburg.secretlabcoat-0ba.workers.dev on 2026-11-05 (America/Toronto).
+All common paths (/, /index.html, /favicon.ico, /robots.txt, /manifest.json, /sw.js, /assets, /api, /health, /static, /css, /js) return HTTP 200 with the same ~117KB HTML body — SPA/catch-all Worker, no separate static assets.
+
+External dependency found in HTML:
+  RELAY_DEFAULT = https://hindenburg-ai.secretlabcoat-0ba.workers.dev
+  That host answers GET with 405 {"error":"POST only"} and allows POST, OPTIONS (CORS *).
+  No other remote asset URLs (no CDN CSS/JS/images). Game is single-file + optional AI relay.
