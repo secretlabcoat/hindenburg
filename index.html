@@ -41,6 +41,9 @@ let view='cabin_bunk',steps=0, busy=false;const scene=$('#scene');
 function applySceneArt(paintEl, style){
   const url=artUrl(style);
   if(!url) return;
+  // Skip until the title overlay exists and is dismissed (early draw() runs before #titleoverlay is parsed).
+  const title=document.querySelector('#titleoverlay');
+  if(!title || !title.hidden) return;
   paintEl.classList.remove('has-art');
   const old=paintEl.querySelector('.scene-art');
   if(old) old.remove();
@@ -48,9 +51,12 @@ function applySceneArt(paintEl, style){
   img.className='scene-art';
   img.alt='';
   img.decoding='async';
-  img.src=url;
-  img.onload=()=>paintEl.classList.add('has-art');
+  // Handlers BEFORE src — cached loads can fire onload synchronously.
+  const mark=()=>{if(img.naturalWidth>0)paintEl.classList.add('has-art')};
+  img.onload=mark;
   img.onerror=()=>{img.remove();paintEl.classList.remove('has-art')};
+  img.src=url;
+  if(img.complete) mark();
   paintEl.insertBefore(img, paintEl.firstChild);
 }
 function scenery(v){let n=nodes[v],style=n.style,s='<div class="paint"><div class="ceiling"></div><div class="perspective-floor"></div>';
