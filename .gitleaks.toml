@@ -1,0 +1,7 @@
+title = "Hindenburg secret scanning"
+[extend]
+useDefault = true
+[allowlist]
+description = "Public browser localStorage namespace, not an API credential (also quoted in old QA logs)"
+regexTarget = "secret"
+regexes = ['''^hindenburg_save_v1$''']

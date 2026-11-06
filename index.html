@@ -1,8 +1,68 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hindenburg — Prototype</title><style>
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#12100e;color:#eadcc4;font:16px Georgia,serif}.shell{max-width:1100px;margin:auto;padding:10px;position:relative}.top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 8px;color:#c9b38a}.top strong{letter-spacing:3px}.top button,.bottom button{background:#292019;color:#eadcc4;border:1px solid #9c7846;border-radius:4px;padding:9px;cursor:pointer}.scene{height:min(56vw,560px);min-height:300px;position:relative;overflow:hidden;border:7px ridge #8c6939;background:linear-gradient(180deg,#a7b6c7,#c4b5a2 58%,#5e4b3d 58%)}.sky{position:absolute;inset:0 0 42%;background:linear-gradient(#8098b5,#b9c9d8 65%,#f4d9b2)}.windows{position:absolute;inset:5% 3% 35%;display:flex;gap:8px;transform:skew(-5deg)}.window{flex:1;border:10px solid #726452;background:linear-gradient(#8fa8c3,#e3d4bd);box-shadow:inset 0 0 0 3px #c9b894;position:relative}.window:after{content:"";position:absolute;left:45%;top:0;height:100%;width:7px;background:#776653;transform:skew(-15deg)}.wall{position:absolute;inset:0;background:linear-gradient(90deg,#8c7866 0 11%,transparent 11% 88%,#8c7866 88%);pointer-events:none}.floor{position:absolute;inset:65% 0 0;background:repeating-linear-gradient(35deg,#594739,#594739 17px,#685242 18px,#685242 35px)}.table{position:absolute;bottom:13%;left:37%;width:25%;height:12%;background:radial-gradient(ellipse,#a98a63 0 55%,#4d3325 56%);border-radius:50%;box-shadow:0 17px 0 -8px #3b2d22}.chair{position:absolute;bottom:10%;width:17%;height:20%;border:9px solid #a1845b;border-radius:35% 35% 10% 10%;background:repeating-linear-gradient(90deg,#977d58 0 5px,#b39a70 6px 10px)}.chair.a{left:16%}.chair.b{right:14%}.person{position:absolute;bottom:22%;width:13%;height:45%;cursor:pointer;filter:drop-shadow(3px 5px 4px #382d2788)}.person:before{content:"";position:absolute;top:0;left:28%;width:44%;height:25%;border-radius:50% 50% 45% 45%;background:#d5ad8d;border-top:13px solid #45392e}.person:after{content:"";position:absolute;top:22%;left:8%;width:84%;height:75%;background:linear-gradient(90deg,#3b3a40,#777078,#38363c);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border-radius:20%}.person.damina{left:23%}.person.damina:before{border-top:17px solid #564638}.person.damina:after{background:linear-gradient(90deg,#48382f,#877360,#4c3833)}.person.snardy{right:25%;height:34%;bottom:23%}.person.snardy:after{background:linear-gradient(90deg,#433f50,#827b8c,#454051)}.hotspot{position:absolute;bottom:5%;right:3%;background:#261c15d9;color:#f1dcac;border:1px solid #b48b52;padding:9px;cursor:pointer}.tag{position:absolute;top:10px;left:12px;padding:5px 10px;background:#231d17bf;color:#f5e2b9}.bottom{display:grid;grid-template-columns:135px minmax(0,1fr) 175px;gap:8px;margin-top:8px}.panel{border:5px ridge #8c6939;background:#211916;padding:10px;min-height:260px}.verbs{display:flex;flex-direction:column;gap:7px}.verbs button{width:100%}.dialogue{height:125px;overflow:auto;line-height:1.5}.dialogue p{margin:0 0 9px}.dialogue .you{color:#a9c6d4}.dialogue .npc{color:#f4dcad}.entry{display:flex;gap:6px;margin-top:8px}.entry input{min-width:0;flex:1;background:#100f0d;color:#fff;border:1px solid #a38352;padding:11px;font:16px Georgia}.entry button{min-width:72px}.inv{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.item{border:1px solid #82613d;min-height:65px;display:flex;align-items:center;justify-content:center;font-size:29px;cursor:pointer}.item.selected{outline:2px solid #e6c47e}.small{font-size:12px;color:#bca783;margin-top:8px;line-height:1.4}.status{padding:8px 3px;color:#bca783;font-size:13px}.settings{display:none;margin:8px 0;padding:10px;border:1px solid #8c6939;background:#231b16}.settings.open{display:block;position:absolute;left:5px;right:5px;z-index:40;box-shadow:0 8px 24px #000a}.settings input{width:100%;padding:9px;background:#100f0d;color:white;border:1px solid #80643f;margin:5px 0}.notice{font-size:13px;color:#e2bf87}@media(max-width:650px){.scene{min-height:275px}.bottom{grid-template-columns:85px 1fr;gap:5px}.panel{padding:7px;min-height:0}.verbs button{font-size:12px;padding:8px 2px}.inventory{grid-column:1 / -1}.inv{grid-template-columns:repeat(4,1fr)}.dialogue{height:150px}.person{width:19%}.person.damina{left:18%}.person.snardy{right:18%}}
+</style><style id="physical-facing-fallback">
+/* Close perpendicular walls are flat elevations, not the generic hallway perspective. */
+.scene .facing-scene{--panel:#67422d;--trim:#c6a771;--light:#ffe3a3;background:#32251d}
+.scene .facing-bulkhead{position:absolute;inset:0 0 10%;background:repeating-linear-gradient(90deg,transparent 0 22%,#322319 22.4% 23.2%,transparent 23.6% 25%),repeating-linear-gradient(0deg,#493222 0 3%,#8d6c43 3.3% 4%,#694a30 4.3% 45%);border-bottom:12px ridge var(--trim)}
+.scene .kit-tile .facing-bulkhead{background:repeating-linear-gradient(0deg,transparent 0 43px,#a7bab3 44px 46px),repeating-linear-gradient(90deg,#437a71 0 44px,#9bb7ad 45px 47px)}
+.scene .kit-metal{--trim:#9a9d93;--panel:#5a625e;background:#252b2b}
+.scene .kit-metal .facing-bulkhead{background:repeating-linear-gradient(35deg,transparent 0 130px,#999e94 132px 137px,#343b39 139px 145px,transparent 147px 230px),linear-gradient(#3e4845,#202a29)}
+.scene .facing-flat-floor{position:absolute;inset:90% 0 0;background:repeating-linear-gradient(0deg,#4c3629 0 10px,#58452f 11px 15px)}
+.scene .kit-tile .facing-flat-floor{background:repeating-conic-gradient(#c4c1af 0 25%,#252726 0 50%) 0/45px 45px}
+.scene .facing-sconce{position:absolute;left:15%;top:22%;width:5%;height:24%;border:7px ridge var(--trim);border-radius:30%;background:linear-gradient(#8d6331,#ffeab0 35% 75%,#7d5129);box-shadow:0 0 45px #ffd58b77}
+.scene .facing-feature{position:absolute;left:34%;top:17%;width:34%;height:70%;z-index:1;background:var(--panel);border:9px ridge var(--trim);box-shadow:7px 6px 16px #0008}
+.scene .prop-door{background:repeating-linear-gradient(0deg,#583820 0 4%,#36251b 4.5% 5.5%,#745334 6% 30%)}
+.scene .prop-door:after{content:'';position:absolute;right:8%;top:55%;width:9%;height:4%;background:#c4a35e;border-radius:50%}
+.scene .prop-wall{left:29%;width:54%;top:24%;height:48%;background:repeating-linear-gradient(90deg,#b39d7d 0 30%,#67452b 31% 35%);border-width:5px}
+.scene .prop-window,.scene .prop-porthole{top:18%;left:28%;width:50%;height:56%;background:linear-gradient(#7898b0,#d3e1df 70%,#9aabb2);border:12px ridge var(--trim)}
+.scene .prop-window:after{content:'';position:absolute;left:47%;top:0;bottom:0;width:5%;background:var(--trim)}
+.scene .prop-porthole{left:39%;width:26%;border-radius:50%;height:49%}
+.scene .prop-notice,.scene .prop-safety{left:33%;width:44%;height:49%;top:24%;background:repeating-linear-gradient(0deg,#b7a782 0 12%,#625542 13% 15%,#b7a782 16% 26%);border:10px ridge #593d28}
+.scene .prop-pipes{left:35%;width:42%;border:0;background:repeating-linear-gradient(90deg,transparent 0 9%,#8e9692 10% 17%,#c1c4b8 18% 20%,#4a514d 21% 26%,transparent 27% 32%);box-shadow:none}
+.scene .prop-pipes:after{content:'';position:absolute;border:8px solid #913e2d;border-radius:50%;left:35%;top:40%;width:30%;height:24%}
+.scene .prop-stairs,.scene .prop-ladder{background:repeating-linear-gradient(0deg,#382b23 0 9%,#b59964 10% 12%,#665039 13% 16%);border-left:10px ridge #b59b63;border-right:10px ridge #b59b63}
+.scene .prop-ladder{left:42%;width:20%;background:repeating-linear-gradient(0deg,transparent 0 11%,#a3a99e 12% 15%);border-color:#929c92}
+.scene .prop-booths,.scene .prop-bunks{left:25%;width:59%;top:40%;height:43%;background:linear-gradient(#6c3330 0 65%,#b28d59 66% 71%,#432a23 72%);border-radius:15% 15% 0 0}
+.scene .prop-bunks{top:22%;height:61%;border-radius:0;background:repeating-linear-gradient(0deg,#e2d9bf 0 18%,#826747 19% 23%,#372c22 24% 49%)}
+.scene .prop-desk,.scene .prop-bar{left:25%;width:61%;top:49%;height:32%;background:linear-gradient(#ab8355 0 12%,#4b3021 13% 30%,#6b482a 31%);border-top:12px ridge #b89a67}
+.scene .prop-cabinets,.scene .prop-wardrobe{left:36%;width:39%;height:72%;background:repeating-linear-gradient(0deg,#62432d 0 10%,#b69965 11% 13%,#61432f 14% 24%)}
+.scene .prop-wardrobe{background:repeating-linear-gradient(90deg,#412b21 0 45%,#b2945c 46% 49%,#67492e 50% 99%)}
+.scene .prop-curtain,.scene .prop-shower{left:28%;width:55%;height:73%;background:repeating-linear-gradient(90deg,#dfd6bd 0 7%,#9c927c 8% 11%,#e8dfc9 12% 17%);border-top:10px ridge #9a9e8e}
+.scene .prop-mirror{left:26%;width:58%;height:42%;background:linear-gradient(140deg,#d5ded4,#7b9993 45%,#c9d7d1 47%,#899c98);border-color:#b3b8a9}
+.scene .prop-towel{left:34%;width:42%;height:8%;top:49%;background:#b1b9af;border:4px ridge #cdd3c6}
+.scene .prop-towel:after{content:'';position:absolute;left:20%;top:0;width:48%;height:110px;background:linear-gradient(90deg,#d8d6c2,#fff5dc,#cfcebe);box-shadow:3px 4px 8px #0008}
+.scene .prop-gascell{left:23%;width:66%;height:78%;top:8%;border-radius:50%;background:repeating-linear-gradient(0deg,#8d9287 0 16%,#626d65 17% 19%,#a2a69b 20% 35%);border:5px solid #c1c5b8}
+.scene .prop-girders,.scene .prop-cables{left:24%;width:65%;height:77%;top:8%;background:repeating-linear-gradient(50deg,transparent 0 46px,#9aa79b 48px 55px,transparent 57px 120px);border:7px ridge #929e92;box-shadow:none}
+.scene .prop-cables{background:repeating-linear-gradient(90deg,#302f27 0 5px,#a9a184 6px 9px,#4f574d 10px 15px);left:37%;width:34%}
+.scene .prop-instruments,.scene .prop-helm{left:27%;width:56%;top:28%;height:48%;background:radial-gradient(circle at 25% 35%,#e4d9ad 0 9%,#998249 10% 13%,transparent 14%),radial-gradient(circle at 70% 35%,#e4d9ad 0 10%,#998249 11% 14%,transparent 15%),#523b25}
+.scene .prop-helm{border-radius:50%;left:40%;width:25%;height:45%;border:13px ridge #b99c63;background:repeating-conic-gradient(#5b4228 0 12deg,transparent 13deg 50deg)}
+.scene .prop-tank{left:36%;width:42%;height:67%;top:18%;border-radius:35%;background:linear-gradient(90deg,#4b5148,#b3b4a1 45%,#575f56)}
+.scene .prop-hatch{left:37%;width:35%;height:62%;top:21%;border-radius:20%;background:radial-gradient(circle,#687365 0 24%,#b4b5a4 25% 30%,#566153 31% 40%,#899486 41%);border:12px ridge #9ba494}
+.scene .prop-rope{left:30%;width:51%;height:55%;top:28%;border-radius:50%;background:repeating-radial-gradient(ellipse,#8b7452 0 6px,#c7b48a 7px 12px,#554a35 13px 16px);border:0}
+.scene .frame-hall-axis .facing-bulkhead{inset:22% 33% 24%}
+.scene .facing-axis-left,.scene .facing-axis-right{position:absolute;top:0;bottom:0;width:37%;background:repeating-linear-gradient(0deg,#62472e 0 25%,#b89a66 26% 28%,#473120 29% 51%);clip-path:polygon(0 0,100% 25%,100% 77%,0 100%)}
+.scene .facing-axis-right{right:0;transform:scaleX(-1)}
+.scene .kit-metal .facing-axis-left,.scene .kit-metal .facing-axis-right{background:repeating-linear-gradient(45deg,#24322f 0 55px,#a4ac9d 57px 62px,#293a34 64px 110px)}
+.scene .facing-axis-floor{position:absolute;inset:74% 0 0;background:repeating-linear-gradient(0deg,#39362b 0 17px,#837356 18px 20px);clip-path:polygon(34% 0,66% 0,100% 100%,0 100%)}
+.scene .frame-hall-axis .facing-feature{left:42%;top:30%;width:16%;height:44%;border-width:4px}
+.scene .frame-hall-axis .prop-girders{left:33%;top:20%;width:34%;height:57%}
+.scene .frame-hall-axis .facing-sconce{left:23%;top:29%;width:4%;height:17%}
+.scene .facing-exit{position:absolute;left:34%;top:16%;width:34%;height:72%;z-index:4;cursor:pointer;background:transparent;border:1px solid #edd2a422}
+.scene .frame-hall-axis .facing-exit{left:40%;top:28%;width:20%;height:48%}
+.scene .facing-exit span{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:max-content;max-width:90vw;font:12px Georgia;padding:5px;background:#23190ee8;color:#e5d2ac;border:1px solid #9d7946}
+.scene .facing-exit:focus{outline:2px solid #f5d895}
+.scene .facing-interaction{z-index:5}
+.scene .facing-notice-hot{position:absolute;left:33%;top:24%;width:44%;height:49%;cursor:pointer}
+.scene .paint.facing-scene.has-art .facing-exit{opacity:0;pointer-events:auto}
+.scene .paint.facing-scene.has-art .facing-interaction{opacity:0;pointer-events:auto}
+.scene .paint.facing-scene .facing-exit:hover,.scene .paint.facing-scene .facing-exit:focus{opacity:1;border-color:#f3dd9b77}
+
+.scene .has-exit .prop-exitdoor{left:73%;width:22%;top:17%;height:70%}
+.scene .has-exit.feature-booths .prop-booths,.scene .has-exit.feature-desk .prop-desk{left:21%;width:46%}
+.scene .has-exit.feature-booths .facing-exit,.scene .has-exit.feature-desk .facing-exit{left:73%;width:22%}
 </style></head><body><main class="shell"><header class="top"><strong>HINDENBURG</strong><span id="clock">May 6, 1937 · Early evening</span><button id="settingsBtn">AI settings</button></header><div class="settings" id="settings"><div>Optional Cloudflare relay URL (the demo works offline with scripted responses):</div><input id="relay" placeholder="https://your-worker.workers.dev"><div class="notice">Do not enter an API key here. Connect only to a relay you control. The relay must support POST /talk.</div><button id="saveSettings">Save relay URL</button></div><section class="scene" id="scene"><div class="sky"></div><div class="windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div><div class="wall"></div><div class="floor"></div><div class="chair a"></div><div class="chair b"></div><div class="table"></div><div class="person damina" data-person="Damina Vontette" title="Talk to Damina Vontette"></div><div class="person snardy" data-person="Snardy Vontette" title="Talk to Snardy Vontette"></div><div class="tag" id="room">Passenger Lounge</div><button class="hotspot" id="move">Go to promenade →</button></section><div class="bottom"><aside class="panel verbs"><button id="talk">Talk</button><button id="examine">Examine</button><button id="take">Take</button><button id="use">Use</button><button id="back">Return</button></aside><section class="panel"><div class="dialogue" id="log" aria-live="polite"></div><form class="entry" id="form"><input id="say" autocomplete="off" maxlength="350" placeholder="Type anything you want to say…" aria-label="What do you say?"><button type="submit">Speak</button></form><div class="small" id="speaker">Select a passenger to speak with them.</div></section><aside class="panel inventory"><strong>YOUR POSSESSIONS</strong><div class="inv" id="inv"><div class="item" data-item="Notebook" title="Notebook">📓</div><div class="item" data-item="Key" title="Key">🗝️</div><div class="item" data-item="Scrap of paper" title="Scrap of paper">📜</div><div class="item" data-item="Empty pocket" title="Empty pocket">·</div></div><div class="small" id="itemnote">Click an item to examine it.</div></aside></div><div class="status" id="status">Prototype · One lounge and promenade · Offline dialogue is scripted; live AI requires a compatible relay.</div></main><script>
 const $=s=>document.querySelector(s),log=$('#log');let room='lounge',who='',selected='',turns=0;const histories={};const beliefs={'Damina Vontette':{trust:0,claims:[]},'Snardy Vontette':{trust:0,claims:[]}};
-const ART_COMMIT='8ac6c4b006b6eddcbbcd7976e4fbfc4d8176e78b';
+const ART_COMMIT='4d01239a7da349a8398d850f96c79d6fe5d72191';
 const ART_BASE='https://cdn.jsdelivr.net/gh/secretlabcoat/hindenburg@'+ART_COMMIT+'/assets/art/';
 const ART_STYLES=new Set(['washshower','washbasin','washdoor','door','bar','office','keel','keelhatch','control','windows','people','promenade','corridor','cabin','cabinwindow','cabindoor','cabindesk','b6bunk','b6window','b6door','b6desk','adcabin','tour1','tour2','tour3','tour4','nook']);
 function artUrl(viewOrStyle){
@@ -44,8 +104,9 @@ function castHTML(v){const c=CAST_AT[v]||[];return c.map((n,i)=>'<div class="hot
 let view='cabin_bunk',steps=0, busy=false;const scene=$('#scene');
 function applySceneArt(paintEl, viewId){
   const n=nodes[viewId];
+  if(!n || n.artStatus!=='ready') return; // Never display a wrong/copy placeholder photograph.
   const primary=artUrl(viewId);
-  const fallback=n&&n.style&&n.style!==viewId?artUrl(n.style):null;
+  const fallback=null; // No cross-facing/style photograph reuse; CSS is the fallback.
   if(!primary) return;
   const title=document.querySelector('#titleoverlay');
   if(!title || !title.hidden) return;
@@ -305,7 +366,7 @@ const _renderNB=renderNotebook;renderNotebook=function(){_renderNB();const S=ai[
   Object.keys(ai).forEach(n=>{if(!ai[n].secret)return;[...body.querySelectorAll('h3')].filter(x=>x.textContent===n).forEach(x=>{const c=document.createElement('div');c.className='nb-meta';c.textContent='They confided: “'+ai[n].secret+'”';x.parentNode.append(c)})})}
 
 // ---------- Save progress in this browser ----------
-const SAVE_KEY='hindenburg_save_v1';let logEntries=[],restoring=false
+const SAVE_KEY='hindenburg_save_v1';let logEntries=[],restoring=false // gitleaks:allow -- public localStorage namespace, not a credential
 const _line=line;line=function(name,msg,cls){_line(name,msg,cls);if(!restoring){logEntries.push([name,msg,cls||'npc']);if(logEntries.length>40)logEntries.shift()}}
 function saveGame(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({v:1,ai,contradictions,gossipKeys,view,steps,turns,items:gameItems,note:!!window.collectedNote,log:logEntries,over:window.gameOver||false,lastPeriod}))}catch{}}
 function loadSave(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');return d&&d.v===1?d:null}catch{return null}}
@@ -931,133 +992,906 @@ draw=function(){_draw10();scene.querySelectorAll('[data-wash]').forEach(el=>el.o
 <script>
 /* ---- Titanic-style 4-facing rotation (applied last so it wins over earlier patches) ---- */
 const ROTATION_NODES={
- washroom_stall:{name:"B-Deck Washroom",facing:"the shower stall \u00b7 your hiding place",left:"washroom_wall",right:"washroom_basins",forward:null,style:"washshower"},
- washroom_basins:{name:"B-Deck Washroom",facing:"wash basins and mirror",left:"washroom_stall",right:"washroom_door",forward:null,style:"washbasin"},
- washroom_door:{name:"B-Deck Washroom",facing:"door to the B-deck corridor",left:"washroom_basins",right:"washroom_wall",forward:"bdeck_corr_washdoor",style:"washdoor"},
- washroom_wall:{name:"B-Deck Washroom",facing:"tiled wall and towel rail",left:"washroom_door",right:"washroom_stall",forward:null,style:"washwall"},
- cabin_bunk:{name:"Cabin B-6 (B deck)",facing:"two berths, made up, unused",left:"cabin_desk",right:"cabin_window",forward:null,style:"b6bunk"},
- cabin_window:{name:"Cabin B-6 (B deck)",facing:"a real window \u2014 new B-deck cabins have them",left:"cabin_bunk",right:"cabin_door",forward:null,style:"b6window"},
- cabin_door:{name:"Cabin B-6 (B deck)",facing:"door to the B-deck corridor",left:"cabin_window",right:"cabin_desk",forward:"bdeck_cabins_door",style:"b6door"},
- cabin_desk:{name:"Cabin B-6 (B deck)",facing:"fold-down desk and washbasin",left:"cabin_door",right:"cabin_bunk",forward:null,style:"b6desk"},
- lounge_windows:{name:"Passenger Lounge",facing:"windows",left:"lounge_aft",right:"lounge_people",forward:"promenade",style:"windows"},
- lounge_people:{name:"Passenger Lounge",facing:"passengers",left:"lounge_windows",right:"lounge_side",forward:null,style:"people"},
- lounge_side:{name:"Passenger Lounge",facing:"seating area",left:"lounge_people",right:"lounge_aft",forward:null,style:"people_side"},
- lounge_aft:{name:"Passenger Lounge",facing:"aft doorway",left:"lounge_side",right:"lounge_windows",forward:"corridor_forward",style:"lounge_aft"},
- promenade:{name:"Promenade",facing:"observation windows",left:"promenade_aft",right:"promenade_side",forward:"lounge_windows",style:"promenade"},
- promenade_side:{name:"Promenade",facing:"seating",left:"promenade",right:"promenade_far",forward:null,style:"promenade_side"},
- promenade_far:{name:"Promenade",facing:"forward windows",left:"promenade_side",right:"promenade_aft",forward:null,style:"promenade_far"},
- promenade_aft:{name:"Promenade",facing:"return passage",left:"promenade_far",right:"promenade",forward:"lounge_windows",style:"promenade_aft"},
- corridor_forward:{name:"Passenger Corridor",facing:"forward",left:"corridor_right",right:"corridor_left",forward:"corridor_end",style:"corridor_forward"},
- corridor_left:{name:"Passenger Corridor",facing:"port cabins",left:"corridor_forward",right:"corridor_end",forward:"adeck_cabin",style:"corridor_left"},
- corridor_end:{name:"Passenger Corridor",facing:"lounge entrance",left:"corridor_left",right:"corridor_right",forward:"lounge_aft",style:"corridor_end"},
- corridor_right:{name:"Passenger Corridor",facing:"starboard cabins / stairs down",left:"corridor_end",right:"corridor_forward",forward:"bdeck_stairs_up",style:"corridor_right"},
- bar_counter:{name:"Bar & Smoking Room",facing:"the bar",left:"bar_door",right:"bar_booths",forward:null,style:"bar_counter"},
- bar_booths:{name:"Bar & Smoking Room",facing:"leather booths",left:"bar_counter",right:"bar_windows",forward:null,style:"bar_booths"},
- bar_windows:{name:"Bar & Smoking Room",facing:"smoking-room windows",left:"bar_booths",right:"bar_door",forward:null,style:"bar_windows"},
- bar_door:{name:"Bar & Smoking Room",facing:"door to stair landing",left:"bar_windows",right:"bar_counter",forward:"bdeck_stairs_bar",style:"bar_door"},
- office_desk:{name:"Purser's Office",facing:"the purser's desk",left:"office_door",right:"office_cabinet",forward:null,style:"office_desk"},
- office_cabinet:{name:"Purser's Office",facing:"filing cabinets",left:"office_desk",right:"office_porthole",forward:null,style:"office_cabinet"},
- office_porthole:{name:"Purser's Office",facing:"porthole and chronometer",left:"office_cabinet",right:"office_door",forward:null,style:"office_porthole"},
- office_door:{name:"Purser's Office",facing:"door to B-deck corridor",left:"office_porthole",right:"office_desk",forward:"bdeck_corr_office",style:"office_door"},
- bdeck_corr_washdoor:{name:"B-Deck Corridor",facing:"washroom door",left:"bdeck_corr_cabins",right:"bdeck_corr_stairs",forward:"washroom_door",style:"bdeck_corr_washdoor"},
- bdeck_corr_stairs:{name:"B-Deck Corridor",facing:"toward the stair landing",left:"bdeck_corr_washdoor",right:"bdeck_corr_office",forward:"bdeck_stairs_door",style:"bdeck_corr_stairs"},
- bdeck_corr_office:{name:"B-Deck Corridor",facing:"purser's office door",left:"bdeck_corr_stairs",right:"bdeck_corr_cabins",forward:"office_door",style:"bdeck_corr_office"},
- bdeck_corr_cabins:{name:"B-Deck Corridor",facing:"toward the new cabins",left:"bdeck_corr_office",right:"bdeck_corr_washdoor",forward:"bdeck_cabins_back",style:"bdeck_corr_cabins"},
- bdeck_stairs_door:{name:"B Deck \u00b7 Stair Landing",facing:"opening to B-deck corridor",left:"bdeck_stairs_wall",right:"bdeck_stairs_up",forward:"bdeck_corr_stairs",style:"bdeck_stairs_door"},
- bdeck_stairs_up:{name:"B Deck \u00b7 Stair Landing",facing:"stairs ascending to A deck",left:"bdeck_stairs_door",right:"bdeck_stairs_bar",forward:"corridor_right",style:"bdeck_stairs_up"},
- bdeck_stairs_bar:{name:"B Deck \u00b7 Stair Landing",facing:"door to bar & smoking room",left:"bdeck_stairs_up",right:"bdeck_stairs_wall",forward:"bar_door",style:"bdeck_stairs_bar"},
- bdeck_stairs_wall:{name:"B Deck \u00b7 Stair Landing",facing:"lacquered bulkhead",left:"bdeck_stairs_bar",right:"bdeck_stairs_door",forward:null,style:"bdeck_stairs_wall"},
- bdeck_cabins_door:{name:"B-Deck Corridor \u00b7 Cabins",facing:"cabin B-6 door",left:"bdeck_cabins_wall",right:"bdeck_cabins_crew",forward:"cabin_door",style:"bdeck_cabins_door"},
- bdeck_cabins_crew:{name:"B-Deck Corridor \u00b7 Cabins",facing:"crew door to the keel",left:"bdeck_cabins_door",right:"bdeck_cabins_back",forward:"crew_door_in",style:"bdeck_cabins_crew"},
- bdeck_cabins_back:{name:"B-Deck Corridor \u00b7 Cabins",facing:"back toward the washroom corridor",left:"bdeck_cabins_crew",right:"bdeck_cabins_wall",forward:"bdeck_corr_cabins",style:"bdeck_cabins_back"},
- bdeck_cabins_wall:{name:"B-Deck Corridor \u00b7 Cabins",facing:"cabin bulkheads",left:"bdeck_cabins_back",right:"bdeck_cabins_door",forward:null,style:"bdeck_cabins_wall"},
- crew_door_in:{name:"B Deck \u00b7 Crew Door",facing:"crew door \u00b7 keel \u00b7 no passengers",left:"crew_door_pipes",right:"crew_door_hall",forward:"keel_walk",style:"crew_door_in"},
- crew_door_hall:{name:"B Deck \u00b7 Crew Door",facing:"back to cabin corridor",left:"crew_door_in",right:"crew_door_sign",forward:"bdeck_cabins_crew",style:"crew_door_hall"},
- crew_door_sign:{name:"B Deck \u00b7 Crew Door",facing:"crew-only notice board",left:"crew_door_hall",right:"crew_door_pipes",forward:null,style:"crew_door_sign"},
- crew_door_pipes:{name:"B Deck \u00b7 Crew Door",facing:"service pipes and valves",left:"crew_door_sign",right:"crew_door_in",forward:null,style:"crew_door_pipes"},
- adeck_cabin:{name:"Passenger Cabin (A deck)",facing:"someone else's cabin \u00b7 no window",left:"adeck_cabin_wardrobe",right:"adeck_cabin_door",forward:null,style:"adcabin_bunks"},
- adeck_cabin_door:{name:"Passenger Cabin (A deck)",facing:"door to the corridor",left:"adeck_cabin",right:"adeck_cabin_curtain",forward:"corridor_left",style:"adcabin_door"},
- adeck_cabin_curtain:{name:"Passenger Cabin (A deck)",facing:"berth curtain",left:"adeck_cabin_door",right:"adeck_cabin_wardrobe",forward:null,style:"adcabin_curtain"},
- adeck_cabin_wardrobe:{name:"Passenger Cabin (A deck)",facing:"wardrobe niche",left:"adeck_cabin_curtain",right:"adeck_cabin",forward:null,style:"adcabin_wardrobe"},
- keel_walk:{name:"Keel Walkway",facing:"catwalk toward the control car",left:"keel_up",right:"keel_hatch",forward:"control_helm",style:"keel_forward"},
- keel_hatch:{name:"Keel Walkway",facing:"a hatch in the outer cover",left:"keel_walk",right:"keel_back",forward:null,style:"keelhatch"},
- keel_back:{name:"Keel Walkway",facing:"door back to B Deck",left:"keel_hatch",right:"keel_up",forward:"crew_door_in",style:"keel_back"},
- keel_up:{name:"Keel Walkway",facing:"looking up into the gas cells",left:"keel_back",right:"keel_walk",forward:null,style:"keel_up"},
- control_helm:{name:"Control Car",facing:"the helm",left:"control_port",right:"control_starboard",forward:null,style:"control_helm"},
- control_starboard:{name:"Control Car",facing:"starboard windows over the clouds",left:"control_helm",right:"control_back",forward:null,style:"control_starboard"},
- control_back:{name:"Control Car",facing:"ladder up to the keel",left:"control_starboard",right:"control_port",forward:"keel_walk",style:"control_ladder"},
- control_port:{name:"Control Car",facing:"port instruments",left:"control_back",right:"control_helm",forward:null,style:"control_port"},
- girder_nook:{name:"High in the Rings",facing:"something watching",left:"girder_nook_left",right:"girder_nook_right",forward:null,style:"nook_watch"},
- girder_nook_right:{name:"High in the Rings",facing:"cable runs along the ring",left:"girder_nook",right:"girder_nook_down",forward:null,style:"nook_right"},
- girder_nook_down:{name:"High in the Rings",facing:"climb back down",left:"girder_nook_right",right:"girder_nook_left",forward:"keel_back",style:"nook_down"},
- girder_nook_left:{name:"High in the Rings",facing:"girders vanishing into shadow",left:"girder_nook_down",right:"girder_nook",forward:null,style:"nook_left"},
- tour_shoes:{name:"Keel Tour \u00b7 tour_shoes",facing:"felt overshoes and the safety rules",left:"tour_shoes_back",right:"tour_shoes_l",forward:"tour_cells",style:"tour1"},
- tour_shoes_l:{name:"Keel Tour \u00b7 tour_shoes",facing:"looking along the catwalk",left:"tour_shoes",right:"tour_shoes_r",forward:null,style:"tour1_l"},
- tour_shoes_r:{name:"Keel Tour \u00b7 tour_shoes",facing:"looking at the girders",left:"tour_shoes_l",right:"tour_shoes_back",forward:null,style:"tour1_r"},
- tour_shoes_back:{name:"Keel Tour \u00b7 tour_shoes",facing:"the way you came",left:"tour_shoes_r",right:"tour_shoes",forward:null,style:"tour1_back"},
- tour_cells:{name:"Keel Tour \u00b7 tour_cells",facing:"looking up into the hull",left:"tour_cells_back",right:"tour_cells_l",forward:"tour_tanks",style:"tour2"},
- tour_cells_l:{name:"Keel Tour \u00b7 tour_cells",facing:"looking along the catwalk",left:"tour_cells",right:"tour_cells_r",forward:null,style:"tour2_l"},
- tour_cells_r:{name:"Keel Tour \u00b7 tour_cells",facing:"looking at the girders",left:"tour_cells_l",right:"tour_cells_back",forward:null,style:"tour2_r"},
- tour_cells_back:{name:"Keel Tour \u00b7 tour_cells",facing:"the way you came",left:"tour_cells_r",right:"tour_cells",forward:null,style:"tour2_back"},
- tour_tanks:{name:"Keel Tour \u00b7 tour_tanks",facing:"fuel and water tanks, crew bunks",left:"tour_tanks_back",right:"tour_tanks_l",forward:"tour_end",style:"tour3"},
- tour_tanks_l:{name:"Keel Tour \u00b7 tour_tanks",facing:"looking along the catwalk",left:"tour_tanks",right:"tour_tanks_r",forward:null,style:"tour3_l"},
- tour_tanks_r:{name:"Keel Tour \u00b7 tour_tanks",facing:"looking at the girders",left:"tour_tanks_l",right:"tour_tanks_back",forward:null,style:"tour3_r"},
- tour_tanks_back:{name:"Keel Tour \u00b7 tour_tanks",facing:"the way you came",left:"tour_tanks_r",right:"tour_tanks",forward:null,style:"tour3_back"},
- tour_end:{name:"Keel Tour \u00b7 tour_end",facing:"the guide turns back \u00b7 the forward keel",left:"tour_end_back",right:"tour_end_l",forward:"keel_walk",style:"tour4"},
- tour_end_l:{name:"Keel Tour \u00b7 tour_end",facing:"looking along the catwalk",left:"tour_end",right:"tour_end_r",forward:null,style:"tour4_l"},
- tour_end_r:{name:"Keel Tour \u00b7 tour_end",facing:"looking at the girders",left:"tour_end_l",right:"tour_end_back",forward:null,style:"tour4_r"},
- tour_end_back:{name:"Keel Tour \u00b7 tour_end",facing:"the way you came",left:"tour_end_r",right:"tour_end",forward:null,style:"tour4_back"},
+  "washroom_stall": {
+    "name": "B-Deck Washroom",
+    "facing": "the shower stall · your hiding place",
+    "left": "washroom_wall",
+    "right": "washroom_basins",
+    "forward": null,
+    "style": "washshower",
+    "framing": "room-wall",
+    "fallback": "shower",
+    "artStatus": "ready"
+  },
+  "washroom_basins": {
+    "name": "B-Deck Washroom",
+    "facing": "wash basins and mirror",
+    "left": "washroom_stall",
+    "right": "washroom_door",
+    "forward": null,
+    "style": "washbasin",
+    "framing": "room-wall",
+    "fallback": "mirror",
+    "artStatus": "ready"
+  },
+  "washroom_door": {
+    "name": "B-Deck Washroom",
+    "facing": "door to the B-deck corridor",
+    "left": "washroom_basins",
+    "right": "washroom_wall",
+    "forward": "bdeck_corr_washdoor",
+    "style": "washdoor",
+    "framing": "room-wall",
+    "fallback": "door",
+    "artStatus": "ready"
+  },
+  "washroom_wall": {
+    "name": "B-Deck Washroom",
+    "facing": "tiled wall and towel rail",
+    "left": "washroom_door",
+    "right": "washroom_stall",
+    "forward": null,
+    "style": "washwall",
+    "framing": "room-wall",
+    "fallback": "towel",
+    "artStatus": "placeholder"
+  },
+  "cabin_bunk": {
+    "name": "Cabin B-6 (B deck)",
+    "facing": "two berths, made up, unused",
+    "left": "cabin_desk",
+    "right": "cabin_window",
+    "forward": null,
+    "style": "b6bunk",
+    "framing": "room-wall",
+    "fallback": "bunks",
+    "artStatus": "ready"
+  },
+  "cabin_window": {
+    "name": "Cabin B-6 (B deck)",
+    "facing": "a real window — new B-deck cabins have them",
+    "left": "cabin_bunk",
+    "right": "cabin_door",
+    "forward": null,
+    "style": "b6window",
+    "framing": "room-wall",
+    "fallback": "window",
+    "artStatus": "ready"
+  },
+  "cabin_door": {
+    "name": "Cabin B-6 (B deck)",
+    "facing": "door to the B-deck corridor",
+    "left": "cabin_window",
+    "right": "cabin_desk",
+    "forward": "bdeck_cabins_door",
+    "style": "b6door",
+    "framing": "room-wall",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "cabin_desk": {
+    "name": "Cabin B-6 (B deck)",
+    "facing": "fold-down desk and washbasin",
+    "left": "cabin_door",
+    "right": "cabin_bunk",
+    "forward": null,
+    "style": "b6desk",
+    "framing": "room-wall",
+    "fallback": "desk",
+    "artStatus": "ready"
+  },
+  "lounge_windows": {
+    "name": "Passenger Lounge",
+    "facing": "windows",
+    "left": "lounge_aft",
+    "right": "lounge_people",
+    "forward": null,
+    "style": "windows",
+    "framing": "room-wall",
+    "fallback": "window",
+    "artStatus": "ready"
+  },
+  "lounge_people": {
+    "name": "Passenger Lounge",
+    "facing": "passengers",
+    "left": "lounge_windows",
+    "right": "lounge_side",
+    "forward": null,
+    "style": "people",
+    "framing": "room-wall",
+    "fallback": "booths",
+    "artStatus": "ready"
+  },
+  "lounge_side": {
+    "name": "Passenger Lounge",
+    "facing": "writing alcove and glazed promenade door",
+    "left": "lounge_people",
+    "right": "lounge_aft",
+    "forward": "promenade_side",
+    "style": "people_side",
+    "framing": "room-wall",
+    "fallback": "desk",
+    "artStatus": "placeholder"
+  },
+  "lounge_aft": {
+    "name": "Passenger Lounge",
+    "facing": "aft doorway",
+    "left": "lounge_side",
+    "right": "lounge_windows",
+    "forward": "corridor_forward",
+    "style": "lounge_aft",
+    "framing": "room-wall",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "promenade": {
+    "name": "Promenade",
+    "facing": "outboard observation windows · solid glazing",
+    "left": "promenade_aft",
+    "right": "promenade_far",
+    "forward": null,
+    "style": "promenade",
+    "framing": "side-wall",
+    "fallback": "window",
+    "artStatus": "placeholder"
+  },
+  "promenade_far": {
+    "name": "Promenade",
+    "facing": "forward along the promenade · closed end",
+    "left": "promenade",
+    "right": "promenade_side",
+    "forward": null,
+    "style": "promenade_far",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "ready"
+  },
+  "promenade_side": {
+    "name": "Promenade",
+    "facing": "inboard seating and lounge doorway",
+    "left": "promenade_far",
+    "right": "promenade_aft",
+    "forward": "lounge_side",
+    "style": "promenade_side",
+    "framing": "side-wall",
+    "fallback": "booths",
+    "artStatus": "placeholder"
+  },
+  "promenade_aft": {
+    "name": "Promenade",
+    "facing": "return passage",
+    "left": "promenade_side",
+    "right": "promenade",
+    "forward": "lounge_windows",
+    "style": "promenade_aft",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "corridor_forward": {
+    "name": "Passenger Corridor",
+    "facing": "forward along the hall · closed end bulkhead",
+    "left": "corridor_right",
+    "right": "corridor_left",
+    "forward": null,
+    "style": "corridor_forward",
+    "framing": "hall-axis",
+    "fallback": "wall",
+    "artStatus": "ready"
+  },
+  "corridor_left": {
+    "name": "Passenger Corridor",
+    "facing": "port cabins",
+    "left": "corridor_forward",
+    "right": "corridor_end",
+    "forward": "adeck_cabin",
+    "style": "corridor_left",
+    "framing": "side-wall",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "corridor_end": {
+    "name": "Passenger Corridor",
+    "facing": "lounge entrance",
+    "left": "corridor_left",
+    "right": "corridor_right",
+    "forward": "lounge_aft",
+    "style": "corridor_end",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "corridor_right": {
+    "name": "Passenger Corridor",
+    "facing": "starboard cabins / stairs down",
+    "left": "corridor_end",
+    "right": "corridor_forward",
+    "forward": "bdeck_stairs_up",
+    "style": "corridor_right",
+    "framing": "side-wall",
+    "fallback": "stairs",
+    "artStatus": "placeholder"
+  },
+  "bar_counter": {
+    "name": "Bar & Smoking Room",
+    "facing": "the bar",
+    "left": "bar_door",
+    "right": "bar_booths",
+    "forward": null,
+    "style": "bar_counter",
+    "framing": "room-wall",
+    "fallback": "bar",
+    "artStatus": "ready"
+  },
+  "bar_booths": {
+    "name": "Bar & Smoking Room",
+    "facing": "leather booths",
+    "left": "bar_counter",
+    "right": "bar_windows",
+    "forward": null,
+    "style": "bar_booths",
+    "framing": "room-wall",
+    "fallback": "booths",
+    "artStatus": "placeholder"
+  },
+  "bar_windows": {
+    "name": "Bar & Smoking Room",
+    "facing": "smoking-room windows",
+    "left": "bar_booths",
+    "right": "bar_door",
+    "forward": null,
+    "style": "bar_windows",
+    "framing": "room-wall",
+    "fallback": "window",
+    "artStatus": "placeholder"
+  },
+  "bar_door": {
+    "name": "Bar & Smoking Room",
+    "facing": "door to stair landing",
+    "left": "bar_windows",
+    "right": "bar_counter",
+    "forward": "bdeck_stairs_bar",
+    "style": "bar_door",
+    "framing": "room-wall",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "office_desk": {
+    "name": "Purser's Office",
+    "facing": "the purser's desk",
+    "left": "office_door",
+    "right": "office_cabinet",
+    "forward": null,
+    "style": "office_desk",
+    "framing": "room-wall",
+    "fallback": "desk",
+    "artStatus": "ready"
+  },
+  "office_cabinet": {
+    "name": "Purser's Office",
+    "facing": "filing cabinets",
+    "left": "office_desk",
+    "right": "office_porthole",
+    "forward": null,
+    "style": "office_cabinet",
+    "framing": "room-wall",
+    "fallback": "cabinets",
+    "artStatus": "placeholder"
+  },
+  "office_porthole": {
+    "name": "Purser's Office",
+    "facing": "porthole and chronometer",
+    "left": "office_cabinet",
+    "right": "office_door",
+    "forward": null,
+    "style": "office_porthole",
+    "framing": "room-wall",
+    "fallback": "porthole",
+    "artStatus": "placeholder"
+  },
+  "office_door": {
+    "name": "Purser's Office",
+    "facing": "door to B-deck corridor",
+    "left": "office_porthole",
+    "right": "office_desk",
+    "forward": "bdeck_corr_office",
+    "style": "office_door",
+    "framing": "room-wall",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "bdeck_corr_washdoor": {
+    "name": "B-Deck Corridor",
+    "facing": "washroom door",
+    "left": "bdeck_corr_cabins",
+    "right": "bdeck_corr_stairs",
+    "forward": "washroom_door",
+    "style": "bdeck_corr_washdoor",
+    "framing": "side-wall",
+    "fallback": "door",
+    "artStatus": "ready"
+  },
+  "bdeck_corr_stairs": {
+    "name": "B-Deck Corridor",
+    "facing": "toward the stair landing",
+    "left": "bdeck_corr_washdoor",
+    "right": "bdeck_corr_office",
+    "forward": "bdeck_stairs_door",
+    "style": "bdeck_corr_stairs",
+    "framing": "hall-axis",
+    "fallback": "stairs",
+    "artStatus": "ready"
+  },
+  "bdeck_corr_office": {
+    "name": "B-Deck Corridor",
+    "facing": "purser's office door",
+    "left": "bdeck_corr_stairs",
+    "right": "bdeck_corr_cabins",
+    "forward": "office_door",
+    "style": "bdeck_corr_office",
+    "framing": "side-wall",
+    "fallback": "door",
+    "artStatus": "ready"
+  },
+  "bdeck_corr_cabins": {
+    "name": "B-Deck Corridor",
+    "facing": "toward the new cabins",
+    "left": "bdeck_corr_office",
+    "right": "bdeck_corr_washdoor",
+    "forward": "bdeck_cabins_back",
+    "style": "bdeck_corr_cabins",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "bdeck_stairs_door": {
+    "name": "B Deck · Stair Landing",
+    "facing": "opening to B-deck corridor",
+    "left": "bdeck_stairs_wall",
+    "right": "bdeck_stairs_up",
+    "forward": "bdeck_corr_stairs",
+    "style": "bdeck_stairs_door",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "bdeck_stairs_up": {
+    "name": "B Deck · Stair Landing",
+    "facing": "stairs ascending to A deck",
+    "left": "bdeck_stairs_door",
+    "right": "bdeck_stairs_bar",
+    "forward": "corridor_right",
+    "style": "bdeck_stairs_up",
+    "framing": "side-wall",
+    "fallback": "stairs",
+    "artStatus": "placeholder"
+  },
+  "bdeck_stairs_bar": {
+    "name": "B Deck · Stair Landing",
+    "facing": "door to bar & smoking room",
+    "left": "bdeck_stairs_up",
+    "right": "bdeck_stairs_wall",
+    "forward": "bar_door",
+    "style": "bdeck_stairs_bar",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "bdeck_stairs_wall": {
+    "name": "B Deck · Stair Landing",
+    "facing": "lacquered bulkhead",
+    "left": "bdeck_stairs_bar",
+    "right": "bdeck_stairs_door",
+    "forward": null,
+    "style": "bdeck_stairs_wall",
+    "framing": "side-wall",
+    "fallback": "notice",
+    "artStatus": "placeholder"
+  },
+  "bdeck_cabins_door": {
+    "name": "B-Deck Corridor · Cabins",
+    "facing": "cabin B-6 door",
+    "left": "bdeck_cabins_back",
+    "right": "bdeck_cabins_crew",
+    "forward": "cabin_door",
+    "style": "bdeck_cabins_door",
+    "framing": "side-wall",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "bdeck_cabins_crew": {
+    "name": "B-Deck Corridor · Cabins",
+    "facing": "crew door to the keel",
+    "left": "bdeck_cabins_door",
+    "right": "bdeck_cabins_wall",
+    "forward": "crew_door_in",
+    "style": "bdeck_cabins_crew",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "bdeck_cabins_wall": {
+    "name": "B-Deck Corridor · Cabins",
+    "facing": "cabin bulkheads",
+    "left": "bdeck_cabins_crew",
+    "right": "bdeck_cabins_back",
+    "forward": null,
+    "style": "bdeck_cabins_wall",
+    "framing": "side-wall",
+    "fallback": "wall",
+    "artStatus": "placeholder"
+  },
+  "bdeck_cabins_back": {
+    "name": "B-Deck Corridor · Cabins",
+    "facing": "back toward the washroom corridor",
+    "left": "bdeck_cabins_wall",
+    "right": "bdeck_cabins_door",
+    "forward": "bdeck_corr_cabins",
+    "style": "bdeck_cabins_back",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "crew_door_in": {
+    "name": "B Deck · Crew Door",
+    "facing": "crew door · keel · no passengers",
+    "left": "crew_door_pipes",
+    "right": "crew_door_sign",
+    "forward": "keel_walk",
+    "style": "crew_door_in",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "crew_door_sign": {
+    "name": "B Deck · Crew Door",
+    "facing": "crew-only notice board",
+    "left": "crew_door_in",
+    "right": "crew_door_hall",
+    "forward": null,
+    "style": "crew_door_sign",
+    "framing": "side-wall",
+    "fallback": "notice",
+    "artStatus": "placeholder"
+  },
+  "crew_door_hall": {
+    "name": "B Deck · Crew Door",
+    "facing": "back to cabin corridor",
+    "left": "crew_door_sign",
+    "right": "crew_door_pipes",
+    "forward": "bdeck_cabins_crew",
+    "style": "crew_door_hall",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "crew_door_pipes": {
+    "name": "B Deck · Crew Door",
+    "facing": "service pipes and valves",
+    "left": "crew_door_hall",
+    "right": "crew_door_in",
+    "forward": null,
+    "style": "crew_door_pipes",
+    "framing": "side-wall",
+    "fallback": "pipes",
+    "artStatus": "placeholder"
+  },
+  "adeck_cabin": {
+    "name": "Passenger Cabin (A deck)",
+    "facing": "someone else's cabin · no window",
+    "left": "adeck_cabin_wardrobe",
+    "right": "adeck_cabin_door",
+    "forward": null,
+    "style": "adcabin_bunks",
+    "framing": "room-wall",
+    "fallback": "bunks",
+    "artStatus": "ready"
+  },
+  "adeck_cabin_door": {
+    "name": "Passenger Cabin (A deck)",
+    "facing": "door to the corridor",
+    "left": "adeck_cabin",
+    "right": "adeck_cabin_curtain",
+    "forward": "corridor_left",
+    "style": "adcabin_door",
+    "framing": "room-wall",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "adeck_cabin_curtain": {
+    "name": "Passenger Cabin (A deck)",
+    "facing": "berth curtain",
+    "left": "adeck_cabin_door",
+    "right": "adeck_cabin_wardrobe",
+    "forward": null,
+    "style": "adcabin_curtain",
+    "framing": "room-wall",
+    "fallback": "curtain",
+    "artStatus": "placeholder"
+  },
+  "adeck_cabin_wardrobe": {
+    "name": "Passenger Cabin (A deck)",
+    "facing": "wardrobe niche",
+    "left": "adeck_cabin_curtain",
+    "right": "adeck_cabin",
+    "forward": null,
+    "style": "adcabin_wardrobe",
+    "framing": "room-wall",
+    "fallback": "wardrobe",
+    "artStatus": "placeholder"
+  },
+  "keel_walk": {
+    "name": "Keel Walkway",
+    "facing": "catwalk toward the control car",
+    "left": "keel_up",
+    "right": "keel_hatch",
+    "forward": "control_helm",
+    "style": "keel_forward",
+    "framing": "hall-axis",
+    "fallback": "girders",
+    "artStatus": "ready"
+  },
+  "keel_hatch": {
+    "name": "Keel Walkway",
+    "facing": "a hatch in the outer cover",
+    "left": "keel_walk",
+    "right": "keel_back",
+    "forward": null,
+    "style": "keelhatch",
+    "framing": "side-wall",
+    "fallback": "hatch",
+    "artStatus": "placeholder"
+  },
+  "keel_back": {
+    "name": "Keel Walkway",
+    "facing": "door back to B Deck",
+    "left": "keel_hatch",
+    "right": "keel_up",
+    "forward": "crew_door_in",
+    "style": "keel_back",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "keel_up": {
+    "name": "Keel Walkway",
+    "facing": "port gas-cell fabric and bracing",
+    "left": "keel_back",
+    "right": "keel_walk",
+    "forward": null,
+    "style": "keel_up",
+    "framing": "side-wall",
+    "fallback": "gascell",
+    "artStatus": "placeholder"
+  },
+  "control_helm": {
+    "name": "Control Car",
+    "facing": "the helm",
+    "left": "control_port",
+    "right": "control_starboard",
+    "forward": null,
+    "style": "control_helm",
+    "framing": "room-wall",
+    "fallback": "helm",
+    "artStatus": "ready"
+  },
+  "control_starboard": {
+    "name": "Control Car",
+    "facing": "starboard windows over the clouds",
+    "left": "control_helm",
+    "right": "control_back",
+    "forward": null,
+    "style": "control_starboard",
+    "framing": "room-wall",
+    "fallback": "window",
+    "artStatus": "placeholder"
+  },
+  "control_back": {
+    "name": "Control Car",
+    "facing": "ladder up to the keel",
+    "left": "control_starboard",
+    "right": "control_port",
+    "forward": "keel_walk",
+    "style": "control_ladder",
+    "framing": "room-wall",
+    "fallback": "ladder",
+    "artStatus": "placeholder"
+  },
+  "control_port": {
+    "name": "Control Car",
+    "facing": "port instruments",
+    "left": "control_back",
+    "right": "control_helm",
+    "forward": null,
+    "style": "control_port",
+    "framing": "room-wall",
+    "fallback": "instruments",
+    "artStatus": "placeholder"
+  },
+  "girder_nook": {
+    "name": "High in the Rings",
+    "facing": "something watching",
+    "left": "girder_nook_left",
+    "right": "girder_nook_right",
+    "forward": null,
+    "style": "nook_watch",
+    "framing": "room-wall",
+    "fallback": "girders",
+    "artStatus": "ready"
+  },
+  "girder_nook_right": {
+    "name": "High in the Rings",
+    "facing": "cable runs along the ring",
+    "left": "girder_nook",
+    "right": "girder_nook_down",
+    "forward": null,
+    "style": "nook_right",
+    "framing": "room-wall",
+    "fallback": "cables",
+    "artStatus": "placeholder"
+  },
+  "girder_nook_down": {
+    "name": "High in the Rings",
+    "facing": "climb back down",
+    "left": "girder_nook_right",
+    "right": "girder_nook_left",
+    "forward": "keel_back",
+    "style": "nook_down",
+    "framing": "room-wall",
+    "fallback": "ladder",
+    "artStatus": "placeholder"
+  },
+  "girder_nook_left": {
+    "name": "High in the Rings",
+    "facing": "girders vanishing into shadow",
+    "left": "girder_nook_down",
+    "right": "girder_nook",
+    "forward": null,
+    "style": "nook_left",
+    "framing": "room-wall",
+    "fallback": "gascell",
+    "artStatus": "placeholder"
+  },
+  "tour_shoes": {
+    "name": "Keel Tour · tour_shoes",
+    "facing": "forward along the catwalk · overshoe gate",
+    "left": "tour_shoes_l",
+    "right": "tour_shoes_r",
+    "forward": "tour_cells",
+    "style": "tour1",
+    "framing": "hall-axis",
+    "fallback": "girders",
+    "artStatus": "placeholder"
+  },
+  "tour_shoes_r": {
+    "name": "Keel Tour · tour_shoes",
+    "facing": "looking at the girders",
+    "left": "tour_shoes",
+    "right": "tour_shoes_back",
+    "forward": null,
+    "style": "tour1_r",
+    "framing": "side-wall",
+    "fallback": "girders",
+    "artStatus": "placeholder"
+  },
+  "tour_shoes_back": {
+    "name": "Keel Tour · tour_shoes",
+    "facing": "the way you came",
+    "left": "tour_shoes_r",
+    "right": "tour_shoes_l",
+    "forward": null,
+    "style": "tour1_back",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "tour_shoes_l": {
+    "name": "Keel Tour · tour_shoes",
+    "facing": "looking along the catwalk",
+    "left": "tour_shoes_back",
+    "right": "tour_shoes",
+    "forward": null,
+    "style": "tour1_l",
+    "framing": "side-wall",
+    "fallback": "safety",
+    "artStatus": "placeholder"
+  },
+  "tour_cells": {
+    "name": "Keel Tour · tour_cells",
+    "facing": "forward along the catwalk · gas-cell ring",
+    "left": "tour_cells_l",
+    "right": "tour_cells_r",
+    "forward": "tour_tanks",
+    "style": "tour2",
+    "framing": "hall-axis",
+    "fallback": "girders",
+    "artStatus": "placeholder"
+  },
+  "tour_cells_r": {
+    "name": "Keel Tour · tour_cells",
+    "facing": "looking at the girders",
+    "left": "tour_cells",
+    "right": "tour_cells_back",
+    "forward": null,
+    "style": "tour2_r",
+    "framing": "side-wall",
+    "fallback": "cables",
+    "artStatus": "placeholder"
+  },
+  "tour_cells_back": {
+    "name": "Keel Tour · tour_cells",
+    "facing": "the way you came",
+    "left": "tour_cells_r",
+    "right": "tour_cells_l",
+    "forward": null,
+    "style": "tour2_back",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "tour_cells_l": {
+    "name": "Keel Tour · tour_cells",
+    "facing": "looking along the catwalk",
+    "left": "tour_cells_back",
+    "right": "tour_cells",
+    "forward": null,
+    "style": "tour2_l",
+    "framing": "side-wall",
+    "fallback": "gascell",
+    "artStatus": "placeholder"
+  },
+  "tour_tanks": {
+    "name": "Keel Tour · tour_tanks",
+    "facing": "forward along the catwalk · tanks",
+    "left": "tour_tanks_l",
+    "right": "tour_tanks_r",
+    "forward": "tour_end",
+    "style": "tour3",
+    "framing": "hall-axis",
+    "fallback": "girders",
+    "artStatus": "ready"
+  },
+  "tour_tanks_r": {
+    "name": "Keel Tour · tour_tanks",
+    "facing": "looking at the girders",
+    "left": "tour_tanks",
+    "right": "tour_tanks_back",
+    "forward": null,
+    "style": "tour3_r",
+    "framing": "side-wall",
+    "fallback": "bunks",
+    "artStatus": "placeholder"
+  },
+  "tour_tanks_back": {
+    "name": "Keel Tour · tour_tanks",
+    "facing": "the way you came",
+    "left": "tour_tanks_r",
+    "right": "tour_tanks_l",
+    "forward": null,
+    "style": "tour3_back",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "tour_tanks_l": {
+    "name": "Keel Tour · tour_tanks",
+    "facing": "looking along the catwalk",
+    "left": "tour_tanks_back",
+    "right": "tour_tanks",
+    "forward": null,
+    "style": "tour3_l",
+    "framing": "side-wall",
+    "fallback": "tank",
+    "artStatus": "placeholder"
+  },
+  "tour_end": {
+    "name": "Keel Tour · tour_end",
+    "facing": "forward along the catwalk · landing-rope gear",
+    "left": "tour_end_l",
+    "right": "tour_end_r",
+    "forward": "keel_walk",
+    "style": "tour4",
+    "framing": "hall-axis",
+    "fallback": "girders",
+    "artStatus": "ready"
+  },
+  "tour_end_r": {
+    "name": "Keel Tour · tour_end",
+    "facing": "looking at the girders",
+    "left": "tour_end",
+    "right": "tour_end_back",
+    "forward": null,
+    "style": "tour4_r",
+    "framing": "side-wall",
+    "fallback": "hatch",
+    "artStatus": "placeholder"
+  },
+  "tour_end_back": {
+    "name": "Keel Tour · tour_end",
+    "facing": "the way you came",
+    "left": "tour_end_r",
+    "right": "tour_end_l",
+    "forward": null,
+    "style": "tour4_back",
+    "framing": "hall-axis",
+    "fallback": "door",
+    "artStatus": "placeholder"
+  },
+  "tour_end_l": {
+    "name": "Keel Tour · tour_end",
+    "facing": "looking along the catwalk",
+    "left": "tour_end_back",
+    "right": "tour_end",
+    "forward": null,
+    "style": "tour4_l",
+    "framing": "side-wall",
+    "fallback": "rope",
+    "artStatus": "placeholder"
+  }
 };
 const ROTATION_ALIASES={"bdeck_washroom": "bdeck_corr_washdoor", "bdeck_stairs": "bdeck_stairs_door", "bdeck_cabins": "bdeck_cabins_door", "crew_door": "crew_door_in"};
-(function applyFourFacingRotation(){
-  // Clear and replace nodes
+// Generated node table above; this renderer deliberately never reuses another facing's photograph.
+(function applyPhysicalFacings(){
   Object.keys(nodes).forEach(k=>delete nodes[k]);
-  Object.assign(nodes, ROTATION_NODES);
-  // Save alias remap
-  const _resolve=v=>ROTATION_ALIASES[v]||v;
-  const _restore=typeof restore==='function'?restore:null;
-  if(_restore){
-    restore=function(d){
-      if(d&&d.view) d.view=_resolve(d.view);
-      return _restore(d);
-    };
-  }
-  // XROOM style aliases for CSS fallback
-  const STYLE_XROOM={
-    washwall:'washbasin', people_side:'people', lounge_aft:'door',
-    promenade_side:'promenade', promenade_far:'promenade', promenade_aft:'door',
-    corridor_forward:'corridor', corridor_end:'corridor', corridor_left:'door', corridor_right:'door',
-    bar_counter:'bar', bar_booths:'bar', bar_windows:'bar', bar_door:'door',
-    office_desk:'office', office_cabinet:'office', office_porthole:'office', office_door:'door',
-    bdeck_corr_washdoor:'door', bdeck_corr_stairs:'door', bdeck_corr_office:'door', bdeck_corr_cabins:'door',
-    bdeck_stairs_door:'door', bdeck_stairs_up:'door', bdeck_stairs_bar:'door', bdeck_stairs_wall:'door',
-    bdeck_cabins_door:'door', bdeck_cabins_crew:'door', bdeck_cabins_back:'door', bdeck_cabins_wall:'door',
-    crew_door_in:'door', crew_door_hall:'door', crew_door_sign:'door', crew_door_pipes:'door',
-    adcabin_bunks:'adcabin', adcabin_door:'adcabin', adcabin_curtain:'adcabin', adcabin_wardrobe:'adcabin',
-    keel_forward:'keel', keel_back:'keel', keel_up:'keel',
-    control_helm:'control', control_ladder:'door', control_port:'control', control_starboard:'control',
-    nook_watch:'nook', nook_down:'nook', nook_left:'nook', nook_right:'nook',
-    tour1_l:'tour1', tour1_r:'tour1', tour1_back:'tour1',
-    tour2_l:'tour2', tour2_r:'tour2', tour2_back:'tour2',
-    tour3_l:'tour3', tour3_r:'tour3', tour3_back:'tour3',
-    tour4_l:'tour4', tour4_r:'tour4', tour4_back:'tour4'
+  Object.assign(nodes,ROTATION_NODES);
+  // Keep movement controls inside the full-height HUD rather than below the clipped shell.
+  scene.after(document.querySelector('.navdock'));
+  const resolve=v=>ROTATION_ALIASES[v]||v;
+  const oldRestore=restore;
+  restore=function(d){return oldRestore({...d,view:nodes[resolve(d.view)]?resolve(d.view):'washroom_stall'})};
+  const oldTravel=travel;
+  travel=function(dest){const id=resolve(dest);if(nodes[id])return oldTravel(id)};
+  // The old climb patch wrote an exit onto the Watcher wall. The ladder wall owns that exit.
+  ACTS.climb=function(){
+    window.nookReturn=view;
+    nodes.girder_nook_down.forward=view;
+    view='girder_nook';steps++;draw();saveGame();
   };
-  const _sc = scenery;
+  const oldDraw=draw;
+  draw=function(){
+    oldDraw();
+    nodes.girder_nook.forward=null;
+    nodes.girder_nook_down.forward=nodes[resolve(window.nookReturn)]?resolve(window.nookReturn):'keel_back';
+    $('#navforward').disabled=!nodes[view].forward;
+  };
+  const MAP={washwall:'washbasin',people_side:'people',lounge_aft:'door',promenade_side:'promenade',promenade_far:'promenade',promenade_aft:'door',corridor_forward:'corridor',corridor_end:'corridor',corridor_left:'door',corridor_right:'door',bar_counter:'bar',bar_booths:'bar',bar_windows:'bar',bar_door:'door',office_desk:'office',office_cabinet:'office',office_porthole:'office',office_door:'door',bdeck_corr_washdoor:'door',bdeck_corr_stairs:'door',bdeck_corr_office:'door',bdeck_corr_cabins:'door',bdeck_stairs_door:'door',bdeck_stairs_up:'door',bdeck_stairs_bar:'door',bdeck_stairs_wall:'door',bdeck_cabins_door:'door',bdeck_cabins_crew:'door',bdeck_cabins_back:'door',bdeck_cabins_wall:'door',crew_door_in:'crewdoor11',crew_door_hall:'door',crew_door_sign:'door',crew_door_pipes:'door',adcabin_bunks:'adcabin',adcabin_door:'adcabin',adcabin_curtain:'adcabin',adcabin_wardrobe:'adcabin',keel_forward:'keel',keel_back:'keel',keel_up:'keel',control_helm:'control',control_ladder:'door',control_port:'control',control_starboard:'control',nook_watch:'nook',nook_down:'nook',nook_left:'nook',nook_right:'nook',tour1_l:'tour1',tour1_r:'tour1',tour1_back:'tour1',tour2_l:'tour2',tour2_r:'tour2',tour2_back:'tour2',tour3_l:'tour3',tour3_r:'tour3',tour3_back:'tour3',tour4_l:'tour4',tour4_r:'tour4',tour4_back:'tour4'};
+  const keepInteractions=new Set(['washroom_stall','washroom_basins','cabin_bunk','cabin_window','cabin_desk','adeck_cabin','keel_hatch','keel_walk','keel_back','girder_nook','tour_cells','tour_end','crew_door_in','corridor_forward']);
+  const oldScenery=scenery;
+  const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   scenery=function(v){
-    const n=nodes[v]; if(!n) return _sc(v);
-    const mapped=STYLE_XROOM[n.style];
-    if(mapped && typeof XROOM!=='undefined' && XROOM[mapped] && !XROOM[n.style]){
-      // temporarily present mapped style for XROOM path
-      const stash=n.style; n.style=mapped;
-      const html=_sc(v);
-      n.style=stash;
-      return html;
+    const n=nodes[v];if(!n)return '';
+    const stash=n.style;n.style=MAP[stash]||stash;
+    let legacy;
+    try{legacy=oldScenery(v)}finally{n.style=stash}
+    const container=document.createElement('div');container.innerHTML=legacy;
+    let interactions='';
+    const selector=keepInteractions.has(v)?'[data-person],[data-object],[data-wash],[data-act],[data-x11],.notehot':'[data-person]';
+    const selected=keepInteractions.has(v)?Array.from(container.querySelectorAll(selector)):[];
+    for(const el of selected){
+      if(selected.some(other=>other!==el&&other.contains(el)))continue;
+      el.classList.add('facing-interaction');
+      interactions+=el.outerHTML;
     }
-    return _sc(v);
+    if(!keepInteractions.has(v))interactions=castHTML(v);
+    if(v==='crew_door_sign')interactions+='<div class="facing-interaction facing-notice-hot" data-x11="notice" title="Read crew notice"></div>';
+    // Retain the steward note on the original corridor facing (old scenery selects style corridor).
+    const kit=/^(keel_|tour_|girder_|crew_)/.test(v)?'metal':v.startsWith('washroom')?'tile':'wood';
+    const axis=n.framing==='hall-axis';
+    const feature=n.fallback;
+    let prop='<div class="facing-feature prop-'+esc(feature)+'" aria-hidden="true"><i></i><b></b><em></em></div>';
+    if(n.forward && !axis && !['door','stairs','ladder'].includes(feature))prop+='<div class="facing-feature prop-door prop-exitdoor" aria-hidden="true"></div>';
+    let exit='';
+    if(n.forward){
+      exit='<div class="facing-exit" data-move="'+esc(n.forward)+'" role="button" tabindex="0" title="'+esc(n.facing)+'"><span>↑ '+esc(n.facing)+'</span></div>';
+    }
+    const floor=axis?'<div class="facing-axis-left"></div><div class="facing-axis-right"></div><div class="facing-axis-floor"></div>':'<div class="facing-flat-floor"></div>';
+    return '<div class="paint facing-scene kit-'+kit+' frame-'+n.framing+' feature-'+feature+(n.forward?' has-exit':'')+'" data-facing="'+v+'" data-art-status="'+n.artStatus+'"><div class="facing-bulkhead"></div>'+floor+'<div class="facing-sconce"></div>'+prop+exit+interactions+'</div><div class="placard">'+esc(n.name)+'</div><div class="hint">'+esc(n.facing)+(n.artStatus==='placeholder'?' · drawn preview':'')+'</div>';
   };
-  // Ensure start facing
-  if(typeof view!=='undefined'){ /* keep until newGame */ }
+  // Keyboard parity with the existing touch/click exit and action handlers.
+  const bindDraw=draw;
+  draw=function(){bindDraw();scene.querySelectorAll('.facing-exit').forEach(el=>el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();travel(el.dataset.move)}})};
 })();
+
 </script>
 
 </body></html>

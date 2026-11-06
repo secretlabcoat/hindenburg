@@ -1,0 +1,35 @@
+[
+  {
+    "id": "bdeck_corr_washdoor",
+    "ok": false,
+    "credential": "HF_TOKEN",
+    "quota": true,
+    "error": "You have exceeded your free ZeroGPU quota (90s requested vs. 0s left). Try again in 0:00:00. Subscribe to Hugging Face PRO to get 40 min of ZeroGPU quota a day - https://huggingface.co/subscribe/pro?from=ZeroGPU"
+  },
+  {
+    "id": "bdeck_corr_washdoor",
+    "ok": true,
+    "seed": 1700,
+    "candidate": "/workspace/scratch/bdeck_corr_washdoor-candidate.webp",
+    "credential": "HF_TOKEN_2"
+  },
+  {
+    "id": "bdeck_corr_office",
+    "ok": true,
+    "seed": 1702,
+    "prompt": "First-person pre-rendered mid-1990s 3D CGI adventure game background, Titanic Adventure Out of Time style reference only, 1937 Hindenburg B-deck service corridor, dark lacquered wood, cream panel insets, brass hardware and warm tungsten sconces. Eye level 50mm camera, consistent horizon height, soft grain and gentle plastic CGI sheen. Empty of people, no readable text or UI, no watermark, no electronics. Camera turns perpendicular to STARBOARD SIDE WALL, one metre away from a closed purser office door centered in flat wood paneling, brass mail slot at waist height, small frosted square glass pane in upper door, a brass clock on the right, short empty noticeboard on left. Front-on close side wall, door fills center half, shallow floor strip. NO hallway view, NO vanishing point, NO receding corridor, NO junction, NO portholes.",
+    "candidate": "/workspace/scratch/corridor-candidates/bdeck_corr_office.webp"
+  },
+  {
+    "id": "bdeck_corr_stairs",
+    "ok": true,
+    "seed": 1701,
+    "prompt": "First-person pre-rendered mid-1990s 3D CGI adventure game background, Titanic Adventure Out of Time style reference only, 1937 Hindenburg B-deck service corridor, dark lacquered wood, cream panel insets, brass hardware and warm tungsten sconces. Eye level 50mm camera, consistent horizon height, soft grain and gentle plastic CGI sheen. Empty of people, no readable text or UI, no watermark, no electronics. Camera faces ALONG corridor AXIS toward stair landing at distant end. Long narrow straight passage, one-point perspective, parallel walls at left and right, dark carpet runner recedes under warm sconces. Far opening has a short flight of stairs and brass rail going up. Closed washroom door glimpsed on LEFT nearby, office frosted door on RIGHT nearby. NO intersections or lateral passages; this is one straight hallway, not a room.",
+    "candidate": "/workspace/scratch/corridor-candidates/bdeck_corr_stairs.webp"
+  },
+  {
+    "id": "bdeck_corr_cabins",
+    "ok": false,
+    "error": "You have exceeded your ZeroGPU quota (90s requested vs. 0s left). Try again in 0:00:00. Authenticate with a Hugging Face token for more quota - https://huggingface.co/settings/tokens"
+  }
+]

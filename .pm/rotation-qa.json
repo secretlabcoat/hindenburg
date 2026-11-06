@@ -2,545 +2,3249 @@
   {
     "label": "mobile",
     "nodeCount": 76,
+    "assetMode": "local mirror of pinned CDN files",
     "locations": {
       "B-Deck Washroom": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "washroom_stall",
           "washroom_basins",
           "washroom_door",
           "washroom_wall"
-        ]
-      },
-      "Cabin B-6 (B deck)": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Cabin B-6 (B deck)": {
+        "facingCount": 4,
         "ids": [
           "cabin_bunk",
           "cabin_window",
           "cabin_door",
           "cabin_desk"
-        ]
-      },
-      "Passenger Lounge": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Passenger Lounge": {
+        "facingCount": 4,
         "ids": [
           "lounge_windows",
           "lounge_people",
           "lounge_side",
           "lounge_aft"
-        ]
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "Promenade": {
         "facingCount": 4,
+        "ids": [
+          "promenade",
+          "promenade_far",
+          "promenade_side",
+          "promenade_aft"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "promenade",
-          "promenade_side",
-          "promenade_far",
-          "promenade_aft"
-        ]
+        "rightOk": true
       },
       "Passenger Corridor": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "corridor_forward",
           "corridor_left",
           "corridor_end",
           "corridor_right"
-        ]
-      },
-      "Bar & Smoking Room": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Bar & Smoking Room": {
+        "facingCount": 4,
         "ids": [
           "bar_counter",
           "bar_booths",
           "bar_windows",
           "bar_door"
-        ]
-      },
-      "Purser's Office": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Purser's Office": {
+        "facingCount": 4,
         "ids": [
           "office_desk",
           "office_cabinet",
           "office_porthole",
           "office_door"
-        ]
-      },
-      "B-Deck Corridor": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "B-Deck Corridor": {
+        "facingCount": 4,
         "ids": [
           "bdeck_corr_washdoor",
           "bdeck_corr_stairs",
           "bdeck_corr_office",
           "bdeck_corr_cabins"
-        ]
-      },
-      "B Deck · Stair Landing": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "B Deck · Stair Landing": {
+        "facingCount": 4,
         "ids": [
           "bdeck_stairs_door",
           "bdeck_stairs_up",
           "bdeck_stairs_bar",
           "bdeck_stairs_wall"
-        ]
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "B-Deck Corridor · Cabins": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "bdeck_cabins_door",
           "bdeck_cabins_crew",
-          "bdeck_cabins_back",
-          "bdeck_cabins_wall"
-        ]
+          "bdeck_cabins_wall",
+          "bdeck_cabins_back"
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "B Deck · Crew Door": {
         "facingCount": 4,
+        "ids": [
+          "crew_door_in",
+          "crew_door_sign",
+          "crew_door_hall",
+          "crew_door_pipes"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "crew_door_in",
-          "crew_door_hall",
-          "crew_door_sign",
-          "crew_door_pipes"
-        ]
+        "rightOk": true
       },
       "Passenger Cabin (A deck)": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "adeck_cabin",
           "adeck_cabin_door",
           "adeck_cabin_curtain",
           "adeck_cabin_wardrobe"
-        ]
-      },
-      "Keel Walkway": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Keel Walkway": {
+        "facingCount": 4,
         "ids": [
           "keel_walk",
           "keel_hatch",
           "keel_back",
           "keel_up"
-        ]
-      },
-      "Control Car": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Control Car": {
+        "facingCount": 4,
         "ids": [
           "control_helm",
           "control_starboard",
           "control_back",
           "control_port"
-        ]
-      },
-      "High in the Rings": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "High in the Rings": {
+        "facingCount": 4,
         "ids": [
           "girder_nook",
           "girder_nook_right",
           "girder_nook_down",
           "girder_nook_left"
-        ]
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "Keel Tour · tour_shoes": {
         "facingCount": 4,
+        "ids": [
+          "tour_shoes",
+          "tour_shoes_r",
+          "tour_shoes_back",
+          "tour_shoes_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_shoes",
-          "tour_shoes_l",
-          "tour_shoes_r",
-          "tour_shoes_back"
-        ]
+        "rightOk": true
       },
       "Keel Tour · tour_cells": {
         "facingCount": 4,
+        "ids": [
+          "tour_cells",
+          "tour_cells_r",
+          "tour_cells_back",
+          "tour_cells_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_cells",
-          "tour_cells_l",
-          "tour_cells_r",
-          "tour_cells_back"
-        ]
+        "rightOk": true
       },
       "Keel Tour · tour_tanks": {
         "facingCount": 4,
+        "ids": [
+          "tour_tanks",
+          "tour_tanks_r",
+          "tour_tanks_back",
+          "tour_tanks_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_tanks",
-          "tour_tanks_l",
-          "tour_tanks_r",
-          "tour_tanks_back"
-        ]
+        "rightOk": true
       },
       "Keel Tour · tour_end": {
         "facingCount": 4,
+        "ids": [
+          "tour_end",
+          "tour_end_r",
+          "tour_end_back",
+          "tour_end_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_end",
-          "tour_end_l",
-          "tour_end_r",
-          "tour_end_back"
-        ]
+        "rightOk": true
       }
     },
     "errors": [],
     "failures": [],
-    "mainPathSmoke": [
-      {
-        "expect": "washroom_basins",
+    "facings": {
+      "washroom_stall": {
+        "view": "washroom_stall",
+        "framing": "room-wall",
+        "feature": "shower",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "washroom_basins": {
         "view": "washroom_basins",
-        "ok": true
+        "framing": "room-wall",
+        "feature": "mirror",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
       },
-      {
-        "expect": "washroom_door",
+      "washroom_door": {
         "view": "washroom_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_washdoor",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_washdoor"
+        ]
+      },
+      "washroom_wall": {
+        "view": "washroom_wall",
+        "framing": "room-wall",
+        "feature": "towel",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "cabin_bunk": {
+        "view": "cabin_bunk",
+        "framing": "room-wall",
+        "feature": "bunks",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "cabin_window": {
+        "view": "cabin_window",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "cabin_door": {
+        "view": "cabin_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_cabins_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_cabins_door"
+        ]
+      },
+      "cabin_desk": {
+        "view": "cabin_desk",
+        "framing": "room-wall",
+        "feature": "desk",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "lounge_windows": {
+        "view": "lounge_windows",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "lounge_people": {
+        "view": "lounge_people",
+        "framing": "room-wall",
+        "feature": "booths",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "lounge_side": {
+        "view": "lounge_side",
+        "framing": "room-wall",
+        "feature": "desk",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "promenade_side",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "promenade_side"
+        ]
+      },
+      "lounge_aft": {
+        "view": "lounge_aft",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "corridor_forward",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "corridor_forward"
+        ]
+      },
+      "promenade": {
+        "view": "promenade",
+        "framing": "side-wall",
+        "feature": "window",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "promenade_far": {
+        "view": "promenade_far",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "promenade_side": {
+        "view": "promenade_side",
+        "framing": "side-wall",
+        "feature": "booths",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "lounge_side",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "lounge_side"
+        ]
+      },
+      "promenade_aft": {
+        "view": "promenade_aft",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "lounge_windows",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "lounge_windows"
+        ]
+      },
+      "corridor_forward": {
+        "view": "corridor_forward",
+        "framing": "hall-axis",
+        "feature": "wall",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "corridor_left": {
+        "view": "corridor_left",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "adeck_cabin",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "adeck_cabin"
+        ]
+      },
+      "corridor_end": {
+        "view": "corridor_end",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "lounge_aft",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "lounge_aft"
+        ]
+      },
+      "corridor_right": {
+        "view": "corridor_right",
+        "framing": "side-wall",
+        "feature": "stairs",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_stairs_up",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_stairs_up"
+        ]
+      },
+      "bar_counter": {
+        "view": "bar_counter",
+        "framing": "room-wall",
+        "feature": "bar",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bar_booths": {
+        "view": "bar_booths",
+        "framing": "room-wall",
+        "feature": "booths",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bar_windows": {
+        "view": "bar_windows",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bar_door": {
+        "view": "bar_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_stairs_bar",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_stairs_bar"
+        ]
+      },
+      "office_desk": {
+        "view": "office_desk",
+        "framing": "room-wall",
+        "feature": "desk",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "office_cabinet": {
+        "view": "office_cabinet",
+        "framing": "room-wall",
+        "feature": "cabinets",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "office_porthole": {
+        "view": "office_porthole",
+        "framing": "room-wall",
+        "feature": "porthole",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "office_door": {
+        "view": "office_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_office",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_office"
+        ]
+      },
+      "bdeck_corr_washdoor": {
+        "view": "bdeck_corr_washdoor",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "washroom_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "washroom_door"
+        ]
+      },
+      "bdeck_corr_stairs": {
+        "view": "bdeck_corr_stairs",
+        "framing": "hall-axis",
+        "feature": "stairs",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "bdeck_stairs_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_stairs_door"
+        ]
+      },
+      "bdeck_corr_office": {
+        "view": "bdeck_corr_office",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "office_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "office_door"
+        ]
+      },
+      "bdeck_corr_cabins": {
+        "view": "bdeck_corr_cabins",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_cabins_back",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_cabins_back"
+        ]
+      },
+      "bdeck_stairs_door": {
+        "view": "bdeck_stairs_door",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_stairs",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_stairs"
+        ]
+      },
+      "bdeck_stairs_up": {
+        "view": "bdeck_stairs_up",
+        "framing": "side-wall",
+        "feature": "stairs",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "corridor_right",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "corridor_right"
+        ]
+      },
+      "bdeck_stairs_bar": {
+        "view": "bdeck_stairs_bar",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bar_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bar_door"
+        ]
+      },
+      "bdeck_stairs_wall": {
+        "view": "bdeck_stairs_wall",
+        "framing": "side-wall",
+        "feature": "notice",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bdeck_cabins_door": {
+        "view": "bdeck_cabins_door",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "cabin_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "cabin_door"
+        ]
+      },
+      "bdeck_cabins_crew": {
+        "view": "bdeck_cabins_crew",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "crew_door_in",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "crew_door_in"
+        ]
+      },
+      "bdeck_cabins_wall": {
+        "view": "bdeck_cabins_wall",
+        "framing": "side-wall",
+        "feature": "wall",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bdeck_cabins_back": {
+        "view": "bdeck_cabins_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_cabins",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_cabins"
+        ]
+      },
+      "crew_door_in": {
+        "view": "crew_door_in",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "keel_walk",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_walk"
+        ]
+      },
+      "crew_door_sign": {
+        "view": "crew_door_sign",
+        "framing": "side-wall",
+        "feature": "notice",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "crew_door_hall": {
+        "view": "crew_door_hall",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_cabins_crew",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_cabins_crew"
+        ]
+      },
+      "crew_door_pipes": {
+        "view": "crew_door_pipes",
+        "framing": "side-wall",
+        "feature": "pipes",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "adeck_cabin": {
+        "view": "adeck_cabin",
+        "framing": "room-wall",
+        "feature": "bunks",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "adeck_cabin_door": {
+        "view": "adeck_cabin_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "corridor_left",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "corridor_left"
+        ]
+      },
+      "adeck_cabin_curtain": {
+        "view": "adeck_cabin_curtain",
+        "framing": "room-wall",
+        "feature": "curtain",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "adeck_cabin_wardrobe": {
+        "view": "adeck_cabin_wardrobe",
+        "framing": "room-wall",
+        "feature": "wardrobe",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "keel_walk": {
+        "view": "keel_walk",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "control_helm",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "control_helm"
+        ]
+      },
+      "keel_hatch": {
+        "view": "keel_hatch",
+        "framing": "side-wall",
+        "feature": "hatch",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "keel_back": {
+        "view": "keel_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "crew_door_in",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "crew_door_in"
+        ]
+      },
+      "keel_up": {
+        "view": "keel_up",
+        "framing": "side-wall",
+        "feature": "gascell",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "control_helm": {
+        "view": "control_helm",
+        "framing": "room-wall",
+        "feature": "helm",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "control_starboard": {
+        "view": "control_starboard",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "control_back": {
+        "view": "control_back",
+        "framing": "room-wall",
+        "feature": "ladder",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "keel_walk",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_walk"
+        ]
+      },
+      "control_port": {
+        "view": "control_port",
+        "framing": "room-wall",
+        "feature": "instruments",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "girder_nook": {
+        "view": "girder_nook",
+        "framing": "room-wall",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "girder_nook_right": {
+        "view": "girder_nook_right",
+        "framing": "room-wall",
+        "feature": "cables",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "girder_nook_down": {
+        "view": "girder_nook_down",
+        "framing": "room-wall",
+        "feature": "ladder",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "keel_back",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_back"
+        ]
+      },
+      "girder_nook_left": {
+        "view": "girder_nook_left",
+        "framing": "room-wall",
+        "feature": "gascell",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_shoes": {
+        "view": "tour_shoes",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "tour_cells",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "tour_cells"
+        ]
+      },
+      "tour_shoes_r": {
+        "view": "tour_shoes_r",
+        "framing": "side-wall",
+        "feature": "girders",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_shoes_back": {
+        "view": "tour_shoes_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_shoes_l": {
+        "view": "tour_shoes_l",
+        "framing": "side-wall",
+        "feature": "safety",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_cells": {
+        "view": "tour_cells",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "tour_tanks",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "tour_tanks"
+        ]
+      },
+      "tour_cells_r": {
+        "view": "tour_cells_r",
+        "framing": "side-wall",
+        "feature": "cables",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_cells_back": {
+        "view": "tour_cells_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_cells_l": {
+        "view": "tour_cells_l",
+        "framing": "side-wall",
+        "feature": "gascell",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_tanks": {
+        "view": "tour_tanks",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "tour_end",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "tour_end"
+        ]
+      },
+      "tour_tanks_r": {
+        "view": "tour_tanks_r",
+        "framing": "side-wall",
+        "feature": "bunks",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_tanks_back": {
+        "view": "tour_tanks_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_tanks_l": {
+        "view": "tour_tanks_l",
+        "framing": "side-wall",
+        "feature": "tank",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_end": {
+        "view": "tour_end",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "keel_walk",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_walk"
+        ]
+      },
+      "tour_end_r": {
+        "view": "tour_end_r",
+        "framing": "side-wall",
+        "feature": "hatch",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_end_back": {
+        "view": "tour_end_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_end_l": {
+        "view": "tour_end_l",
+        "framing": "side-wall",
+        "feature": "rope",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      }
+    },
+    "forwardTests": [
+      {
+        "id": "washroom_door",
+        "expected": "bdeck_corr_washdoor",
+        "got": "bdeck_corr_washdoor",
         "ok": true
       },
       {
-        "expect": "bdeck_corr_washdoor",
-        "view": "bdeck_corr_washdoor",
+        "id": "cabin_door",
+        "expected": "bdeck_cabins_door",
+        "got": "bdeck_cabins_door",
+        "ok": true
+      },
+      {
+        "id": "lounge_side",
+        "expected": "promenade_side",
+        "got": "promenade_side",
+        "ok": true
+      },
+      {
+        "id": "lounge_aft",
+        "expected": "corridor_forward",
+        "got": "corridor_forward",
+        "ok": true
+      },
+      {
+        "id": "promenade_side",
+        "expected": "lounge_side",
+        "got": "lounge_side",
+        "ok": true
+      },
+      {
+        "id": "promenade_aft",
+        "expected": "lounge_windows",
+        "got": "lounge_windows",
+        "ok": true
+      },
+      {
+        "id": "corridor_left",
+        "expected": "adeck_cabin",
+        "got": "adeck_cabin",
+        "ok": true
+      },
+      {
+        "id": "corridor_end",
+        "expected": "lounge_aft",
+        "got": "lounge_aft",
+        "ok": true
+      },
+      {
+        "id": "corridor_right",
+        "expected": "bdeck_stairs_up",
+        "got": "bdeck_stairs_up",
+        "ok": true
+      },
+      {
+        "id": "bar_door",
+        "expected": "bdeck_stairs_bar",
+        "got": "bdeck_stairs_bar",
+        "ok": true
+      },
+      {
+        "id": "office_door",
+        "expected": "bdeck_corr_office",
+        "got": "bdeck_corr_office",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_washdoor",
+        "expected": "washroom_door",
+        "got": "washroom_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_stairs",
+        "expected": "bdeck_stairs_door",
+        "got": "bdeck_stairs_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_office",
+        "expected": "office_door",
+        "got": "office_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_cabins",
+        "expected": "bdeck_cabins_back",
+        "got": "bdeck_cabins_back",
+        "ok": true
+      },
+      {
+        "id": "bdeck_stairs_door",
+        "expected": "bdeck_corr_stairs",
+        "got": "bdeck_corr_stairs",
+        "ok": true
+      },
+      {
+        "id": "bdeck_stairs_up",
+        "expected": "corridor_right",
+        "got": "corridor_right",
+        "ok": true
+      },
+      {
+        "id": "bdeck_stairs_bar",
+        "expected": "bar_door",
+        "got": "bar_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_cabins_door",
+        "expected": "cabin_door",
+        "got": "cabin_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_cabins_crew",
+        "expected": "crew_door_in",
+        "got": "crew_door_in",
+        "ok": true
+      },
+      {
+        "id": "bdeck_cabins_back",
+        "expected": "bdeck_corr_cabins",
+        "got": "bdeck_corr_cabins",
+        "ok": true
+      },
+      {
+        "id": "crew_door_in",
+        "expected": "keel_walk",
+        "got": "keel_walk",
+        "ok": true
+      },
+      {
+        "id": "crew_door_hall",
+        "expected": "bdeck_cabins_crew",
+        "got": "bdeck_cabins_crew",
+        "ok": true
+      },
+      {
+        "id": "adeck_cabin_door",
+        "expected": "corridor_left",
+        "got": "corridor_left",
+        "ok": true
+      },
+      {
+        "id": "keel_walk",
+        "expected": "control_helm",
+        "got": "control_helm",
+        "ok": true
+      },
+      {
+        "id": "keel_back",
+        "expected": "crew_door_in",
+        "got": "crew_door_in",
+        "ok": true
+      },
+      {
+        "id": "control_back",
+        "expected": "keel_walk",
+        "got": "keel_walk",
+        "ok": true
+      },
+      {
+        "id": "girder_nook_down",
+        "expected": "keel_back",
+        "got": "keel_back",
+        "ok": true
+      },
+      {
+        "id": "tour_shoes",
+        "expected": "tour_cells",
+        "got": "tour_cells",
+        "ok": true
+      },
+      {
+        "id": "tour_cells",
+        "expected": "tour_tanks",
+        "got": "tour_tanks",
+        "ok": true
+      },
+      {
+        "id": "tour_tanks",
+        "expected": "tour_end",
+        "got": "tour_end",
+        "ok": true
+      },
+      {
+        "id": "tour_end",
+        "expected": "keel_walk",
+        "got": "keel_walk",
         "ok": true
       }
-    ]
+    ],
+    "aliasTests": [
+      {
+        "alias": "bdeck_washroom",
+        "target": "bdeck_corr_washdoor",
+        "restored": "bdeck_corr_washdoor",
+        "travelled": "bdeck_corr_washdoor",
+        "ok": true
+      },
+      {
+        "alias": "bdeck_stairs",
+        "target": "bdeck_stairs_door",
+        "restored": "bdeck_stairs_door",
+        "travelled": "bdeck_stairs_door",
+        "ok": true
+      },
+      {
+        "alias": "bdeck_cabins",
+        "target": "bdeck_cabins_door",
+        "restored": "bdeck_cabins_door",
+        "travelled": "bdeck_cabins_door",
+        "ok": true
+      },
+      {
+        "alias": "crew_door",
+        "target": "crew_door_in",
+        "restored": "crew_door_in",
+        "travelled": "crew_door_in",
+        "ok": true
+      }
+    ],
+    "reachableFacings": 76,
+    "interactions": {
+      "crew_door_in": 1,
+      "tour_cells": 1,
+      "girder_nook": 1,
+      "keel_hatch": 1,
+      "washroom_stall": 1,
+      "cabin_window": 1
+    },
+    "climbTest": {
+      "view": "girder_nook",
+      "wallForward": null,
+      "down": "tour_cells"
+    }
   },
   {
     "label": "desktop",
     "nodeCount": 76,
+    "assetMode": "local mirror of pinned CDN files",
     "locations": {
       "B-Deck Washroom": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "washroom_stall",
           "washroom_basins",
           "washroom_door",
           "washroom_wall"
-        ]
-      },
-      "Cabin B-6 (B deck)": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Cabin B-6 (B deck)": {
+        "facingCount": 4,
         "ids": [
           "cabin_bunk",
           "cabin_window",
           "cabin_door",
           "cabin_desk"
-        ]
-      },
-      "Passenger Lounge": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Passenger Lounge": {
+        "facingCount": 4,
         "ids": [
           "lounge_windows",
           "lounge_people",
           "lounge_side",
           "lounge_aft"
-        ]
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "Promenade": {
         "facingCount": 4,
+        "ids": [
+          "promenade",
+          "promenade_far",
+          "promenade_side",
+          "promenade_aft"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "promenade",
-          "promenade_side",
-          "promenade_far",
-          "promenade_aft"
-        ]
+        "rightOk": true
       },
       "Passenger Corridor": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "corridor_forward",
           "corridor_left",
           "corridor_end",
           "corridor_right"
-        ]
-      },
-      "Bar & Smoking Room": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Bar & Smoking Room": {
+        "facingCount": 4,
         "ids": [
           "bar_counter",
           "bar_booths",
           "bar_windows",
           "bar_door"
-        ]
-      },
-      "Purser's Office": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Purser's Office": {
+        "facingCount": 4,
         "ids": [
           "office_desk",
           "office_cabinet",
           "office_porthole",
           "office_door"
-        ]
-      },
-      "B-Deck Corridor": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "B-Deck Corridor": {
+        "facingCount": 4,
         "ids": [
           "bdeck_corr_washdoor",
           "bdeck_corr_stairs",
           "bdeck_corr_office",
           "bdeck_corr_cabins"
-        ]
-      },
-      "B Deck · Stair Landing": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "B Deck · Stair Landing": {
+        "facingCount": 4,
         "ids": [
           "bdeck_stairs_door",
           "bdeck_stairs_up",
           "bdeck_stairs_bar",
           "bdeck_stairs_wall"
-        ]
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "B-Deck Corridor · Cabins": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "bdeck_cabins_door",
           "bdeck_cabins_crew",
-          "bdeck_cabins_back",
-          "bdeck_cabins_wall"
-        ]
+          "bdeck_cabins_wall",
+          "bdeck_cabins_back"
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "B Deck · Crew Door": {
         "facingCount": 4,
+        "ids": [
+          "crew_door_in",
+          "crew_door_sign",
+          "crew_door_hall",
+          "crew_door_pipes"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "crew_door_in",
-          "crew_door_hall",
-          "crew_door_sign",
-          "crew_door_pipes"
-        ]
+        "rightOk": true
       },
       "Passenger Cabin (A deck)": {
         "facingCount": 4,
-        "leftBack": true,
-        "rightBack": true,
-        "leftOk": true,
-        "rightOk": true,
         "ids": [
           "adeck_cabin",
           "adeck_cabin_door",
           "adeck_cabin_curtain",
           "adeck_cabin_wardrobe"
-        ]
-      },
-      "Keel Walkway": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Keel Walkway": {
+        "facingCount": 4,
         "ids": [
           "keel_walk",
           "keel_hatch",
           "keel_back",
           "keel_up"
-        ]
-      },
-      "Control Car": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "Control Car": {
+        "facingCount": 4,
         "ids": [
           "control_helm",
           "control_starboard",
           "control_back",
           "control_port"
-        ]
-      },
-      "High in the Rings": {
-        "facingCount": 4,
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
+        "rightOk": true
+      },
+      "High in the Rings": {
+        "facingCount": 4,
         "ids": [
           "girder_nook",
           "girder_nook_right",
           "girder_nook_down",
           "girder_nook_left"
-        ]
+        ],
+        "leftBack": true,
+        "rightBack": true,
+        "leftOk": true,
+        "rightOk": true
       },
       "Keel Tour · tour_shoes": {
         "facingCount": 4,
+        "ids": [
+          "tour_shoes",
+          "tour_shoes_r",
+          "tour_shoes_back",
+          "tour_shoes_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_shoes",
-          "tour_shoes_l",
-          "tour_shoes_r",
-          "tour_shoes_back"
-        ]
+        "rightOk": true
       },
       "Keel Tour · tour_cells": {
         "facingCount": 4,
+        "ids": [
+          "tour_cells",
+          "tour_cells_r",
+          "tour_cells_back",
+          "tour_cells_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_cells",
-          "tour_cells_l",
-          "tour_cells_r",
-          "tour_cells_back"
-        ]
+        "rightOk": true
       },
       "Keel Tour · tour_tanks": {
         "facingCount": 4,
+        "ids": [
+          "tour_tanks",
+          "tour_tanks_r",
+          "tour_tanks_back",
+          "tour_tanks_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_tanks",
-          "tour_tanks_l",
-          "tour_tanks_r",
-          "tour_tanks_back"
-        ]
+        "rightOk": true
       },
       "Keel Tour · tour_end": {
         "facingCount": 4,
+        "ids": [
+          "tour_end",
+          "tour_end_r",
+          "tour_end_back",
+          "tour_end_l"
+        ],
         "leftBack": true,
         "rightBack": true,
         "leftOk": true,
-        "rightOk": true,
-        "ids": [
-          "tour_end",
-          "tour_end_l",
-          "tour_end_r",
-          "tour_end_back"
-        ]
+        "rightOk": true
       }
     },
     "errors": [],
     "failures": [],
-    "mainPathSmoke": [
-      {
-        "expect": "washroom_basins",
+    "facings": {
+      "washroom_stall": {
+        "view": "washroom_stall",
+        "framing": "room-wall",
+        "feature": "shower",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "washroom_basins": {
         "view": "washroom_basins",
-        "ok": true
+        "framing": "room-wall",
+        "feature": "mirror",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
       },
-      {
-        "expect": "washroom_door",
+      "washroom_door": {
         "view": "washroom_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_washdoor",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_washdoor"
+        ]
+      },
+      "washroom_wall": {
+        "view": "washroom_wall",
+        "framing": "room-wall",
+        "feature": "towel",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "cabin_bunk": {
+        "view": "cabin_bunk",
+        "framing": "room-wall",
+        "feature": "bunks",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "cabin_window": {
+        "view": "cabin_window",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "cabin_door": {
+        "view": "cabin_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_cabins_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_cabins_door"
+        ]
+      },
+      "cabin_desk": {
+        "view": "cabin_desk",
+        "framing": "room-wall",
+        "feature": "desk",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "lounge_windows": {
+        "view": "lounge_windows",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "lounge_people": {
+        "view": "lounge_people",
+        "framing": "room-wall",
+        "feature": "booths",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "lounge_side": {
+        "view": "lounge_side",
+        "framing": "room-wall",
+        "feature": "desk",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "promenade_side",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "promenade_side"
+        ]
+      },
+      "lounge_aft": {
+        "view": "lounge_aft",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "corridor_forward",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "corridor_forward"
+        ]
+      },
+      "promenade": {
+        "view": "promenade",
+        "framing": "side-wall",
+        "feature": "window",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "promenade_far": {
+        "view": "promenade_far",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "promenade_side": {
+        "view": "promenade_side",
+        "framing": "side-wall",
+        "feature": "booths",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "lounge_side",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "lounge_side"
+        ]
+      },
+      "promenade_aft": {
+        "view": "promenade_aft",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "lounge_windows",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "lounge_windows"
+        ]
+      },
+      "corridor_forward": {
+        "view": "corridor_forward",
+        "framing": "hall-axis",
+        "feature": "wall",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "corridor_left": {
+        "view": "corridor_left",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "adeck_cabin",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "adeck_cabin"
+        ]
+      },
+      "corridor_end": {
+        "view": "corridor_end",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "lounge_aft",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "lounge_aft"
+        ]
+      },
+      "corridor_right": {
+        "view": "corridor_right",
+        "framing": "side-wall",
+        "feature": "stairs",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_stairs_up",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_stairs_up"
+        ]
+      },
+      "bar_counter": {
+        "view": "bar_counter",
+        "framing": "room-wall",
+        "feature": "bar",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bar_booths": {
+        "view": "bar_booths",
+        "framing": "room-wall",
+        "feature": "booths",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bar_windows": {
+        "view": "bar_windows",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bar_door": {
+        "view": "bar_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_stairs_bar",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_stairs_bar"
+        ]
+      },
+      "office_desk": {
+        "view": "office_desk",
+        "framing": "room-wall",
+        "feature": "desk",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "office_cabinet": {
+        "view": "office_cabinet",
+        "framing": "room-wall",
+        "feature": "cabinets",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "office_porthole": {
+        "view": "office_porthole",
+        "framing": "room-wall",
+        "feature": "porthole",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "office_door": {
+        "view": "office_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_office",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_office"
+        ]
+      },
+      "bdeck_corr_washdoor": {
+        "view": "bdeck_corr_washdoor",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "washroom_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "washroom_door"
+        ]
+      },
+      "bdeck_corr_stairs": {
+        "view": "bdeck_corr_stairs",
+        "framing": "hall-axis",
+        "feature": "stairs",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "bdeck_stairs_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_stairs_door"
+        ]
+      },
+      "bdeck_corr_office": {
+        "view": "bdeck_corr_office",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "office_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "office_door"
+        ]
+      },
+      "bdeck_corr_cabins": {
+        "view": "bdeck_corr_cabins",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_cabins_back",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_cabins_back"
+        ]
+      },
+      "bdeck_stairs_door": {
+        "view": "bdeck_stairs_door",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_stairs",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_stairs"
+        ]
+      },
+      "bdeck_stairs_up": {
+        "view": "bdeck_stairs_up",
+        "framing": "side-wall",
+        "feature": "stairs",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "corridor_right",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "corridor_right"
+        ]
+      },
+      "bdeck_stairs_bar": {
+        "view": "bdeck_stairs_bar",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bar_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bar_door"
+        ]
+      },
+      "bdeck_stairs_wall": {
+        "view": "bdeck_stairs_wall",
+        "framing": "side-wall",
+        "feature": "notice",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bdeck_cabins_door": {
+        "view": "bdeck_cabins_door",
+        "framing": "side-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "cabin_door",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "cabin_door"
+        ]
+      },
+      "bdeck_cabins_crew": {
+        "view": "bdeck_cabins_crew",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "crew_door_in",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "crew_door_in"
+        ]
+      },
+      "bdeck_cabins_wall": {
+        "view": "bdeck_cabins_wall",
+        "framing": "side-wall",
+        "feature": "wall",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "bdeck_cabins_back": {
+        "view": "bdeck_cabins_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_corr_cabins",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_corr_cabins"
+        ]
+      },
+      "crew_door_in": {
+        "view": "crew_door_in",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "keel_walk",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_walk"
+        ]
+      },
+      "crew_door_sign": {
+        "view": "crew_door_sign",
+        "framing": "side-wall",
+        "feature": "notice",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "crew_door_hall": {
+        "view": "crew_door_hall",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "bdeck_cabins_crew",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "bdeck_cabins_crew"
+        ]
+      },
+      "crew_door_pipes": {
+        "view": "crew_door_pipes",
+        "framing": "side-wall",
+        "feature": "pipes",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "adeck_cabin": {
+        "view": "adeck_cabin",
+        "framing": "room-wall",
+        "feature": "bunks",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "adeck_cabin_door": {
+        "view": "adeck_cabin_door",
+        "framing": "room-wall",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "corridor_left",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "corridor_left"
+        ]
+      },
+      "adeck_cabin_curtain": {
+        "view": "adeck_cabin_curtain",
+        "framing": "room-wall",
+        "feature": "curtain",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "adeck_cabin_wardrobe": {
+        "view": "adeck_cabin_wardrobe",
+        "framing": "room-wall",
+        "feature": "wardrobe",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "keel_walk": {
+        "view": "keel_walk",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "control_helm",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "control_helm"
+        ]
+      },
+      "keel_hatch": {
+        "view": "keel_hatch",
+        "framing": "side-wall",
+        "feature": "hatch",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "keel_back": {
+        "view": "keel_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "crew_door_in",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "crew_door_in"
+        ]
+      },
+      "keel_up": {
+        "view": "keel_up",
+        "framing": "side-wall",
+        "feature": "gascell",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "control_helm": {
+        "view": "control_helm",
+        "framing": "room-wall",
+        "feature": "helm",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "control_starboard": {
+        "view": "control_starboard",
+        "framing": "room-wall",
+        "feature": "window",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "control_back": {
+        "view": "control_back",
+        "framing": "room-wall",
+        "feature": "ladder",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "keel_walk",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_walk"
+        ]
+      },
+      "control_port": {
+        "view": "control_port",
+        "framing": "room-wall",
+        "feature": "instruments",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "girder_nook": {
+        "view": "girder_nook",
+        "framing": "room-wall",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "girder_nook_right": {
+        "view": "girder_nook_right",
+        "framing": "room-wall",
+        "feature": "cables",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "girder_nook_down": {
+        "view": "girder_nook_down",
+        "framing": "room-wall",
+        "feature": "ladder",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "keel_back",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_back"
+        ]
+      },
+      "girder_nook_left": {
+        "view": "girder_nook_left",
+        "framing": "room-wall",
+        "feature": "gascell",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_shoes": {
+        "view": "tour_shoes",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "tour_cells",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "tour_cells"
+        ]
+      },
+      "tour_shoes_r": {
+        "view": "tour_shoes_r",
+        "framing": "side-wall",
+        "feature": "girders",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_shoes_back": {
+        "view": "tour_shoes_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_shoes_l": {
+        "view": "tour_shoes_l",
+        "framing": "side-wall",
+        "feature": "safety",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_cells": {
+        "view": "tour_cells",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": "tour_tanks",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "tour_tanks"
+        ]
+      },
+      "tour_cells_r": {
+        "view": "tour_cells_r",
+        "framing": "side-wall",
+        "feature": "cables",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_cells_back": {
+        "view": "tour_cells_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_cells_l": {
+        "view": "tour_cells_l",
+        "framing": "side-wall",
+        "feature": "gascell",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_tanks": {
+        "view": "tour_tanks",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "tour_end",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "tour_end"
+        ]
+      },
+      "tour_tanks_r": {
+        "view": "tour_tanks_r",
+        "framing": "side-wall",
+        "feature": "bunks",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_tanks_back": {
+        "view": "tour_tanks_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_tanks_l": {
+        "view": "tour_tanks_l",
+        "framing": "side-wall",
+        "feature": "tank",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_end": {
+        "view": "tour_end",
+        "framing": "hall-axis",
+        "feature": "girders",
+        "status": "ready",
+        "hasArt": true,
+        "hasImage": true,
+        "hasDrawing": true,
+        "forward": "keel_walk",
+        "forwardDisabled": false,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": [
+          "keel_walk"
+        ]
+      },
+      "tour_end_r": {
+        "view": "tour_end_r",
+        "framing": "side-wall",
+        "feature": "hatch",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_end_back": {
+        "view": "tour_end_back",
+        "framing": "hall-axis",
+        "feature": "door",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      },
+      "tour_end_l": {
+        "view": "tour_end_l",
+        "framing": "side-wall",
+        "feature": "rope",
+        "status": "placeholder",
+        "hasArt": false,
+        "hasImage": false,
+        "hasDrawing": true,
+        "forward": null,
+        "forwardDisabled": true,
+        "reciprocal": true,
+        "navVisible": true,
+        "moveTargets": []
+      }
+    },
+    "forwardTests": [
+      {
+        "id": "washroom_door",
+        "expected": "bdeck_corr_washdoor",
+        "got": "bdeck_corr_washdoor",
         "ok": true
       },
       {
-        "expect": "bdeck_corr_washdoor",
-        "view": "bdeck_corr_washdoor",
+        "id": "cabin_door",
+        "expected": "bdeck_cabins_door",
+        "got": "bdeck_cabins_door",
+        "ok": true
+      },
+      {
+        "id": "lounge_side",
+        "expected": "promenade_side",
+        "got": "promenade_side",
+        "ok": true
+      },
+      {
+        "id": "lounge_aft",
+        "expected": "corridor_forward",
+        "got": "corridor_forward",
+        "ok": true
+      },
+      {
+        "id": "promenade_side",
+        "expected": "lounge_side",
+        "got": "lounge_side",
+        "ok": true
+      },
+      {
+        "id": "promenade_aft",
+        "expected": "lounge_windows",
+        "got": "lounge_windows",
+        "ok": true
+      },
+      {
+        "id": "corridor_left",
+        "expected": "adeck_cabin",
+        "got": "adeck_cabin",
+        "ok": true
+      },
+      {
+        "id": "corridor_end",
+        "expected": "lounge_aft",
+        "got": "lounge_aft",
+        "ok": true
+      },
+      {
+        "id": "corridor_right",
+        "expected": "bdeck_stairs_up",
+        "got": "bdeck_stairs_up",
+        "ok": true
+      },
+      {
+        "id": "bar_door",
+        "expected": "bdeck_stairs_bar",
+        "got": "bdeck_stairs_bar",
+        "ok": true
+      },
+      {
+        "id": "office_door",
+        "expected": "bdeck_corr_office",
+        "got": "bdeck_corr_office",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_washdoor",
+        "expected": "washroom_door",
+        "got": "washroom_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_stairs",
+        "expected": "bdeck_stairs_door",
+        "got": "bdeck_stairs_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_office",
+        "expected": "office_door",
+        "got": "office_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_corr_cabins",
+        "expected": "bdeck_cabins_back",
+        "got": "bdeck_cabins_back",
+        "ok": true
+      },
+      {
+        "id": "bdeck_stairs_door",
+        "expected": "bdeck_corr_stairs",
+        "got": "bdeck_corr_stairs",
+        "ok": true
+      },
+      {
+        "id": "bdeck_stairs_up",
+        "expected": "corridor_right",
+        "got": "corridor_right",
+        "ok": true
+      },
+      {
+        "id": "bdeck_stairs_bar",
+        "expected": "bar_door",
+        "got": "bar_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_cabins_door",
+        "expected": "cabin_door",
+        "got": "cabin_door",
+        "ok": true
+      },
+      {
+        "id": "bdeck_cabins_crew",
+        "expected": "crew_door_in",
+        "got": "crew_door_in",
+        "ok": true
+      },
+      {
+        "id": "bdeck_cabins_back",
+        "expected": "bdeck_corr_cabins",
+        "got": "bdeck_corr_cabins",
+        "ok": true
+      },
+      {
+        "id": "crew_door_in",
+        "expected": "keel_walk",
+        "got": "keel_walk",
+        "ok": true
+      },
+      {
+        "id": "crew_door_hall",
+        "expected": "bdeck_cabins_crew",
+        "got": "bdeck_cabins_crew",
+        "ok": true
+      },
+      {
+        "id": "adeck_cabin_door",
+        "expected": "corridor_left",
+        "got": "corridor_left",
+        "ok": true
+      },
+      {
+        "id": "keel_walk",
+        "expected": "control_helm",
+        "got": "control_helm",
+        "ok": true
+      },
+      {
+        "id": "keel_back",
+        "expected": "crew_door_in",
+        "got": "crew_door_in",
+        "ok": true
+      },
+      {
+        "id": "control_back",
+        "expected": "keel_walk",
+        "got": "keel_walk",
+        "ok": true
+      },
+      {
+        "id": "girder_nook_down",
+        "expected": "keel_back",
+        "got": "keel_back",
+        "ok": true
+      },
+      {
+        "id": "tour_shoes",
+        "expected": "tour_cells",
+        "got": "tour_cells",
+        "ok": true
+      },
+      {
+        "id": "tour_cells",
+        "expected": "tour_tanks",
+        "got": "tour_tanks",
+        "ok": true
+      },
+      {
+        "id": "tour_tanks",
+        "expected": "tour_end",
+        "got": "tour_end",
+        "ok": true
+      },
+      {
+        "id": "tour_end",
+        "expected": "keel_walk",
+        "got": "keel_walk",
         "ok": true
       }
-    ]
+    ],
+    "aliasTests": [
+      {
+        "alias": "bdeck_washroom",
+        "target": "bdeck_corr_washdoor",
+        "restored": "bdeck_corr_washdoor",
+        "travelled": "bdeck_corr_washdoor",
+        "ok": true
+      },
+      {
+        "alias": "bdeck_stairs",
+        "target": "bdeck_stairs_door",
+        "restored": "bdeck_stairs_door",
+        "travelled": "bdeck_stairs_door",
+        "ok": true
+      },
+      {
+        "alias": "bdeck_cabins",
+        "target": "bdeck_cabins_door",
+        "restored": "bdeck_cabins_door",
+        "travelled": "bdeck_cabins_door",
+        "ok": true
+      },
+      {
+        "alias": "crew_door",
+        "target": "crew_door_in",
+        "restored": "crew_door_in",
+        "travelled": "crew_door_in",
+        "ok": true
+      }
+    ],
+    "reachableFacings": 76,
+    "interactions": {
+      "crew_door_in": 1,
+      "tour_cells": 1,
+      "girder_nook": 1,
+      "keel_hatch": 1,
+      "washroom_stall": 1,
+      "cabin_window": 1
+    },
+    "climbTest": {
+      "view": "girder_nook",
+      "wallForward": null,
+      "down": "tour_cells"
+    }
   }
 ]
