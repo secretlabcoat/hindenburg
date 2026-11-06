@@ -1,0 +1,14 @@
+# Agent / QA scratch — keep screenshots if intentionally added; ignore logs & reports
+.pm/*.log
+.pm/*.txt
+.pm/*.json
+.pm/*-console.txt
+.pm/opencode-*.log
+.pm/qa-*.json
+.pm/qa-*.txt
+.pm/*-report.json
+.pm/before-*-console.txt
+# OS / editor
+.DS_Store
+*.swp
+.aider*
