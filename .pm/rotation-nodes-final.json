@@ -1,0 +1,794 @@
+{
+  "node_count": 76,
+  "location_count": 19,
+  "aliases": {
+    "bdeck_washroom": "bdeck_corr_washdoor",
+    "bdeck_stairs": "bdeck_stairs_door",
+    "bdeck_cabins": "bdeck_cabins_door",
+    "crew_door": "crew_door_in"
+  },
+  "start": "washroom_stall",
+  "nodes": {
+    "washroom_stall": {
+      "name": "B-Deck Washroom",
+      "facing": "the shower stall \u00b7 your hiding place",
+      "left": "washroom_wall",
+      "right": "washroom_basins",
+      "forward": null,
+      "style": "washshower"
+    },
+    "washroom_basins": {
+      "name": "B-Deck Washroom",
+      "facing": "wash basins and mirror",
+      "left": "washroom_stall",
+      "right": "washroom_door",
+      "forward": null,
+      "style": "washbasin"
+    },
+    "washroom_door": {
+      "name": "B-Deck Washroom",
+      "facing": "door to the B-deck corridor",
+      "left": "washroom_basins",
+      "right": "washroom_wall",
+      "forward": "bdeck_corr_washdoor",
+      "style": "washdoor"
+    },
+    "washroom_wall": {
+      "name": "B-Deck Washroom",
+      "facing": "tiled wall and towel rail",
+      "left": "washroom_door",
+      "right": "washroom_stall",
+      "forward": null,
+      "style": "washwall"
+    },
+    "cabin_bunk": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "two berths, made up, unused",
+      "left": "cabin_desk",
+      "right": "cabin_window",
+      "forward": null,
+      "style": "b6bunk"
+    },
+    "cabin_window": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "a real window \u2014 new B-deck cabins have them",
+      "left": "cabin_bunk",
+      "right": "cabin_door",
+      "forward": null,
+      "style": "b6window"
+    },
+    "cabin_door": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "door to the B-deck corridor",
+      "left": "cabin_window",
+      "right": "cabin_desk",
+      "forward": "bdeck_cabins_door",
+      "style": "b6door"
+    },
+    "cabin_desk": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "fold-down desk and washbasin",
+      "left": "cabin_door",
+      "right": "cabin_bunk",
+      "forward": null,
+      "style": "b6desk"
+    },
+    "lounge_windows": {
+      "name": "Passenger Lounge",
+      "facing": "windows",
+      "left": "lounge_aft",
+      "right": "lounge_people",
+      "forward": "promenade",
+      "style": "windows"
+    },
+    "lounge_people": {
+      "name": "Passenger Lounge",
+      "facing": "passengers",
+      "left": "lounge_windows",
+      "right": "lounge_side",
+      "forward": null,
+      "style": "people"
+    },
+    "lounge_side": {
+      "name": "Passenger Lounge",
+      "facing": "seating area",
+      "left": "lounge_people",
+      "right": "lounge_aft",
+      "forward": null,
+      "style": "people_side"
+    },
+    "lounge_aft": {
+      "name": "Passenger Lounge",
+      "facing": "aft doorway",
+      "left": "lounge_side",
+      "right": "lounge_windows",
+      "forward": "corridor_forward",
+      "style": "lounge_aft"
+    },
+    "promenade": {
+      "name": "Promenade",
+      "facing": "observation windows",
+      "left": "promenade_aft",
+      "right": "promenade_side",
+      "forward": "lounge_windows",
+      "style": "promenade"
+    },
+    "promenade_side": {
+      "name": "Promenade",
+      "facing": "seating",
+      "left": "promenade",
+      "right": "promenade_far",
+      "forward": null,
+      "style": "promenade_side"
+    },
+    "promenade_far": {
+      "name": "Promenade",
+      "facing": "forward windows",
+      "left": "promenade_side",
+      "right": "promenade_aft",
+      "forward": null,
+      "style": "promenade_far"
+    },
+    "promenade_aft": {
+      "name": "Promenade",
+      "facing": "return passage",
+      "left": "promenade_far",
+      "right": "promenade",
+      "forward": "lounge_windows",
+      "style": "promenade_aft"
+    },
+    "corridor_forward": {
+      "name": "Passenger Corridor",
+      "facing": "forward",
+      "left": "corridor_right",
+      "right": "corridor_left",
+      "forward": "corridor_end",
+      "style": "corridor_forward"
+    },
+    "corridor_left": {
+      "name": "Passenger Corridor",
+      "facing": "port cabins",
+      "left": "corridor_forward",
+      "right": "corridor_end",
+      "forward": "adeck_cabin",
+      "style": "corridor_left"
+    },
+    "corridor_end": {
+      "name": "Passenger Corridor",
+      "facing": "lounge entrance",
+      "left": "corridor_left",
+      "right": "corridor_right",
+      "forward": "lounge_aft",
+      "style": "corridor_end"
+    },
+    "corridor_right": {
+      "name": "Passenger Corridor",
+      "facing": "starboard cabins / stairs down",
+      "left": "corridor_end",
+      "right": "corridor_forward",
+      "forward": "bdeck_stairs_up",
+      "style": "corridor_right"
+    },
+    "bar_counter": {
+      "name": "Bar & Smoking Room",
+      "facing": "the bar",
+      "left": "bar_door",
+      "right": "bar_booths",
+      "forward": null,
+      "style": "bar_counter"
+    },
+    "bar_booths": {
+      "name": "Bar & Smoking Room",
+      "facing": "leather booths",
+      "left": "bar_counter",
+      "right": "bar_windows",
+      "forward": null,
+      "style": "bar_booths"
+    },
+    "bar_windows": {
+      "name": "Bar & Smoking Room",
+      "facing": "smoking-room windows",
+      "left": "bar_booths",
+      "right": "bar_door",
+      "forward": null,
+      "style": "bar_windows"
+    },
+    "bar_door": {
+      "name": "Bar & Smoking Room",
+      "facing": "door to stair landing",
+      "left": "bar_windows",
+      "right": "bar_counter",
+      "forward": "bdeck_stairs_bar",
+      "style": "bar_door"
+    },
+    "office_desk": {
+      "name": "Purser's Office",
+      "facing": "the purser's desk",
+      "left": "office_door",
+      "right": "office_cabinet",
+      "forward": null,
+      "style": "office_desk"
+    },
+    "office_cabinet": {
+      "name": "Purser's Office",
+      "facing": "filing cabinets",
+      "left": "office_desk",
+      "right": "office_porthole",
+      "forward": null,
+      "style": "office_cabinet"
+    },
+    "office_porthole": {
+      "name": "Purser's Office",
+      "facing": "porthole and chronometer",
+      "left": "office_cabinet",
+      "right": "office_door",
+      "forward": null,
+      "style": "office_porthole"
+    },
+    "office_door": {
+      "name": "Purser's Office",
+      "facing": "door to B-deck corridor",
+      "left": "office_porthole",
+      "right": "office_desk",
+      "forward": "bdeck_corr_office",
+      "style": "office_door"
+    },
+    "bdeck_corr_washdoor": {
+      "name": "B-Deck Corridor",
+      "facing": "washroom door",
+      "left": "bdeck_corr_cabins",
+      "right": "bdeck_corr_stairs",
+      "forward": "washroom_door",
+      "style": "bdeck_corr_washdoor"
+    },
+    "bdeck_corr_stairs": {
+      "name": "B-Deck Corridor",
+      "facing": "toward the stair landing",
+      "left": "bdeck_corr_washdoor",
+      "right": "bdeck_corr_office",
+      "forward": "bdeck_stairs_door",
+      "style": "bdeck_corr_stairs"
+    },
+    "bdeck_corr_office": {
+      "name": "B-Deck Corridor",
+      "facing": "purser's office door",
+      "left": "bdeck_corr_stairs",
+      "right": "bdeck_corr_cabins",
+      "forward": "office_door",
+      "style": "bdeck_corr_office"
+    },
+    "bdeck_corr_cabins": {
+      "name": "B-Deck Corridor",
+      "facing": "toward the new cabins",
+      "left": "bdeck_corr_office",
+      "right": "bdeck_corr_washdoor",
+      "forward": "bdeck_cabins_back",
+      "style": "bdeck_corr_cabins"
+    },
+    "bdeck_stairs_door": {
+      "name": "B Deck \u00b7 Stair Landing",
+      "facing": "opening to B-deck corridor",
+      "left": "bdeck_stairs_wall",
+      "right": "bdeck_stairs_up",
+      "forward": "bdeck_corr_stairs",
+      "style": "bdeck_stairs_door"
+    },
+    "bdeck_stairs_up": {
+      "name": "B Deck \u00b7 Stair Landing",
+      "facing": "stairs ascending to A deck",
+      "left": "bdeck_stairs_door",
+      "right": "bdeck_stairs_bar",
+      "forward": "corridor_right",
+      "style": "bdeck_stairs_up"
+    },
+    "bdeck_stairs_bar": {
+      "name": "B Deck \u00b7 Stair Landing",
+      "facing": "door to bar & smoking room",
+      "left": "bdeck_stairs_up",
+      "right": "bdeck_stairs_wall",
+      "forward": "bar_door",
+      "style": "bdeck_stairs_bar"
+    },
+    "bdeck_stairs_wall": {
+      "name": "B Deck \u00b7 Stair Landing",
+      "facing": "lacquered bulkhead",
+      "left": "bdeck_stairs_bar",
+      "right": "bdeck_stairs_door",
+      "forward": null,
+      "style": "bdeck_stairs_wall"
+    },
+    "bdeck_cabins_door": {
+      "name": "B-Deck Corridor \u00b7 Cabins",
+      "facing": "cabin B-6 door",
+      "left": "bdeck_cabins_wall",
+      "right": "bdeck_cabins_crew",
+      "forward": "cabin_door",
+      "style": "bdeck_cabins_door"
+    },
+    "bdeck_cabins_crew": {
+      "name": "B-Deck Corridor \u00b7 Cabins",
+      "facing": "crew door to the keel",
+      "left": "bdeck_cabins_door",
+      "right": "bdeck_cabins_back",
+      "forward": "crew_door_in",
+      "style": "bdeck_cabins_crew"
+    },
+    "bdeck_cabins_back": {
+      "name": "B-Deck Corridor \u00b7 Cabins",
+      "facing": "back toward the washroom corridor",
+      "left": "bdeck_cabins_crew",
+      "right": "bdeck_cabins_wall",
+      "forward": "bdeck_corr_cabins",
+      "style": "bdeck_cabins_back"
+    },
+    "bdeck_cabins_wall": {
+      "name": "B-Deck Corridor \u00b7 Cabins",
+      "facing": "cabin bulkheads",
+      "left": "bdeck_cabins_back",
+      "right": "bdeck_cabins_door",
+      "forward": null,
+      "style": "bdeck_cabins_wall"
+    },
+    "crew_door_in": {
+      "name": "B Deck \u00b7 Crew Door",
+      "facing": "crew door \u00b7 keel \u00b7 no passengers",
+      "left": "crew_door_pipes",
+      "right": "crew_door_hall",
+      "forward": "keel_walk",
+      "style": "crew_door_in"
+    },
+    "crew_door_hall": {
+      "name": "B Deck \u00b7 Crew Door",
+      "facing": "back to cabin corridor",
+      "left": "crew_door_in",
+      "right": "crew_door_sign",
+      "forward": "bdeck_cabins_crew",
+      "style": "crew_door_hall"
+    },
+    "crew_door_sign": {
+      "name": "B Deck \u00b7 Crew Door",
+      "facing": "crew-only notice board",
+      "left": "crew_door_hall",
+      "right": "crew_door_pipes",
+      "forward": null,
+      "style": "crew_door_sign"
+    },
+    "crew_door_pipes": {
+      "name": "B Deck \u00b7 Crew Door",
+      "facing": "service pipes and valves",
+      "left": "crew_door_sign",
+      "right": "crew_door_in",
+      "forward": null,
+      "style": "crew_door_pipes"
+    },
+    "adeck_cabin": {
+      "name": "Passenger Cabin (A deck)",
+      "facing": "someone else's cabin \u00b7 no window",
+      "left": "adeck_cabin_wardrobe",
+      "right": "adeck_cabin_door",
+      "forward": null,
+      "style": "adcabin_bunks"
+    },
+    "adeck_cabin_door": {
+      "name": "Passenger Cabin (A deck)",
+      "facing": "door to the corridor",
+      "left": "adeck_cabin",
+      "right": "adeck_cabin_curtain",
+      "forward": "corridor_left",
+      "style": "adcabin_door"
+    },
+    "adeck_cabin_curtain": {
+      "name": "Passenger Cabin (A deck)",
+      "facing": "berth curtain",
+      "left": "adeck_cabin_door",
+      "right": "adeck_cabin_wardrobe",
+      "forward": null,
+      "style": "adcabin_curtain"
+    },
+    "adeck_cabin_wardrobe": {
+      "name": "Passenger Cabin (A deck)",
+      "facing": "wardrobe niche",
+      "left": "adeck_cabin_curtain",
+      "right": "adeck_cabin",
+      "forward": null,
+      "style": "adcabin_wardrobe"
+    },
+    "keel_walk": {
+      "name": "Keel Walkway",
+      "facing": "catwalk toward the control car",
+      "left": "keel_up",
+      "right": "keel_hatch",
+      "forward": "control_helm",
+      "style": "keel_forward"
+    },
+    "keel_hatch": {
+      "name": "Keel Walkway",
+      "facing": "a hatch in the outer cover",
+      "left": "keel_walk",
+      "right": "keel_back",
+      "forward": null,
+      "style": "keelhatch"
+    },
+    "keel_back": {
+      "name": "Keel Walkway",
+      "facing": "door back to B Deck",
+      "left": "keel_hatch",
+      "right": "keel_up",
+      "forward": "crew_door_in",
+      "style": "keel_back"
+    },
+    "keel_up": {
+      "name": "Keel Walkway",
+      "facing": "looking up into the gas cells",
+      "left": "keel_back",
+      "right": "keel_walk",
+      "forward": null,
+      "style": "keel_up"
+    },
+    "control_helm": {
+      "name": "Control Car",
+      "facing": "the helm",
+      "left": "control_port",
+      "right": "control_starboard",
+      "forward": null,
+      "style": "control_helm"
+    },
+    "control_starboard": {
+      "name": "Control Car",
+      "facing": "starboard windows over the clouds",
+      "left": "control_helm",
+      "right": "control_back",
+      "forward": null,
+      "style": "control_starboard"
+    },
+    "control_back": {
+      "name": "Control Car",
+      "facing": "ladder up to the keel",
+      "left": "control_starboard",
+      "right": "control_port",
+      "forward": "keel_walk",
+      "style": "control_ladder"
+    },
+    "control_port": {
+      "name": "Control Car",
+      "facing": "port instruments",
+      "left": "control_back",
+      "right": "control_helm",
+      "forward": null,
+      "style": "control_port"
+    },
+    "girder_nook": {
+      "name": "High in the Rings",
+      "facing": "something watching",
+      "left": "girder_nook_left",
+      "right": "girder_nook_right",
+      "forward": null,
+      "style": "nook_watch"
+    },
+    "girder_nook_right": {
+      "name": "High in the Rings",
+      "facing": "cable runs along the ring",
+      "left": "girder_nook",
+      "right": "girder_nook_down",
+      "forward": null,
+      "style": "nook_right"
+    },
+    "girder_nook_down": {
+      "name": "High in the Rings",
+      "facing": "climb back down",
+      "left": "girder_nook_right",
+      "right": "girder_nook_left",
+      "forward": "keel_back",
+      "style": "nook_down"
+    },
+    "girder_nook_left": {
+      "name": "High in the Rings",
+      "facing": "girders vanishing into shadow",
+      "left": "girder_nook_down",
+      "right": "girder_nook",
+      "forward": null,
+      "style": "nook_left"
+    },
+    "tour_shoes": {
+      "name": "Keel Tour \u00b7 tour_shoes",
+      "facing": "felt overshoes and the safety rules",
+      "left": "tour_shoes_back",
+      "right": "tour_shoes_l",
+      "forward": "tour_cells",
+      "style": "tour1"
+    },
+    "tour_shoes_l": {
+      "name": "Keel Tour \u00b7 tour_shoes",
+      "facing": "looking along the catwalk",
+      "left": "tour_shoes",
+      "right": "tour_shoes_r",
+      "forward": null,
+      "style": "tour1_l"
+    },
+    "tour_shoes_r": {
+      "name": "Keel Tour \u00b7 tour_shoes",
+      "facing": "looking at the girders",
+      "left": "tour_shoes_l",
+      "right": "tour_shoes_back",
+      "forward": null,
+      "style": "tour1_r"
+    },
+    "tour_shoes_back": {
+      "name": "Keel Tour \u00b7 tour_shoes",
+      "facing": "the way you came",
+      "left": "tour_shoes_r",
+      "right": "tour_shoes",
+      "forward": null,
+      "style": "tour1_back"
+    },
+    "tour_cells": {
+      "name": "Keel Tour \u00b7 tour_cells",
+      "facing": "looking up into the hull",
+      "left": "tour_cells_back",
+      "right": "tour_cells_l",
+      "forward": "tour_tanks",
+      "style": "tour2"
+    },
+    "tour_cells_l": {
+      "name": "Keel Tour \u00b7 tour_cells",
+      "facing": "looking along the catwalk",
+      "left": "tour_cells",
+      "right": "tour_cells_r",
+      "forward": null,
+      "style": "tour2_l"
+    },
+    "tour_cells_r": {
+      "name": "Keel Tour \u00b7 tour_cells",
+      "facing": "looking at the girders",
+      "left": "tour_cells_l",
+      "right": "tour_cells_back",
+      "forward": null,
+      "style": "tour2_r"
+    },
+    "tour_cells_back": {
+      "name": "Keel Tour \u00b7 tour_cells",
+      "facing": "the way you came",
+      "left": "tour_cells_r",
+      "right": "tour_cells",
+      "forward": null,
+      "style": "tour2_back"
+    },
+    "tour_tanks": {
+      "name": "Keel Tour \u00b7 tour_tanks",
+      "facing": "fuel and water tanks, crew bunks",
+      "left": "tour_tanks_back",
+      "right": "tour_tanks_l",
+      "forward": "tour_end",
+      "style": "tour3"
+    },
+    "tour_tanks_l": {
+      "name": "Keel Tour \u00b7 tour_tanks",
+      "facing": "looking along the catwalk",
+      "left": "tour_tanks",
+      "right": "tour_tanks_r",
+      "forward": null,
+      "style": "tour3_l"
+    },
+    "tour_tanks_r": {
+      "name": "Keel Tour \u00b7 tour_tanks",
+      "facing": "looking at the girders",
+      "left": "tour_tanks_l",
+      "right": "tour_tanks_back",
+      "forward": null,
+      "style": "tour3_r"
+    },
+    "tour_tanks_back": {
+      "name": "Keel Tour \u00b7 tour_tanks",
+      "facing": "the way you came",
+      "left": "tour_tanks_r",
+      "right": "tour_tanks",
+      "forward": null,
+      "style": "tour3_back"
+    },
+    "tour_end": {
+      "name": "Keel Tour \u00b7 tour_end",
+      "facing": "the guide turns back \u00b7 the forward keel",
+      "left": "tour_end_back",
+      "right": "tour_end_l",
+      "forward": "keel_walk",
+      "style": "tour4"
+    },
+    "tour_end_l": {
+      "name": "Keel Tour \u00b7 tour_end",
+      "facing": "looking along the catwalk",
+      "left": "tour_end",
+      "right": "tour_end_r",
+      "forward": null,
+      "style": "tour4_l"
+    },
+    "tour_end_r": {
+      "name": "Keel Tour \u00b7 tour_end",
+      "facing": "looking at the girders",
+      "left": "tour_end_l",
+      "right": "tour_end_back",
+      "forward": null,
+      "style": "tour4_r"
+    },
+    "tour_end_back": {
+      "name": "Keel Tour \u00b7 tour_end",
+      "facing": "the way you came",
+      "left": "tour_end_r",
+      "right": "tour_end",
+      "forward": null,
+      "style": "tour4_back"
+    }
+  },
+  "locations": [
+    {
+      "name": "B-Deck Washroom",
+      "ids": [
+        "washroom_stall",
+        "washroom_basins",
+        "washroom_door",
+        "washroom_wall"
+      ]
+    },
+    {
+      "name": "Cabin B-6 (B deck)",
+      "ids": [
+        "cabin_bunk",
+        "cabin_window",
+        "cabin_door",
+        "cabin_desk"
+      ]
+    },
+    {
+      "name": "Passenger Lounge",
+      "ids": [
+        "lounge_windows",
+        "lounge_people",
+        "lounge_side",
+        "lounge_aft"
+      ]
+    },
+    {
+      "name": "Promenade",
+      "ids": [
+        "promenade",
+        "promenade_side",
+        "promenade_far",
+        "promenade_aft"
+      ]
+    },
+    {
+      "name": "Passenger Corridor",
+      "ids": [
+        "corridor_forward",
+        "corridor_left",
+        "corridor_end",
+        "corridor_right"
+      ]
+    },
+    {
+      "name": "Bar & Smoking Room",
+      "ids": [
+        "bar_counter",
+        "bar_booths",
+        "bar_windows",
+        "bar_door"
+      ]
+    },
+    {
+      "name": "Purser's Office",
+      "ids": [
+        "office_desk",
+        "office_cabinet",
+        "office_porthole",
+        "office_door"
+      ]
+    },
+    {
+      "name": "B-Deck Corridor",
+      "ids": [
+        "bdeck_corr_washdoor",
+        "bdeck_corr_stairs",
+        "bdeck_corr_office",
+        "bdeck_corr_cabins"
+      ]
+    },
+    {
+      "name": "B Deck \u00b7 Stair Landing",
+      "ids": [
+        "bdeck_stairs_door",
+        "bdeck_stairs_up",
+        "bdeck_stairs_bar",
+        "bdeck_stairs_wall"
+      ]
+    },
+    {
+      "name": "B-Deck Corridor \u00b7 Cabins",
+      "ids": [
+        "bdeck_cabins_door",
+        "bdeck_cabins_crew",
+        "bdeck_cabins_back",
+        "bdeck_cabins_wall"
+      ]
+    },
+    {
+      "name": "B Deck \u00b7 Crew Door",
+      "ids": [
+        "crew_door_in",
+        "crew_door_hall",
+        "crew_door_sign",
+        "crew_door_pipes"
+      ]
+    },
+    {
+      "name": "Passenger Cabin (A deck)",
+      "ids": [
+        "adeck_cabin",
+        "adeck_cabin_door",
+        "adeck_cabin_curtain",
+        "adeck_cabin_wardrobe"
+      ]
+    },
+    {
+      "name": "Keel Walkway",
+      "ids": [
+        "keel_walk",
+        "keel_hatch",
+        "keel_back",
+        "keel_up"
+      ]
+    },
+    {
+      "name": "Control Car",
+      "ids": [
+        "control_helm",
+        "control_starboard",
+        "control_back",
+        "control_port"
+      ]
+    },
+    {
+      "name": "High in the Rings",
+      "ids": [
+        "girder_nook",
+        "girder_nook_right",
+        "girder_nook_down",
+        "girder_nook_left"
+      ]
+    },
+    {
+      "name": "Keel Tour \u00b7 tour_shoes",
+      "ids": [
+        "tour_shoes",
+        "tour_shoes_l",
+        "tour_shoes_r",
+        "tour_shoes_back"
+      ]
+    },
+    {
+      "name": "Keel Tour \u00b7 tour_cells",
+      "ids": [
+        "tour_cells",
+        "tour_cells_l",
+        "tour_cells_r",
+        "tour_cells_back"
+      ]
+    },
+    {
+      "name": "Keel Tour \u00b7 tour_tanks",
+      "ids": [
+        "tour_tanks",
+        "tour_tanks_l",
+        "tour_tanks_r",
+        "tour_tanks_back"
+      ]
+    },
+    {
+      "name": "Keel Tour \u00b7 tour_end",
+      "ids": [
+        "tour_end",
+        "tour_end_l",
+        "tour_end_r",
+        "tour_end_back"
+      ]
+    }
+  ]
+}
