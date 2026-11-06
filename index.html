@@ -287,7 +287,7 @@ if(saved&&!saved.over){$('#startgame').textContent='Continue Voyage';const nb2=d
   nb2.onclick=()=>{localStorage.removeItem(SAVE_KEY);newGame()}
   $('#startgame').onclick=()=>{$('#titleoverlay').hidden=true;beginAudio();restore(saved)}}
 else{if(saved)localStorage.removeItem(SAVE_KEY);$('#startgame').onclick=()=>newGame()}
-function newGame(){logEntries=[];_start();narrate('Your goal: get someone with authority to believe you before the ship reaches Lakehurst. The Chief Steward works the passenger corridor on A deck, up the stairs from B deck. Your notebook keeps track of everything.');updateClock();saveGame()}
+function newGame(){logEntries=[];_start();narrate('Your goal: get someone with authority to believe you before the ship reaches Lakehurst. The Chief Steward works the passenger corridor on A deck, up the stairs from B deck. Your notebook keeps track of everything.');narrate('Tip: Use ↶ or ↷ to turn until you face the door, then press ↑ or tap the door to step into the corridor.');updateClock();saveGame()}
 </script>
 <style>
 /* ---------- Round 2 rooms: B deck, keel, control car ---------- */
@@ -539,6 +539,9 @@ renderNotebook=function(){_renderNB9();const g=$('#notebookBody .nb-goals');if(!
 .scene .wash-door{position:absolute;left:32%;top:14%;width:36%;bottom:22%;background:linear-gradient(90deg,#4d3a2b,#8b6f52 20%,#a1855f 70%,#5a4432);border:8px ridge #b39268;cursor:pointer}
 .scene .wash-door:after{content:'WASCHRAUM · B';position:absolute;top:10%;left:0;right:0;text-align:center;font:bold 9px Georgia,serif;color:#f1e3c2;letter-spacing:1px}
 .scene .wash-door:before{content:'●';position:absolute;right:9%;top:52%;color:#e7c67f}
+.scene .wash-door-tag{position:absolute;bottom:15%;left:5%;right:5%;background:#211912ea;border:1px solid #c2a37a;color:#f4dcad;font:bold 11px Georgia,serif;text-align:center;padding:4px 2px;letter-spacing:1px;pointer-events:none;box-shadow:0 0 8px #000}
+@keyframes navglow{0%,100%{box-shadow:0 0 4px #e7cf9f}50%{box-shadow:0 0 16px #f4dcad,0 0 8px #f4dcad}}
+.navdock button.pulse{animation:navglow 1.2s infinite ease-in-out;border-color:#f4dcad;color:#fff}
 </style>
 <script>
 /* Start hidden in the B-deck washroom (the real ship's washrooms, toilets and only shower were on B deck) */
@@ -553,11 +556,24 @@ nodes.bdeck_stairs.name='B-Deck Corridor';nodes.crew_door.name='B-Deck Corridor'
 ;['cabin_bunk','cabin_window','cabin_door','cabin_desk'].forEach(k=>nodes[k].name='Empty Cabin (A deck)');nodes.cabin_bunk.facing='a made-up bunk nobody is using'
 XROOM.washshower=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-rail"></div><div class="wash-head"></div><div class="wash-curtain" data-wash="shower" title="Shower curtain"></div>'
 XROOM.washbasin=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-mirror" data-wash="mirror" title="Mirror"></div><div class="wash-basin a"></div><div class="wash-basin b"></div>'
-XROOM.washdoor=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-door" data-move="bdeck_washroom" title="Step out into the corridor"></div>'
+XROOM.washdoor=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-door" data-move="bdeck_washroom" title="Step out into the corridor"><div class="wash-door-tag">EXIT TO CORRIDOR ↑</div></div>'
 const WASH_TEXT={shower:'The only shower aboard any airship, and the one place nobody looks twice at a closed curtain. You have been hiding behind it since Frankfurt.',
  mirror:'Your reflection looks like someone who has not slept in three days. No ticket, no cabin, no name on the manifest. Just what you know about tonight.'}
 const _draw10=draw
-draw=function(){_draw10();scene.querySelectorAll('[data-wash]').forEach(el=>el.onclick=()=>narrate(WASH_TEXT[el.dataset.wash]))}
+draw=function(){_draw10();scene.querySelectorAll('[data-wash]').forEach(el=>el.onclick=()=>narrate(WASH_TEXT[el.dataset.wash]))
+ if(!who){
+  const hasP=CAST_AT[view]&&CAST_AT[view].length>0;
+  if(view.startsWith('washroom_')){
+   $('#speaker').textContent=view==='washroom_door'?'Facing the door. Press ↑ or tap the door to step into the corridor.':'Use ↶ or ↷ to turn around and find the door.';
+  }else if(!hasP){
+   $('#speaker').textContent=nodes[view]&&nodes[view].forward?'Explore using ↶ ↷ to turn or ↑ to move forward.':'Turn with ↶ ↷ to explore this area.';
+  }else{
+   $('#speaker').textContent='Select a passenger to speak with them.';
+  }
+ }
+ const fwd=$('#navforward');
+ if(fwd)fwd.classList.toggle('pulse',!fwd.disabled&&(view==='washroom_door'||view.startsWith('washroom_')));
+}
 </script>
 <!-- r11-sleeping-tour -->
 <style>
