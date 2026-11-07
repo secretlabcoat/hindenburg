@@ -470,8 +470,8 @@
       "location": "lounge",
       "framing": "room-wall",
       "feature": "desk",
-      "status": "placeholder",
-      "reason": "Duplicate or generic hall view does not match this facing",
+      "status": "ready",
+      "reason": "Generated with the specific facing prompt and visually reviewed",
       "seed": 1202,
       "detail": "South wall: writing alcove with narrow table and upholstered settee at left, an actual glazed promenade door at right; distinct from east seating view.",
       "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level 50mm equivalent camera, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same location material lock: Mahogany trim, cream panels, warm brass sconces, patterned carpet, low Art Deco armchairs. Room-wall framing: different specific wall from same room center, not a repeated panorama. South wall: writing alcove with narrow table and upholstered settee at left, an actual glazed promenade door at right; distinct from east seating view. No people.",
@@ -484,16 +484,16 @@
         "style": "people_side",
         "framing": "room-wall",
         "fallback": "desk",
-        "artStatus": "placeholder"
+        "artStatus": "ready"
       },
-      "sha256": "334d35e090d4267aac2860cb381e1b2e4b37fd13e1bd2d1cf24b314cca24c439"
+      "sha256": "2e0068384d699d66ebe4134ad2afbf827906f48c82ba2da3b6bc76f3bb5b38a4"
     },
     "lounge_aft": {
       "location": "lounge",
       "framing": "room-wall",
       "feature": "door",
-      "status": "placeholder",
-      "reason": "Duplicate or generic hall view does not match this facing",
+      "status": "ready",
+      "reason": "Generated with the specific facing prompt and visually reviewed",
       "seed": 1203,
       "detail": "West wall: a single aft exit doorway to A-deck corridor, cream panel surround and amber sconces; close elevation, not a long passage.",
       "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level 50mm equivalent camera, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same location material lock: Mahogany trim, cream panels, warm brass sconces, patterned carpet, low Art Deco armchairs. Room-wall framing: a different specific wall from the same room center, no duplicate whole-room panorama. West wall: a single aft exit doorway to A-deck corridor, cream panel surround and amber sconces; close elevation, not a long passage. No people.",
@@ -506,9 +506,9 @@
         "style": "lounge_aft",
         "framing": "room-wall",
         "fallback": "door",
-        "artStatus": "placeholder"
+        "artStatus": "ready"
       },
-      "sha256": "835c88b720f68fc6c21e2b9d220d3cabb287f6e76885fcffab60f2e5bfb16601"
+      "sha256": "b9847a83e098cde2a32c9923e40a647a0f6931e6174929f80c341194969707f6"
     },
     "promenade": {
       "location": "promenade",
@@ -2018,8 +2018,6 @@
   "regeneration": [
     "washroom_wall",
     "cabin_door",
-    "lounge_side",
-    "lounge_aft",
     "promenade",
     "promenade_side",
     "promenade_aft",

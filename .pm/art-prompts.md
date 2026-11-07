@@ -87,15 +87,15 @@ Seed 1201; `assets/art/lounge_people.webp`. Unique source image retained.
 
 **Append to global + material lock:** East wall: two armchairs around a low table, two period-dressed female passengers as mid-90s CGI figures, framed landscape behind.
 
-### lounge_side — placeholder / room-wall
+### lounge_side — ready / room-wall
 
-Seed 1202; `assets/art/lounge_side.webp`. Duplicate or generic hall view does not match this facing.
+Seed 1202; `assets/art/lounge_side.webp`. Generated with the specific facing prompt and visually reviewed.
 
 **Append to global + material lock:** South wall: writing alcove with narrow table and upholstered settee at left, an actual glazed promenade door at right; distinct from east seating view.
 
-### lounge_aft — placeholder / room-wall
+### lounge_aft — ready / room-wall
 
-Seed 1203; `assets/art/lounge_aft.webp`. Duplicate or generic hall view does not match this facing.
+Seed 1203; `assets/art/lounge_aft.webp`. Generated with the specific facing prompt and visually reviewed.
 
 **Append to global + material lock:** West wall: a single aft exit doorway to A-deck corridor, cream panel surround and amber sconces; close elevation, not a long passage.
 

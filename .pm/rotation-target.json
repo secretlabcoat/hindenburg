@@ -172,7 +172,7 @@
           "style": "people_side",
           "framing": "room-wall",
           "fallback": "desk",
-          "artStatus": "placeholder"
+          "artStatus": "ready"
         },
         {
           "id": "lounge_aft",
@@ -184,7 +184,7 @@
           "style": "lounge_aft",
           "framing": "room-wall",
           "fallback": "door",
-          "artStatus": "placeholder"
+          "artStatus": "ready"
         }
       ]
     },

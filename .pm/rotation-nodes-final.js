@@ -118,7 +118,7 @@ const ROTATION_NODES={
     "style": "people_side",
     "framing": "room-wall",
     "fallback": "desk",
-    "artStatus": "placeholder"
+    "artStatus": "ready"
   },
   "lounge_aft": {
     "name": "Passenger Lounge",
@@ -129,7 +129,7 @@ const ROTATION_NODES={
     "style": "lounge_aft",
     "framing": "room-wall",
     "fallback": "door",
-    "artStatus": "placeholder"
+    "artStatus": "ready"
   },
   "promenade": {
     "name": "Promenade",
