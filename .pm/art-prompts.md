@@ -39,9 +39,9 @@ Seed 1002; `assets/art/washroom_door.webp`. Unique source image retained.
 
 ### washroom_wall — placeholder / room-wall
 
-Seed 1003; `assets/art/washroom_wall.webp`. Previously room-matched copied placeholder.
+Seed 72003; `assets/art/washroom_wall.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** West wall: blank teal tile, a horizontal chrome towel rail and two folded white towels; no basin, shower or doorway.
+**Append to global + material lock:** West wall: blank teal tile, a horizontal chrome towel rail and two folded white towels; no basin, shower or doorway. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Cabin B-6 (B deck)
 
@@ -61,9 +61,9 @@ Seed 1101; `assets/art/cabin_window.webp`. Unique source image retained.
 
 ### cabin_door — placeholder / room-wall
 
-Seed 1102; `assets/art/cabin_door.webp`. Whole bunk-room view, not a close frontal exit wall.
+Seed 72102; `assets/art/cabin_door.webp`. Whole bunk-room view, not a close frontal exit wall.
 
-**Append to global + material lock:** South wall: close front-on cabin exit door with brass handle, only a sliver of bunk at left; no full-room or hallway perspective.
+**Append to global + material lock:** South wall: close front-on cabin exit door with brass handle, only a sliver of bunk at left; no full-room or hallway perspective. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### cabin_desk — ready / room-wall
 
@@ -105,9 +105,9 @@ Material lock: Long slanted observation glazing, mahogany handrail, cream inboar
 
 ### promenade — placeholder / side-wall
 
-Seed 1300; `assets/art/promenade.webp`. Old long axial promenade view is wrong for a perpendicular observation-window side wall.
+Seed 72300; `assets/art/promenade.webp`. Old long axial promenade view is wrong for a perpendicular observation-window side wall.
 
-**Append to global + material lock:** OUTBOARD wall perpendicular to walkway: close broad slanted observation window and brass handrail, clouds outside, no walk-through opening.
+**Append to global + material lock:** OUTBOARD wall perpendicular to walkway: close broad slanted observation window and brass handrail, clouds outside, no walk-through opening. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### promenade_far — ready / hall-axis
 
@@ -117,15 +117,15 @@ Seed 1301; `assets/art/promenade_far.webp`. Canonical long forward-axis promenad
 
 ### promenade_side — placeholder / side-wall
 
-Seed 1302; `assets/art/promenade_side.webp`. Duplicate or generic hall view does not match this facing.
+Seed 72302; `assets/art/promenade_side.webp`. Duplicate or generic hall view does not match this facing.
 
-**Append to global + material lock:** INBOARD wall perpendicular to walkway: wicker settee, one framed route map and a real glazed lounge door to the right; no vanishing hallway.
+**Append to global + material lock:** INBOARD wall perpendicular to walkway: wicker settee, one framed route map and a real glazed lounge door to the right; no vanishing hallway. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### promenade_aft — placeholder / hall-axis
 
-Seed 1303; `assets/art/promenade_aft.webp`. Duplicate or generic hall view does not match this facing.
+Seed 72303; `assets/art/promenade_aft.webp`. Duplicate or generic hall view does not match this facing.
 
-**Append to global + material lock:** AFT axis opposite forward: long promenade to an open return passage into the lounge at distant end, glazing now on right and seating on left.
+**Append to global + material lock:** AFT axis opposite forward: long promenade to an open return passage into the lounge at distant end, glazing now on right and seating on left. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Passenger Corridor
 
@@ -139,21 +139,21 @@ Seed 1400; `assets/art/corridor_forward.webp`. Unique source image retained.
 
 ### corridor_left — placeholder / side-wall
 
-Seed 1401; `assets/art/corridor_left.webp`. Duplicate or generic hall view does not match this facing.
+Seed 72401; `assets/art/corridor_left.webp`. Duplicate or generic hall view does not match this facing.
 
-**Append to global + material lock:** PORT side wall: a single A-deck cabin door close and front-on, brass handle, one sconce at left and cream panel at right. No view down a corridor.
+**Append to global + material lock:** PORT side wall: a single A-deck cabin door close and front-on, brass handle, one sconce at left and cream panel at right. No view down a corridor. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### corridor_end — placeholder / hall-axis
 
-Seed 1402; `assets/art/corridor_end.webp`. Duplicate or generic hall view does not match this facing.
+Seed 72402; `assets/art/corridor_end.webp`. Duplicate or generic hall view does not match this facing.
 
-**Append to global + material lock:** AFT axis opposite forward: long cabin corridor with an open passenger lounge entrance at far end, a small carpet medallion at threshold; not the forward closed-end view.
+**Append to global + material lock:** AFT axis opposite forward: long cabin corridor with an open passenger lounge entrance at far end, a small carpet medallion at threshold; not the forward closed-end view. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### corridor_right — placeholder / side-wall
 
-Seed 1403; `assets/art/corridor_right.webp`. Duplicate or generic hall view does not match this facing.
+Seed 72403; `assets/art/corridor_right.webp`. Duplicate or generic hall view does not match this facing.
 
-**Append to global + material lock:** STARBOARD side wall: close transverse stairwell opening with a brass rail and first steps descending, cream surround; not a long hallway or another cabin door.
+**Append to global + material lock:** STARBOARD side wall: close transverse stairwell opening with a brass rail and first steps descending, cream surround; not a long hallway or another cabin door. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Bar & Smoking Room
 
@@ -167,21 +167,21 @@ Seed 1500; `assets/art/bar_counter.webp`. Unique source image retained.
 
 ### bar_booths — placeholder / room-wall
 
-Seed 1501; `assets/art/bar_booths.webp`. Previously room-matched copied placeholder.
+Seed 72501; `assets/art/bar_booths.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** East wall: a pair of high-backed oxblood leather booths and small round tables under a mirror; no bar counter.
+**Append to global + material lock:** East wall: a pair of high-backed oxblood leather booths and small round tables under a mirror; no bar counter. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bar_windows — placeholder / room-wall
 
-Seed 1502; `assets/art/bar_windows.webp`. Previously room-matched copied placeholder.
+Seed 72502; `assets/art/bar_windows.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** South wall: three compact smoking-room observation windows, brass ashtray stand and low leather bench, cloud daylight.
+**Append to global + material lock:** South wall: three compact smoking-room observation windows, brass ashtray stand and low leather bench, cloud daylight. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bar_door — placeholder / room-wall
 
-Seed 1503; `assets/art/bar_door.webp`. Previously room-matched copied placeholder.
+Seed 72503; `assets/art/bar_door.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** West wall: closed pressure-lock exit door to stair landing with metal surround and brass latch; shallow floor, no bar or corridor perspective.
+**Append to global + material lock:** West wall: closed pressure-lock exit door to stair landing with metal surround and brass latch; shallow floor, no bar or corridor perspective. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Purser's Office
 
@@ -195,21 +195,21 @@ Seed 1600; `assets/art/office_desk.webp`. Unique source image retained.
 
 ### office_cabinet — placeholder / room-wall
 
-Seed 1601; `assets/art/office_cabinet.webp`. Previously room-matched copied placeholder.
+Seed 72601; `assets/art/office_cabinet.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** East wall: tall filing cabinet with many shallow drawers and a wall shelf of bound paper ledgers; no desk centered.
+**Append to global + material lock:** East wall: tall filing cabinet with many shallow drawers and a wall shelf of bound paper ledgers; no desk centered. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### office_porthole — placeholder / room-wall
 
-Seed 1602; `assets/art/office_porthole.webp`. Previously room-matched copied placeholder.
+Seed 72602; `assets/art/office_porthole.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** South wall: single brass-rimmed porthole, a chronometer on its right and a narrow radiator beneath; close wall, not desk view.
+**Append to global + material lock:** South wall: single brass-rimmed porthole, a chronometer on its right and a narrow radiator beneath; close wall, not desk view. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### office_door — placeholder / room-wall
 
-Seed 1603; `assets/art/office_door.webp`. Previously room-matched copied placeholder.
+Seed 72603; `assets/art/office_door.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** West wall: closed wood door to B-deck corridor, brass coat hook with cap at left, no view down corridor.
+**Append to global + material lock:** West wall: closed wood door to B-deck corridor, brass coat hook with cap at left, no view down corridor. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## B-Deck Corridor
 
@@ -235,9 +235,9 @@ Seed 1702; `assets/art/bdeck_corr_office.webp`. New HF FLUX.1-schnell image, vis
 
 ### bdeck_corr_cabins — placeholder / hall-axis
 
-Seed 1703; `assets/art/bdeck_corr_cabins.webp`. Previously room-matched copied placeholder.
+Seed 72703; `assets/art/bdeck_corr_cabins.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT AXIS opposite stairs: long straight passage toward new cabin section and twin narrow end doors; washroom on right and office on left. No staircase in this direction, no junction.
+**Append to global + material lock:** AFT AXIS opposite stairs: long straight passage toward new cabin section and twin narrow end doors; washroom on right and office on left. No staircase in this direction, no junction. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## B Deck · Stair Landing
 
@@ -245,27 +245,27 @@ Material lock: Dark wood stair landing, cream inset panels, continuous brass sta
 
 ### bdeck_stairs_door — placeholder / hall-axis
 
-Seed 1800; `assets/art/bdeck_stairs_door.webp`. Previously room-matched copied placeholder.
+Seed 72800; `assets/art/bdeck_stairs_door.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** FORWARD landing axis: short straight approach back into B-deck corridor, one open rectangular passage centered, railing edge at right.
+**Append to global + material lock:** FORWARD landing axis: short straight approach back into B-deck corridor, one open rectangular passage centered, railing edge at right. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bdeck_stairs_up — placeholder / side-wall
 
-Seed 1801; `assets/art/bdeck_stairs_up.webp`. Previously room-matched copied placeholder.
+Seed 72801; `assets/art/bdeck_stairs_up.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** STARBOARD transverse wall: stairs ascending directly away through a close stair opening to A deck, brass handrail at left; not a long hallway.
+**Append to global + material lock:** STARBOARD transverse wall: stairs ascending directly away through a close stair opening to A deck, brass handrail at left; not a long hallway. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bdeck_stairs_bar — placeholder / hall-axis
 
-Seed 1802; `assets/art/bdeck_stairs_bar.webp`. Previously room-matched copied placeholder.
+Seed 72802; `assets/art/bdeck_stairs_bar.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT landing axis opposite corridor opening: short approach to the smoking-room pressure door, metal surround and glazed transom visible.
+**Append to global + material lock:** AFT landing axis opposite corridor opening: short approach to the smoking-room pressure door, metal surround and glazed transom visible. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bdeck_stairs_wall — placeholder / side-wall
 
-Seed 1803; `assets/art/bdeck_stairs_wall.webp`. Previously room-matched copied placeholder.
+Seed 72803; `assets/art/bdeck_stairs_wall.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT wall close-up: lacquered cream-inset bulkhead with a framed deck plan and brass sconce, no door or passage.
+**Append to global + material lock:** PORT wall close-up: lacquered cream-inset bulkhead with a framed deck plan and brass sconce, no door or passage. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## B-Deck Corridor · Cabins
 
@@ -273,27 +273,27 @@ Material lock: Quiet B-deck cabin passage, dark wood panels, cream door inserts,
 
 ### bdeck_cabins_door — placeholder / side-wall
 
-Seed 1900; `assets/art/bdeck_cabins_door.webp`. Previously room-matched copied placeholder.
+Seed 72900; `assets/art/bdeck_cabins_door.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT wall: close frontal B-6 cabin door with a small blank number plate, brass knob, one adjacent cream panel; no hallway depth.
+**Append to global + material lock:** PORT wall: close frontal B-6 cabin door with a small blank number plate, brass knob, one adjacent cream panel; no hallway depth. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bdeck_cabins_crew — placeholder / hall-axis
 
-Seed 1901; `assets/art/bdeck_cabins_crew.webp`. Previously room-matched copied placeholder.
+Seed 72901; `assets/art/bdeck_cabins_crew.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** FORWARD AXIS: narrow straight cabin passage toward a dark crew-only threshold at far end, B-6 door on left, brass sconces recede.
+**Append to global + material lock:** FORWARD AXIS: narrow straight cabin passage toward a dark crew-only threshold at far end, B-6 door on left, brass sconces recede. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bdeck_cabins_wall — placeholder / side-wall
 
-Seed 1902; `assets/art/bdeck_cabins_wall.webp`. Previously room-matched copied placeholder.
+Seed 72902; `assets/art/bdeck_cabins_wall.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** STARBOARD wall: close uninterrupted wood bulkheads, inset cream panels, one amber sconce and low ventilation grille, no door or corridor opening.
+**Append to global + material lock:** STARBOARD wall: close uninterrupted wood bulkheads, inset cream panels, one amber sconce and low ventilation grille, no door or corridor opening. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### bdeck_cabins_back — placeholder / hall-axis
 
-Seed 1903; `assets/art/bdeck_cabins_back.webp`. Previously room-matched copied placeholder.
+Seed 72903; `assets/art/bdeck_cabins_back.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT AXIS opposite crew threshold: long return view toward the brighter washroom/office corridor, B-6 door now on right, no crew door ahead.
+**Append to global + material lock:** AFT AXIS opposite crew threshold: long return view toward the brighter washroom/office corridor, B-6 door now on right, no crew door ahead. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## B Deck · Crew Door
 
@@ -301,27 +301,27 @@ Material lock: Tiny crew vestibule, dull wood and grey metal, exposed service pi
 
 ### crew_door_in — placeholder / hall-axis
 
-Seed 2000; `assets/art/crew_door_in.webp`. Previously room-matched copied placeholder.
+Seed 73000; `assets/art/crew_door_in.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** FORWARD AXIS of tiny vestibule: utilitarian crew door through to keel catwalk, metal threshold, small lamp above, pipes at edges.
+**Append to global + material lock:** FORWARD AXIS of tiny vestibule: utilitarian crew door through to keel catwalk, metal threshold, small lamp above, pipes at edges. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### crew_door_sign — placeholder / side-wall
 
-Seed 2001; `assets/art/crew_door_sign.webp`. Previously room-matched copied placeholder.
+Seed 73001; `assets/art/crew_door_sign.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** STARBOARD close side wall: crew safety noticeboard with illegible paper cards and felt-overshoe shelf beneath, no door or receding passage.
+**Append to global + material lock:** STARBOARD close side wall: crew safety noticeboard with illegible paper cards and felt-overshoe shelf beneath, no door or receding passage. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### crew_door_hall — placeholder / hall-axis
 
-Seed 2002; `assets/art/crew_door_hall.webp`. Previously room-matched copied placeholder.
+Seed 73002; `assets/art/crew_door_hall.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT AXIS opposite keel door: short vestibule return opening into wood cabin corridor, warm cabin sconces visible beyond.
+**Append to global + material lock:** AFT AXIS opposite keel door: short vestibule return opening into wood cabin corridor, warm cabin sconces visible beyond. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### crew_door_pipes — placeholder / side-wall
 
-Seed 2003; `assets/art/crew_door_pipes.webp`. Previously room-matched copied placeholder.
+Seed 73003; `assets/art/crew_door_pipes.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT close side wall: three grey service pipes, red valve wheel and small brass pressure gauge, shallow metal deck strip; no exit.
+**Append to global + material lock:** PORT close side wall: three grey service pipes, red valve wheel and small brass pressure gauge, shallow metal deck strip; no exit. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Passenger Cabin (A deck)
 
@@ -335,21 +335,21 @@ Seed 2100; `assets/art/adeck_cabin.webp`. Unique source image retained.
 
 ### adeck_cabin_door — placeholder / room-wall
 
-Seed 2101; `assets/art/adeck_cabin_door.webp`. Previously room-matched copied placeholder.
+Seed 73101; `assets/art/adeck_cabin_door.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** East wall: one close wood exit door, plain brass latch and shoes below, just a sliver of berth edge; not whole bunk room.
+**Append to global + material lock:** East wall: one close wood exit door, plain brass latch and shoes below, just a sliver of berth edge; not whole bunk room. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### adeck_cabin_curtain — placeholder / room-wall
 
-Seed 2102; `assets/art/adeck_cabin_curtain.webp`. Previously room-matched copied placeholder.
+Seed 73102; `assets/art/adeck_cabin_curtain.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** South wall: closed cream berth/privacy curtain with narrow pelmet, hem above small floor strip, no door, no window.
+**Append to global + material lock:** South wall: closed cream berth/privacy curtain with narrow pelmet, hem above small floor strip, no door, no window. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### adeck_cabin_wardrobe — placeholder / room-wall
 
-Seed 2103; `assets/art/adeck_cabin_wardrobe.webp`. Previously room-matched copied placeholder.
+Seed 73103; `assets/art/adeck_cabin_wardrobe.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** West wall: shallow wardrobe niche with two hanging coats, washbasin shelf and small lamp; no full-room or bunk perspective.
+**Append to global + material lock:** West wall: shallow wardrobe niche with two hanging coats, washbasin shelf and small lamp; no full-room or bunk perspective. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Keel Walkway
 
@@ -363,21 +363,21 @@ Seed 2200; `assets/art/keel_walk.webp`. Unique source image retained.
 
 ### keel_hatch — placeholder / side-wall
 
-Seed 2201; `assets/art/keel_hatch.webp`. Old picture shows a long glazed control vestibule, not a close outer-cover hatch side wall.
+Seed 73201; `assets/art/keel_hatch.webp`. Old picture shows a long glazed control vestibule, not a close outer-cover hatch side wall.
 
-**Append to global + material lock:** STARBOARD side: close metal-framed outer-cover hatch, bolts and handwheel, glimpse of blue sky at seam, railing at bottom; no long walkway centered.
+**Append to global + material lock:** STARBOARD side: close metal-framed outer-cover hatch, bolts and handwheel, glimpse of blue sky at seam, railing at bottom; no long walkway centered. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### keel_back — placeholder / hall-axis
 
-Seed 2202; `assets/art/keel_back.webp`. Duplicate or generic hall view does not match this facing.
+Seed 73202; `assets/art/keel_back.webp`. Duplicate or generic hall view does not match this facing.
 
-**Append to global + material lock:** AFT AXIS opposite control car: catwalk returning to the B-deck crew vestibule door at distant end, rectangular door replaces forward ring view.
+**Append to global + material lock:** AFT AXIS opposite control car: catwalk returning to the B-deck crew vestibule door at distant end, rectangular door replaces forward ring view. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### keel_up — placeholder / side-wall
 
-Seed 2203; `assets/art/keel_up.webp`. Previously room-matched copied placeholder.
+Seed 73203; `assets/art/keel_up.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT side wall: close curved grey gas-cell fabric immediately beyond diagonal aluminum bracing, one cage lamp, railing at bottom; no vanishing catwalk, no vertical camera tilt.
+**Append to global + material lock:** PORT side wall: close curved grey gas-cell fabric immediately beyond diagonal aluminum bracing, one cage lamp, railing at bottom; no vanishing catwalk, no vertical camera tilt. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Control Car
 
@@ -391,21 +391,21 @@ Seed 2300; `assets/art/control_helm.webp`. Unique source image retained.
 
 ### control_starboard — placeholder / room-wall
 
-Seed 2301; `assets/art/control_starboard.webp`. Previously room-matched copied placeholder.
+Seed 73301; `assets/art/control_starboard.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** Starboard wall: close bank of slanted gondola side windows with clouds and part of brass handrail, no helm centered.
+**Append to global + material lock:** Starboard wall: close bank of slanted gondola side windows with clouds and part of brass handrail, no helm centered. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### control_back — placeholder / room-wall
 
-Seed 2302; `assets/art/control_back.webp`. Duplicate or generic hall view does not match this facing.
+Seed 73302; `assets/art/control_back.webp`. Duplicate or generic hall view does not match this facing.
 
-**Append to global + material lock:** Aft wall: close vertical ladder through ceiling hatch up to keel, wood bulkhead and safety rail; not a wood passenger hallway.
+**Append to global + material lock:** Aft wall: close vertical ladder through ceiling hatch up to keel, wood bulkhead and safety rail; not a wood passenger hallway. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### control_port — placeholder / room-wall
 
-Seed 2303; `assets/art/control_port.webp`. Previously room-matched copied placeholder.
+Seed 73303; `assets/art/control_port.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** Port wall: close analog brass gauge bank, engine-order dial, chart shelf and red valve handle, no central helm or wide window view.
+**Append to global + material lock:** Port wall: close analog brass gauge bank, engine-order dial, chart shelf and red valve handle, no central helm or wide window view. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## High in the Rings
 
@@ -419,21 +419,21 @@ Seed 2400; `assets/art/girder_nook.webp`. Unique source image retained.
 
 ### girder_nook_right — placeholder / room-wall
 
-Seed 2401; `assets/art/girder_nook_right.webp`. Previously room-matched copied placeholder.
+Seed 73401; `assets/art/girder_nook_right.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** Right face: close cable run clipped to aluminum ring, one junction box and dark fabric beyond, no long hallway.
+**Append to global + material lock:** Right face: close cable run clipped to aluminum ring, one junction box and dark fabric beyond, no long hallway. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### girder_nook_down — placeholder / room-wall
 
-Seed 2402; `assets/art/girder_nook_down.webp`. Previously room-matched copied placeholder.
+Seed 73402; `assets/art/girder_nook_down.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** Rear face: ladder descending toward distant catwalk lamps, handhold at eye level, actual climb-down opening.
+**Append to global + material lock:** Rear face: ladder descending toward distant catwalk lamps, handhold at eye level, actual climb-down opening. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### girder_nook_left — placeholder / room-wall
 
-Seed 2403; `assets/art/girder_nook_left.webp`. Previously room-matched copied placeholder.
+Seed 73403; `assets/art/girder_nook_left.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** Left face: close curved gas-cell fabric and diagonal truss joints disappearing into shadow, no watcher or ladder.
+**Append to global + material lock:** Left face: close curved gas-cell fabric and diagonal truss joints disappearing into shadow, no watcher or ladder. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Keel Tour · tour_shoes
 
@@ -441,27 +441,27 @@ Material lock: Escorted keel tour stop 1, aluminum trusses, grey gas-cell fabric
 
 ### tour_shoes — placeholder / hall-axis
 
-Seed 2500; `assets/art/tour_shoes.webp`. Old picture lacks the safety gate / overshoe landmark.
+Seed 73500; `assets/art/tour_shoes.webp`. Old picture lacks the safety gate / overshoe landmark.
 
-**Append to global + material lock:** FORWARD AXIS: straight catwalk toward next tour stop; felt overshoe rack beside safety gate flanks the route, centered walkway and one-point perspective, a clear onward opening.
+**Append to global + material lock:** FORWARD AXIS: straight catwalk toward next tour stop; felt overshoe rack beside safety gate flanks the route, centered walkway and one-point perspective, a clear onward opening. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_shoes_r — placeholder / side-wall
 
-Seed 2501; `assets/art/tour_shoes_r.webp`. Previously room-matched copied placeholder.
+Seed 73501; `assets/art/tour_shoes_r.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** STARBOARD side: close riveted ring cross-braces and single utility lamp, no door or long passage.
+**Append to global + material lock:** STARBOARD side: close riveted ring cross-braces and single utility lamp, no door or long passage. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_shoes_back — placeholder / hall-axis
 
-Seed 2502; `assets/art/tour_shoes_back.webp`. Previously room-matched copied placeholder.
+Seed 73502; `assets/art/tour_shoes_back.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward the crew entrance, different distant landmark, no feature from forward end centered.
+**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward the crew entrance, different distant landmark, no feature from forward end centered. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_shoes_l — placeholder / side-wall
 
-Seed 2503; `assets/art/tour_shoes_l.webp`. Previously room-matched copied placeholder.
+Seed 73503; `assets/art/tour_shoes_l.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT side: close felt-overshoe rack and safety cards, metal shelf, no walkway depth.
+**Append to global + material lock:** PORT side: close felt-overshoe rack and safety cards, metal shelf, no walkway depth. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Keel Tour · tour_cells
 
@@ -469,27 +469,27 @@ Material lock: Escorted keel tour stop 2, aluminum trusses, grey gas-cell fabric
 
 ### tour_cells — placeholder / hall-axis
 
-Seed 2600; `assets/art/tour_cells.webp`. Old picture shows an enormous circular fan in a wood room, not an onward gas-cell catwalk axis.
+Seed 73600; `assets/art/tour_cells.webp`. Old picture shows an enormous circular fan in a wood room, not an onward gas-cell catwalk axis.
 
-**Append to global + material lock:** FORWARD AXIS: straight catwalk toward next tour stop; enormous gas-cell ring beyond railing flanks the route, centered walkway and one-point perspective, a clear onward opening.
+**Append to global + material lock:** FORWARD AXIS: straight catwalk toward next tour stop; enormous gas-cell ring beyond railing flanks the route, centered walkway and one-point perspective, a clear onward opening. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_cells_r — placeholder / side-wall
 
-Seed 2601; `assets/art/tour_cells_r.webp`. Previously room-matched copied placeholder.
+Seed 73601; `assets/art/tour_cells_r.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** STARBOARD side: vertical cable bundle, truss junctions and grey fabric seam, no forward catwalk.
+**Append to global + material lock:** STARBOARD side: vertical cable bundle, truss junctions and grey fabric seam, no forward catwalk. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_cells_back — placeholder / hall-axis
 
-Seed 2602; `assets/art/tour_cells_back.webp`. Previously room-matched copied placeholder.
+Seed 73602; `assets/art/tour_cells_back.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward overshoe gate, different distant landmark, no feature from forward end centered.
+**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward overshoe gate, different distant landmark, no feature from forward end centered. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_cells_l — placeholder / side-wall
 
-Seed 2603; `assets/art/tour_cells_l.webp`. Previously room-matched copied placeholder.
+Seed 73603; `assets/art/tour_cells_l.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT side: huge curved gas-cell fabric and close diagonal aluminum truss, railing at bottom, no vanishing catwalk.
+**Append to global + material lock:** PORT side: huge curved gas-cell fabric and close diagonal aluminum truss, railing at bottom, no vanishing catwalk. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Keel Tour · tour_tanks
 
@@ -503,21 +503,21 @@ Seed 2700; `assets/art/tour_tanks.webp`. Unique source image retained.
 
 ### tour_tanks_r — placeholder / side-wall
 
-Seed 2701; `assets/art/tour_tanks_r.webp`. Previously room-matched copied placeholder.
+Seed 73701; `assets/art/tour_tanks_r.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** STARBOARD side: close crew bunk cubbies with folded blankets and metal lockers, no tanks or corridor view.
+**Append to global + material lock:** STARBOARD side: close crew bunk cubbies with folded blankets and metal lockers, no tanks or corridor view. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_tanks_back — placeholder / hall-axis
 
-Seed 2702; `assets/art/tour_tanks_back.webp`. Previously room-matched copied placeholder.
+Seed 73702; `assets/art/tour_tanks_back.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward gas-cell ring, different distant landmark, no feature from forward end centered.
+**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward gas-cell ring, different distant landmark, no feature from forward end centered. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_tanks_l — placeholder / side-wall
 
-Seed 2703; `assets/art/tour_tanks_l.webp`. Previously room-matched copied placeholder.
+Seed 73703; `assets/art/tour_tanks_l.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT side: close cylindrical diesel fuel tank, one black pipe and red valve, railing foreground, no receding path.
+**Append to global + material lock:** PORT side: close cylindrical diesel fuel tank, one black pipe and red valve, railing foreground, no receding path. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ## Keel Tour · tour_end
 
@@ -531,18 +531,18 @@ Seed 2800; `assets/art/tour_end.webp`. Unique source image retained.
 
 ### tour_end_r — placeholder / side-wall
 
-Seed 2801; `assets/art/tour_end_r.webp`. Previously room-matched copied placeholder.
+Seed 73801; `assets/art/tour_end_r.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** STARBOARD side: close bolted outer-cover hatch with small porthole and control lever, no long passage.
+**Append to global + material lock:** STARBOARD side: close bolted outer-cover hatch with small porthole and control lever, no long passage. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_end_back — placeholder / hall-axis
 
-Seed 2802; `assets/art/tour_end_back.webp`. Previously room-matched copied placeholder.
+Seed 73802; `assets/art/tour_end_back.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward tank stop, different distant landmark, no feature from forward end centered.
+**Append to global + material lock:** AFT AXIS opposite tour progress: return catwalk toward tank stop, different distant landmark, no feature from forward end centered. Straight axial passage, opposite landmark maintained. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.
 
 ### tour_end_l — placeholder / side-wall
 
-Seed 2803; `assets/art/tour_end_l.webp`. Previously room-matched copied placeholder.
+Seed 73803; `assets/art/tour_end_l.webp`. Previously room-matched copied placeholder.
 
-**Append to global + material lock:** PORT side: close coiled landing ropes and hatch winch on grey brackets, dark hull fabric behind, no walkway depth.
+**Append to global + material lock:** PORT side: close coiled landing ropes and hatch winch on grey brackets, dark hull fabric behind, no walkway depth. Close frontal single-wall elevation, parallel verticals, shallow floor strip, no adjacent-wall panorama or long aisle. Visible 1930s brass wall sconces or shaded pendant lamps only; plain ceilings without recessed fixtures. No text-like plaques, intercoms, electronics or modern fittings.

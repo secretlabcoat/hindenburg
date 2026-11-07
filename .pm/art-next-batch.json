@@ -1,0 +1,42 @@
+[
+  {
+    "id": "helen_karens",
+    "name": "Helen Karens",
+    "mapping": "PURSER / CAST_AT.office_desk",
+    "description": "Adult female purser, composed alert expression, neatly pinned dark 1930s waved hair, cream blouse and dark tailored wool jacket, plain brass buttons.",
+    "seed": 80601,
+    "prompt": "Mid-1990s pre-rendered 3D CGI adventure game character, Titanic Adventure Out of Time visual language, believable lightly faceted face, soft grain, restrained plastic sheen. Aboard the 1937 Hindenburg. One person, head and shoulders straight-on, eyes open at camera, neutral closed mouth, full hair and chin visible, level shoulders, no hands. Plain blurred cream background, soft amber key light from camera left. Period costume, no lettering, logos or watermark. Adult female purser, composed alert expression, neatly pinned dark 1930s waved hair, cream blouse and dark tailored wool jacket, plain brass buttons.",
+    "design_note": "Proposed appearance; game identity and role verified, visual details not canonical.",
+    "type": "character",
+    "width": 768,
+    "height": 768
+  },
+  {
+    "id": "washroom_wall",
+    "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level 50mm equivalent camera, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same location material lock: Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door. Room-wall framing: a different specific wall from the same room center, no duplicate whole-room panorama. West wall: blank teal tile, a horizontal chrome towel rail and two folded white towels; no basin, shower or doorway. No people.  Camera square to this single wall, parallel verticals, wall fills frame except a thin floor strip; no adjacent wall or distant aisle in frame. Only visible period brass wall sconces or shaded pendant lamps; continuous plain ceiling, no recessed downlights. Unlettered surfaces, no plaques, intercoms, screens or modern technology.",
+    "seed": 72003,
+    "type": "room",
+    "width": 768,
+    "height": 432
+  },
+  {
+    "id": "bunny_treemont",
+    "name": "Bunny Treemont",
+    "mapping": "BUNNY / CAST_AT.keel_walk",
+    "description": "Adult deckhand, practical plain dark work shirt, short tidy brown hair, slightly weathered face, attentive reserved expression.",
+    "seed": 80602,
+    "prompt": "Mid-1990s pre-rendered 3D CGI adventure game character, Titanic Adventure Out of Time visual language, believable lightly faceted face, soft grain, restrained plastic sheen. Aboard the 1937 Hindenburg. One person, head and shoulders straight-on, eyes open at camera, neutral closed mouth, full hair and chin visible, level shoulders, no hands. Plain blurred cream background, soft amber key light from camera left. Period costume, no lettering, logos or watermark. Adult deckhand, practical plain dark work shirt, short tidy brown hair, slightly weathered face, attentive reserved expression.",
+    "design_note": "Proposed appearance; game identity and role verified, visual details not canonical.",
+    "type": "character",
+    "width": 768,
+    "height": 768
+  },
+  {
+    "id": "cabin_door",
+    "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level 50mm equivalent camera, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same location material lock: Compact B-6 cabin, honey wood veneer, cream ceiling, brass fittings, made-up linen berths. Room-wall framing: a different specific wall from the same room center, no duplicate whole-room panorama. South wall: close front-on cabin exit door with brass handle, only a sliver of bunk at left; no full-room or hallway perspective. No people.  Camera square to this single wall, parallel verticals, wall fills frame except a thin floor strip; no adjacent wall or distant aisle in frame. Only visible period brass wall sconces or shaded pendant lamps; continuous plain ceiling, no recessed downlights. Unlettered surfaces, no plaques, intercoms, screens or modern technology.",
+    "seed": 72102,
+    "type": "room",
+    "width": 768,
+    "height": 432
+  }
+]

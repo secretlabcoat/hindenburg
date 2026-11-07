@@ -1,0 +1,87 @@
+[
+  {
+    "source": "art-facing-review.json",
+    "id": "washroom_wall",
+    "accept": false,
+    "why": "Prompt wants blank west tile wall with towel rail only; image shows basin, door, radiator, recessed spots and intercom panel (anachronisms + wrong contents)",
+    "historical_seed": 1003
+  },
+  {
+    "source": "art-facing-review.json",
+    "id": "cabin_door",
+    "accept": false,
+    "why": "Prompt wants close front-on exit door with bunk sliver; image is full bunk-room panorama looking toward door",
+    "historical_seed": 1102
+  },
+  {
+    "source": "art-facing-review.json",
+    "id": "lounge_side",
+    "accept": false,
+    "why": "Prompt wants writing alcove + glazed promenade door as specific south wall; image is wide corner panorama",
+    "historical_seed": 1202
+  },
+  {
+    "source": "art-facing-review.json",
+    "id": "lounge_aft",
+    "accept": false,
+    "why": "Prompt wants close elevation of single aft doorway; image is full lounge with recessed spotlights (anachronism)",
+    "historical_seed": 1203
+  },
+  {
+    "source": "art-facing-review.json",
+    "id": "promenade",
+    "accept": false,
+    "why": "Prompt wants perpendicular close outboard observation window (side-wall); image is long axial vanishing corridor",
+    "historical_seed": 1300
+  },
+  {
+    "source": "art-facing-review-20261107.json",
+    "id": "bar_booths",
+    "accept": false,
+    "why": "Recessed ceiling downlights (anachronism, same reason lounge_aft was rejected); deep railcar-style room vista with windows rather than a close east-wall elevation",
+    "historical_seed": 1501
+  },
+  {
+    "source": "art-facing-review-20261107.json",
+    "id": "bar_windows",
+    "accept": false,
+    "why": "Recessed pinpoint ceiling lights; bar counter and bottle shelving dominate left; deep perspective instead of the south wall of three windows",
+    "historical_seed": 1502
+  },
+  {
+    "source": "art-facing-review-20261107.json",
+    "id": "bar_door",
+    "accept": false,
+    "why": "Long corridor/railcar perspective with rows of seats (prompt: shallow floor, no bar or corridor perspective); text-like plaque above the door",
+    "historical_seed": 1503
+  },
+  {
+    "source": "20261107-evening-r1",
+    "when": "2026-11-07 18:20 EST (America/Toronto)",
+    "attempts": [
+      {
+        "id": "helen_karens",
+        "seed": 80601,
+        "outcome": "service_error",
+        "error": "You have exceeded your free ZeroGPU quota (90s requested vs. 0s left). Try again in 0:00:00. Subscribe to Hugging Face PRO to get 40 min of ZeroGPU quota a day - https://huggingface.co/subscribe/pro?from=ZeroGPU",
+        "credential": "HF_TOKEN",
+        "fallback": "HF_TOKEN_2 skipped: documented whoami returned HTTP 401; do not generate anonymously"
+      }
+    ],
+    "auth": [
+      {
+        "credential": "HF_TOKEN",
+        "present": true,
+        "authenticated": true,
+        "type": "user"
+      },
+      {
+        "credential": "HF_TOKEN_2",
+        "present": true,
+        "authenticated": false,
+        "error_type": "HfHubHTTPError"
+      }
+    ],
+    "second_credential_http_status": 401
+  }
+]
