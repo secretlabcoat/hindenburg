@@ -2319,6 +2319,11 @@ draw();
 .entry input{padding:6px!important}.entry button{padding:6px!important}
 #dialogue-tools{font-size:10px}.inventory{padding:3px!important}
 .inv .item{flex-basis:68px}.item .item-caption{font-size:10px!important}#topology-movement{max-height:100px}.topology-door-strip button{font-size:10px;max-width:47%}}
+
+/* Toolbar controls participate in layout; no fixed overlay on map/actions. */
+.top #soundbtn{position:static;flex:0 0 auto;margin:0}
+/* Short landscape windows scroll instead of squeezing the scene out. */
+@media(max-height:500px){.scene{flex:1 0 180px!important;min-height:180px!important}}
 </style><script>/* V3: ONE geometry/topology model drives navigation, room doors and floor-plan HUD.
    Fictional game arrangement inspired by historical cutaway; not measured plans. */
 (()=>{
@@ -2335,6 +2340,8 @@ draw();
  }
  document.querySelector('#offline-map')?.remove();document.querySelector('#map-toggle')?.remove();
  const toggle=document.createElement('button');toggle.id='topology-map-toggle';toggle.textContent='Floor plan';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','topology-map');document.querySelector('.top').append(toggle);
+ // Keep sound in the wrapping toolbar: the legacy fixed phone button covered Floor plan.
+ const sound=document.querySelector('#soundbtn');if(sound)document.querySelector('.top').append(sound);
  const drawer=document.createElement('aside');drawer.id='topology-map';drawer.hidden=true;drawer.setAttribute('aria-label','Ship floor plan');
  const select=document.createElement('select');select.id='topology-deck';select.setAttribute('aria-label','Select ship level');
  for(const[k,label]of Object.entries(T.decks)){const o=document.createElement('option');o.value=k;o.textContent=label;select.append(o)}

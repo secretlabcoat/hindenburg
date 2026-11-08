@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "passed": true
+    },
+    {
+      "viewport": {
+        "width": 393,
+        "height": 852
+      },
+      "passed": true
+    },
+    {
+      "viewport": {
+        "width": 393,
+        "height": 600
+      },
+      "passed": true
+    },
+    {
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "passed": true
+    }
+  ],
+  "limits": "Headless Chrome; file-origin offline UI. No live relay, soft keyboard, audio quality or full story/ending suite verified."
+}

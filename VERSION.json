@@ -1,10 +1,10 @@
 {
-  "version": "V3-story-save-regression-20261107",
+  "version": "V3-integrated-20261108",
   "reference_html_sha256": "18c66df21affc75f9fc2898ca21a56cf8160d0cb95fcb8c1cf39049207446aa8",
   "reference_html_bytes": 1278563,
   "supplied_source_sha256": "fcebd6b37b3ccd673af7a81118af08024cd781f31ab7da0c9e88a59e23611ee6",
   "lineage": "supplied playtest fcebd6 -> isolated V1 ->V2 live/UI ->V3 physical topology ->map usability patch",
-  "deployment_status": "NOT DEPLOYED by this handoff task; target unresolved",
+  "deployment_status": "Integrated locally; not deployed",
   "possible_targets": [
     "https://oofyjym.sharehtml.org/",
     "https://hindenburg.secretlabcoat-0ba.workers.dev/"
