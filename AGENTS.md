@@ -31,5 +31,5 @@ You are working as Fred Drummond’s coding agents (OpenCode, Aider, or others) 
 
 Read `/workspace/pm/repos/hindenburg.md` before editing.
 Live style: art-deco gold/sepia single-file `index.html`. Prefer minimal CSS/JS edits.
-Do not deploy, push, or create remotes. Do not add API keys. Keep offline scripted NPCs working.
+Branch pushes to the existing origin remote are allowed for authorized work. Do not force-push, merge, deploy, or create remotes without Paul LaBute’s explicit approval. Do not add API keys. Keep offline scripted NPCs working.
 After edits, leave the file valid HTML (balanced tags, no syntax errors in inline scripts).
