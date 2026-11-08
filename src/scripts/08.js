@@ -28,5 +28,6 @@ checkEndings=function(){if(window.gameOver)return
  ENDINGS.hero=HERO_STEWARD;_checkEndings6()}
 const _renderNB6=renderNotebook
 renderNotebook=function(){_renderNB6();const g=$('#notebookBody .nb-goals');if(!g)return;const F=ai[FIRST],C=ai[CAPTAIN]
- const li=document.createElement('li');li.textContent='Or warn and convince an officer in the control car (First Officer 60+, Captain '+OFFICERS[CAPTAIN]+'+). Now: '+(F.met?F.trust:'?')+' / '+(C.met?C.trust:'?')
- if((F.warned&&F.trust>=60)||(C.warned&&C.trust>=70))li.className='done';g.children[4]?g.children[4].after(li):g.append(li)}
+ const captainGate=C.secretEarned?60:70
+ const li=document.createElement('li');li.textContent='Or warn and convince an officer in the control car (First Officer 60+, Captain '+captainGate+'+). Now: '+(F.met?F.trust:'?')+' / '+(C.met?C.trust:'?')
+ if((F.warned&&F.trust>=60)||(C.warned&&C.trust>=captainGate))li.className='done';g.children[4]?g.children[4].after(li):g.append(li)}

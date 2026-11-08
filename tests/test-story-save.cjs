@@ -126,6 +126,41 @@ function say(t,text){
   close(tour);
   passed.push('Guided tour requires crew access and is available at clock 8–15, but closed at 7 and 16');
 
+  for(const [name,threshold] of [['STEWARD',65],['FIRST',60],['CAPTAIN',70]]){
+    const t=await start();
+    t.w.eval(`window.hindenburgLiveEnabled=false;choose(${name});ai[${name}].trust=${threshold-1}`);
+    await say(t,'Fire danger at Lakehurst');
+    assert(t.w.eval(`ai[${name}].warned`),name+' warning remembered');
+    assert(!t.w.gameOver,name+' warning below trust threshold does not win');
+    assert.equal(t.w.eval(`ai[${name}].trust`),threshold-1,'offline warning earns no trust');
+    close(t);
+  }
+  for(const name of ['STEWARD','PURSER']){
+    const t=await start();
+    t.w.eval(`window.hindenburgLiveEnabled=false;choose(${name});ai[${name}].trust=25`);
+    await say(t,'I am a stowaway with no ticket');
+    assert.equal(t.w.eval(`ai[${name}].trust`),10);
+    assert.equal(t.w.gameOver,'capture',name+' confession causes capture');
+    close(t);
+  }
+  const pickup=await start();
+  pickup.w.eval("view='corridor_forward';steps=3;draw()");
+  assert(pickup.d.querySelector('.notehot'),'steward note appears in corridor at step 3');
+  pickup.d.querySelector('.notehot').click();
+  const picked=JSON.parse(pickup.w.localStorage.getItem(SAVE_KEY));
+  assert(picked.note&&picked.items.some(x=>x.name==='Steward’s note'),'pickup immediately persists item and flag');
+  close(pickup);
+  passed.push('Authority warnings require trust, offline warnings grant none; confessions capture at trust 10; actual note pickup persists');
+
+  const captainGoal=await start();
+  captainGoal.w.eval('ai[CAPTAIN].met=true;ai[CAPTAIN].warned=true;ai[CAPTAIN].trust=60;ai[CAPTAIN].secretEarned=true;renderNotebook()');
+  const officerGoal=[...captainGoal.d.querySelectorAll('.nb-goals li')].find(li=>li.textContent.startsWith('Or warn and convince an officer'));
+  assert(officerGoal.classList.contains('done'),'Captain secret lowers notebook completion threshold to 60');
+  captainGoal.w.eval('checkEndings()');
+  assert.equal(captainGoal.d.querySelector('#endtitle').textContent,'The Captain’s Word');
+  close(captainGoal);
+  passed.push('Captain secret makes the notebook and ending agree at trust 60');
+
   const source=await start();
   source.w.eval("view='lounge_side';turns=5;steps=7;ai[STEWARD].met=true;ai[STEWARD].warned=true;ai[STEWARD].trust=64;ai[BUNNY].met=true;ai[BUNNY].trust=55;ai[BUNNY].route=true;contradictions.push('synthetic contradiction');window.collectedNote=true;gameItems.push({name:'Steward note',icon:'N',desc:'Synthetic test item'});saveGame()");
   const v3=JSON.parse(source.w.localStorage.getItem(SAVE_KEY));
