@@ -1,3 +1,11 @@
+# Current combined game
+
+Use branch `integration/current-game-20261108` as the starting point for new work.
+It combines the current source handoff, phone/map/landscape fixes, story/save
+regression and Captain notebook fix, and Paul’s supplied bathroom art.
+Read `audit/INTEGRATION-20261108.md` for coverage and remaining gaps.
+Branch for new work from this integration branch; return changes here after testing.
+
 # Hindenburg — current shared local working source
 Read HANDOFF.md, CURRENT-STATE.md, TODO.md and ART-DIRECTION.md before work. This new folder supersedes old box/GitHub/import snapshots for this local V3 continuation, not a claim of global newest Mac version.
 

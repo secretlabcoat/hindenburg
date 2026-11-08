@@ -1,3 +1,7 @@
+## Integration update — November 8
+
+The integration branch combines all current remote game changes with local story/save work and supplied bathroom art. Eight enabled facing photos and 68 fallbacks; original references remain historical. See audit/INTEGRATION-20261108.md. Earlier numbers below describe the pre-integration baseline.
+
 # Current state and evidence
 
 ## Verified artifact

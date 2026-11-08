@@ -1,0 +1,38 @@
+[
+  {
+    "tool": "cursor.GenerateImage",
+    "arguments": {
+      "filename": "hindenburg-bathroom-east-sink-mirror.png",
+      "aspect_ratio": "16:9",
+      "reference_image_paths": [
+        "/workspace/scratch/hindenburg-art-staging/bathroom-20261108/reference.png"
+      ],
+      "description": "Generate ONE matching EAST wall view of the exact small washroom in the reference image. This is a90degree clockwise turn IN PLACE from the north striped-curtain view, same camera center/height, lens impression, wall height/width and floor scale. Reference is literal material/style authority: muted jade green square glazed tiles, cream grout, repeating cream cross/flower decorative band at same height, walnut ceiling cornice, cream low ceiling, warm lighting, black-and-ivory checkerboard floor, understated dated prerendered adventure-game CGI finish. Face the EAST wall frontally, corner seams near frame edges and only narrow neighboring-wall returns, NOT a new whole-room diagonal panorama. One ivory shallow oval wall-mounted porcelain washbasin and curved plain chrome spout, matching the sink visible at reference right. Above it, ONE plain walnut-framed rectangular mirror. Mirror plausibly reflects only opposite jade towel wall and a little white towel, NO doorway, camera, person, phantom room or another sink. Compact exposed plumbing below. A narrow closed walnut utility cupboard panel may be near right corner, but NOT a traversable door. The striped curtain remains NORTH, not on this wall: at most a tiny sliver on extreme LEFT return. No doors, windows, text, people, UI, watermark, shiny luxury hotel redesign or modern electronics. Preserve same compact room and tile pattern; render a single individual16:9game background."
+    },
+    "view_id": "washroom_basins"
+  },
+  {
+    "tool": "cursor.GenerateImage",
+    "arguments": {
+      "filename": "hindenburg-bathroom-west-towel-holder.png",
+      "aspect_ratio": "16:9",
+      "reference_image_paths": [
+        "/workspace/scratch/hindenburg-art-staging/bathroom-20261108/reference.png"
+      ],
+      "description": "Generate ONE matching WEST wall view of the exact small washroom in reference. This is a90degree counterclockwise turn IN PLACE from its north striped-curtain view, SAME room center/camera height/lens, wall dimensions, corner-seam positions and checkerboard scale. Match reference exactly: muted jade green square glazed tiles, cream grout, repeated cream cross/flower decorative tile band at same height, walnut cornice on low cream ceiling, warm soft practical lighting, black-and-ivory checkerboard floor, slightly dated prerendered CGI adventure-game finish, not new modern luxury hotel. Face the WEST wall frontally: mostly the close tiled wall, two corner seams near frame edges, only narrow side-wall returns. Center ONE simple period chrome horizontal towel rail at chest height with one neatly folded off-white cotton towel. Rail is not a ladder/radiator. Empty modest wall otherwise. NO doorway, window, mirror, basin, sink, shower opening, extra passage or new room ahead. North striped curtain stays at NORTH, at most tiny sliver on extreme RIGHT side return, NOT relocated onto this wall. Preserve original tile ornament, warm green colors, floor perspective and camera horizon. No text, people, UI, watermark, contemporary fixtures or collage. A single separate16:9background for the same compact1937airship bathroom."
+    },
+    "view_id": "washroom_wall"
+  },
+  {
+    "tool": "cursor.GenerateImage",
+    "arguments": {
+      "filename": "hindenburg-bathroom-south-door.png",
+      "aspect_ratio": "16:9",
+      "reference_image_paths": [
+        "/workspace/scratch/hindenburg-art-staging/bathroom-20261108/reference.png"
+      ],
+      "description": "Generate ONE matching SOUTH wall view of the exact compact bathroom in reference, an180degree camera turn IN PLACE from the striped-curtain NORTH view, same camera center/height, lens impression, wall dimensions, checkerboard tile scale and horizon. Match literal reference look: muted jade green small square glazed tiles, cream grout, repeating cream cross/flower decorative band at same height, walnut ceiling cornice and black skirting, low cream ceiling, warm soft lighting, ivory/black checkerboard floor, restrained slightly dated prerendered CGI adventure-game aesthetic. Face SOUTH wall frontally with one centered CLOSED plain dark walnut wooden exit door and frame; simple metal lever/latch, no lettering/sign/glass/keypad/pushbar. The room has ONLY this one traversable exit to B-deck corridor. Continuous jade wall and decorative band on either side. Two corner seams near frame edges, only narrow side-wall returns: EAST sink/mirror wall is LEFT, WEST towel wall RIGHT. Do not expand room, add a second door, corridor beyond closed door or bathroom suite. The NORTH striped shower curtain is BEHIND THE CAMERA and MUST be entirely absent, not placed beside door. No people, words, UI, watermarks, modern hotel fixtures, collage or photograph of a different style. Make one separate16:9game background belonging to the exact reference room."
+    },
+    "view_id": "washroom_door"
+  }
+]

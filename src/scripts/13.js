@@ -43,7 +43,7 @@ const ROTATION_NODES={
     "style": "washwall",
     "framing": "room-wall",
     "fallback": "towel",
-    "artStatus": "placeholder"
+    "artStatus": "ready"
   },
   "cabin_bunk": {
     "name": "Cabin B-6 (B deck)",

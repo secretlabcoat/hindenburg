@@ -1,0 +1,50 @@
+
+> hindenburg-playtest-handoff@3.0.1 test
+> python3 tests/test-topology.py && node tests/test-dom.cjs && node tests/test-story-save.cjs && node tests/test-map-layout.cjs
+
+Geometry/topology assertions passed: 149
+{
+  "passed": 15,
+  "tests": [
+    "Initial source and V3 override execute without uncaught DOM errors",
+    "Begin in washroom north; 76 views and 12 NPCs retained",
+    "Turns stay in washroom; South doorway enters adjacent B corridor preserving South",
+    "Washroom → B corridor → stairs → A corridor → cabin/lounge/dining and reciprocal return, heading preserved",
+    "Bar/purser/cabin/crew/keel/control route follows only shared doors and named verticals",
+    "All 76 right turns keep room identity and rotate world compass exactly 90°",
+    "All 19 links traverse and return with opposite-facing entry, no hidden teleport",
+    "Upper-rings ladder locked until glimmer clue, unlocked route remains physical",
+    "Legacy direct travel to distant control car rejected; Back turns around, never teleports",
+    "All 76 views: scene/UI door hotspots and forward availability agree with same topology; no stale data-move hooks",
+    "Deck selector renders exact floor footprints; current level marked; map remains normal-flow drawer",
+    "V2 save room/story/items preserved; view reoriented explicitly, no silent reset",
+    "Actual glimmer hotspot unlocks physical upper ladder and Watcher interaction is retained",
+    "Guided tour respects gathering room/time and crosses only adjacent crew ladder",
+    "Original Bunny hatch remains locked without route; arranged approach escape ending works (explicit exterior ending, not teleport)"
+  ],
+  "uncaughtErrors": [],
+  "limits": "JSDOM events/selectors and state only. No real browser, measured pixel layout, audio rendering or live relay request performed here. Live relay behavior inherited from V2."
+}
+{
+  "passed": 8,
+  "tests": [
+    "All seven ending branches trigger and record their distinct collection keys at boundary prerequisites",
+    "Key and scrap have no implemented use; Take is a generic dead end; Notebook renders met-character goals and trust",
+    "Offline fire/Lakehurst warning marks the Chief Steward warned without a relay call",
+    "Mocked trust increase from 52 to 55 arranges Bunny; hatch refuses before clock 16 and escapes at approach",
+    "Guided tour requires crew access and is available at clock 8–15, but closed at 7 and 16",
+    "Authority warnings require trust, offline warnings grant none; confessions capture at trust 10; actual note pickup persists",
+    "Captain secret makes the notebook and ending agree at trust 60",
+    "Synthetic V1/V2/V3 reloads retain room, compass orientation, turns, steps, inventory, note, contradictions, Steward and Bunny flags"
+  ],
+  "uncaughtErrors": [],
+  "relayCalls": 1,
+  "limits": "Synthetic save payloads derived from the current v:1 schema; no historical save files or live relay used."
+}
+{
+  rooms_centering_passed: 19,
+  checks_per_room: 7,
+  responsive_css_assertions: 5,
+  uncaught_dom_errors: [],
+  limits: 'Synthetic rendered rectangles and DOM assertions, not browser layout; clamp edges handled by native scroll container. Parent Chrome retest required.'
+}

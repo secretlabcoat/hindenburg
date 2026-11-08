@@ -1,0 +1,195 @@
+{
+  "original_reference": "/workspace/projects/hindenburg-playtest/art/legacy/washroom_stall.webp",
+  "reference_sha256": "96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2",
+  "current_topology_matching_remote_branch": "fix/p0-browser-qa-20261107",
+  "commit": "aa630d5495f56e540f254e93f086b26af21ada2c",
+  "facings": [
+    {
+      "view_id": "washroom_stall",
+      "room_id": "wash",
+      "room_name": "B-Deck Washroom",
+      "deck": "B",
+      "heading_index": 0,
+      "world_heading": "North / bow",
+      "room_cells": [
+        [
+          1,
+          3
+        ]
+      ],
+      "room_anchor": [
+        1,
+        3
+      ],
+      "framing": "room-wall",
+      "door_count": 0,
+      "vertical_connector_count": 0,
+      "exits": [],
+      "cast_placements": [],
+      "material_lock": "Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door",
+      "legacy_feature_reference_only": "shower",
+      "art_status": "enabled-existing-compatible",
+      "old_image_embedded": true,
+      "old_image_relative_path": "art/legacy/washroom_stall.webp",
+      "legacy_seed": 1000,
+      "proposed_v3_seed": 930000,
+      "seed_status": "proposal-not-generated-or-approved",
+      "batch_priority": 12,
+      "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level camera at1.6m,50mm equivalent lens, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same-room material lock: Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door. Room wash: B-Deck Washroom, deck B; camera faces North / bow. Close perpendicular specific wall elevation, not a duplicate axial hallway panorama. This facing has 0 traversable connector(s): Solid wall on this facing: zero traversable doorways, no false exit. Keep all additional neighboring-wall openings outside frame or explicitly non-traversable. No people in room background; portraits/hotspots separate. Geometry supplied by current topology, not obsolete filename meaning.",
+      "acceptance": [
+        "Door/shaft count, correct destinations and wall direction match topology",
+        "Same camera origin/height/horizon for four room facings",
+        "North/South and East/West are correct opposing wall or axial views",
+        "No modern artifacts, readable lettering, logos, watermarks or false doors",
+        "Distinct view, not reused whole-room panorama",
+        "Human visual acceptance recorded with hash before replacing fallback"
+      ],
+      "apertures_left_to_right": [],
+      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading."
+    },
+    {
+      "view_id": "washroom_basins",
+      "room_id": "wash",
+      "room_name": "B-Deck Washroom",
+      "deck": "B",
+      "heading_index": 1,
+      "world_heading": "East / starboard",
+      "room_cells": [
+        [
+          1,
+          3
+        ]
+      ],
+      "room_anchor": [
+        1,
+        3
+      ],
+      "framing": "room-wall",
+      "door_count": 0,
+      "vertical_connector_count": 0,
+      "exits": [],
+      "cast_placements": [],
+      "material_lock": "Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door",
+      "legacy_feature_reference_only": "mirror",
+      "art_status": "enabled-existing-compatible",
+      "old_image_embedded": true,
+      "old_image_relative_path": "art/legacy/washroom_basins.webp",
+      "legacy_seed": 1001,
+      "proposed_v3_seed": 930001,
+      "seed_status": "proposal-not-generated-or-approved",
+      "batch_priority": 12,
+      "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level camera at1.6m,50mm equivalent lens, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same-room material lock: Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door. Room wash: B-Deck Washroom, deck B; camera faces East / starboard. Close perpendicular specific wall elevation, not a duplicate axial hallway panorama. This facing has 0 traversable connector(s): Solid wall on this facing: zero traversable doorways, no false exit. Keep all additional neighboring-wall openings outside frame or explicitly non-traversable. No people in room background; portraits/hotspots separate. Geometry supplied by current topology, not obsolete filename meaning.",
+      "acceptance": [
+        "Door/shaft count, correct destinations and wall direction match topology",
+        "Same camera origin/height/horizon for four room facings",
+        "North/South and East/West are correct opposing wall or axial views",
+        "No modern artifacts, readable lettering, logos, watermarks or false doors",
+        "Distinct view, not reused whole-room panorama",
+        "Human visual acceptance recorded with hash before replacing fallback"
+      ],
+      "apertures_left_to_right": [],
+      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading."
+    },
+    {
+      "view_id": "washroom_door",
+      "room_id": "wash",
+      "room_name": "B-Deck Washroom",
+      "deck": "B",
+      "heading_index": 2,
+      "world_heading": "South / stern",
+      "room_cells": [
+        [
+          1,
+          3
+        ]
+      ],
+      "room_anchor": [
+        1,
+        3
+      ],
+      "framing": "room-wall",
+      "door_count": 1,
+      "vertical_connector_count": 0,
+      "exits": [
+        {
+          "edge_id": "wash-bcorr",
+          "kind": "door",
+          "label": "Door",
+          "destination_room": "bcorr",
+          "destination_deck": "B",
+          "door_or_shaft_point": [
+            1.5,
+            4.0
+          ],
+          "gate": null
+        }
+      ],
+      "cast_placements": [],
+      "material_lock": "Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door",
+      "legacy_feature_reference_only": "door",
+      "art_status": "enabled-existing-compatible",
+      "old_image_embedded": true,
+      "old_image_relative_path": "art/legacy/washroom_door.webp",
+      "legacy_seed": 1002,
+      "proposed_v3_seed": 930002,
+      "seed_status": "proposal-not-generated-or-approved",
+      "batch_priority": 12,
+      "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level camera at1.6m,50mm equivalent lens, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same-room material lock: Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door. Room wash: B-Deck Washroom, deck B; camera faces South / stern. Close perpendicular specific wall elevation, not a duplicate axial hallway panorama. This facing has 1 traversable connector(s): Door leads to B-Deck Main Corridor (B). Keep all additional neighboring-wall openings outside frame or explicitly non-traversable. No people in room background; portraits/hotspots separate. Geometry supplied by current topology, not obsolete filename meaning.",
+      "acceptance": [
+        "Door/shaft count, correct destinations and wall direction match topology",
+        "Same camera origin/height/horizon for four room facings",
+        "North/South and East/West are correct opposing wall or axial views",
+        "No modern artifacts, readable lettering, logos, watermarks or false doors",
+        "Distinct view, not reused whole-room panorama",
+        "Human visual acceptance recorded with hash before replacing fallback"
+      ],
+      "apertures_left_to_right": [
+        "wash-bcorr"
+      ],
+      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading."
+    },
+    {
+      "view_id": "washroom_wall",
+      "room_id": "wash",
+      "room_name": "B-Deck Washroom",
+      "deck": "B",
+      "heading_index": 3,
+      "world_heading": "West / port",
+      "room_cells": [
+        [
+          1,
+          3
+        ]
+      ],
+      "room_anchor": [
+        1,
+        3
+      ],
+      "framing": "room-wall",
+      "door_count": 0,
+      "vertical_connector_count": 0,
+      "exits": [],
+      "cast_placements": [],
+      "material_lock": "Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door",
+      "legacy_feature_reference_only": "towel",
+      "art_status": "css-fallback-needs-new-topology-art",
+      "old_image_embedded": false,
+      "old_image_relative_path": null,
+      "legacy_seed": 72003,
+      "proposed_v3_seed": 930003,
+      "seed_status": "proposal-not-generated-or-approved",
+      "batch_priority": 12,
+      "prompt": "first-person pre-rendered 3D CGI, mid-1990s adventure game, Titanic Adventure Out of Time style reference only; period-accurate 1937 LZ 129 Hindenburg Art Deco, warm tungsten practical lighting, soft grain and gentle plastic sheen. Eye-level camera at1.6m,50mm equivalent lens, same horizon and camera height for all four facings. No modern objects, electronics, readable text, logos, watermarks or UI. Not an ocean liner. Same-room material lock: Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door. Room wash: B-Deck Washroom, deck B; camera faces West / port. Close perpendicular specific wall elevation, not a duplicate axial hallway panorama. This facing has 0 traversable connector(s): Solid wall on this facing: zero traversable doorways, no false exit. Keep all additional neighboring-wall openings outside frame or explicitly non-traversable. No people in room background; portraits/hotspots separate. Geometry supplied by current topology, not obsolete filename meaning.",
+      "acceptance": [
+        "Door/shaft count, correct destinations and wall direction match topology",
+        "Same camera origin/height/horizon for four room facings",
+        "North/South and East/West are correct opposing wall or axial views",
+        "No modern artifacts, readable lettering, logos, watermarks or false doors",
+        "Distinct view, not reused whole-room panorama",
+        "Human visual acceptance recorded with hash before replacing fallback"
+      ],
+      "apertures_left_to_right": [],
+      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading."
+    }
+  ]
+}

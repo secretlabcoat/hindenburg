@@ -4,7 +4,7 @@
  const T=TOPOLOGY_DATA, dirs=['North / bow','East / starboard','South / stern','West / port'];
  const byView={};for(const[id,r]of Object.entries(T.rooms))r.views.forEach((v,h)=>byView[v]={room:id,heading:h});
  const originalNodes=JSON.parse(JSON.stringify(nodes));
- const keptArt=new Set(['washroom_stall','washroom_basins','washroom_door','cabin_bunk','cabin_window','cabin_desk','control_helm']);
+ const keptArt=new Set(['washroom_stall','washroom_basins','washroom_door','washroom_wall','cabin_bunk','cabin_window','cabin_desk','control_helm']);
  const roomOf=v=>byView[v]?.room,headingOf=v=>byView[v]?.heading;
  function gate(edge){if(edge.gate==='watcher-noticed'&&!ai['The Watcher in the Rings']?.noticed)return 'The gas-cell ladder is concealed. Examine the glimmer in the gas-cell gallery first.';return ''}
  function exits(id,h){return T.edges.flatMap(e=>e.a===id&&e.ha===h?[{edge:e,to:e.b}]:e.b===id&&e.hb===h?[{edge:e,to:e.a}]:[])}

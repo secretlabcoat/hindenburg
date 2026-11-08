@@ -16,9 +16,9 @@
   "counts": {
     "rooms": 19,
     "views": 76,
-    "enabled_existing_photos": 7,
-    "fallback_views": 69,
-    "old_embedded_images": 21
+    "enabled_existing_photos": 8,
+    "fallback_views": 68,
+    "old_embedded_images": 22
   },
   "facings": [
     {
@@ -88,7 +88,7 @@
       "cast_placements": [],
       "material_lock": "Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door",
       "legacy_feature_reference_only": "mirror",
-      "art_status": "enabled-existing-compatible",
+      "art_status": "enabled-user-approved",
       "old_image_embedded": true,
       "old_image_relative_path": "art/legacy/washroom_basins.webp",
       "legacy_seed": 1001,
@@ -105,7 +105,10 @@
         "Human visual acceptance recorded with hash before replacing fallback"
       ],
       "apertures_left_to_right": [],
-      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading."
+      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading.",
+      "accepted_image_relative_path": "art/bathroom-20261108/washroom_basins.webp",
+      "accepted_sha256": "6c5211f4fa640c9421381eab2771f7c3fdb8a41896b032585cee2cdbda340f8d",
+      "approval": "Paul requested supplied ZIP images for starting room, 2026-11-08"
     },
     {
       "view_id": "washroom_door",
@@ -144,7 +147,7 @@
       "cast_placements": [],
       "material_lock": "Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door",
       "legacy_feature_reference_only": "door",
-      "art_status": "enabled-existing-compatible",
+      "art_status": "enabled-user-approved",
       "old_image_embedded": true,
       "old_image_relative_path": "art/legacy/washroom_door.webp",
       "legacy_seed": 1002,
@@ -163,7 +166,10 @@
       "apertures_left_to_right": [
         "wash-bcorr"
       ],
-      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading."
+      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading.",
+      "accepted_image_relative_path": "art/bathroom-20261108/washroom_door.webp",
+      "accepted_sha256": "10dcbb67392fcbf1453968d630888424b7bc914e25405395a246b357db12c232",
+      "approval": "Paul requested supplied ZIP images for starting room, 2026-11-08"
     },
     {
       "view_id": "washroom_wall",
@@ -189,7 +195,7 @@
       "cast_placements": [],
       "material_lock": "Teal glazed tiles, black-and-white check floor, chrome fittings, dark wood door",
       "legacy_feature_reference_only": "towel",
-      "art_status": "css-fallback-needs-new-topology-art",
+      "art_status": "enabled-user-approved",
       "old_image_embedded": false,
       "old_image_relative_path": null,
       "legacy_seed": 72003,
@@ -206,7 +212,10 @@
         "Human visual acceptance recorded with hash before replacing fallback"
       ],
       "apertures_left_to_right": [],
-      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading."
+      "layout_label_caution": "Node ID may describe obsolete feature; use topology/current room and world heading.",
+      "accepted_image_relative_path": "art/bathroom-20261108/washroom_wall.webp",
+      "accepted_sha256": "774de38bf2eba9e7c7ec6ce98d09cc8389e5b91e5721e82f16bbcf213bbb6e6b",
+      "approval": "Paul requested supplied ZIP images for starting room, 2026-11-08"
     },
     {
       "view_id": "cabin_bunk",

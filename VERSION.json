@@ -1,5 +1,5 @@
 {
-  "version": "V3-integrated-20261108",
+  "version": "V3-integrated-bathroom-20261108",
   "reference_html_sha256": "18c66df21affc75f9fc2898ca21a56cf8160d0cb95fcb8c1cf39049207446aa8",
   "reference_html_bytes": 1278563,
   "supplied_source_sha256": "fcebd6b37b3ccd673af7a81118af08024cd781f31ab7da0c9e88a59e23611ee6",
@@ -11,7 +11,7 @@
   ],
   "save_key": "hindenburg_playable_20261107_v1",
   "optional_save_field": "topologyVersion:3",
-  "built_html_sha256": "ad0cfbdbc26cb128c6cba1efad35246f0cd03af7b5af8f2101956fc7da28ee17",
-  "built_html_bytes": 1278606,
-  "validation": "npm run build && npm test; story/save regression added; original reference hash retained as baseline"
+  "built_html_sha256": "0c32ad77d8eb7190fe76a0d830f71e6e14a4b5ac034af007b537a12f4cd8828c",
+  "built_html_bytes": 1346162,
+  "validation": "npm run build && npm test pass; mounted browser four bathroom views verified"
 }
