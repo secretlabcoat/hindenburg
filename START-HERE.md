@@ -11,4 +11,4 @@ Read HANDOFF.md, CURRENT-STATE.md, TODO.md and ART-DIRECTION.md before work. Thi
 - `audit/`: prior tests and exact topology change audit.
 - No credentials, paid calls, production deployment tools, repositories or authentication state included.
 
-Local shared machine path: `/workspace/projects/hindenburg-playtest/`. Other agents share files but not browser desktops. Transfer ZIP to agents on another machine; box paths are not Fred’s Mac paths. No Git commit/push/cloud agents. Do not edit historical imports or the reported Mac original.
+Local shared machine path: `/workspace/projects/hindenburg-playtest/`. Other agents share files but not browser desktops. Transfer ZIP to agents on another machine; box paths are not Fred’s Mac paths. Historical no-push restriction superseded: follow current AGENTS.md and DEPLOYMENT.md authorization for GitHub and the existing Cloudflare game Worker. Do not edit historical imports or the reported Mac original.
