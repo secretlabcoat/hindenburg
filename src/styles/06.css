@@ -1,0 +1,14 @@
+
+/* Relay + automatic notebook (added Nov 4) */
+.thinking{color:#d9bd8d;font-style:italic;opacity:.85}
+.thinking .dots:after{content:'';animation:dots 1.2s steps(4) infinite}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+.overheard{color:#c9b3e0;font-style:italic}
+.nb-entry{border-top:1px solid #8c6939;padding:8px 0;color:#eadcc4;font-size:13px;line-height:1.35}
+.nb-entry h3{margin:0 0 4px;font:bold 15px Georgia;color:#f4dcad}
+.nb-entry ul{margin:3px 0 3px 18px;padding:0}
+.nb-meta{color:#d9bd8d;font-size:12px}
+.nb-contra{color:#f0a58a}
+.nbflash{animation:nbflash 1.4s ease 2}
+@keyframes nbflash{50%{box-shadow:0 0 0 3px #f4dcad;transform:scale(1.08)}}
+#form button:disabled{opacity:.5}

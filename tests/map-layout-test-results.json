@@ -1,0 +1,7 @@
+{
+  "rooms_centering_passed": 19,
+  "checks_per_room": 7,
+  "responsive_css_assertions": 5,
+  "uncaught_dom_errors": [],
+  "limits": "Synthetic rendered rectangles and DOM assertions, not browser layout; clamp edges handled by native scroll container. Parent Chrome retest required."
+}

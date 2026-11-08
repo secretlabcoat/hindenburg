@@ -1,0 +1,24 @@
+
+#topology-map{order:1;position:static;flex:0 0 auto;width:100%;max-height:245px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;border:1px solid #b99d64;border-radius:5px;background:#211a12;padding:5px}
+#topology-map[hidden]{display:none!important}#topology-map-toggle{position:static;min-height:32px}
+#topology-deck{max-width:100%;background:#2c2419;color:#f0ddb8;border:1px solid #b99d64;font:12px Georgia;padding:4px}
+.topology-plan-scroll{flex:1 1 auto;min-height:80px;height:140px;max-height:155px;overflow:auto;width:100%;background:#15110d}.topology-plan-scroll svg{display:block;max-height:none;height:auto;max-width:none;margin-inline:auto}
+.topology-caption,.topology-legend{font:10px Georgia;color:#ecd6aa;line-height:1.25;margin:3px 0}
+#topology-movement{order:1;display:flex;flex-wrap:wrap;gap:3px;align-items:center;padding:3px;background:#211a12;flex:0 0 auto;max-height:100px;overflow:auto}
+#topology-movement .movement-reason{font:11px Georgia;color:#e4c990}#topology-movement button{font:11px Georgia;padding:5px;color:#f0ddb8;background:#392e1e;border:1px solid #b99d64;min-height:30px;cursor:pointer}#topology-movement button:disabled{opacity:.6;cursor:default}
+.topology-door-strip{position:absolute;bottom:5px;left:5px;right:5px;display:flex;flex-wrap:wrap;gap:4px;z-index:8;pointer-events:none}.topology-door-strip button{pointer-events:auto;max-width:48%;font:11px Georgia;padding:5px;background:#251c11ed;color:#f2dfb7;border:1px solid #d5b477;min-height:32px;cursor:pointer}
+.bottom{grid-template-columns:100px minmax(0,1fr)!important}.inventory{grid-column:1/-1!important;display:block!important;width:auto!important;min-width:0!important}.inventory>strong{display:none!important}.inv{display:flex!important;flex-wrap:wrap;gap:5px;min-width:0!important}.inv .item{flex:1 1 85px;min-width:0!important;width:auto!important;max-width:none!important;height:auto!important;min-height:48px!important;padding:3px!important}.item .item-caption{font:11px Georgia!important;white-space:normal;overflow-wrap:anywhere;line-height:1.2}.inv .moreitem{font:11px Georgia!important}.inventory-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.inventory-grid .item{min-width:0}.shell{overflow-y:auto!important}#viewlabel{overflow-wrap:anywhere}
+@media(max-width:500px){
+.shell{height:100dvh!important;min-height:0!important;max-height:100dvh!important;overflow-y:auto!important;overscroll-behavior-y:contain}
+.scene{flex:1 0 180px!important;min-height:180px!important}
+#topology-map{height:174px;max-height:174px;flex:0 0 174px}
+.topology-plan-scroll{height:90px;min-height:74px;max-height:100px}
+.topology-caption,.topology-legend{font-size:10px;margin:2px 0;flex:0 0 auto}
+#topology-deck{flex:0 0 auto;font-size:11px;padding:3px}
+.bottom{grid-template-columns:76px minmax(0,1fr)!important;min-width:0}
+.verbs.panel{padding:3px;border-width:2px;overflow:visible}
+.verbs button{font-size:12px!important;padding:5px 2px!important;min-height:30px;white-space:normal;overflow-wrap:normal}
+.dialogue{height:clamp(88px,12dvh,110px)!important;min-height:0!important;max-height:110px!important;padding-top:3px}
+.entry input{padding:6px!important}.entry button{padding:6px!important}
+#dialogue-tools{font-size:10px}.inventory{padding:3px!important}
+.inv .item{flex-basis:68px}.item .item-caption{font-size:10px!important}#topology-movement{max-height:100px}.topology-door-strip button{font-size:10px;max-width:47%}}

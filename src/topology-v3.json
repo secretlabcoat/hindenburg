@@ -1,0 +1,744 @@
+{
+  "version": 3,
+  "world_directions": [
+    "North / bow",
+    "East / starboard",
+    "South / stern",
+    "West / port"
+  ],
+  "decks": {
+    "C": "Control car (below B deck)",
+    "B": "B deck",
+    "A": "A deck",
+    "K": "Keel / hull service gallery",
+    "U": "Upper rings"
+  },
+  "rooms": {
+    "wash": {
+      "name": "B-Deck Washroom",
+      "deck": "B",
+      "cells": [
+        [
+          1,
+          3
+        ]
+      ],
+      "views": [
+        "washroom_stall",
+        "washroom_basins",
+        "washroom_door",
+        "washroom_wall"
+      ],
+      "anchor": [
+        1,
+        3
+      ]
+    },
+    "b6": {
+      "name": "Cabin B-6 (B deck)",
+      "deck": "B",
+      "cells": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "views": [
+        "cabin_bunk",
+        "cabin_door",
+        "cabin_window",
+        "cabin_desk"
+      ],
+      "anchor": [
+        0,
+        6
+      ]
+    },
+    "lounge": {
+      "name": "Lounge / reading room / east promenade",
+      "deck": "A",
+      "cells": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "views": [
+        "lounge_windows",
+        "lounge_people",
+        "lounge_aft",
+        "lounge_side"
+      ],
+      "anchor": [
+        3,
+        1
+      ]
+    },
+    "dining": {
+      "name": "Dining room / west promenade",
+      "deck": "A",
+      "cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "views": [
+        "promenade",
+        "promenade_side",
+        "promenade_far",
+        "promenade_aft"
+      ],
+      "anchor": [
+        0,
+        1
+      ]
+    },
+    "acorr": {
+      "name": "A-Deck Passenger Corridor",
+      "deck": "A",
+      "cells": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "views": [
+        "corridor_forward",
+        "corridor_right",
+        "corridor_end",
+        "corridor_left"
+      ],
+      "anchor": [
+        2,
+        2
+      ]
+    },
+    "bar": {
+      "name": "Bar & Smoking Room",
+      "deck": "B",
+      "cells": [
+        [
+          3,
+          3
+        ]
+      ],
+      "views": [
+        "bar_windows",
+        "bar_booths",
+        "bar_door",
+        "bar_counter"
+      ],
+      "anchor": [
+        3,
+        3
+      ]
+    },
+    "purser": {
+      "name": "Purser's Office",
+      "deck": "B",
+      "cells": [
+        [
+          4,
+          3
+        ]
+      ],
+      "views": [
+        "office_porthole",
+        "office_cabinet",
+        "office_door",
+        "office_desk"
+      ],
+      "anchor": [
+        4,
+        3
+      ]
+    },
+    "bcorr": {
+      "name": "B-Deck Main Corridor",
+      "deck": "B",
+      "cells": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "views": [
+        "bdeck_corr_washdoor",
+        "bdeck_corr_stairs",
+        "bdeck_corr_office",
+        "bdeck_corr_cabins"
+      ],
+      "anchor": [
+        3,
+        4
+      ]
+    },
+    "stairs": {
+      "name": "B-Deck Stair Landing",
+      "deck": "B",
+      "cells": [
+        [
+          2,
+          3
+        ]
+      ],
+      "views": [
+        "bdeck_stairs_up",
+        "bdeck_stairs_wall",
+        "bdeck_stairs_door",
+        "bdeck_stairs_bar"
+      ],
+      "anchor": [
+        2,
+        3
+      ]
+    },
+    "bcab": {
+      "name": "B-Deck Cabin Corridor",
+      "deck": "B",
+      "cells": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "views": [
+        "bdeck_cabins_wall",
+        "bdeck_cabins_crew",
+        "bdeck_cabins_back",
+        "bdeck_cabins_door"
+      ],
+      "anchor": [
+        2,
+        5
+      ]
+    },
+    "crew": {
+      "name": "B-Deck Crew Access",
+      "deck": "B",
+      "cells": [
+        [
+          3,
+          5
+        ]
+      ],
+      "views": [
+        "crew_door_hall",
+        "crew_door_in",
+        "crew_door_pipes",
+        "crew_door_sign"
+      ],
+      "anchor": [
+        3,
+        5
+      ]
+    },
+    "acab": {
+      "name": "A-Deck Passenger Cabin",
+      "deck": "A",
+      "cells": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "views": [
+        "adeck_cabin",
+        "adeck_cabin_curtain",
+        "adeck_cabin_wardrobe",
+        "adeck_cabin_door"
+      ],
+      "anchor": [
+        1,
+        2
+      ]
+    },
+    "keel": {
+      "name": "Keel Service Walkway",
+      "deck": "K",
+      "cells": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          -1
+        ]
+      ],
+      "views": [
+        "keel_up",
+        "keel_walk",
+        "keel_hatch",
+        "keel_back"
+      ],
+      "anchor": [
+        3,
+        0
+      ]
+    },
+    "control": {
+      "name": "Control Car",
+      "deck": "C",
+      "cells": [
+        [
+          3,
+          -1
+        ]
+      ],
+      "views": [
+        "control_helm",
+        "control_starboard",
+        "control_back",
+        "control_port"
+      ],
+      "anchor": [
+        3,
+        -1
+      ]
+    },
+    "nook": {
+      "name": "Upper Rings / Watcher",
+      "deck": "U",
+      "cells": [
+        [
+          3,
+          4
+        ]
+      ],
+      "views": [
+        "girder_nook",
+        "girder_nook_right",
+        "girder_nook_down",
+        "girder_nook_left"
+      ],
+      "anchor": [
+        3,
+        4
+      ]
+    },
+    "shoes": {
+      "name": "Keel Entry / Overshoes",
+      "deck": "K",
+      "cells": [
+        [
+          3,
+          5
+        ]
+      ],
+      "views": [
+        "tour_shoes_l",
+        "tour_shoes",
+        "tour_shoes_r",
+        "tour_shoes_back"
+      ],
+      "anchor": [
+        3,
+        5
+      ]
+    },
+    "cells": {
+      "name": "Gas-Cell Tour Gallery",
+      "deck": "K",
+      "cells": [
+        [
+          3,
+          4
+        ]
+      ],
+      "views": [
+        "tour_cells_l",
+        "tour_cells",
+        "tour_cells_r",
+        "tour_cells_back"
+      ],
+      "anchor": [
+        3,
+        4
+      ]
+    },
+    "tanks": {
+      "name": "Fuel / Ballast Gallery",
+      "deck": "K",
+      "cells": [
+        [
+          3,
+          3
+        ]
+      ],
+      "views": [
+        "tour_tanks_l",
+        "tour_tanks",
+        "tour_tanks_r",
+        "tour_tanks_back"
+      ],
+      "anchor": [
+        3,
+        3
+      ]
+    },
+    "tourend": {
+      "name": "Forward Tour Landing",
+      "deck": "K",
+      "cells": [
+        [
+          3,
+          2
+        ]
+      ],
+      "views": [
+        "tour_end_l",
+        "tour_end",
+        "tour_end_r",
+        "tour_end_back"
+      ],
+      "anchor": [
+        3,
+        2
+      ]
+    }
+  },
+  "edges": [
+    {
+      "id": "wash-bcorr",
+      "a": "wash",
+      "b": "bcorr",
+      "ha": 2,
+      "hb": 0,
+      "point": [
+        1.5,
+        4.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "bcorr-stairs",
+      "a": "bcorr",
+      "b": "stairs",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        2.5,
+        4.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "bcorr-bar",
+      "a": "bcorr",
+      "b": "bar",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        3.5,
+        4.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "bcorr-purser",
+      "a": "bcorr",
+      "b": "purser",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        4.5,
+        4.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "bcorr-bcab",
+      "a": "bcorr",
+      "b": "bcab",
+      "ha": 2,
+      "hb": 0,
+      "point": [
+        1.5,
+        5.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "bcab-b6",
+      "a": "bcab",
+      "b": "b6",
+      "ha": 3,
+      "hb": 1,
+      "point": [
+        1.0,
+        5.5
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "bcab-crew",
+      "a": "bcab",
+      "b": "crew",
+      "ha": 1,
+      "hb": 3,
+      "point": [
+        3.0,
+        5.5
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "bcorr-crew",
+      "a": "bcorr",
+      "b": "crew",
+      "ha": 2,
+      "hb": 0,
+      "point": [
+        3.5,
+        5.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "acorr-acab",
+      "a": "acorr",
+      "b": "acab",
+      "ha": 3,
+      "hb": 1,
+      "point": [
+        2.0,
+        1.5
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "acorr-lounge",
+      "a": "acorr",
+      "b": "lounge",
+      "ha": 1,
+      "hb": 3,
+      "point": [
+        3.0,
+        0.5
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "acorr-dining",
+      "a": "acorr",
+      "b": "dining",
+      "ha": 3,
+      "hb": 1,
+      "point": [
+        1.0,
+        0.5
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "shoes-cells",
+      "a": "shoes",
+      "b": "cells",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        3.5,
+        5.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "cells-tanks",
+      "a": "cells",
+      "b": "tanks",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        3.5,
+        4.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "tanks-tourend",
+      "a": "tanks",
+      "b": "tourend",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        3.5,
+        3.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "tourend-keel",
+      "a": "tourend",
+      "b": "keel",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        3.5,
+        2.0
+      ],
+      "kind": "door",
+      "label": "Door"
+    },
+    {
+      "id": "stairs-acorr",
+      "a": "stairs",
+      "b": "acorr",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        2.5,
+        3.5
+      ],
+      "kind": "vertical",
+      "label": "Passenger stairs",
+      "gate": null
+    },
+    {
+      "id": "crew-shoes",
+      "a": "crew",
+      "b": "shoes",
+      "ha": 1,
+      "hb": 3,
+      "point": [
+        3.5,
+        5.5
+      ],
+      "kind": "vertical",
+      "label": "Crew ladder: B deck \u2194 keel",
+      "gate": null
+    },
+    {
+      "id": "cells-nook",
+      "a": "cells",
+      "b": "nook",
+      "ha": 1,
+      "hb": 3,
+      "point": [
+        3.5,
+        4.5
+      ],
+      "kind": "vertical",
+      "label": "Gas-cell ladder: keel \u2194 upper rings",
+      "gate": "watcher-noticed"
+    },
+    {
+      "id": "keel-control",
+      "a": "keel",
+      "b": "control",
+      "ha": 0,
+      "hb": 2,
+      "point": [
+        3.5,
+        -0.5
+      ],
+      "kind": "vertical",
+      "label": "Enclosed service ladder: keel \u2194 control car",
+      "gate": null
+    }
+  ],
+  "historical_accuracy": "Fictional coherent game arrangement inspired by the cutaway, not measured historical plans. East promenade/reading alcove share lounge; west promenade/dining share former promenade location."
+}

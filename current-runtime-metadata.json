@@ -1,0 +1,655 @@
+{
+  "nodes": {
+    "washroom_stall": {
+      "name": "B-Deck Washroom",
+      "facing": "North / bow · wall / no doorway",
+      "style": "washshower",
+      "framing": "room-wall",
+      "fallback": "shower",
+      "artStatus": "ready"
+    },
+    "washroom_basins": {
+      "name": "B-Deck Washroom",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "washbasin",
+      "framing": "room-wall",
+      "fallback": "mirror",
+      "artStatus": "ready"
+    },
+    "washroom_door": {
+      "name": "B-Deck Washroom",
+      "facing": "South / stern · Door to B-Deck Main Corridor",
+      "style": "washdoor",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "ready"
+    },
+    "washroom_wall": {
+      "name": "B-Deck Washroom",
+      "facing": "West / port · wall / no doorway",
+      "style": "washwall",
+      "framing": "room-wall",
+      "fallback": "towel",
+      "artStatus": "placeholder"
+    },
+    "cabin_bunk": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "North / bow · wall / no doorway",
+      "style": "b6bunk",
+      "framing": "room-wall",
+      "fallback": "bunks",
+      "artStatus": "ready"
+    },
+    "cabin_window": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "South / stern · wall / no doorway",
+      "style": "b6window",
+      "framing": "room-wall",
+      "fallback": "window",
+      "artStatus": "ready"
+    },
+    "cabin_door": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "East / starboard · Door to B-Deck Cabin Corridor",
+      "style": "b6door",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "cabin_desk": {
+      "name": "Cabin B-6 (B deck)",
+      "facing": "West / port · wall / no doorway",
+      "style": "b6desk",
+      "framing": "room-wall",
+      "fallback": "desk",
+      "artStatus": "ready"
+    },
+    "lounge_windows": {
+      "name": "Lounge / reading room / east promenade",
+      "facing": "North / bow · wall / no doorway",
+      "style": "windows",
+      "framing": "room-wall",
+      "fallback": "window",
+      "artStatus": "placeholder"
+    },
+    "lounge_people": {
+      "name": "Lounge / reading room / east promenade",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "people",
+      "framing": "room-wall",
+      "fallback": "booths",
+      "artStatus": "placeholder"
+    },
+    "lounge_side": {
+      "name": "Lounge / reading room / east promenade",
+      "facing": "West / port · Door to A-Deck Passenger Corridor",
+      "style": "people_side",
+      "framing": "room-wall",
+      "fallback": "desk",
+      "artStatus": "placeholder"
+    },
+    "lounge_aft": {
+      "name": "Lounge / reading room / east promenade",
+      "facing": "South / stern · wall / no doorway",
+      "style": "lounge_aft",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "promenade": {
+      "name": "Dining room / west promenade",
+      "facing": "North / bow · wall / no doorway",
+      "style": "promenade",
+      "framing": "room-wall",
+      "fallback": "window",
+      "artStatus": "placeholder"
+    },
+    "promenade_far": {
+      "name": "Dining room / west promenade",
+      "facing": "South / stern · wall / no doorway",
+      "style": "promenade_far",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "promenade_side": {
+      "name": "Dining room / west promenade",
+      "facing": "East / starboard · Door to A-Deck Passenger Corridor",
+      "style": "promenade_side",
+      "framing": "room-wall",
+      "fallback": "booths",
+      "artStatus": "placeholder"
+    },
+    "promenade_aft": {
+      "name": "Dining room / west promenade",
+      "facing": "West / port · wall / no doorway",
+      "style": "promenade_aft",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "corridor_forward": {
+      "name": "A-Deck Passenger Corridor",
+      "facing": "North / bow · wall / no doorway",
+      "style": "corridor_forward",
+      "framing": "hall-axis",
+      "fallback": "wall",
+      "artStatus": "placeholder"
+    },
+    "corridor_left": {
+      "name": "A-Deck Passenger Corridor",
+      "facing": "West / port · Door to A-Deck Passenger Cabin / Door to Dining room / west promenade",
+      "style": "corridor_left",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "corridor_end": {
+      "name": "A-Deck Passenger Corridor",
+      "facing": "South / stern · Passenger stairs to B-Deck Stair Landing",
+      "style": "corridor_end",
+      "framing": "hall-axis",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "corridor_right": {
+      "name": "A-Deck Passenger Corridor",
+      "facing": "East / starboard · Door to Lounge / reading room / east promenade",
+      "style": "corridor_right",
+      "framing": "room-wall",
+      "fallback": "stairs",
+      "artStatus": "placeholder"
+    },
+    "bar_counter": {
+      "name": "Bar & Smoking Room",
+      "facing": "West / port · wall / no doorway",
+      "style": "bar_counter",
+      "framing": "room-wall",
+      "fallback": "bar",
+      "artStatus": "placeholder"
+    },
+    "bar_booths": {
+      "name": "Bar & Smoking Room",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "bar_booths",
+      "framing": "room-wall",
+      "fallback": "booths",
+      "artStatus": "placeholder"
+    },
+    "bar_windows": {
+      "name": "Bar & Smoking Room",
+      "facing": "North / bow · wall / no doorway",
+      "style": "bar_windows",
+      "framing": "room-wall",
+      "fallback": "window",
+      "artStatus": "placeholder"
+    },
+    "bar_door": {
+      "name": "Bar & Smoking Room",
+      "facing": "South / stern · Door to B-Deck Main Corridor",
+      "style": "bar_door",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "office_desk": {
+      "name": "Purser's Office",
+      "facing": "West / port · wall / no doorway",
+      "style": "office_desk",
+      "framing": "room-wall",
+      "fallback": "desk",
+      "artStatus": "placeholder"
+    },
+    "office_cabinet": {
+      "name": "Purser's Office",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "office_cabinet",
+      "framing": "room-wall",
+      "fallback": "cabinets",
+      "artStatus": "placeholder"
+    },
+    "office_porthole": {
+      "name": "Purser's Office",
+      "facing": "North / bow · wall / no doorway",
+      "style": "office_porthole",
+      "framing": "room-wall",
+      "fallback": "porthole",
+      "artStatus": "placeholder"
+    },
+    "office_door": {
+      "name": "Purser's Office",
+      "facing": "South / stern · Door to B-Deck Main Corridor",
+      "style": "office_door",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_corr_washdoor": {
+      "name": "B-Deck Main Corridor",
+      "facing": "North / bow · Door to B-Deck Washroom / Door to B-Deck Stair Landing / Door to Bar & Smoking Room / Door to Purser's Office",
+      "style": "bdeck_corr_washdoor",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_corr_stairs": {
+      "name": "B-Deck Main Corridor",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "bdeck_corr_stairs",
+      "framing": "hall-axis",
+      "fallback": "stairs",
+      "artStatus": "placeholder"
+    },
+    "bdeck_corr_office": {
+      "name": "B-Deck Main Corridor",
+      "facing": "South / stern · Door to B-Deck Cabin Corridor / Door to B-Deck Crew Access",
+      "style": "bdeck_corr_office",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_corr_cabins": {
+      "name": "B-Deck Main Corridor",
+      "facing": "West / port · wall / no doorway",
+      "style": "bdeck_corr_cabins",
+      "framing": "hall-axis",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_stairs_door": {
+      "name": "B-Deck Stair Landing",
+      "facing": "South / stern · Door to B-Deck Main Corridor",
+      "style": "bdeck_stairs_door",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_stairs_up": {
+      "name": "B-Deck Stair Landing",
+      "facing": "North / bow · Passenger stairs to A-Deck Passenger Corridor",
+      "style": "bdeck_stairs_up",
+      "framing": "room-wall",
+      "fallback": "stairs",
+      "artStatus": "placeholder"
+    },
+    "bdeck_stairs_bar": {
+      "name": "B-Deck Stair Landing",
+      "facing": "West / port · wall / no doorway",
+      "style": "bdeck_stairs_bar",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_stairs_wall": {
+      "name": "B-Deck Stair Landing",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "bdeck_stairs_wall",
+      "framing": "room-wall",
+      "fallback": "notice",
+      "artStatus": "placeholder"
+    },
+    "bdeck_cabins_door": {
+      "name": "B-Deck Cabin Corridor",
+      "facing": "West / port · Door to Cabin B-6 (B deck)",
+      "style": "bdeck_cabins_door",
+      "framing": "hall-axis",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_cabins_crew": {
+      "name": "B-Deck Cabin Corridor",
+      "facing": "East / starboard · Door to B-Deck Crew Access",
+      "style": "bdeck_cabins_crew",
+      "framing": "hall-axis",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "bdeck_cabins_wall": {
+      "name": "B-Deck Cabin Corridor",
+      "facing": "North / bow · Door to B-Deck Main Corridor",
+      "style": "bdeck_cabins_wall",
+      "framing": "room-wall",
+      "fallback": "wall",
+      "artStatus": "placeholder"
+    },
+    "bdeck_cabins_back": {
+      "name": "B-Deck Cabin Corridor",
+      "facing": "South / stern · wall / no doorway",
+      "style": "bdeck_cabins_back",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "crew_door_in": {
+      "name": "B-Deck Crew Access",
+      "facing": "East / starboard · Crew ladder: B deck ↔ keel to Keel Entry / Overshoes",
+      "style": "crew_door_in",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "crew_door_sign": {
+      "name": "B-Deck Crew Access",
+      "facing": "West / port · Door to B-Deck Cabin Corridor",
+      "style": "crew_door_sign",
+      "framing": "room-wall",
+      "fallback": "notice",
+      "artStatus": "placeholder"
+    },
+    "crew_door_hall": {
+      "name": "B-Deck Crew Access",
+      "facing": "North / bow · Door to B-Deck Main Corridor",
+      "style": "crew_door_hall",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "crew_door_pipes": {
+      "name": "B-Deck Crew Access",
+      "facing": "South / stern · wall / no doorway",
+      "style": "crew_door_pipes",
+      "framing": "room-wall",
+      "fallback": "pipes",
+      "artStatus": "placeholder"
+    },
+    "adeck_cabin": {
+      "name": "A-Deck Passenger Cabin",
+      "facing": "North / bow · wall / no doorway",
+      "style": "adcabin_bunks",
+      "framing": "room-wall",
+      "fallback": "bunks",
+      "artStatus": "placeholder"
+    },
+    "adeck_cabin_door": {
+      "name": "A-Deck Passenger Cabin",
+      "facing": "West / port · wall / no doorway",
+      "style": "adcabin_door",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "adeck_cabin_curtain": {
+      "name": "A-Deck Passenger Cabin",
+      "facing": "East / starboard · Door to A-Deck Passenger Corridor",
+      "style": "adcabin_curtain",
+      "framing": "room-wall",
+      "fallback": "curtain",
+      "artStatus": "placeholder"
+    },
+    "adeck_cabin_wardrobe": {
+      "name": "A-Deck Passenger Cabin",
+      "facing": "South / stern · wall / no doorway",
+      "style": "adcabin_wardrobe",
+      "framing": "room-wall",
+      "fallback": "wardrobe",
+      "artStatus": "placeholder"
+    },
+    "keel_walk": {
+      "name": "Keel Service Walkway",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "keel_forward",
+      "framing": "room-wall",
+      "fallback": "girders",
+      "artStatus": "placeholder"
+    },
+    "keel_hatch": {
+      "name": "Keel Service Walkway",
+      "facing": "South / stern · Door to Forward Tour Landing",
+      "style": "keelhatch",
+      "framing": "hall-axis",
+      "fallback": "hatch",
+      "artStatus": "placeholder"
+    },
+    "keel_back": {
+      "name": "Keel Service Walkway",
+      "facing": "West / port · wall / no doorway",
+      "style": "keel_back",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "keel_up": {
+      "name": "Keel Service Walkway",
+      "facing": "North / bow · Enclosed service ladder: keel ↔ control car to Control Car",
+      "style": "keel_up",
+      "framing": "hall-axis",
+      "fallback": "gascell",
+      "artStatus": "placeholder"
+    },
+    "control_helm": {
+      "name": "Control Car",
+      "facing": "North / bow · wall / no doorway",
+      "style": "control_helm",
+      "framing": "room-wall",
+      "fallback": "helm",
+      "artStatus": "ready"
+    },
+    "control_starboard": {
+      "name": "Control Car",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "control_starboard",
+      "framing": "room-wall",
+      "fallback": "window",
+      "artStatus": "placeholder"
+    },
+    "control_back": {
+      "name": "Control Car",
+      "facing": "South / stern · Enclosed service ladder: keel ↔ control car to Keel Service Walkway",
+      "style": "control_ladder",
+      "framing": "room-wall",
+      "fallback": "ladder",
+      "artStatus": "placeholder"
+    },
+    "control_port": {
+      "name": "Control Car",
+      "facing": "West / port · wall / no doorway",
+      "style": "control_port",
+      "framing": "room-wall",
+      "fallback": "instruments",
+      "artStatus": "placeholder"
+    },
+    "girder_nook": {
+      "name": "Upper Rings / Watcher",
+      "facing": "North / bow · wall / no doorway",
+      "style": "nook_watch",
+      "framing": "room-wall",
+      "fallback": "girders",
+      "artStatus": "placeholder"
+    },
+    "girder_nook_right": {
+      "name": "Upper Rings / Watcher",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "nook_right",
+      "framing": "room-wall",
+      "fallback": "cables",
+      "artStatus": "placeholder"
+    },
+    "girder_nook_down": {
+      "name": "Upper Rings / Watcher",
+      "facing": "South / stern · wall / no doorway",
+      "style": "nook_down",
+      "framing": "room-wall",
+      "fallback": "ladder",
+      "artStatus": "placeholder"
+    },
+    "girder_nook_left": {
+      "name": "Upper Rings / Watcher",
+      "facing": "West / port · Gas-cell ladder: keel ↔ upper rings to Gas-Cell Tour Gallery",
+      "style": "nook_left",
+      "framing": "room-wall",
+      "fallback": "gascell",
+      "artStatus": "placeholder"
+    },
+    "tour_shoes": {
+      "name": "Keel Entry / Overshoes",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "tour1",
+      "framing": "room-wall",
+      "fallback": "girders",
+      "artStatus": "placeholder"
+    },
+    "tour_shoes_r": {
+      "name": "Keel Entry / Overshoes",
+      "facing": "South / stern · wall / no doorway",
+      "style": "tour1_r",
+      "framing": "hall-axis",
+      "fallback": "girders",
+      "artStatus": "placeholder"
+    },
+    "tour_shoes_back": {
+      "name": "Keel Entry / Overshoes",
+      "facing": "West / port · Crew ladder: B deck ↔ keel to B-Deck Crew Access",
+      "style": "tour1_back",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "tour_shoes_l": {
+      "name": "Keel Entry / Overshoes",
+      "facing": "North / bow · Door to Gas-Cell Tour Gallery",
+      "style": "tour1_l",
+      "framing": "hall-axis",
+      "fallback": "safety",
+      "artStatus": "placeholder"
+    },
+    "tour_cells": {
+      "name": "Gas-Cell Tour Gallery",
+      "facing": "East / starboard · Gas-cell ladder: keel ↔ upper rings to Upper Rings / Watcher",
+      "style": "tour2",
+      "framing": "room-wall",
+      "fallback": "girders",
+      "artStatus": "placeholder"
+    },
+    "tour_cells_r": {
+      "name": "Gas-Cell Tour Gallery",
+      "facing": "South / stern · Door to Keel Entry / Overshoes",
+      "style": "tour2_r",
+      "framing": "hall-axis",
+      "fallback": "cables",
+      "artStatus": "placeholder"
+    },
+    "tour_cells_back": {
+      "name": "Gas-Cell Tour Gallery",
+      "facing": "West / port · wall / no doorway",
+      "style": "tour2_back",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "tour_cells_l": {
+      "name": "Gas-Cell Tour Gallery",
+      "facing": "North / bow · Door to Fuel / Ballast Gallery",
+      "style": "tour2_l",
+      "framing": "hall-axis",
+      "fallback": "gascell",
+      "artStatus": "placeholder"
+    },
+    "tour_tanks": {
+      "name": "Fuel / Ballast Gallery",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "tour3",
+      "framing": "room-wall",
+      "fallback": "girders",
+      "artStatus": "placeholder"
+    },
+    "tour_tanks_r": {
+      "name": "Fuel / Ballast Gallery",
+      "facing": "South / stern · Door to Gas-Cell Tour Gallery",
+      "style": "tour3_r",
+      "framing": "hall-axis",
+      "fallback": "bunks",
+      "artStatus": "placeholder"
+    },
+    "tour_tanks_back": {
+      "name": "Fuel / Ballast Gallery",
+      "facing": "West / port · wall / no doorway",
+      "style": "tour3_back",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "tour_tanks_l": {
+      "name": "Fuel / Ballast Gallery",
+      "facing": "North / bow · Door to Forward Tour Landing",
+      "style": "tour3_l",
+      "framing": "hall-axis",
+      "fallback": "tank",
+      "artStatus": "placeholder"
+    },
+    "tour_end": {
+      "name": "Forward Tour Landing",
+      "facing": "East / starboard · wall / no doorway",
+      "style": "tour4",
+      "framing": "room-wall",
+      "fallback": "girders",
+      "artStatus": "placeholder"
+    },
+    "tour_end_r": {
+      "name": "Forward Tour Landing",
+      "facing": "South / stern · Door to Fuel / Ballast Gallery",
+      "style": "tour4_r",
+      "framing": "hall-axis",
+      "fallback": "hatch",
+      "artStatus": "placeholder"
+    },
+    "tour_end_back": {
+      "name": "Forward Tour Landing",
+      "facing": "West / port · wall / no doorway",
+      "style": "tour4_back",
+      "framing": "room-wall",
+      "fallback": "door",
+      "artStatus": "placeholder"
+    },
+    "tour_end_l": {
+      "name": "Forward Tour Landing",
+      "facing": "North / bow · Door to Keel Service Walkway",
+      "style": "tour4_l",
+      "framing": "hall-axis",
+      "fallback": "rope",
+      "artStatus": "placeholder"
+    }
+  },
+  "cast": {
+    "lounge_people": [
+      "Damina Vontette",
+      "Snardy Vontette"
+    ],
+    "lounge_side": [
+      "Colonel Landry Stoppard",
+      "Vaunice Charles"
+    ],
+    "corridor_forward": [
+      "Manard Toxu"
+    ],
+    "promenade_side": [
+      "Potter McNare"
+    ],
+    "keel_walk": [
+      "Bunny Treemont"
+    ],
+    "office_desk": [
+      "Helen Karens"
+    ],
+    "bar_counter": [
+      "Oreo Malloy"
+    ],
+    "control_helm": [
+      "Captain Swanson Kyle",
+      "Emilio Estavant"
+    ]
+  },
+  "npc": [
+    "Damina Vontette",
+    "Snardy Vontette",
+    "Colonel Landry Stoppard",
+    "Vaunice Charles",
+    "Manard Toxu",
+    "Potter McNare",
+    "Bunny Treemont",
+    "Helen Karens",
+    "Oreo Malloy",
+    "Captain Swanson Kyle",
+    "Emilio Estavant",
+    "The Watcher in the Rings"
+  ]
+}

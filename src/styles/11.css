@@ -1,0 +1,18 @@
+
+/* ---------- Round 10: B-deck washroom start (simple placeholder art) ---------- */
+.scene .wash-wall{position:absolute;inset:0;background:repeating-linear-gradient(0deg,#d9d6c8 0 22px,#b9b5a6 22px 24px),#d9d6c8;background-blend-mode:multiply}
+.scene .wash-wall:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 22px,#b9b5a6 22px 24px)}
+.scene .wash-floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:repeating-conic-gradient(#2f2a26 0 25%,#d8d2c2 0 50%) 0 0/28px 28px}
+.scene .wash-rail{position:absolute;left:18%;right:18%;top:12%;height:6px;background:#8c8678;border-radius:3px}
+.scene .wash-curtain{position:absolute;left:18%;width:64%;top:13%;bottom:22%;background:repeating-linear-gradient(90deg,#e9e2cf 0 14px,#c9bfa6 14px 20px);border-bottom:4px solid #9d927a;cursor:pointer}
+.scene .wash-curtain.open{width:22%}
+.scene .wash-head{position:absolute;left:58%;top:16%;width:9%;height:6%;background:#9a958a;border-radius:0 0 50% 50%}
+.scene .wash-mirror{position:absolute;left:30%;top:14%;width:40%;height:30%;border:8px solid #8a7556;background:linear-gradient(135deg,#c9d3d6,#8c999c);cursor:pointer}
+.scene .wash-basin{position:absolute;bottom:22%;width:26%;height:20%;background:linear-gradient(#f4f1e8,#bdb8ab);border-radius:6px 6px 40% 40%;box-shadow:0 6px 0 #6f6a60}
+.scene .wash-basin.a{left:18%}.scene .wash-basin.b{right:18%}
+.scene .wash-door{position:absolute;left:32%;top:14%;width:36%;bottom:22%;background:linear-gradient(90deg,#4d3a2b,#8b6f52 20%,#a1855f 70%,#5a4432);border:8px ridge #b39268;cursor:pointer}
+.scene .wash-door:after{content:'WASCHRAUM · B';position:absolute;top:10%;left:0;right:0;text-align:center;font:bold 9px Georgia,serif;color:#f1e3c2;letter-spacing:1px}
+.scene .wash-door:before{content:'●';position:absolute;right:9%;top:52%;color:#e7c67f}
+.scene .wash-door-tag{position:absolute;bottom:15%;left:5%;right:5%;background:#211912ea;border:1px solid #c2a37a;color:#f4dcad;font:bold 11px Georgia,serif;text-align:center;padding:4px 2px;letter-spacing:1px;pointer-events:none;box-shadow:0 0 8px #000}
+@keyframes navglow{0%,100%{box-shadow:0 0 4px #e7cf9f}50%{box-shadow:0 0 16px #f4dcad,0 0 8px #f4dcad}}
+.navdock button.pulse{animation:navglow 1.2s infinite ease-in-out;border-color:#f4dcad;color:#fff}

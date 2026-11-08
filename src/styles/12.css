@@ -1,0 +1,34 @@
+
+.scene .r11-wall { position: absolute; inset: 0; background: #dcd4c5; }
+.scene .r11-adwall { position: absolute; inset: 0; background: #b8c4cb; }
+.scene .r11-keelbg { position: absolute; inset: 0; background: #1a1e24; }
+.scene .r11-panel { position: absolute; background: #cbbba0; border: 1px solid #998a72; }
+.scene .r11-berth { position: absolute; background: #4a5d6e; border-radius: 4px; cursor: pointer; }
+.scene .r11-sheet { position: absolute; background: #f0ede6; }
+.scene .r11-pillow { position: absolute; background: #ffffff; border-radius: 3px; }
+.scene .r11-case { position: absolute; background: #6e472a; border-radius: 3px; border: 1px solid #3d2614; cursor: pointer; }
+.scene .r11-wardrobe { position: absolute; background: #8c7663; border-left: 2px solid #57483a; cursor: pointer; }
+.scene .r11-window-frame { position: absolute; background: #3d4956; border: 4px solid #232a32; border-radius: 6px; overflow: hidden; }
+.scene .r11-sea { position: absolute; inset: 0; background: linear-gradient(#8ca0b3 50%, #4a5c6d 50%); }
+.scene .r11-bell { position: absolute; width: 14px; height: 22px; background: #b59449; border-radius: 7px; cursor: pointer; border: 1px solid #665022; }
+.scene .r11-door { position: absolute; background: #5c4533; border: 3px solid #38291c; cursor: pointer; }
+.scene .r11-card { position: absolute; background: #d9c49c; border: 1px solid #826e49; font: 10px Georgia, serif; color: #222; text-align: center; line-height: 14px; }
+.scene .r11-desk { position: absolute; background: #73573f; border: 1px solid #453323; cursor: pointer; }
+.scene .r11-basin { position: absolute; background: #f7f7f7; border: 2px solid #ccc; border-radius: 0 0 12px 12px; cursor: pointer; }
+.scene .r11-tap { position: absolute; width: 4px; height: 8px; background: #b59449; }
+.scene .r11-shoes { position: absolute; width: 20px; height: 10px; background: #222; border-radius: 4px 8px 0 0; cursor: pointer; }
+.scene .r11-walkway { position: absolute; left: 45%; width: 10%; top: 0; bottom: 0; background: #333a42; border-left: 1px solid #555e69; border-right: 1px solid #555e69; }
+.scene .r11-girder { position: absolute; background: #707e8c; opacity: 0.6; }
+.scene .r11-cell { position: absolute; background: radial-gradient(circle at 50% 30%, #e8e3d5, #aa9f8c); border-radius: 50%; opacity: 0.85; }
+.scene .r11-bench { position: absolute; background: #544436; border: 1px solid #30261e; }
+.scene .r11-overshoe { position: absolute; background: #666; border-radius: 6px; cursor: pointer; }
+.scene .r11-rules { position: absolute; background: #fffbe8; border: 1px solid #aa9966; padding: 6px; font: 10px Georgia, serif; color: #333; }
+.scene .r11-tank { position: absolute; background: linear-gradient(90deg, #444, #777, #333); border-radius: 6px; }
+.scene .r11-tent { position: absolute; background: #c2b193; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+.scene .r11-flicker { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(235, 245, 255, 0.7); box-shadow: 0 0 10px #fff; opacity: 0.35; cursor: pointer; animation: r11Pulse 3s infinite ease-in-out; }
+.scene .r11-flicker::after { content: ''; position: absolute; inset: -14px; }
+@keyframes r11Pulse { 0%, 100% { opacity: 0.2; transform: scale(0.9); } 50% { opacity: 0.7; transform: scale(1.2); } }
+.scene .r11-watcher { position: absolute; width: 70px; height: 40px; left: calc(50% - 35px); top: 38%; background: radial-gradient(ellipse at center, rgba(230,240,255,0.95) 0%, rgba(180,210,240,0.4) 50%, rgba(0,0,0,0) 75%); border-radius: 50%; cursor: pointer; animation: r11Glow 4s infinite ease-in-out; }
+@keyframes r11Glow { 0%, 100% { opacity: 0.6; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1.05); } }
+.scene .r11-pupil { position: absolute; width: 12px; height: 12px; left: 29px; top: 14px; background: #1a2636; border-radius: 50%; box-shadow: 0 0 6px #fff; }
+.scene .r11-lbl { position: absolute; font: 10px Georgia, serif; color: #ddd; text-align: center; width: 100%; pointer-events: none; }

@@ -1,0 +1,30 @@
+# steward reactions
+Fri, 06 Nov 2026 17:20:52 +0000
+-rw-r--r-- 1 box box  85K Nov  6 17:16 /workspace/portraits/steward/frown.mp4
+-rw-r--r-- 1 box box  30K Nov  6 17:16 /workspace/portraits/steward/frown.webm
+-rw-r--r-- 1 box box  17K Nov  6 17:16 /workspace/portraits/steward/frown_poster.webp
+-rw-r--r-- 1 box box  77K Nov  6 17:04 /workspace/portraits/steward/idle.mp4
+-rw-r--r-- 1 box box  28K Nov  6 17:04 /workspace/portraits/steward/idle.webm
+-rw-r--r-- 1 box box  16K Nov  6 17:04 /workspace/portraits/steward/idle_poster.webp
+-rw-r--r-- 1 box box 137K Nov  6 17:10 /workspace/portraits/steward/nod.mp4
+-rw-r--r-- 1 box box  44K Nov  6 17:10 /workspace/portraits/steward/nod.webm
+-rw-r--r-- 1 box box  16K Nov  6 17:10 /workspace/portraits/steward/nod_poster.webp
+-rw-r--r-- 1 box box 324K Nov  6 17:20 /workspace/portraits/steward/preview.mp4
+-rw-r--r-- 1 box box 324K Nov  6 17:20 /workspace/portraits/steward/preview.mp4
+-rw-r--r-- 1 box box 611K Nov  6 17:20 /workspace/portraits/steward/preview.png
+-rw-r--r-- 1 box box 145K Nov  6 17:20 /workspace/portraits/steward/shake.mp4
+-rw-r--r-- 1 box box  48K Nov  6 17:20 /workspace/portraits/steward/shake.webm
+-rw-r--r-- 1 box box  17K Nov  6 17:20 /workspace/portraits/steward/shake_poster.webp
+-rw-r--r-- 1 box box  88K Nov  6 17:06 /workspace/portraits/steward/smile.mp4
+-rw-r--r-- 1 box box  32K Nov  6 17:06 /workspace/portraits/steward/smile.webm
+-rw-r--r-- 1 box box  17K Nov  6 17:06 /workspace/portraits/steward/smile_poster.webp
+-rw-r--r-- 1 box box 105K Nov  6 17:14 /workspace/portraits/steward/surprised.mp4
+-rw-r--r-- 1 box box  35K Nov  6 17:14 /workspace/portraits/steward/surprised.webm
+-rw-r--r-- 1 box box  17K Nov  6 17:14 /workspace/portraits/steward/surprised_poster.webp
+--- timings ---
+seconds_for_idle=154 rc=0
+seconds_for_smile=147 rc=0
+seconds_for_nod=221 rc=0
+seconds_for_surprised=207 rc=0
+seconds_for_frown=157 rc=0
+seconds_for_shake=247 rc=0

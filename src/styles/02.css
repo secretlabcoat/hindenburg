@@ -1,0 +1,25 @@
+
+[hidden]{display:none!important}
+#mapPanel{display:none!important}
+#offline-map{position:static;width:100%;max-width:100%;box-sizing:border-box;order:1;flex:0 0 auto;margin:3px 0;padding:4px 7px;background:#211a13e8;color:#f1d8a4;border:1px solid #b79a66;border-radius:5px;font:10px Georgia;max-height:165px;overflow:auto;pointer-events:auto}
+#offline-map[hidden]{display:none!important}
+#map-toggle{position:static;min-width:60px;min-height:32px;white-space:nowrap}
+#offline-map svg{width:100%;height:88px;display:block;background:#231c12;pointer-events:none}
+#offline-map .map-status{font-size:10px;padding:2px;line-height:1.2}
+#offline-map .map-help{font-size:9px;line-height:1.2;color:#cfb786}
+#offline-map .map-room-label{font:9px Georgia;fill:#e7cf9f}
+#offline-map .map-floor-label{font:bold 12px Georgia;fill:#e7cf9f}
+#offline-map .map-node{fill:#483927;stroke:#a98d56;stroke-width:1}
+#offline-map .active-room{fill:#947a41;stroke:#ffe2a0;stroke-width:2}
+#offline-map .map-edge{stroke:#c0a064;stroke-width:1.3;opacity:.7}
+#offline-map .player{fill:#ffe4a4;stroke:#2b2015;stroke-width:2}
+.top{flex-wrap:wrap}.shell{overflow-y:auto!important}
+#inv .item{height:auto;min-height:44px;font-size:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 2px;line-height:1.1}
+.item .item-caption{display:block;font:10px Georgia;white-space:normal;margin-top:2px}
+#dialogue-tools{display:flex;flex-wrap:wrap;align-items:center;gap:3px;margin:3px 0;font:10px Georgia}
+#dialogue-tools .dialogue-feedback{flex:1 1 100%;color:#dfc994}
+#dialogue-tools button{background:#392d20;color:#eadcc4;border:1px solid #987945;font:10px Georgia;padding:4px 6px;min-height:30px;cursor:pointer}
+#relay-state{font:10px Georgia;color:#ead3a2;display:block;margin:3px 0}
+#dialogue-tools:empty{display:none}
+@media(max-width:500px){#offline-map{max-height:145px}#offline-map svg{height:68px}#offline-map .map-detail{display:none}.top span{font-size:10px}.top{gap:4px}.entry input{min-width:0}#inv .item{font-size:16px}.item .item-caption{font-size:9px}}
+

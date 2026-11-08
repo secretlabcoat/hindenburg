@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; media-src data:; connect-src https://hindenburg-ai.secretlabcoat-0ba.workers.dev; font-src 'none'; base-uri 'none'; form-action 'none'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hindenburg — Prototype</title><style>@@INLINE_STYLE:00.css@@</style><style id="physical-facing-fallback">@@INLINE_STYLE:01.css@@</style><style>@@INLINE_STYLE:02.css@@</style></head><body><main class="shell"><header class="top"><strong>HINDENBURG</strong><span id="clock">May 6, 1937 · Early evening</span><button id="settingsBtn">Offline mode</button></header><div class="settings" id="settings"><div>Offline downloadable build: dialogue is scripted, not live AI.</div><input id="relay" placeholder="https://your-worker.workers.dev"><div class="notice">No API key or network connection required. Saves stay in this browser.</div><button id="saveSettings" disabled>Offline</button></div><section class="scene" id="scene"><div class="sky"></div><div class="windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div><div class="wall"></div><div class="floor"></div><div class="chair a"></div><div class="chair b"></div><div class="table"></div><div class="person damina" data-person="Damina Vontette" title="Talk to Damina Vontette"></div><div class="person snardy" data-person="Snardy Vontette" title="Talk to Snardy Vontette"></div><div class="tag" id="room">Passenger Lounge</div><button class="hotspot" id="move">Go to promenade →</button></section><div class="bottom"><aside class="panel verbs"><button id="talk">Talk</button><button id="examine" style="font-size:10px;padding:5px 2px;">Examine</button><button id="take">Take</button><button id="use">Use</button><button id="back">Return</button></aside><section class="panel"><div class="dialogue" id="log" aria-live="polite"></div><form class="entry" id="form"><input id="say" autocomplete="off" maxlength="350" placeholder="Type anything you want to say…" aria-label="What do you say?"><button type="submit">Speak</button></form><div class="small" id="speaker">Select a passenger to speak with them.</div></section><aside class="panel inventory"><strong>YOUR POSSESSIONS</strong><div class="inv" id="inv"><div class="item" data-item="Notebook" title="Notebook">📓</div><div class="item" data-item="Key" title="Key">🗝️</div><div class="item" data-item="Scrap of paper" title="Scrap of paper">📜</div><div class="item" data-item="Empty pocket" title="Empty pocket">·</div></div><div class="small" id="itemnote">Click an item to examine it.</div></aside></div><div class="status" id="status">Prototype · One lounge and promenade · Offline dialogue is scripted; live AI requires a compatible relay.</div></main><script>@@INLINE_SCRIPT:00.js@@</script><style>@@INLINE_STYLE:03.css@@</style>
+<div class="navdock" aria-label="First-person movement controls"><button id="navleft" aria-label="Turn left">←</button><button id="navforward" aria-label="Move forward">↑</button><button id="navright" aria-label="Turn right">→</button><span class="loc" id="viewlabel">Passenger Lounge · facing windows</span></div>
+<div class="map-panel" id="mapPanel" aria-label="Ship map">
+  <div class="map-title">SHIP MAP</div>
+  <div class="map-canvas" id="mapCanvas"></div>
+  <div class="map-legend">
+    <span class="map-dot" style="background:#e7cf9f;"></span> You
+    <span class="map-dot" style="background:#e74c3c;"></span> NPC
+    <span class="map-door">▢</span> Exit
+  </div>
+</div>
+<script>@@INLINE_SCRIPT:01.js@@</script><style>@@INLINE_STYLE:04.css@@</style>
+<div class="inventory-modal" id="inventoryModal" role="dialog" aria-modal="true" aria-label="Inventory"><div class="inventory-window"><div class="inventory-head"><strong>YOUR POSSESSIONS</strong><button id="closeInventory">Close ×</button></div><div class="inventory-grid" id="inventoryGrid"></div><p class="small" id="inventoryInfo">Select an item to inspect it.</p></div></div>
+<script>@@INLINE_SCRIPT:02.js@@</script>
+<style>@@INLINE_STYLE:05.css@@</style>
+<div id="titleoverlay" class="titleoverlay"><div class="titlecard"><div class="airship"><svg viewBox="0 0 240 100" width="230" height="96" role="img" aria-label="The airship Hindenburg"><defs><linearGradient id="hull" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1dcae"/><stop offset=".45" stop-color="#cdb184"/><stop offset="1" stop-color="#6f5639"/></linearGradient><linearGradient id="fin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8bd8c"/><stop offset="1" stop-color="#7a5f3f"/></linearGradient></defs><path d="M72 26 L36 6 L28 9 L40 34 Z M72 68 L36 88 L28 85 L40 60 Z" fill="url(#fin)" stroke="#5b452e" stroke-width="1.2"/><path d="M60 47 L14 41 L12 53 Z" fill="url(#fin)" stroke="#5b452e" stroke-width="1"/><ellipse cx="124" cy="47" rx="102" ry="27" fill="url(#hull)" stroke="#5b452e" stroke-width="1.6"/><g stroke="#8e734d" stroke-width=".9" fill="none" opacity=".75"><path d="M40 35 Q124 16 214 33"/><path d="M24 47 H226"/><path d="M40 60 Q124 79 214 61"/><path d="M64 23 V71 M92 20 V74 M120 20 V74 M148 20 V74 M176 22 V72 M200 27 V67"/></g><path d="M165 72 Q176 82 192 72 Z" fill="#6b5236" stroke="#4a3725" stroke-width="1"/><path d="M106 72 h28 q-2 6 -14 6 q-12 0 -14 -6 Z" fill="#7a5f3f" opacity=".9"/><ellipse cx="200" cy="38" rx="14" ry="5" fill="#fff6dc" opacity=".35"/></svg></div><div style="letter-spacing:4px;color:#c4ab80">AN ADVENTURE OUT OF TIME</div><h1>HINDENBURG</h1><p>May 6, 1937. You are aboard without a ticket.<br>You know how this journey ends.</p><button id="startgame">Begin Voyage</button><p style="font-size:12px">Headphones recommended · Sound is optional</p></div></div>
+<button id="soundbtn" class="soundbtn" aria-label="Toggle ambient sound">♫ Sound on</button>
+<script>@@INLINE_SCRIPT:03.js@@</script>
+<style>@@INLINE_STYLE:06.css@@</style>
+<div class="inventory-modal" id="notebookModal" role="dialog" aria-modal="true" aria-label="Notebook"><div class="inventory-window"><div class="inventory-head"><strong>📓 YOUR NOTEBOOK</strong><button id="closeNotebook">Close ×</button></div><div id="notebookBody"></div></div></div>
+<script>@@INLINE_SCRIPT:04.js@@</script>
+<style>@@INLINE_STYLE:07.css@@</style>
+<div id="endoverlay" class="titleoverlay" hidden><div class="titlecard"><div class="endkind" id="endkind"></div><h1 id="endtitle" style="font-size:clamp(24px,7vw,40px)"></h1><p id="endtext"></p><p class="endstats" id="endstats"></p><button id="endrestart">Start a new voyage</button></div></div>
+<script>@@INLINE_SCRIPT:05.js@@</script>
+<style>@@INLINE_STYLE:08.css@@</style>
+<script>@@INLINE_SCRIPT:06.js@@</script>
+<script>@@INLINE_SCRIPT:07.js@@</script>
+<script>@@INLINE_SCRIPT:08.js@@</script>
+<style>@@INLINE_STYLE:09.css@@</style>
+<script>@@INLINE_SCRIPT:09.js@@</script>
+<style>@@INLINE_STYLE:10.css@@</style>
+<script>@@INLINE_SCRIPT:10.js@@</script>
+<style>@@INLINE_STYLE:11.css@@</style>
+<script>@@INLINE_SCRIPT:11.js@@</script>
+<!-- r11-sleeping-tour -->
+<style>@@INLINE_STYLE:12.css@@</style>
+<script>@@INLINE_SCRIPT:12.js@@</script>
+
+<script>@@INLINE_SCRIPT:13.js@@</script>
+
+<script>@@INLINE_SCRIPT:14.js@@</script>
+<style>@@INLINE_STYLE:13.css@@</style><script>@@INLINE_SCRIPT:15.js@@</script><script>@@INLINE_SCRIPT:16.js@@</script><script>@@INLINE_SCRIPT:17.js@@</script><style>@@INLINE_STYLE:14.css@@</style><script>@@INLINE_SCRIPT:topology-runtime.js@@</script></body></html>
