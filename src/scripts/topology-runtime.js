@@ -14,6 +14,8 @@
  }
  document.querySelector('#offline-map')?.remove();document.querySelector('#map-toggle')?.remove();
  const toggle=document.createElement('button');toggle.id='topology-map-toggle';toggle.textContent='Floor plan';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','topology-map');document.querySelector('.top').append(toggle);
+ // Keep sound in the wrapping toolbar: the legacy fixed phone button covered Floor plan.
+ const sound=document.querySelector('#soundbtn');if(sound)document.querySelector('.top').append(sound);
  const drawer=document.createElement('aside');drawer.id='topology-map';drawer.hidden=true;drawer.setAttribute('aria-label','Ship floor plan');
  const select=document.createElement('select');select.id='topology-deck';select.setAttribute('aria-label','Select ship level');
  for(const[k,label]of Object.entries(T.decks)){const o=document.createElement('option');o.value=k;o.textContent=label;select.append(o)}

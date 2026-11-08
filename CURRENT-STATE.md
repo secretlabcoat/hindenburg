@@ -13,3 +13,6 @@ Latest fixes: centering uses rendered dot/pane rectangles incl borders/scroll, S
 
 ## Portrait status
 Current game integrates only existing STATIC Manard Toxu still (`idle_poster.webp` reference). Existing six-reaction MP4/WebM/posters and quality report copied under art/reference/steward; not wired into runtime.11other NPCs have no verified accepted standalone portrait/reaction set for this build; procedural/hotspot rendering and Watcher remain. Proposed character seeds in legacy plan are NOT outputs/approvals. Full current placements in machine manifest. Player remains unnamed and needs no invented identity.
+
+## P0 follow-up 2026-11-07
+Real headless Chrome found/fixed the Sound button intercepting phone Floor plan taps and short-landscape scene collapse. Four viewport checks pass; see audit/P0-BROWSER-QA.md and tests/browser-test-results.json. Full story/physical-device/live-origin checks remain pending. Current playable index.html and dist/index.html match the new build hash in VERSION.json; reference HTML remains original provenance.

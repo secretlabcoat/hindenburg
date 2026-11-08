@@ -22,3 +22,8 @@
 .entry input{padding:6px!important}.entry button{padding:6px!important}
 #dialogue-tools{font-size:10px}.inventory{padding:3px!important}
 .inv .item{flex-basis:68px}.item .item-caption{font-size:10px!important}#topology-movement{max-height:100px}.topology-door-strip button{font-size:10px;max-width:47%}}
+
+/* Toolbar controls participate in layout; no fixed overlay on map/actions. */
+.top #soundbtn{position:static;flex:0 0 auto;margin:0}
+/* Short landscape windows scroll instead of squeezing the scene out. */
+@media(max-height:500px){.scene{flex:1 0 180px!important;min-height:180px!important}}

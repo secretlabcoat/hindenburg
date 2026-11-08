@@ -4,7 +4,8 @@
   "version": "3.0.1",
   "scripts": {
     "build": "python3 build.py",
-    "test": "python3 tests/test-topology.py && node tests/test-dom.cjs && node tests/test-map-layout.cjs"
+    "test": "python3 tests/test-topology.py && node tests/test-dom.cjs && node tests/test-map-layout.cjs",
+    "test:browser": "node tests/test-browser.cjs"
   },
   "devDependencies": {
     "jsdom": "31.0.0"
