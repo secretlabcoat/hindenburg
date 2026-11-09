@@ -1,5 +1,15 @@
 # Deployment authorization and safe handoff
 
+## Art-only target — 2026-11-09
+
+ShareHTML (`https://oofyjym.sharehtml.org/`) is an art source. Do not publish or edit it.
+
+The permanent game is the existing Worker `hindenburg` at `https://hindenburg.secretlabcoat-0ba.workers.dev/`. The file to put in its catch-all response is `deploy/hindenburg-worker.html` (1,164,525 bytes, SHA-256 `2ed2fd16566b87974abdfafd5723f0b9327f2f363a13d7f3adc0e3d935b16565`). That file is the live Worker HTML plus ShareHTML’s ready photographs. It is not the V3 `dist/index.html`.
+
+`deploy/hindenburg-worker-module.mjs` is an ES module that returns those exact bytes for every request, with `content-type: text/html;charset=utf-8` and `cache-control: no-cache`. Deploy that module only onto the existing `hindenburg` Worker. Do not create a worker, and do not change `hindenburg-ai`.
+
+This branch does not publish by merging. Production was not changed when the artifact was built.
+
 ## Current authorization (Paul, 2026-11-08)
 
 Paul authorizes agents to save and commit this project's changes locally, push them to the existing GitHub repository `https://github.com/secretlabcoat/hindenburg`, and deploy the game build to the existing Cloudflare game Worker `hindenburg` at `https://hindenburg.secretlabcoat-0ba.workers.dev/`.
