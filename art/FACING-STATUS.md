@@ -1,6 +1,6 @@
 # Current facing queue — spatial V3
 
-76view IDs /19room identities;7compatible enabled photos,69fallback.21legacy embedded images do not mean21current approvals. All930xxxseeds are proposed, not generated.
+76view IDs /19room identities;8enabled photographs,68fallback. The B-deck washroom, the starting room, uses the supplied north curtain original plus the three matching supplied walls. 21legacy embedded images do not mean21current approvals. All930xxxseeds are proposed, not generated.
 
 |Priority|Room / deck|View|Heading|Framing|Actual doors / connectors|Art status|Proposed seed|
 |---|---|---|---|---|---|---|---|
@@ -49,9 +49,9 @@
 |11|Control Car /C|control_back|South / stern|room-wall|Enclosed service ladder: keel ↔ control car→Keel Service Walkway|css-fallback-needs-new-topology-art|931302|
 |11|Control Car /C|control_port|West / port|room-wall|Wall / none|css-fallback-needs-new-topology-art|931303|
 |12|B-Deck Washroom /B|washroom_stall|North / bow|room-wall|Wall / none|enabled-existing-compatible|930000|
-|12|B-Deck Washroom /B|washroom_basins|East / starboard|room-wall|Wall / none|enabled-existing-compatible|930001|
-|12|B-Deck Washroom /B|washroom_door|South / stern|room-wall|Door→B-Deck Main Corridor|enabled-existing-compatible|930002|
-|12|B-Deck Washroom /B|washroom_wall|West / port|room-wall|Wall / none|css-fallback-needs-new-topology-art|930003|
+|12|B-Deck Washroom /B|washroom_basins|East / starboard|room-wall|Wall / none|enabled-user-approved|930001|
+|12|B-Deck Washroom /B|washroom_door|South / stern|room-wall|Door→B-Deck Main Corridor|enabled-user-approved|930002|
+|12|B-Deck Washroom /B|washroom_wall|West / port|room-wall|Wall / none|enabled-user-approved|930003|
 |13|Cabin B-6 (B deck) /B|cabin_bunk|North / bow|room-wall|Wall / none|enabled-existing-compatible|930100|
 |13|Cabin B-6 (B deck) /B|cabin_door|East / starboard|room-wall|Door→B-Deck Cabin Corridor|css-fallback-needs-new-topology-art|930101|
 |13|Cabin B-6 (B deck) /B|cabin_window|South / stern|room-wall|Wall / none|enabled-existing-compatible|930102|

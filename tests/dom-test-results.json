@@ -1,9 +1,10 @@
 {
-  "passed": 15,
+  "passed": 16,
   "tests": [
     "Initial source and V3 override execute without uncaught DOM errors",
     "Begin in washroom north; 76 views and 12 NPCs retained",
     "Turns stay in washroom; South doorway enters adjacent B corridor preserving South",
+    "Washroom start shows four supplied photographs; curtain, mirror and painted south door keep their interactions",
     "Washroom → B corridor → stairs → A corridor → cabin/lounge/dining and reciprocal return, heading preserved",
     "Bar/purser/cabin/crew/keel/control route follows only shared doors and named verticals",
     "All 76 right turns keep room identity and rotate world compass exactly 90°",

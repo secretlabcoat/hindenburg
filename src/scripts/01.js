@@ -22,15 +22,19 @@ function applySceneArt(paintEl, viewId){
   img.className='scene-art';
   img.alt='';
   img.decoding='async';
-  const mark=()=>{if(img.naturalWidth>0)paintEl.classList.add('has-art')};
+  const mark=()=>{if(img.isConnected&&img.naturalWidth>0)paintEl.classList.add('has-art')};
   img.onload=mark;
   img.onerror=()=>{
     if(fallback && img.dataset.tried!=='1'){img.dataset.tried='1';img.src=fallback;return}
     img.remove();paintEl.classList.remove('has-art');
   };
   img.src=primary;
-  if(img.complete) mark();
   paintEl.insertBefore(img, paintEl.firstChild);
+  // Data-URL photographs can already be complete before naturalWidth is ready, so the
+  // load event never arrives. Decode again or the CSS fixtures stay painted over the photo.
+  mark();
+  queueMicrotask(mark);
+  if(typeof img.decode==='function')img.decode().then(mark).catch(()=>{});
 }
 function scenery(v){let n=nodes[v],style=n.style,s='<div class="paint"><div class="ceiling"></div><div class="perspective-floor"></div>';
 if(n.style==='cabin'||n.style==='cabinwindow'||n.style==='cabindoor'||n.style==='cabindesk'){s+='<div class="cabinwall"></div><div class="cabinlamp"></div>';if(n.style==='cabindesk')s+='<div class="cabindesk"></div>';if(n.style==='cabin')s+='<div class="cabinbed"></div><div class="cabintrunk" data-object="trunk" title="Inspect trunk"></div>';if(n.style==='cabinwindow')s+='<div class="cabinport"></div><div class="cabindesk" data-object="desk" title="Inspect desk"></div>';if(n.style==='cabindoor'||n.style==='cabindesk')s+='<div class="cabindoorobj" data-move="corridor_left" title="Open cabin door"></div>';}
