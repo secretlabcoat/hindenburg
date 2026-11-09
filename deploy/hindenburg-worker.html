@@ -951,4 +951,145 @@ draw=function(){
 })();
 </script>
 
+
+<style id="deck-hud">
+#deckhud{order:0;flex:0 0 auto;background:#d6e6f5;color:#1c2430;border:2px solid #243044;margin:0 0 3px}
+.shell:has(#deckhud-large:not([hidden])) .scene{flex:0 1 30vh;min-height:120px}
+.shell:has(#deckhud-large:not([hidden])) .dialogue{height:72px}
+.deckhud-bar{display:flex;align-items:center;gap:8px;padding:4px 6px}
+#deckhud-toggle{min-height:44px;min-width:44px;background:#243044;color:#f4efe6;border:0;padding:6px 10px;font:14px Georgia,serif}
+#deckhud-where{font:13px Georgia,serif}
+.deckhud-compact svg{width:100%;height:72px;display:block;pointer-events:none}
+.deckhud-large{padding:6px 8px 8px;max-height:min(42vh,280px);overflow:auto}
+.deckhud-large svg{width:100%;height:auto;display:block}
+#deckhud-deck{min-height:44px;font:16px Georgia,serif;margin-left:6px}
+#deckhud-facing{font:13px Georgia,serif;margin:6px 0}
+@media(max-height:700px){.deckhud-compact svg{height:56px}.deckhud-large{max-height:28vh}}
+</style>
+
+<script id="deck-hud">
+const DECK_PLAN={"note":"Game schematic, not a measured blueprint. Bow is up, port is left, starboard is right.","width":400,"height":560,"decks":[{"id":"A","name":"A deck"},{"id":"B","name":"B deck"},{"id":"K","name":"Keel"},{"id":"U","name":"Upper rings"},{"id":"C","name":"Control car"}],"places":{"promenade":{"deck":"A","x":100,"y":24,"w":200,"h":78,"label":"Promenade"},"lounge":{"deck":"A","x":100,"y":118,"w":200,"h":100,"label":"Passenger lounge"},"acorridor":{"deck":"A","x":140,"y":250,"w":120,"h":180,"label":"Passenger corridor"},"acabin":{"deck":"A","x":16,"y":280,"w":108,"h":110,"label":"Cabin (A deck)"},"washroom":{"deck":"B","x":16,"y":36,"w":120,"h":110,"label":"Washroom"},"office":{"deck":"B","x":16,"y":176,"w":120,"h":96,"label":"Purser\u2019s office"},"b6":{"deck":"B","x":16,"y":320,"w":120,"h":120,"label":"Cabin B-6"},"bcorridor":{"deck":"B","x":150,"y":36,"w":100,"h":420,"label":"B-deck corridor"},"bar":{"deck":"B","x":270,"y":150,"w":114,"h":100,"label":"Bar"},"keel":{"deck":"K","x":160,"y":36,"w":80,"h":400,"label":"Keel walkway"},"tour_shoes":{"deck":"K","x":16,"y":36,"w":128,"h":72,"label":"Tour \u00b7 overshoes"},"tour_cells":{"deck":"K","x":16,"y":124,"w":128,"h":72,"label":"Tour \u00b7 gas cells"},"tour_tanks":{"deck":"K","x":16,"y":212,"w":128,"h":72,"label":"Tour \u00b7 tanks"},"tour_end":{"deck":"K","x":16,"y":300,"w":128,"h":72,"label":"Tour \u00b7 forward end"},"nook":{"deck":"U","x":90,"y":70,"w":220,"h":140,"label":"Upper rings"},"control":{"deck":"C","x":80,"y":48,"w":240,"h":160,"label":"Control car"}},"nodes":{"lounge_windows":{"place":"lounge","heading":0},"lounge_people":{"place":"lounge","heading":90},"lounge_side":{"place":"lounge","heading":180},"lounge_aft":{"place":"lounge","heading":270},"promenade":{"place":"promenade","heading":180},"promenade_side":{"place":"promenade","heading":270},"promenade_far":{"place":"promenade","heading":0},"promenade_aft":{"place":"promenade","heading":90},"corridor_forward":{"place":"acorridor","heading":0},"corridor_right":{"place":"acorridor","heading":90},"corridor_end":{"place":"acorridor","heading":180},"corridor_left":{"place":"acorridor","heading":270},"adeck_cabin":{"place":"acabin","heading":90},"washroom_stall":{"place":"washroom","heading":0},"washroom_basins":{"place":"washroom","heading":90},"washroom_door":{"place":"washroom","heading":180},"washroom_wall":{"place":"washroom","heading":270},"cabin_window":{"place":"b6","heading":0},"cabin_door":{"place":"b6","heading":90},"cabin_desk":{"place":"b6","heading":180},"cabin_bunk":{"place":"b6","heading":270},"office_desk":{"place":"office","heading":90},"bar_counter":{"place":"bar","heading":270},"bdeck_stairs":{"place":"bcorridor","heading":0,"at":[200,70]},"bdeck_washroom":{"place":"bcorridor","heading":270,"at":[200,140]},"bdeck_cabins":{"place":"bcorridor","heading":270,"at":[200,360]},"crew_door":{"place":"bcorridor","heading":180,"at":[200,430]},"keel_walk":{"place":"keel","heading":0,"at":[200,80]},"keel_hatch":{"place":"keel","heading":270,"at":[200,220]},"keel_back":{"place":"keel","heading":180,"at":[200,390]},"tour_shoes":{"place":"tour_shoes","heading":180},"tour_cells":{"place":"tour_cells","heading":180},"tour_tanks":{"place":"tour_tanks","heading":180},"tour_end":{"place":"tour_end","heading":90},"girder_nook":{"place":"nook","heading":180},"control_helm":{"place":"control","heading":0},"control_back":{"place":"control","heading":180}},"stubs":[{"deck":"A","x":276,"y":300,"w":108,"h":70,"label":"Stairs down to B","link":"acorridor-bcorridor"},{"deck":"B","x":270,"y":36,"w":114,"h":58,"label":"Stairs up to A","link":"acorridor-bcorridor"},{"deck":"B","x":270,"y":470,"w":114,"h":58,"label":"Ladder to keel","link":"bcorridor-keel"},{"deck":"K","x":256,"y":360,"w":128,"h":52,"label":"Ladder up to B","link":"bcorridor-keel"},{"deck":"K","x":256,"y":36,"w":128,"h":52,"label":"Ladder to control","link":"keel-control"},{"deck":"C","x":80,"y":224,"w":240,"h":44,"label":"Ladder up to keel","link":"keel-control"},{"deck":"K","x":256,"y":180,"w":128,"h":52,"label":"Ladder to upper rings","link":"keel-nook"},{"deck":"U","x":90,"y":230,"w":220,"h":44,"label":"Ladder down to keel","link":"keel-nook"},{"deck":"B","x":270,"y":400,"w":114,"h":56,"label":"Escorted tour","link":"bcorridor-tour"},{"deck":"K","x":16,"y":400,"w":128,"h":44,"label":"Tour from crew door","link":"bcorridor-tour"}],"links":[{"id":"lounge-promenade","a":"lounge","b":"promenade","kind":"door","label":"Door"},{"id":"lounge-acorridor","a":"lounge","b":"acorridor","kind":"door","label":"Door"},{"id":"acorridor-acabin","a":"acorridor","b":"acabin","kind":"door","label":"Door \u00b7 port"},{"id":"acorridor-bcorridor","a":"acorridor","b":"bcorridor","kind":"stairs","label":"Stairs \u00b7 A deck starboard \u2194 B deck"},{"id":"bcorridor-washroom","a":"bcorridor","b":"washroom","kind":"door","label":"Door"},{"id":"bcorridor-office","a":"bcorridor","b":"office","kind":"door","label":"Door"},{"id":"bcorridor-b6","a":"bcorridor","b":"b6","kind":"door","label":"Door"},{"id":"bcorridor-bar","a":"bcorridor","b":"bar","kind":"door","label":"Door"},{"id":"bcorridor-keel","a":"bcorridor","b":"keel","kind":"stairs","label":"Ladder \u00b7 crew door \u2194 keel"},{"id":"keel-control","a":"keel","b":"control","kind":"stairs","label":"Ladder \u00b7 keel \u2194 control car"},{"id":"tour-shoes-cells","a":"tour_shoes","b":"tour_cells","kind":"door","label":"Tour path"},{"id":"tour-cells-tanks","a":"tour_cells","b":"tour_tanks","kind":"door","label":"Tour path"},{"id":"tour-tanks-end","a":"tour_tanks","b":"tour_end","kind":"door","label":"Tour path"},{"id":"tour-end-keel","a":"tour_end","b":"keel","kind":"door","label":"Tour joins the walkway"},{"id":"bcorridor-tour","a":"bcorridor","b":"tour_shoes","kind":"gated","label":"Escorted tour from the crew door"},{"id":"keel-nook","a":"keel","b":"nook","kind":"gated","label":"Ladder up after the glimmer"},{"id":"tour-cells-nook","a":"tour_cells","b":"nook","kind":"gated","label":"Ladder up from the gas cells"}]};
+/* Deck plans for the permanent game. Geometry is a schematic of the
+   walkable nodes, not a measured airship. Bow is up. */
+function hindenburgDeckSvg(plan, deckId, marker) {
+  const places = Object.entries(plan.places).filter(([, p]) => p.deck === deckId);
+  const deck = plan.decks.find(d => d.id === deckId);
+  const w = plan.width, h = plan.height;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const center = p => [p.x + p.w / 2, p.y + p.h / 2];
+  let body = '';
+  const onDeck = id => plan.places[id] && plan.places[id].deck === deckId;
+  for (const link of plan.links) {
+    if (onDeck(link.a) && onDeck(link.b)) {
+      const [x1, y1] = center(plan.places[link.a]);
+      const [x2, y2] = center(plan.places[link.b]);
+      const dash = link.kind === 'gated' ? ' stroke-dasharray="5 4"' : '';
+      body += '<line data-link="' + link.id + '" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#243044" stroke-width="' + (link.kind === 'stairs' ? 6 : 3) + '"' + dash + '/>';
+    } else if (onDeck(link.a) || onDeck(link.b)) {
+      const id = onDeck(link.a) ? link.a : link.b;
+      const p = plan.places[id];
+      const x = p.x + p.w - 8, y = p.y + 8;
+      body += '<g data-link="' + link.id + '" data-transfer="1"><rect x="' + (x - 28) + '" y="' + y + '" width="36" height="22" fill="#f3d48a" stroke="#243044" stroke-width="2"/>' +
+        '<path d="M' + (x - 24) + ' ' + (y + 16) + ' h28 M' + (x - 22) + ' ' + (y + 11) + ' h24 M' + (x - 20) + ' ' + (y + 6) + ' h20" stroke="#243044" stroke-width="1.4" fill="none"/>' +
+        '<title>' + esc(link.label) + '</title></g>';
+    }
+  }
+  for (const [id, p] of places) {
+    const fill = p.label.indexOf('corridor') >= 0 || p.label.indexOf('walkway') >= 0 ? '#e7d2c4' : '#c48b93';
+    body += '<g data-place="' + id + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + p.h + '" rx="2" fill="' + fill + '" stroke="#243044" stroke-width="4"/>' +
+      '<text x="' + (p.x + p.w / 2) + '" y="' + (p.y + p.h / 2) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="13">' + esc(p.label) + '</text></g>';
+  }
+  for (const stub of plan.stubs || []) {
+    if (stub.deck !== deckId) continue;
+    body += '<g data-link="' + stub.link + '" data-transfer="1"><rect x="' + stub.x + '" y="' + stub.y + '" width="' + stub.w + '" height="' + stub.h + '" fill="#f3d48a" stroke="#243044" stroke-width="3"/>' +
+      '<text x="' + (stub.x + stub.w / 2) + '" y="' + (stub.y + stub.h / 2 + 4) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="11">' + esc(stub.label) + '</text></g>';
+  }
+  if (marker && plan.places[marker.place] && plan.places[marker.place].deck === deckId) {
+    const node = plan.nodes[marker.node] || {};
+    const p = plan.places[marker.place];
+    const x = node.at ? node.at[0] : p.x + p.w / 2;
+    const y = node.at ? node.at[1] : p.y + p.h / 2;
+    const heading = node.heading || 0;
+    body += '<g data-player="1" data-node="' + esc(marker.node) + '" data-heading="' + heading + '" transform="translate(' + x + ' ' + y + ')">' +
+      '<circle r="11" fill="#f4c430" stroke="#1c2430" stroke-width="2"/>' +
+      '<polygon points="0,-16 -7,6 7,6" fill="#1d3557" transform="rotate(' + heading + ')"/>' +
+      '</g>';
+  }
+  const title = deck ? deck.name : deckId;
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="' + esc(title) + ' game schematic, bow up">' +
+    '<rect width="' + w + '" height="' + h + '" fill="#d6e6f5"/>' +
+    '<text x="16" y="18" fill="#1c2430" font-family="Georgia, serif" font-size="14" font-weight="700">' + esc(title) + '</text>' +
+    '<text x="16" y="' + (h - 28) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Game schematic · not a measured blueprint</text>' +
+    '<text x="16" y="' + (h - 12) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Bow ↑   Port ←   Starboard →   door —   stairs = ladder   dashed = gated</text>' +
+    body + '</svg>';
+}
+
+function hindenburgMountDeckHud(plan) {
+  if (document.getElementById('deckhud')) return;
+  const hud = document.createElement('section');
+  hud.id = 'deckhud';
+  hud.hidden = true;
+  hud.innerHTML = '<div class="deckhud-bar"><button type="button" id="deckhud-toggle" aria-expanded="false" aria-controls="deckhud-large">Deck plan</button><span id="deckhud-where"></span></div>' +
+    '<div id="deckhud-compact" class="deckhud-compact"></div>' +
+    '<div id="deckhud-large" class="deckhud-large" hidden><label>Deck <select id="deckhud-deck"></select></label><p id="deckhud-facing"></p><div id="deckhud-full"></div></div>';
+  document.querySelector('.top').after(hud);
+  const select = hud.querySelector('#deckhud-deck');
+  for (const deck of plan.decks) {
+    const o = document.createElement('option');
+    o.value = deck.id;
+    o.textContent = deck.name;
+    select.append(o);
+  }
+  let enlarged = false;
+  let chosen = null;
+  function placeOf(nodeId) {
+    const n = plan.nodes[nodeId];
+    return n ? plan.places[n.place] : null;
+  }
+  function exitText() {
+    const n = nodes[view];
+    if (!n || !n.forward || !nodes[n.forward]) return 'Forward: no door on this facing.';
+    const there = nodes[n.forward];
+    const same = plan.nodes[n.forward] && plan.nodes[view] && plan.nodes[n.forward].place === plan.nodes[view].place;
+    if (same) return 'Forward: farther along ' + placeOf(view).label + '.';
+    return 'Forward: ' + there.name + ' · ' + there.facing + '.';
+  }
+  function paintHud() {
+    const started = document.querySelector('#titleoverlay') && document.querySelector('#titleoverlay').hidden;
+    hud.hidden = !started;
+    if (!started || !plan.nodes[view]) return;
+    const meta = plan.nodes[view];
+    const place = plan.places[meta.place];
+    if (!chosen) chosen = place.deck;
+    if (!enlarged) chosen = place.deck;
+    select.value = chosen;
+    hud.querySelector('#deckhud-where').textContent = plan.decks.find(d => d.id === place.deck).name + ' · ' + place.label;
+    const marker = {node: view, place: meta.place};
+    hud.querySelector('#deckhud-compact').innerHTML = hindenburgDeckSvg(plan, place.deck, marker);
+    hud.querySelector('#deckhud-full').innerHTML = hindenburgDeckSvg(plan, chosen, chosen === place.deck ? marker : null);
+    const here = chosen === place.deck ? 'You are here. ' : 'You are on ' + plan.decks.find(d => d.id === place.deck).name + '. ';
+    hud.querySelector('#deckhud-facing').textContent = here + 'Facing: ' + nodes[view].facing + '. ' + exitText();
+  }
+  hud.querySelector('#deckhud-toggle').onclick = () => {
+    enlarged = !enlarged;
+    hud.querySelector('#deckhud-large').hidden = !enlarged;
+    hud.querySelector('#deckhud-toggle').setAttribute('aria-expanded', String(enlarged));
+    hud.querySelector('#deckhud-toggle').textContent = enlarged ? 'Close plan' : 'Deck plan';
+    paintHud();
+  };
+  select.onchange = () => { chosen = select.value; paintHud(); };
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && enlarged) hud.querySelector('#deckhud-toggle').click();
+  });
+  const prevDraw = draw;
+  draw = function () {
+    const result = prevDraw.apply(this, arguments);
+    paintHud();
+    return result;
+  };
+  paintHud();
+}
+
+hindenburgMountDeckHud(DECK_PLAN);
+</script>
 </body></html>

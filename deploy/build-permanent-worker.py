@@ -172,10 +172,29 @@ draw=function(){
 </script>
 """ % json.dumps(payload, separators=(',', ':'))
 
+deck_css = r"""
+<style id="deck-hud">
+#deckhud{order:0;flex:0 0 auto;background:#d6e6f5;color:#1c2430;border:2px solid #243044;margin:0 0 3px}
+.shell:has(#deckhud-large:not([hidden])) .scene{flex:0 1 30vh;min-height:120px}
+.shell:has(#deckhud-large:not([hidden])) .dialogue{height:72px}
+.deckhud-bar{display:flex;align-items:center;gap:8px;padding:4px 6px}
+#deckhud-toggle{min-height:44px;min-width:44px;background:#243044;color:#f4efe6;border:0;padding:6px 10px;font:14px Georgia,serif}
+#deckhud-where{font:13px Georgia,serif}
+.deckhud-compact svg{width:100%;height:72px;display:block;pointer-events:none}
+.deckhud-large{padding:6px 8px 8px;max-height:min(42vh,280px);overflow:auto}
+.deckhud-large svg{width:100%;height:auto;display:block}
+#deckhud-deck{min-height:44px;font:16px Georgia,serif;margin-left:6px}
+#deckhud-facing{font:13px Georgia,serif;margin:6px 0}
+@media(max-height:700px){.deckhud-compact svg{height:56px}.deckhud-large{max-height:28vh}}
+</style>
+"""
+plan = json.loads((ROOT / 'deck-plans' / 'plans.json').read_text())
+deck_js = (ROOT / 'deck-map.js').read_text()
+deck_script = '<script id="deck-hud">\nconst DECK_PLAN=' + json.dumps(plan, separators=(',', ':')) + ';\n' + deck_js + '\nhindenburgMountDeckHud(DECK_PLAN);\n</script>'
 html = BASE.decode('utf-8')
 if '</body>' not in html:
     raise SystemExit('baseline has no body close')
-html = html.replace('</body>', style + '\n' + script + '\n</body>', 1)
+html = html.replace('</body>', style + '\n' + script + '\n' + deck_css + '\n' + deck_script + '\n</body>', 1)
 if html.count(relay.decode()) < 1:
     raise SystemExit('relay URL dropped')
 for name in OLD_BATHROOM:

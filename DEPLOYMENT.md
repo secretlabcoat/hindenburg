@@ -4,7 +4,7 @@
 
 ShareHTML (`https://oofyjym.sharehtml.org/`) is an art source. Do not publish or edit it.
 
-The permanent game is the existing Worker `hindenburg` at `https://hindenburg.secretlabcoat-0ba.workers.dev/`. The file to put in its catch-all response is `deploy/hindenburg-worker.html` (1,232,509 bytes, SHA-256 `2839d4cba61ca9bab7494c1ccf5601d994f199d4efa3e903a52fc95a5a0c4fd2`). It keeps the permanent game, uses the uploaded bathroom walls, and leaves characters visible over photographs. It is not the V3 `dist/index.html`. The earlier body `2ed2fd16…565` is superseded.
+The permanent game is the existing Worker `hindenburg` at `https://hindenburg.secretlabcoat-0ba.workers.dev/`. The file to put in its catch-all response is `deploy/hindenburg-worker.html` (1,246,923 bytes, SHA-256 `b9e31e10dc73befb936e326ec86fbfeed34f39507a372213c0c59fd0d294941b`). It keeps the permanent game, uses the uploaded bathroom walls, and leaves characters visible over photographs. It is not the V3 `dist/index.html`. The earlier body `2ed2fd16…565` is superseded.
 
 `deploy/hindenburg-worker-module.mjs` is an ES module that returns those exact bytes for every request, with `content-type: text/html;charset=utf-8` and `cache-control: no-cache`. Deploy that module only onto the existing `hindenburg` Worker. Do not create a worker, and do not change `hindenburg-ai`.
 

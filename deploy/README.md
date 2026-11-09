@@ -10,7 +10,9 @@ Coverage is `deploy/ART-COVERAGE.json`. Nineteen permanent views show photograph
 
 ## Deploy route
 
-Update the existing Worker named `hindenburg` so its catch-all response is `deploy/hindenburg-worker.html` (1,232,509 bytes, SHA-256 `2839d4cba61ca9bab7494c1ccf5601d994f199d4efa3e903a52fc95a5a0c4fd2`). Do not deploy `dist/index.html` from the V3 game, and do not change the `hindenburg-ai` Worker. The previously published body `2ed2fd16566b87974abdfafd5723f0b9327f2f363a13d7f3adc0e3d935b16565` still has the older bathroom pictures and hides characters.
+Schematic deck plans, labeled as not a measured blueprint, are in `deploy/deck-plans/` (SVG and PNG for A, B, Keel, Upper rings, and the control car). The same geometry drives the in-game Deck plan control. It does not move the player.
+
+Update the existing Worker named `hindenburg` so its catch-all response is `deploy/hindenburg-worker.html` (1,246,923 bytes, SHA-256 `b9e31e10dc73befb936e326ec86fbfeed34f39507a372213c0c59fd0d294941b`). Do not deploy `dist/index.html` from the V3 game, and do not change the `hindenburg-ai` Worker. The previously published body `2ed2fd16566b87974abdfafd5723f0b9327f2f363a13d7f3adc0e3d935b16565` still has the older bathroom pictures and hides characters.
 
 ## Release v1.0.0 (checked, not a deploy target)
 
