@@ -219,19 +219,15 @@ function applySceneArt(paintEl, viewId){
   img.className='scene-art';
   img.alt='';
   img.decoding='async';
-  const mark=()=>{if(img.isConnected&&img.naturalWidth>0)paintEl.classList.add('has-art')};
+  const mark=()=>{if(img.naturalWidth>0)paintEl.classList.add('has-art')};
   img.onload=mark;
   img.onerror=()=>{
     if(fallback && img.dataset.tried!=='1'){img.dataset.tried='1';img.src=fallback;return}
     img.remove();paintEl.classList.remove('has-art');
   };
   img.src=primary;
+  if(img.complete) mark();
   paintEl.insertBefore(img, paintEl.firstChild);
-  // Data-URL photographs can already be complete before naturalWidth is ready, so the
-  // load event never arrives. Decode again or the CSS fixtures stay painted over the photo.
-  mark();
-  queueMicrotask(mark);
-  if(typeof img.decode==='function')img.decode().then(mark).catch(()=>{});
 }
 function scenery(v){let n=nodes[v],style=n.style,s='<div class="paint"><div class="ceiling"></div><div class="perspective-floor"></div>';
 if(n.style==='cabin'||n.style==='cabinwindow'||n.style==='cabindoor'||n.style==='cabindesk'){s+='<div class="cabinwall"></div><div class="cabinlamp"></div>';if(n.style==='cabindesk')s+='<div class="cabindesk"></div>';if(n.style==='cabin')s+='<div class="cabinbed"></div><div class="cabintrunk" data-object="trunk" title="Inspect trunk"></div>';if(n.style==='cabinwindow')s+='<div class="cabinport"></div><div class="cabindesk" data-object="desk" title="Inspect desk"></div>';if(n.style==='cabindoor'||n.style==='cabindesk')s+='<div class="cabindoorobj" data-move="corridor_left" title="Open cabin door"></div>';}
@@ -2324,12 +2320,6 @@ draw();
 #dialogue-tools{font-size:10px}.inventory{padding:3px!important}
 .inv .item{flex-basis:68px}.item .item-caption{font-size:10px!important}#topology-movement{max-height:100px}.topology-door-strip button{font-size:10px;max-width:47%}}
 
-/* Supplied washroom photographs: invisible hotspots track the painted fixtures.
-   CSS-drawn previews keep the larger placeholder shapes above. */
-.scene .paint.has-art .wash-curtain{left:33%;width:36%;top:20%;bottom:28%}
-.scene .paint.has-art .wash-mirror{left:36%;width:28%;top:16%;height:26%}
-.wash-door-hotspot{position:absolute;left:38%;top:16%;width:24%;height:62%;z-index:6;background:transparent;border:0;padding:0;cursor:pointer}
-.wash-door-hotspot:focus{outline:2px solid #f5d895}
 /* Toolbar controls participate in layout; no fixed overlay on map/actions. */
 .top #soundbtn{position:static;flex:0 0 auto;margin:0}
 /* Short landscape windows scroll instead of squeezing the scene out. */
@@ -2423,11 +2413,7 @@ draw();
   for(const x of ee){const b=document.createElement('button');b.type='button';b.dataset.topologyEdge=x.edge.id;const why=gate(x.edge);b.textContent=(x.edge.kind==='vertical'?x.edge.label+' → ':'Door → ')+T.rooms[x.to].name;b.title=why||'Move through this adjacent '+(x.edge.kind==='vertical'?'connector':'door');b.disabled=!!why;b.setAttribute('aria-label',b.textContent+(why?' — '+why:''));b.onclick=()=>move(x.edge.id);movement.append(b);if(why){const reason=document.createElement('span');reason.textContent=why;reason.className='movement-reason';movement.append(reason)}}
   if(id==='crew'&&h===1&&clockTime()>=8&&clockTime()<16&&!ai[BUNNY].toured){const b=document.createElement('button');b.textContent='Join guided tour via this crew ladder';b.onclick=()=>ACTS.tour();movement.append(b)}
   if(id==='keel'&&h===2){const p=document.createElement('span');p.className='movement-reason';p.textContent='External escape hatch (not a room): Bunny must arrange it; only usable during approach.';movement.append(p)}
-  const paintedWashDoor=id==='wash'&&nodes[view].artStatus==='ready'&&ee.filter(x=>x.edge.kind==='door'&&!gate(x.edge)).length===1;
-  const strip=document.createElement('div');strip.className='topology-door-strip';strip.setAttribute('aria-label','Doorways visible on this wall');for(const x of ee){if(paintedWashDoor&&x.edge.kind==='door')continue;const b=document.createElement('button');b.type='button';b.textContent=(x.edge.kind==='vertical'?'↕ ':'Door: ')+T.rooms[x.to].name;b.dataset.topologyEdge=x.edge.id;b.disabled=!!gate(x.edge);b.title=gate(x.edge)||x.edge.label;b.onclick=()=>move(x.edge.id);strip.append(b)}scene.append(strip);
-  // Starting washroom only: the supplied south photograph has one centered door.
-  // The movement bar keeps the labelled control so the caption is not covered.
-  if(paintedWashDoor){const x=ee.find(x=>x.edge.kind==='door'&&!gate(x.edge)),hot=document.createElement('button');hot.type='button';hot.className='wash-door-hotspot';hot.dataset.topologyEdge=x.edge.id;hot.setAttribute('aria-label','Door to '+T.rooms[x.to].name);hot.title='Door to '+T.rooms[x.to].name;hot.onclick=()=>move(x.edge.id);scene.append(hot)}
+  const strip=document.createElement('div');strip.className='topology-door-strip';strip.setAttribute('aria-label','Doorways visible on this wall');for(const x of ee){const b=document.createElement('button');b.type='button';b.textContent=(x.edge.kind==='vertical'?'↕ ':'Door: ')+T.rooms[x.to].name;b.dataset.topologyEdge=x.edge.id;b.disabled=!!gate(x.edge);b.title=gate(x.edge)||x.edge.label;b.onclick=()=>move(x.edge.id);strip.append(b)}scene.append(strip);
   document.querySelector('#navleft').onclick=()=>turn(-1);document.querySelector('#navright').onclick=()=>turn(1);
   const f=document.querySelector('#navforward'),first=ee.find(x=>!gate(x.edge));f.disabled=!first;f.onclick=()=>first?move(first.edge.id):narrate(ee.length?gate(ee[0].edge):'Wall, not a doorway. Turn to an exit.');f.title=first?'Enter '+T.rooms[first.to].name:ee.length?gate(ee[0].edge):'No door on this wall';f.setAttribute('aria-label',first?'Move forward to '+T.rooms[first.to].name:'Forward unavailable: '+f.title);
   document.querySelector('#back').textContent='Turn around';document.querySelector('#back').setAttribute('aria-label','Turn around in the current room');document.querySelector('#back').onclick=()=>turn(2);

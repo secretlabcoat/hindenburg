@@ -1,17 +1,17 @@
 {
-  "version": "V3-washroom-first-room-20261109",
+  "version": "V3-integrated-bathroom-20261108",
   "reference_html_sha256": "18c66df21affc75f9fc2898ca21a56cf8160d0cb95fcb8c1cf39049207446aa8",
   "reference_html_bytes": 1278563,
   "supplied_source_sha256": "fcebd6b37b3ccd673af7a81118af08024cd781f31ab7da0c9e88a59e23611ee6",
   "lineage": "supplied playtest fcebd6 -> isolated V1 ->V2 live/UI ->V3 physical topology ->map usability patch",
-  "deployment_status": "Built and browser-checked 2026-11-09. Not deployed: Wrangler is unauthenticated and ShareHTML has no stored page id or manage key. Live hosts still serve older HTML.",
+  "deployment_status": "Integrated locally; not deployed",
   "possible_targets": [
     "https://oofyjym.sharehtml.org/",
     "https://hindenburg.secretlabcoat-0ba.workers.dev/"
   ],
   "save_key": "hindenburg_playable_20261107_v1",
   "optional_save_field": "topologyVersion:3",
-  "built_html_sha256": "477188536b513b92ff20c1cba972328db499cd08a45444956dd97d21b8838392",
-  "built_html_bytes": 1347631,
-  "validation": "npm test pass: 149 geometry, 16 DOM, 8 story/save, 19 map rooms. Headless Chrome 1280x800 and 390x844 showed all four starting-room photographs, curtain, mirror, and south-door interactions."
+  "built_html_sha256": "0c32ad77d8eb7190fe76a0d830f71e6e14a4b5ac034af007b537a12f4cd8828c",
+  "built_html_bytes": 1346162,
+  "validation": "npm run build && npm test pass; mounted browser four bathroom views verified"
 }

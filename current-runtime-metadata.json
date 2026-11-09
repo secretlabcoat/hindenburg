@@ -30,7 +30,7 @@
       "style": "washwall",
       "framing": "room-wall",
       "fallback": "towel",
-      "artStatus": "ready"
+      "artStatus": "placeholder"
     },
     "cabin_bunk": {
       "name": "Cabin B-6 (B deck)",

@@ -30,15 +30,5 @@ Official docs https://sharehtml.org/docs/api explicitly document `PUT /api/v1/pa
 ## Browser update checklist for parent
 Confirm exact intended existing URL. Open existing authorized management dashboard (never public game page scripts). Use replace/upload HTML with reviewed `dist/index.html` or exact current `index.html`; preserve existing URL and privacy. This is already user-authorized site update once correct target/access resolved; no AI worker edit. Do not create account/new paid service. After upload, GET playable HTML and compare SHA256 against VERSION.json (host wrappers may require comparing embedded source instead). Verify topology marker `HindenburgTopology`/`data-player-dot` and final map CSS, then actual Begin/movement/map/live Colonel in browser. Record URL, deployed version/hash and verification result back into VERSION.json/DEPLOYMENT.md. Do not claim published from local save alone.
 
-## Verification 2026-11-09 — not a publication
-
-Point-in-time checks only. They do not show that either host is permanent.
-
-- `https://oofyjym.sharehtml.org/` returned HTTP 200, 1,247,132 bytes, SHA-256 `f55ea693ea476ffdc190329603075a7d31b434cb8a5f712f980f93e4e20e762a`. It still pins `ART_COMMIT` `4d01239` and has no `HindenburgTopology` marker.
-- `https://hindenburg.secretlabcoat-0ba.workers.dev/` returned HTTP 200, 117,297 bytes, SHA-256 `95ed968ce061908e74038bb5dd4bfcbc915f0718fbfe14cd06af4e6753e55129`. That HTML has no `washroom_wall` facing and no `ART_COMMIT`.
-- `https://hindenburg-ai.secretlabcoat-0ba.workers.dev/talk` answered a browser-like POST with HTTP 200 and a dialogue `reply` (no `fallback` field). `OPTIONS` returned 200 with `access-control-allow-origin: *`. `GET` returned 405 `{"error":"POST only"}`. A non-browser client received Cloudflare error 1010.
-- `npx wrangler whoami` reported not authenticated. No Cloudflare token, `SHAREHTML_TOKEN`, page id, or manage key was available in the environment. The ShareHTML cache tag was not treated as the API page id.
-- Existing-page update remains `PUT https://sharehtml.org/api/v1/pages/{id}` with `X-Manage-Key` or `Authorization: Bearer`. Do not `POST` a new page. The file to upload is `dist/index.html`, identical to `index.html`: 1,347,631 bytes, SHA-256 `477188536b513b92ff20c1cba972328db499cd08a45444956dd97d21b8838392`.
-
 ## Current Cloudflare route
 Use a supported connector/plugin, authenticated dashboard, Wrangler CLI, or documented Cloudflare API for the EXISTING game Worker identified above, after confirming the account/resource and applying the current release authorization above. Do not invent account IDs or expose credentials. The target and permission are established above; available authentication must still be verified. Keep relay untouched.

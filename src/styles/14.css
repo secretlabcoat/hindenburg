@@ -23,12 +23,6 @@
 #dialogue-tools{font-size:10px}.inventory{padding:3px!important}
 .inv .item{flex-basis:68px}.item .item-caption{font-size:10px!important}#topology-movement{max-height:100px}.topology-door-strip button{font-size:10px;max-width:47%}}
 
-/* Supplied washroom photographs: invisible hotspots track the painted fixtures.
-   CSS-drawn previews keep the larger placeholder shapes above. */
-.scene .paint.has-art .wash-curtain{left:33%;width:36%;top:20%;bottom:28%}
-.scene .paint.has-art .wash-mirror{left:36%;width:28%;top:16%;height:26%}
-.wash-door-hotspot{position:absolute;left:38%;top:16%;width:24%;height:62%;z-index:6;background:transparent;border:0;padding:0;cursor:pointer}
-.wash-door-hotspot:focus{outline:2px solid #f5d895}
 /* Toolbar controls participate in layout; no fixed overlay on map/actions. */
 .top #soundbtn{position:static;flex:0 0 auto;margin:0}
 /* Short landscape windows scroll instead of squeezing the scene out. */
