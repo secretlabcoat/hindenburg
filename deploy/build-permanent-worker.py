@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Build the permanent Worker HTML: live game bytes plus ShareHTML raster art.
+"""Build the permanent Worker HTML.
 
-The baseline is the catch-all HTML served by
+Baseline is the catch-all HTML from
 https://hindenburg.secretlabcoat-0ba.workers.dev/ (git 59d0b47).
-Photographs are the 21 artStatus=ready WebPs embedded in
-https://oofyjym.sharehtml.org/. Placeholder and CSS/vector art are not copied.
-Navigation, node graph, and the hindenburg-ai relay are left unchanged.
+Scene photographs are ShareHTML's ready WebPs, except the bathroom:
+east, south, and west walls come from the uploaded 2026-11-08 originals.
+The north curtain stays the reference those walls were drawn against.
+The west wall is added to the washroom turn cycle. The south door still
+exits to the B-deck corridor. The AI relay is unchanged.
 """
 import base64, hashlib, json
 from pathlib import Path
@@ -13,7 +15,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 BASE = (ROOT / 'permanent-baseline.html').read_bytes()
 ART = ROOT / 'sharehtml-art'
+BATH = ROOT / 'bathroom-20261108'
 OUT = ROOT / 'hindenburg-worker.html'
+MODULE = ROOT / 'hindenburg-worker-module.mjs'
+
+# Authoritative bathroom WebPs. These replace the older ShareHTML bathroom bytes.
+BATHROOM = {
+    'washroom_basins': '6c5211f4fa640c9421381eab2771f7c3fdb8a41896b032585cee2cdbda340f8d',
+    'washroom_door': '10dcbb67392fcbf1453968d630888424b7bc914e25405395a246b357db12c232',
+    'washroom_wall': '774de38bf2eba9e7c7ec6ce98d09cc8389e5b91e5721e82f16bbcf213bbb6e6b',
+}
+# North curtain. reference.png in the upload decodes to this exact WebP.
+STALL = '96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2'
+OLD_BATHROOM = {
+    'washroom_basins': '4cd0b7484391d0fec40bcd7e361744ad2417349fe038f2c99baa2638db385a2b',
+    'washroom_door': '0a213e84d96dcecd32e94288bd8c27da289d0604437b8e0941059f7e3aed7134',
+}
 
 # Worker view id -> ShareHTML ready photograph. bdeck_washroom is the permanent
 # game's name for the corridor wall whose ready photo is bdeck_corr_washdoor.
@@ -21,6 +38,7 @@ VIEW_ART = {
     'washroom_stall': 'washroom_stall',
     'washroom_basins': 'washroom_basins',
     'washroom_door': 'washroom_door',
+    'washroom_wall': 'washroom_wall',
     'cabin_bunk': 'cabin_bunk',
     'cabin_window': 'cabin_window',
     'cabin_desk': 'cabin_desk',
@@ -44,13 +62,25 @@ UNMAPPED_READY = ['bdeck_corr_stairs', 'bdeck_corr_office']
 CENTER_EXIT = ['keel_walk', 'tour_end']
 
 expected = json.loads((ART / 'hashes.json').read_text())
+if expected.get('washroom_stall') != STALL:
+    raise SystemExit('north curtain hash drifted')
 images = {}
 for name, sha in expected.items():
+    if name in BATHROOM:
+        continue  # older ShareHTML bathroom bytes stay on disk for comparison only
     raw = (ART / f'{name}.webp').read_bytes()
     got = hashlib.sha256(raw).hexdigest()
     if got != sha:
         raise SystemExit(f'{name} sha256 {got} != ShareHTML {sha}')
     images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+for name, sha in BATHROOM.items():
+    raw = (BATH / f'{name}.webp').read_bytes()
+    got = hashlib.sha256(raw).hexdigest()
+    if got != sha:
+        raise SystemExit(f'{name} sha256 {got} != uploaded bathroom {sha}')
+    images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+if hashlib.sha256(base64.b64decode(images['washroom_stall'].split(',',1)[1])).hexdigest() != STALL:
+    raise SystemExit('stall photograph is not the north reference')
 
 payload = {
     'images': images,
@@ -67,15 +97,15 @@ style = r"""
 .scene .scene-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
 .scene .paint.has-art>:not(.scene-art){opacity:0}
 .scene .paint.has-art>:not(.scene-art)[data-move],
-.scene .paint.has-art>:not(.scene-art)[data-person],
 .scene .paint.has-art>:not(.scene-art)[data-object],
 .scene .paint.has-art>:not(.scene-art)[data-wash],
 .scene .paint.has-art>:not(.scene-art)[data-act],
 .scene .paint.has-art>:not(.scene-art)[data-x11],
 .scene .paint.has-art>.photo-exit{opacity:0;pointer-events:auto;z-index:4}
-.scene .paint.has-art .wash-curtain{left:34%;width:32%;top:18%;bottom:30%}
-.scene .paint.has-art .wash-mirror{left:40%;width:22%;top:20%;height:26%}
-.scene .paint.has-art .wash-door{left:36%;width:28%;top:14%;bottom:18%}
+.scene .paint.has-art [data-person]{opacity:1!important;z-index:6;pointer-events:auto}
+.scene .paint.has-art .wash-curtain{left:33%;width:34%;top:18%;bottom:28%}
+.scene .paint.has-art .wash-mirror{left:38%;width:24%;top:14%;height:28%}
+.scene .paint.has-art .wash-door{left:40%;width:20%;top:16%;height:62%}
 .scene .paint.has-art .doorway{left:36%;width:28%;top:16%;height:64%}
 .photo-exit{position:absolute;left:42%;top:28%;width:16%;height:36%;background:transparent;border:0;padding:0;cursor:pointer}
 .photo-exit:focus{outline:2px solid #f5d895}
@@ -86,8 +116,29 @@ script = """
 <script id="sharehtml-raster-art">
 (function(){
 const PACK=%s;
+function ensureWashroom(){
+  nodes.washroom_wall=nodes.washroom_wall||{name:'B-Deck Washroom',facing:'tiled wall and towel rail',left:'washroom_door',right:'washroom_stall',forward:null,style:'washwall'};
+  const wall=nodes.washroom_wall;
+  wall.name='B-Deck Washroom';
+  wall.facing='tiled wall and towel rail';
+  wall.left='washroom_door';
+  wall.right='washroom_stall';
+  wall.forward=null;
+  wall.style='washwall';
+  nodes.washroom_stall.left='washroom_wall';
+  nodes.washroom_stall.right='washroom_basins';
+  nodes.washroom_stall.forward=null;
+  nodes.washroom_basins.left='washroom_stall';
+  nodes.washroom_basins.right='washroom_door';
+  nodes.washroom_basins.forward=null;
+  nodes.washroom_door.left='washroom_basins';
+  nodes.washroom_door.right='washroom_wall';
+  nodes.washroom_door.forward='bdeck_washroom';
+}
+ensureWashroom();
 const oldDraw=draw;
 draw=function(){
+  ensureWashroom();
   const result=oldDraw.apply(this, arguments);
   const title=document.querySelector('#titleoverlay');
   const paint=document.querySelector('#scene .paint');
@@ -127,7 +178,30 @@ if '</body>' not in html:
 html = html.replace('</body>', style + '\n' + script + '\n</body>', 1)
 if html.count(relay.decode()) < 1:
     raise SystemExit('relay URL dropped')
+for name in OLD_BATHROOM:
+    old_b64 = base64.b64encode((ART / f'{name}.webp').read_bytes()).decode()
+    if old_b64 in html:
+        raise SystemExit(f'old ShareHTML {name} photograph is still embedded')
 data = html.encode()
 OUT.write_bytes(data)
-print(OUT.name, len(data), hashlib.sha256(data).hexdigest())
+digest = hashlib.sha256(data).hexdigest()
+module = (
+    "// ES module package for the EXISTING Worker named hindenburg.\n"
+    "// Returns deploy/hindenburg-worker.html for every path.\n"
+    "// Do not deploy this file to hindenburg-ai. Do not create a new Worker.\n"
+    f"// SHA-256 of the HTML body: {digest}\n"
+    "const HTML = " + json.dumps(html) + ";\n"
+    "export default {\n"
+    "  async fetch() {\n"
+    "    return new Response(HTML, {\n"
+    "      headers: {\n"
+    "        'content-type': 'text/html;charset=utf-8',\n"
+    "        'cache-control': 'no-cache'\n"
+    "      }\n"
+    "    });\n"
+    "  }\n"
+    "};\n"
+)
+MODULE.write_text(module)
+print(OUT.name, len(data), digest)
 print('photos', len(images), 'views', len(VIEW_ART), 'unmapped', ','.join(UNMAPPED_READY))

@@ -8,15 +8,16 @@
   "permanent_baseline_git": "59d0b4772e9a3f0075c95fbf8d0ed9df245284ee",
   "permanent_views": 36,
   "artifact": "deploy/hindenburg-worker.html",
-  "artifact_bytes": 1164525,
-  "artifact_sha256": "2ed2fd16566b87974abdfafd5723f0b9327f2f363a13d7f3adc0e3d935b16565",
+  "artifact_bytes": 1232509,
+  "artifact_sha256": "2839d4cba61ca9bab7494c1ccf5601d994f199d4efa3e903a52fc95a5a0c4fd2",
   "module_package": "deploy/hindenburg-worker-module.mjs",
   "published": false,
   "relay": "https://hindenburg-ai.secretlabcoat-0ba.workers.dev",
   "photos_on_permanent_views": {
-    "washroom_stall": "washroom_stall",
-    "washroom_basins": "washroom_basins",
-    "washroom_door": "washroom_door",
+    "washroom_stall": "washroom_stall (north reference 96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2)",
+    "washroom_basins": "uploaded 6c5211f4fa640c9421381eab2771f7c3fdb8a41896b032585cee2cdbda340f8d",
+    "washroom_door": "uploaded 10dcbb67392fcbf1453968d630888424b7bc914e25405395a246b357db12c232",
+    "washroom_wall": "uploaded 774de38bf2eba9e7c7ec6ce98d09cc8389e5b91e5721e82f16bbcf213bbb6e6b",
     "cabin_bunk": "cabin_bunk",
     "cabin_window": "cabin_window",
     "cabin_desk": "cabin_desk",
@@ -59,8 +60,14 @@
   ],
   "first_room": {
     "start_view": "washroom_stall",
-    "permanent_facings": ["washroom_stall", "washroom_basins", "washroom_door"],
-    "all_three_have_sharehtml_photographs": true,
-    "fourth_wall": "The permanent game has no washroom_wall facing. ShareHTML marks washroom_wall placeholder and does not embed a photograph for it."
+    "facings_clockwise": ["washroom_stall", "washroom_basins", "washroom_door", "washroom_wall"],
+    "north_reference_sha256": "96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2",
+    "uploaded_sha256": {
+      "washroom_basins": "6c5211f4fa640c9421381eab2771f7c3fdb8a41896b032585cee2cdbda340f8d",
+      "washroom_door": "10dcbb67392fcbf1453968d630888424b7bc914e25405395a246b357db12c232",
+      "washroom_wall": "774de38bf2eba9e7c7ec6ce98d09cc8389e5b91e5721e82f16bbcf213bbb6e6b"
+    },
+    "exit": "washroom_door forward remains bdeck_washroom",
+    "captain_raster": "none in ShareHTML or the upload; CSS figures are kept visible over control_helm"
   }
 }
