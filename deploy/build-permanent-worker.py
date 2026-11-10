@@ -101,7 +101,11 @@ style = r"""
 .scene .paint.has-art>:not(.scene-art)[data-wash],
 .scene .paint.has-art>:not(.scene-art)[data-act],
 .scene .paint.has-art>:not(.scene-art)[data-x11],
-.scene .paint.has-art>.photo-exit{opacity:0;pointer-events:auto;z-index:4}
+.scene .paint.has-art>.photo-exit{opacity:1;background:transparent;pointer-events:auto;z-index:6;cursor:pointer}
+.scene .paint.has-art [data-move]{background:transparent!important;border-color:transparent!important;box-shadow:none!important;color:transparent}
+.scene .paint.has-art [data-move]:before,.scene .paint.has-art [data-move]:after{content:none!important}
+.photo-exit span{position:absolute;left:50%;bottom:0;transform:translateX(-50%);background:#23190ee8;color:#f3e2c0;font:12px Georgia,serif;padding:3px 6px;white-space:nowrap;opacity:0;pointer-events:none}
+.photo-exit:hover span,.photo-exit:focus span{opacity:1}
 .scene .paint.has-art [data-person]{opacity:1!important;z-index:6;pointer-events:auto}
 .scene .paint.has-art .wash-curtain{left:33%;width:34%;top:18%;bottom:28%}
 .scene .paint.has-art .wash-mirror{left:38%;width:24%;top:14%;height:28%}
@@ -174,18 +178,28 @@ draw=function(){
 
 deck_css = r"""
 <style id="deck-hud">
-#deckhud{order:0;flex:0 0 auto;background:#d6e6f5;color:#1c2430;border:2px solid #243044;margin:0 0 3px}
-.shell:has(#deckhud-large:not([hidden])) .scene{flex:0 1 30vh;min-height:120px}
-.shell:has(#deckhud-large:not([hidden])) .dialogue{height:72px}
-.deckhud-bar{display:flex;align-items:center;gap:8px;padding:4px 6px}
-#deckhud-toggle{min-height:44px;min-width:44px;background:#243044;color:#f4efe6;border:0;padding:6px 10px;font:14px Georgia,serif}
-#deckhud-where{font:13px Georgia,serif}
-.deckhud-compact svg{width:100%;height:64px;display:block;pointer-events:none}
-.deckhud-large{padding:6px 8px 8px}
-.deckhud-large svg{height:min(240px,34vh);width:auto;max-width:100%;display:block;margin:0 auto}
+#deckhud{position:fixed;z-index:30;left:8px;top:96px;width:152px;box-sizing:border-box;background:#d6e6f5ee;color:#1c2430;border:2px solid #243044;padding:4px}
+#deckhud.is-collapsed{width:48px}
+#deckhud.is-collapsed #deckhud-open{display:none}
+#deckhud-collapse{min-height:36px;width:100%;background:#243044;color:#f4efe6;border:0;font:12px Georgia,serif;margin-bottom:4px}
+.deckhud-mini{display:block;width:100%;padding:0;border:0;background:transparent;color:#1c2430;cursor:pointer;text-align:left}
+#deckhud-where{display:block;font:11px Georgia,serif;line-height:1.2;margin:0 0 2px}
+.deckhud-mini svg{width:100%;height:auto;display:block;pointer-events:none}
+#deckpop[hidden]{display:none!important}
+#deckpop{position:fixed;inset:0;z-index:50;background:#0c0a0880;display:flex;align-items:center;justify-content:center;padding:16px}
+.deckpop-card{background:#d6e6f5;color:#1c2430;border:3px solid #243044;width:min(920px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:12px;box-sizing:border-box}
+#deckpop-close{min-height:44px;min-width:44px;background:#243044;color:#f4efe6;border:0;font:14px Georgia,serif;margin-bottom:8px}
 #deckhud-deck{min-height:44px;font:16px Georgia,serif;margin-left:6px}
-#deckhud-facing{font:13px Georgia,serif;margin:6px 0}
-@media(max-width:650px){.deckhud-large svg{height:min(180px,28vh)}}
+#deckhud-facing{font:14px Georgia,serif;margin:8px 0}
+#deckhud-full svg{width:auto;height:min(70vh,640px);max-width:100%;display:block;margin:0 auto}
+.exit-left{left:4%;width:28%}
+.exit-right{left:68%;width:28%}
+.exit-hot{cursor:pointer}
+.exit-label{position:absolute;left:50%;bottom:0;transform:translateX(-50%);background:#23190ee8;color:#f3e2c0;font:12px Georgia,serif;padding:3px 6px;white-space:nowrap;opacity:0;pointer-events:none;z-index:8}
+.exit-hot:hover>.exit-label,.exit-hot:focus>.exit-label{opacity:1}
+.exit-gated{left:4%;top:62%;width:28%;height:18%}
+.exit-climb{left:36%;top:4%;width:28%;height:18%}
+@media(max-width:700px){#deckhud{width:112px;top:84px}#deckhud.is-collapsed{width:44px}#deckhud-full svg{height:min(62vh,520px)}}
 </style>
 """
 plan = json.loads((ROOT / 'deck-plans' / 'plans.json').read_text())

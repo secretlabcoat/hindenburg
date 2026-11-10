@@ -16,17 +16,20 @@ function hindenburgDeckSvg(plan, deckId, marker) {
   };
   let shapes = '';
   let lines = '';
+  let labels = '';
   const onDeck = id => plan.places[id] && plan.places[id].deck === deckId;
   const linkLine = (id, a, b, kind) => {
     const [x1, y1] = border(a, b.x + b.w / 2, b.y + b.h / 2);
     const [x2, y2] = border(b, a.x + a.w / 2, a.y + a.h / 2);
     const dash = kind === 'gated' ? ' stroke-dasharray="6 4"' : '';
-    lines += '<line data-link="' + id + '" x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" stroke="#243044" stroke-width="' + (kind === 'stairs' ? 5 : 3) + '"' + dash + '/>';
+    const coords = ' x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '"';
+    lines += '<line' + coords + ' stroke="#243044" stroke-width="' + (kind === 'stairs' ? 5 : 3) + '"' + dash + '/>';
+    lines += '<line data-link="' + id + '"' + coords + ' stroke="transparent" stroke-width="16"/>';
   };
   for (const [id, p] of places) {
     const fill = p.label.indexOf('corridor') >= 0 || p.label.indexOf('walkway') >= 0 ? '#e7d2c4' : '#c48b93';
-    shapes += '<g data-place="' + id + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + p.h + '" rx="2" fill="' + fill + '" stroke="#243044" stroke-width="4"/>' +
-      '<text x="' + (p.x + p.w / 2) + '" y="' + (p.y + p.h / 2) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="13">' + esc(p.label) + '</text></g>';
+    shapes += '<g data-place="' + id + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + p.h + '" rx="2" fill="' + fill + '" stroke="#243044" stroke-width="4"/></g>';
+    labels += '<text x="' + (p.x + p.w / 2) + '" y="' + (p.y + p.h / 2) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="13">' + esc(p.label) + '</text>';
   }
   for (const link of plan.links) {
     if (onDeck(link.a) && onDeck(link.b)) linkLine(link.id, plan.places[link.a], plan.places[link.b], link.kind);
@@ -34,89 +37,241 @@ function hindenburgDeckSvg(plan, deckId, marker) {
   for (const stub of plan.stubs || []) {
     if (stub.deck !== deckId) continue;
     const box = {x: stub.x, y: stub.y, w: stub.w, h: stub.h};
-    shapes += '<g data-transfer="1"><rect x="' + stub.x + '" y="' + stub.y + '" width="' + stub.w + '" height="' + stub.h + '" fill="#f3d48a" stroke="#243044" stroke-width="3"/>' +
-      '<text x="' + (stub.x + stub.w / 2) + '" y="' + (stub.y + stub.h / 2 + 4) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="11">' + esc(stub.label) + '</text></g>';
+    const ay = stub.y + stub.h / 2;
+    const up = stub.dir === 'up';
+    const shaft = up ? '<line x1="0" y1="7" x2="0" y2="-1" stroke="#1d3557" stroke-width="2.5"/>' : '<line x1="0" y1="-7" x2="0" y2="1" stroke="#1d3557" stroke-width="2.5"/>';
+    const head = up ? '0,-8 -6,-1 6,-1' : '0,8 -6,1 6,1';
+    shapes += '<g data-transfer="1" data-arrow="shaft"><rect x="' + stub.x + '" y="' + stub.y + '" width="' + stub.w + '" height="' + stub.h + '" fill="#f3d48a" stroke="#243044" stroke-width="3"/>' +
+      '<g transform="translate(' + (stub.x + 16) + ' ' + ay + ')">' + shaft + '<polygon points="' + head + '" fill="#1d3557"/></g>' +
+      '<text x="' + (stub.x + stub.w / 2 + 8) + '" y="' + (ay + 4) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="11">' + esc(stub.label) + '</text></g>';
     if (stub.from && onDeck(stub.from)) linkLine(stub.link, plan.places[stub.from], box, (plan.links.find(l => l.id === stub.link) || {}).kind);
   }
   let body = shapes + lines;
   if (marker && plan.places[marker.place] && plan.places[marker.place].deck === deckId) {
     const node = plan.nodes[marker.node] || {};
     const p = plan.places[marker.place];
-    const x = node.at ? node.at[0] : p.x + p.w / 2;
-    const y = node.at ? node.at[1] : p.y + p.h / 2;
     const heading = node.heading || 0;
-    body += '<g data-player="1" data-node="' + esc(marker.node) + '" data-heading="' + heading + '" transform="translate(' + x + ' ' + y + ')">' +
-      '<circle r="11" fill="#f4c430" stroke="#1c2430" stroke-width="2"/>' +
-      '<polygon points="0,-16 -7,6 7,6" fill="#1d3557" transform="rotate(' + heading + ')"/>' +
+    let x, y;
+    if (node.at) {
+      x = node.at[0];
+      y = node.at[1];
+    } else {
+      const rad = heading * Math.PI / 180;
+      const reach = Math.min(p.w, p.h) * 0.28;
+      x = p.x + p.w / 2 + Math.sin(rad) * reach;
+      y = p.y + p.h / 2 - Math.cos(rad) * reach;
+    }
+    body += '<g data-player="1" data-marker="arrow" data-node="' + esc(marker.node) + '" data-heading="' + heading + '" transform="translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') rotate(' + heading + ')">' +
+      '<line x1="0" y1="12" x2="0" y2="-4" stroke="#fff8e8" stroke-width="7" stroke-linecap="butt"/>' +
+      '<line x1="0" y1="12" x2="0" y2="-4" stroke="#1d3557" stroke-width="3.5" stroke-linecap="butt"/>' +
+      '<polygon points="0,-15 -7,-3 7,-3" fill="#1d3557" stroke="#fff8e8" stroke-width="1.5"/>' +
       '</g>';
   }
+  body += labels;
   const title = deck ? deck.name : deckId;
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="' + esc(title) + ' game schematic, bow up">' +
     '<rect width="' + w + '" height="' + h + '" fill="#d6e6f5"/>' +
     '<text x="16" y="18" fill="#1c2430" font-family="Georgia, serif" font-size="14" font-weight="700">' + esc(title) + '</text>' +
     '<text x="16" y="' + (h - 28) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Game schematic · not a measured blueprint</text>' +
-    '<text x="16" y="' + (h - 12) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Bow ↑   Port ←   Starboard →   door —   stairs = ladder   dashed = gated</text>' +
+    '<text x="16" y="' + (h - 12) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Bow up · port left · starboard right · line = door · arrow = stair · dashed = gated</text>' +
     body + '</svg>';
 }
 
 function hindenburgMountDeckHud(plan) {
   if (document.getElementById('deckhud')) return;
-  const hud = document.createElement('section');
+  const left = document.querySelector('#navleft');
+  const forward = document.querySelector('#navforward');
+  const right = document.querySelector('#navright');
+  if (left) left.textContent = '←';
+  if (forward) forward.textContent = '↑';
+  if (right) right.textContent = '→';
+  const hud = document.createElement('aside');
   hud.id = 'deckhud';
   hud.hidden = true;
-  hud.innerHTML = '<div class="deckhud-bar"><button type="button" id="deckhud-toggle" aria-expanded="false" aria-controls="deckhud-large">Deck plan</button><span id="deckhud-where"></span></div>' +
-    '<div id="deckhud-compact" class="deckhud-compact"></div>' +
-    '<div id="deckhud-large" class="deckhud-large" hidden><label>Deck <select id="deckhud-deck"></select></label><p id="deckhud-facing"></p><div id="deckhud-full"></div></div>';
-  document.querySelector('.top').after(hud);
-  const select = hud.querySelector('#deckhud-deck');
+  hud.innerHTML = '<button type="button" id="deckhud-collapse" aria-expanded="true">Hide</button>' +
+    '<button type="button" id="deckhud-open" class="deckhud-mini" aria-haspopup="dialog" aria-expanded="false" aria-controls="deckpop">' +
+    '<span id="deckhud-where"></span><span id="deckhud-mini"></span></button>';
+  const pop = document.createElement('div');
+  pop.id = 'deckpop';
+  pop.hidden = true;
+  pop.innerHTML = '<div class="deckpop-card" role="dialog" aria-modal="true" aria-label="Deck plan"><button type="button" id="deckpop-close">Close</button>' +
+    '<label>Deck <select id="deckhud-deck"></select></label><p id="deckhud-facing"></p><div id="deckhud-full"></div></div>';
+  document.body.append(hud, pop);
+  const select = pop.querySelector('#deckhud-deck');
   for (const deck of plan.decks) {
     const o = document.createElement('option');
     o.value = deck.id;
     o.textContent = deck.name;
     select.append(o);
   }
-  let enlarged = false;
+  let phone = false;
+  try { phone = window.matchMedia('(max-width: 700px)').matches; } catch (e) { phone = false; }
+  let collapsed = phone;
+  let open = false;
   let chosen = null;
-  function placeOf(nodeId) {
-    const n = plan.nodes[nodeId];
-    return n ? plan.places[n.place] : null;
+  function placeId(nodeId) {
+    return plan.nodes[nodeId] ? plan.nodes[nodeId].place : null;
   }
   function exitText() {
     const n = nodes[view];
     if (!n || !n.forward || !nodes[n.forward]) return 'Forward: no door on this facing.';
     const there = nodes[n.forward];
-    const same = plan.nodes[n.forward] && plan.nodes[view] && plan.nodes[n.forward].place === plan.nodes[view].place;
-    if (same) return 'Forward: farther along ' + placeOf(view).label + '.';
-    return 'Forward: ' + there.name + ' · ' + there.facing + '.';
+    if (placeId(n.forward) === placeId(view)) return 'Forward: farther along ' + plan.places[placeId(view)].label + '.';
+    return 'Forward: ' + there.name + '.';
+  }
+  function currentExits() {
+    const here = placeId(view);
+    const out = [];
+    if (!here || !nodes[view]) return out;
+    for (const dir of ['forward', 'left', 'right']) {
+      const dest = nodes[view][dir];
+      if (!dest || !nodes[dest] || !plan.nodes[dest]) continue;
+      if (placeId(dest) === here) continue;
+      const link = plan.links.find(l => (l.a === here && l.b === placeId(dest)) || (l.b === here && l.a === placeId(dest)));
+      if (link) out.push({link: link.id, dest, label: 'Enter ' + nodes[dest].name});
+    }
+    if (view === 'crew_door') out.push({link: 'bcorridor-tour', dest: null, gated: 'tour', label: 'Join escorted tour'});
+    if (view === 'tour_cells') out.push({link: 'tour-cells-nook', dest: null, gated: 'climb', label: 'Climb to the upper rings'});
+    if (view === 'keel_back') out.push({link: 'keel-nook', dest: null, gated: 'climb', label: 'Climb to the upper rings'});
+    return out;
+  }
+  function useExit(exit) {
+    if (!exit.gated) { travel(exit.dest); return; }
+    if (exit.gated === 'tour') {
+      const before = view;
+      ACTS.tour();
+      if (view === before) narrate('The escorted tour is not gathering now. It meets at the crew door in the daytime, before Bunny has already taken a group.');
+      return;
+    }
+    const button = document.querySelector('#scene [data-act="climb"]');
+    if (button) { button.click(); return; }
+    narrate('The ladder into the upper rings stays hidden until you notice the glimmer.');
+  }
+  function wirePopupDoors() {
+    const exits = currentExits();
+    pop.querySelectorAll('[data-link]').forEach(el => {
+      const exit = exits.find(x => x.link === el.dataset.link);
+      el.style.cursor = exit ? 'pointer' : '';
+      if (!exit) { el.onclick = null; return; }
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+      title.textContent = exit.label;
+      el.append(title);
+      const go = () => { open = false; pop.hidden = true; useExit(exit); };
+      el.onclick = go;
+      el.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } };
+    });
+  }
+  function exitLabel(dest) {
+    return 'Enter ' + nodes[dest].name;
+  }
+  function labelExit(el, dest) {
+    const label = exitLabel(dest);
+    el.classList.add('exit-hot');
+    el.style.cursor = 'pointer';
+    el.setAttribute('aria-label', label);
+    let s = el.querySelector(':scope > .exit-label');
+    if (!s) {
+      s = document.createElement('span');
+      s.className = 'exit-label';
+      el.append(s);
+    }
+    s.textContent = label;
+  }
+  function addHotspot(dest, label, extraClass) {
+    const paint = document.querySelector('#scene .paint') || document.querySelector('#scene');
+    if (!paint || !dest) return;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'photo-exit exit-hot ' + (extraClass || 'exit-forward');
+    b.dataset.move = dest;
+    b.setAttribute('aria-label', label);
+    const s = document.createElement('span');
+    s.className = 'exit-label';
+    s.textContent = label;
+    b.append(s);
+    b.onclick = () => travel(dest);
+    paint.append(b);
+  }
+  function addGated(kind, label, extraClass) {
+    const paint = document.querySelector('#scene .paint');
+    if (!paint || paint.querySelector('[data-gated="' + kind + '"]')) return;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'photo-exit exit-hot ' + extraClass;
+    b.style.cursor = 'pointer';
+    b.dataset.gated = kind;
+    b.setAttribute('aria-label', label);
+    const s = document.createElement('span');
+    s.className = 'exit-label';
+    s.textContent = label;
+    b.append(s);
+    b.onclick = () => useExit({gated: kind, dest: null, label: label});
+    paint.append(b);
+  }
+  function samePlace(dest) {
+    return plan.nodes[view] && plan.nodes[dest] && plan.nodes[dest].place === plan.nodes[view].place;
+  }
+  function ensureExits() {
+    const n = nodes[view];
+    const paint = document.querySelector('#scene .paint');
+    if (!n || !paint) return;
+    for (const dir of ['forward', 'left', 'right']) {
+      const dest = n[dir];
+      if (!dest || !nodes[dest]) continue;
+      if (dir !== 'forward' && samePlace(dest)) continue;
+      let el = paint.querySelector('[data-move="' + dest + '"]');
+      if (!el) {
+        addHotspot(dest, exitLabel(dest), dir === 'forward' ? 'exit-forward' : 'exit-' + dir);
+        el = paint.querySelector('[data-move="' + dest + '"]');
+      }
+      if (el) labelExit(el, dest);
+    }
+    if (view === 'crew_door') addGated('tour', 'Join escorted tour', 'exit-gated');
+    if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
   }
   function paintHud() {
     const started = document.querySelector('#titleoverlay') && document.querySelector('#titleoverlay').hidden;
     hud.hidden = !started;
     if (!started || !plan.nodes[view]) return;
+    ensureExits();
     const meta = plan.nodes[view];
     const place = plan.places[meta.place];
-    if (!chosen) chosen = place.deck;
-    if (!enlarged) chosen = place.deck;
+    if (!chosen || !open) chosen = place.deck;
     select.value = chosen;
-    hud.querySelector('#deckhud-where').textContent = plan.decks.find(d => d.id === place.deck).name + ' · ' + place.label;
+    hud.classList.toggle('is-collapsed', collapsed);
+    hud.querySelector('#deckhud-collapse').setAttribute('aria-expanded', String(!collapsed));
+    hud.querySelector('#deckhud-collapse').textContent = collapsed ? 'Map' : 'Hide';
+    hud.querySelector('#deckhud-open').hidden = collapsed;
+    hud.querySelector('#deckhud-open').setAttribute('aria-expanded', String(open));
     const marker = {node: view, place: meta.place};
-    hud.querySelector('#deckhud-compact').hidden = enlarged;
-    hud.querySelector('#deckhud-compact').innerHTML = enlarged ? '' : hindenburgDeckSvg(plan, place.deck, marker);
-    hud.querySelector('#deckhud-full').innerHTML = hindenburgDeckSvg(plan, chosen, chosen === place.deck ? marker : null);
-    const here = chosen === place.deck ? 'You are here. ' : 'You are on ' + plan.decks.find(d => d.id === place.deck).name + '. ';
-    hud.querySelector('#deckhud-facing').textContent = here + 'Facing: ' + nodes[view].facing + '. ' + exitText();
+    hud.querySelector('#deckhud-where').textContent = plan.places[meta.place].label;
+    hud.querySelector('#deckhud-mini').innerHTML = collapsed ? '' : hindenburgDeckSvg(plan, place.deck, marker);
+    pop.hidden = !open;
+    if (open) {
+      pop.querySelector('#deckhud-full').innerHTML = hindenburgDeckSvg(plan, chosen, chosen === place.deck ? marker : null);
+      const here = chosen === place.deck ? 'You are here. ' : 'You are on ' + plan.decks.find(d => d.id === place.deck).name + '. ';
+      pop.querySelector('#deckhud-facing').textContent = here + 'Facing: ' + nodes[view].facing + '. ' + exitText();
+      wirePopupDoors();
+    }
   }
-  hud.querySelector('#deckhud-toggle').onclick = () => {
-    enlarged = !enlarged;
-    hud.querySelector('#deckhud-large').hidden = !enlarged;
-    hud.querySelector('#deckhud-toggle').setAttribute('aria-expanded', String(enlarged));
-    hud.querySelector('#deckhud-toggle').textContent = enlarged ? 'Close plan' : 'Deck plan';
+  function setOpen(next) {
+    open = next;
+    if (open) collapsed = false;
+    paintHud();
+  }
+  hud.querySelector('#deckhud-collapse').onclick = e => {
+    e.stopPropagation();
+    collapsed = !collapsed;
+    if (collapsed) open = false;
     paintHud();
   };
+  hud.querySelector('#deckhud-open').onclick = () => setOpen(!open);
+  pop.querySelector('#deckpop-close').onclick = () => setOpen(false);
+  pop.addEventListener('click', e => { if (e.target === pop) setOpen(false); });
   select.onchange = () => { chosen = select.value; paintHud(); };
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && enlarged) hud.querySelector('#deckhud-toggle').click();
-  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) setOpen(false); });
   const prevDraw = draw;
   draw = function () {
     const result = prevDraw.apply(this, arguments);

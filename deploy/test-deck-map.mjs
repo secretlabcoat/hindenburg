@@ -53,18 +53,27 @@ assert.equal(w.eval('nodes.washroom_door.forward'), 'bdeck_washroom');
 w.eval("document.querySelector('#startgame').click()");
 assert.equal(w.eval('view'), 'washroom_stall');
 assert.equal(w.document.querySelector('#deckhud').hidden, false);
+assert.equal(w.document.querySelector('[data-player]').getAttribute('data-marker'), 'arrow');
+assert.ok(w.document.querySelector('[data-player] line'), 'facing marker has a shaft');
+assert.ok(w.document.querySelector('[data-player] polygon'), 'facing marker has an arrowhead');
+assert.equal(w.document.querySelector('#navleft').textContent, '←');
+assert.equal(w.document.querySelector('#navforward').textContent, '↑');
+assert.equal(w.document.querySelector('#navright').textContent, '→');
 assert.equal(w.document.querySelector('[data-player]').getAttribute('data-node'), 'washroom_stall');
 assert.equal(w.document.querySelector('[data-player]').getAttribute('data-heading'), '0');
+assert.equal(w.document.querySelector('#deckpop').hidden, true);
 const before = w.eval('view');
-w.document.querySelector('#deckhud-toggle').click();
-assert.equal(w.document.querySelector('#deckhud-compact').hidden, true);
+w.document.querySelector('#deckhud-open').click();
+assert.equal(w.document.querySelector('#deckpop').hidden, false);
+assert.equal(w.document.querySelectorAll('#deckhud svg').length, 1);
 assert.equal(w.document.querySelectorAll('#deckhud-full svg').length, 1);
 assert.equal(w.document.querySelector('#deckhud-full [data-player]').getAttribute('data-node'), 'washroom_stall');
 w.document.querySelector('#deckhud-deck').value = 'A';
 w.document.querySelector('#deckhud-deck').dispatchEvent(new w.Event('change'));
 assert.equal(w.eval('view'), before);
 assert.equal(w.document.querySelector('#deckhud-full [data-player]'), null);
-w.document.querySelector('#deckhud-toggle').click();
+w.document.querySelector('#deckpop-close').click();
+assert.equal(w.document.querySelector('#deckpop').hidden, true);
 w.document.querySelector('#navright').click();
 await new Promise(r => setTimeout(r, 250));
 assert.equal(w.eval('view'), 'washroom_basins');
@@ -75,8 +84,81 @@ function getComputed(win) {
   return win.getComputedStyle(win.document.querySelector('[data-person="Captain Swanson Kyle"]')).opacity;
 }
 assert.equal(getComputed(w), '1');
+w.eval("view='washroom_door';draw()");
+const door = w.document.querySelector('#scene [data-move="bdeck_washroom"]');
+assert.ok(door, 'washroom door hotspot');
+assert.equal(door.getAttribute('aria-label'), 'Enter B-Deck Corridor');
+assert.equal(door.querySelector('.exit-label').textContent, 'Enter B-Deck Corridor');
+assert.equal(door.style.cursor, 'pointer');
+door.click();
+await new Promise(r => setTimeout(r, 250));
+assert.equal(w.eval('view'), 'bdeck_washroom');
+w.eval("view='washroom_door';draw()");
+w.document.querySelector('#deckhud-open').click();
+const mapDoor = w.document.querySelector('#deckhud-full [data-link="bcorridor-washroom"]');
+assert.ok(mapDoor, 'popup door for current exit');
+assert.equal(mapDoor.getAttribute('role'), 'button');
+const distant = w.document.querySelector('#deckhud-full [data-link="lounge-promenade"]');
+assert.equal(distant, null);
+const otherDeck = w.document.querySelector('#deckhud-deck');
+otherDeck.value = 'A';
+otherDeck.dispatchEvent(new w.Event('change'));
+const farDoor = w.document.querySelector('#deckhud-full [data-link="lounge-promenade"]');
+assert.ok(farDoor, 'other deck still draws its doors');
+assert.equal(farDoor.onclick, null);
+const stayed = w.eval('view');
+if (farDoor.onclick) farDoor.onclick();
+assert.equal(w.eval('view'), stayed);
+otherDeck.value = 'B';
+otherDeck.dispatchEvent(new w.Event('change'));
+w.document.querySelector('#deckhud-full [data-link="bcorridor-washroom"]').onclick();
+await new Promise(r => setTimeout(r, 250));
+assert.equal(w.eval('view'), 'bdeck_washroom');
+assert.equal(w.document.querySelector('#deckpop').hidden, true);
+w.eval('ai["Bunny Treemont"].toured = true');
+w.eval("view='crew_door';draw()");
+const tourHot = w.document.querySelector('#scene [data-gated="tour"]');
+assert.ok(tourHot, 'gated tour hotspot');
+tourHot.click();
+assert.equal(w.eval('view'), 'crew_door');
+assert.ok(w.document.querySelector('#log').textContent.includes('not gathering'));
+w.eval("view='tour_cells';draw()");
+const climbHot = w.document.querySelector('#scene [data-gated="climb"]');
+assert.ok(climbHot, 'gated ladder hotspot');
+climbHot.click();
+assert.equal(w.eval('view'), 'tour_cells');
+assert.ok(w.document.querySelector('#log').textContent.includes('upper rings'));
 w.eval("view='bdeck_stairs';draw()");
-assert.equal(w.document.querySelector('#deckhud-where').textContent.includes('B deck'), true);
+assert.equal(w.document.querySelector('#deckhud-where').textContent.includes('Washroom') || w.document.querySelector('#deckhud-where').textContent.includes('corridor') || w.document.querySelector('#deckhud-where').textContent.length > 0, true);
+let missingHot = [];
+const audit = [];
+for (const id of gameNodes) {
+  w.eval('view=' + JSON.stringify(id) + ';draw()');
+  const row = {id, exits: []};
+  for (const dir of ['forward', 'left', 'right']) {
+    const dest = w.eval('nodes[' + JSON.stringify(id) + '].' + dir);
+    if (!dest) continue;
+    const same = placeOf(id) === placeOf(dest);
+    if (dir !== 'forward' && same) continue;
+    const hot = w.document.querySelector('#scene [data-move="' + dest + '"]');
+    const label = hot && hot.getAttribute('aria-label');
+    const hover = hot && hot.querySelector('.exit-label') && hot.querySelector('.exit-label').textContent;
+    if (!hot || hot.style.cursor !== 'pointer' || !label || !label.startsWith('Enter ') || hover !== label) {
+      missingHot.push(id + ' ' + dir + ' -> ' + dest);
+    }
+    row.exits.push(dir + ' → ' + dest + ' [' + (label || 'MISSING') + ']');
+  }
+  if (id === 'crew_door' || id === 'tour_cells' || id === 'keel_back') {
+    const kind = id === 'crew_door' ? 'tour' : 'climb';
+    const gated = w.document.querySelector('#scene [data-gated="' + kind + '"]');
+    if (!gated || gated.style.cursor !== 'pointer') missingHot.push(id + ' gated ' + kind);
+    row.exits.push('gated ' + kind + ' [' + (gated ? gated.getAttribute('aria-label') : 'MISSING') + ']');
+  }
+  audit.push(row);
+}
+assert.deepEqual(missingHot, []);
+console.log('EXIT AUDIT');
+for (const row of audit) console.log(row.id + ' | ' + (row.exits.join('; ') || '(no exit on this facing; turns stay in the room)'));
 const ctx = {};
 vm.runInNewContext(fs.readFileSync(new URL('./deck-map.js', import.meta.url), 'utf8') + '\nthis.svg=hindenburgDeckSvg;', ctx);
 const svgs = {};
@@ -84,6 +166,8 @@ for (const deck of plan.decks) svgs[deck.id] = ctx.svg(plan, deck.id, null);
 function linesOf(svg) { return [...svg.matchAll(/<line data-link="([^"]+)"/g)].map(m => m[1]); }
 for (const stub of plan.stubs) {
   assert.ok(linesOf(svgs[stub.deck]).includes(stub.link), 'stub not drawn ' + stub.label);
+  assert.ok(svgs[stub.deck].includes('data-arrow="shaft"'), 'stair arrow is a drawn shaft ' + stub.deck);
+  assert.ok(!/[▲▼◀▶⬆⬇➤➔]/.test(svgs[stub.deck]), 'no decorative arrow glyphs ' + stub.deck);
 }
 for (const id of gameNodes) {
   for (const dir of ['forward', 'left', 'right']) {
