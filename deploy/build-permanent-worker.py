@@ -180,12 +180,12 @@ deck_css = r"""
 .deckhud-bar{display:flex;align-items:center;gap:8px;padding:4px 6px}
 #deckhud-toggle{min-height:44px;min-width:44px;background:#243044;color:#f4efe6;border:0;padding:6px 10px;font:14px Georgia,serif}
 #deckhud-where{font:13px Georgia,serif}
-.deckhud-compact svg{width:100%;height:72px;display:block;pointer-events:none}
-.deckhud-large{padding:6px 8px 8px;max-height:min(42vh,280px);overflow:auto}
-.deckhud-large svg{width:100%;height:auto;display:block}
+.deckhud-compact svg{width:100%;height:64px;display:block;pointer-events:none}
+.deckhud-large{padding:6px 8px 8px}
+.deckhud-large svg{height:min(240px,34vh);width:auto;max-width:100%;display:block;margin:0 auto}
 #deckhud-deck{min-height:44px;font:16px Georgia,serif;margin-left:6px}
 #deckhud-facing{font:13px Georgia,serif;margin:6px 0}
-@media(max-height:700px){.deckhud-compact svg{height:56px}.deckhud-large{max-height:28vh}}
+@media(max-width:650px){.deckhud-large svg{height:min(180px,28vh)}}
 </style>
 """
 plan = json.loads((ROOT / 'deck-plans' / 'plans.json').read_text())

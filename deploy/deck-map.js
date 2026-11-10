@@ -5,34 +5,40 @@ function hindenburgDeckSvg(plan, deckId, marker) {
   const deck = plan.decks.find(d => d.id === deckId);
   const w = plan.width, h = plan.height;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const center = p => [p.x + p.w / 2, p.y + p.h / 2];
-  let body = '';
+  const border = (rect, tx, ty) => {
+    const cx = rect.x + rect.w / 2, cy = rect.y + rect.h / 2;
+    const dx = tx - cx, dy = ty - cy;
+    if (!dx && !dy) return [cx, cy];
+    const sx = dx ? (rect.w / 2) / Math.abs(dx) : Infinity;
+    const sy = dy ? (rect.h / 2) / Math.abs(dy) : Infinity;
+    const s = Math.min(sx, sy);
+    return [cx + dx * s, cy + dy * s];
+  };
+  let shapes = '';
+  let lines = '';
   const onDeck = id => plan.places[id] && plan.places[id].deck === deckId;
-  for (const link of plan.links) {
-    if (onDeck(link.a) && onDeck(link.b)) {
-      const [x1, y1] = center(plan.places[link.a]);
-      const [x2, y2] = center(plan.places[link.b]);
-      const dash = link.kind === 'gated' ? ' stroke-dasharray="5 4"' : '';
-      body += '<line data-link="' + link.id + '" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#243044" stroke-width="' + (link.kind === 'stairs' ? 6 : 3) + '"' + dash + '/>';
-    } else if (onDeck(link.a) || onDeck(link.b)) {
-      const id = onDeck(link.a) ? link.a : link.b;
-      const p = plan.places[id];
-      const x = p.x + p.w - 8, y = p.y + 8;
-      body += '<g data-link="' + link.id + '" data-transfer="1"><rect x="' + (x - 28) + '" y="' + y + '" width="36" height="22" fill="#f3d48a" stroke="#243044" stroke-width="2"/>' +
-        '<path d="M' + (x - 24) + ' ' + (y + 16) + ' h28 M' + (x - 22) + ' ' + (y + 11) + ' h24 M' + (x - 20) + ' ' + (y + 6) + ' h20" stroke="#243044" stroke-width="1.4" fill="none"/>' +
-        '<title>' + esc(link.label) + '</title></g>';
-    }
-  }
+  const linkLine = (id, a, b, kind) => {
+    const [x1, y1] = border(a, b.x + b.w / 2, b.y + b.h / 2);
+    const [x2, y2] = border(b, a.x + a.w / 2, a.y + a.h / 2);
+    const dash = kind === 'gated' ? ' stroke-dasharray="6 4"' : '';
+    lines += '<line data-link="' + id + '" x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" stroke="#243044" stroke-width="' + (kind === 'stairs' ? 5 : 3) + '"' + dash + '/>';
+  };
   for (const [id, p] of places) {
     const fill = p.label.indexOf('corridor') >= 0 || p.label.indexOf('walkway') >= 0 ? '#e7d2c4' : '#c48b93';
-    body += '<g data-place="' + id + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + p.h + '" rx="2" fill="' + fill + '" stroke="#243044" stroke-width="4"/>' +
+    shapes += '<g data-place="' + id + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + p.h + '" rx="2" fill="' + fill + '" stroke="#243044" stroke-width="4"/>' +
       '<text x="' + (p.x + p.w / 2) + '" y="' + (p.y + p.h / 2) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="13">' + esc(p.label) + '</text></g>';
+  }
+  for (const link of plan.links) {
+    if (onDeck(link.a) && onDeck(link.b)) linkLine(link.id, plan.places[link.a], plan.places[link.b], link.kind);
   }
   for (const stub of plan.stubs || []) {
     if (stub.deck !== deckId) continue;
-    body += '<g data-link="' + stub.link + '" data-transfer="1"><rect x="' + stub.x + '" y="' + stub.y + '" width="' + stub.w + '" height="' + stub.h + '" fill="#f3d48a" stroke="#243044" stroke-width="3"/>' +
+    const box = {x: stub.x, y: stub.y, w: stub.w, h: stub.h};
+    shapes += '<g data-transfer="1"><rect x="' + stub.x + '" y="' + stub.y + '" width="' + stub.w + '" height="' + stub.h + '" fill="#f3d48a" stroke="#243044" stroke-width="3"/>' +
       '<text x="' + (stub.x + stub.w / 2) + '" y="' + (stub.y + stub.h / 2 + 4) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="11">' + esc(stub.label) + '</text></g>';
+    if (stub.from && onDeck(stub.from)) linkLine(stub.link, plan.places[stub.from], box, (plan.links.find(l => l.id === stub.link) || {}).kind);
   }
+  let body = shapes + lines;
   if (marker && plan.places[marker.place] && plan.places[marker.place].deck === deckId) {
     const node = plan.nodes[marker.node] || {};
     const p = plan.places[marker.place];
@@ -94,7 +100,8 @@ function hindenburgMountDeckHud(plan) {
     select.value = chosen;
     hud.querySelector('#deckhud-where').textContent = plan.decks.find(d => d.id === place.deck).name + ' · ' + place.label;
     const marker = {node: view, place: meta.place};
-    hud.querySelector('#deckhud-compact').innerHTML = hindenburgDeckSvg(plan, place.deck, marker);
+    hud.querySelector('#deckhud-compact').hidden = enlarged;
+    hud.querySelector('#deckhud-compact').innerHTML = enlarged ? '' : hindenburgDeckSvg(plan, place.deck, marker);
     hud.querySelector('#deckhud-full').innerHTML = hindenburgDeckSvg(plan, chosen, chosen === place.deck ? marker : null);
     const here = chosen === place.deck ? 'You are here. ' : 'You are on ' + plan.decks.find(d => d.id === place.deck).name + '. ';
     hud.querySelector('#deckhud-facing').textContent = here + 'Facing: ' + nodes[view].facing + '. ' + exitText();

@@ -20,10 +20,10 @@
     "bcorridor": {"deck": "B", "x": 150, "y": 36, "w": 100, "h": 420, "label": "B-deck corridor"},
     "bar": {"deck": "B", "x": 270, "y": 150, "w": 114, "h": 100, "label": "Bar"},
     "keel": {"deck": "K", "x": 160, "y": 36, "w": 80, "h": 400, "label": "Keel walkway"},
-    "tour_shoes": {"deck": "K", "x": 16, "y": 36, "w": 128, "h": 72, "label": "Tour · overshoes"},
-    "tour_cells": {"deck": "K", "x": 16, "y": 124, "w": 128, "h": 72, "label": "Tour · gas cells"},
-    "tour_tanks": {"deck": "K", "x": 16, "y": 212, "w": 128, "h": 72, "label": "Tour · tanks"},
-    "tour_end": {"deck": "K", "x": 16, "y": 300, "w": 128, "h": 72, "label": "Tour · forward end"},
+    "tour_shoes": {"deck": "K", "x": 16, "y": 96, "w": 128, "h": 68, "label": "Tour · overshoes"},
+    "tour_cells": {"deck": "K", "x": 16, "y": 180, "w": 128, "h": 68, "label": "Tour · gas cells"},
+    "tour_tanks": {"deck": "K", "x": 16, "y": 264, "w": 128, "h": 68, "label": "Tour · tanks"},
+    "tour_end": {"deck": "K", "x": 16, "y": 348, "w": 128, "h": 68, "label": "Tour · forward end"},
     "nook": {"deck": "U", "x": 90, "y": 70, "w": 220, "h": 140, "label": "Upper rings"},
     "control": {"deck": "C", "x": 80, "y": 48, "w": 240, "h": 160, "label": "Control car"}
   },
@@ -67,16 +67,17 @@
     "control_back": {"place": "control", "heading": 180}
   },
   "stubs": [
-    {"deck": "A", "x": 276, "y": 300, "w": 108, "h": 70, "label": "Stairs down to B", "link": "acorridor-bcorridor"},
-    {"deck": "B", "x": 270, "y": 36, "w": 114, "h": 58, "label": "Stairs up to A", "link": "acorridor-bcorridor"},
-    {"deck": "B", "x": 270, "y": 470, "w": 114, "h": 58, "label": "Ladder to keel", "link": "bcorridor-keel"},
-    {"deck": "K", "x": 256, "y": 360, "w": 128, "h": 52, "label": "Ladder up to B", "link": "bcorridor-keel"},
-    {"deck": "K", "x": 256, "y": 36, "w": 128, "h": 52, "label": "Ladder to control", "link": "keel-control"},
-    {"deck": "C", "x": 80, "y": 224, "w": 240, "h": 44, "label": "Ladder up to keel", "link": "keel-control"},
-    {"deck": "K", "x": 256, "y": 180, "w": 128, "h": 52, "label": "Ladder to upper rings", "link": "keel-nook"},
-    {"deck": "U", "x": 90, "y": 230, "w": 220, "h": 44, "label": "Ladder down to keel", "link": "keel-nook"},
-    {"deck": "B", "x": 270, "y": 400, "w": 114, "h": 56, "label": "Escorted tour", "link": "bcorridor-tour"},
-    {"deck": "K", "x": 16, "y": 400, "w": 128, "h": 44, "label": "Tour from crew door", "link": "bcorridor-tour"}
+    {"deck": "A", "from": "acorridor", "x": 276, "y": 300, "w": 108, "h": 64, "label": "To B deck ↓", "link": "acorridor-bcorridor"},
+    {"deck": "B", "from": "bcorridor", "x": 270, "y": 36, "w": 114, "h": 52, "label": "To A deck ↑", "link": "acorridor-bcorridor"},
+    {"deck": "B", "from": "bcorridor", "x": 270, "y": 478, "w": 114, "h": 52, "label": "To keel ↓", "link": "bcorridor-keel"},
+    {"deck": "K", "from": "keel", "x": 256, "y": 360, "w": 128, "h": 48, "label": "To B deck ↑", "link": "bcorridor-keel"},
+    {"deck": "K", "from": "keel", "x": 256, "y": 36, "w": 128, "h": 48, "label": "To control car ↓", "link": "keel-control"},
+    {"deck": "C", "from": "control", "x": 80, "y": 224, "w": 240, "h": 44, "label": "To keel ↑", "link": "keel-control"},
+    {"deck": "K", "from": "keel", "x": 256, "y": 160, "w": 128, "h": 48, "label": "To upper rings ↑", "link": "keel-nook"},
+    {"deck": "K", "from": "tour_cells", "x": 256, "y": 190, "w": 128, "h": 48, "label": "Cells ladder ↑", "link": "tour-cells-nook"},
+    {"deck": "U", "from": "nook", "x": 90, "y": 230, "w": 220, "h": 44, "label": "To keel ↓", "link": "keel-nook"},
+    {"deck": "B", "from": "bcorridor", "x": 270, "y": 400, "w": 114, "h": 52, "label": "Escorted tour ↓", "link": "bcorridor-tour"},
+    {"deck": "K", "from": "tour_shoes", "x": 16, "y": 36, "w": 128, "h": 48, "label": "From crew door", "link": "bcorridor-tour"}
   ],
   "links": [
     {"id": "lounge-promenade", "a": "lounge", "b": "promenade", "kind": "door", "label": "Door"},

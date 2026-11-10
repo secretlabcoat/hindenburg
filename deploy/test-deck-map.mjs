@@ -1,6 +1,7 @@
 import {JSDOM} from 'jsdom';
 import fs from 'fs';
 import crypto from 'crypto';
+import vm from 'vm';
 import assert from 'node:assert/strict';
 
 const html = fs.readFileSync(new URL('./hindenburg-worker.html', import.meta.url), 'utf8');
@@ -56,11 +57,14 @@ assert.equal(w.document.querySelector('[data-player]').getAttribute('data-node')
 assert.equal(w.document.querySelector('[data-player]').getAttribute('data-heading'), '0');
 const before = w.eval('view');
 w.document.querySelector('#deckhud-toggle').click();
+assert.equal(w.document.querySelector('#deckhud-compact').hidden, true);
+assert.equal(w.document.querySelectorAll('#deckhud-full svg').length, 1);
+assert.equal(w.document.querySelector('#deckhud-full [data-player]').getAttribute('data-node'), 'washroom_stall');
 w.document.querySelector('#deckhud-deck').value = 'A';
 w.document.querySelector('#deckhud-deck').dispatchEvent(new w.Event('change'));
 assert.equal(w.eval('view'), before);
 assert.equal(w.document.querySelector('#deckhud-full [data-player]'), null);
-assert.equal(w.document.querySelector('#deckhud-compact [data-player]').getAttribute('data-node'), 'washroom_stall');
+w.document.querySelector('#deckhud-toggle').click();
 w.document.querySelector('#navright').click();
 await new Promise(r => setTimeout(r, 250));
 assert.equal(w.eval('view'), 'washroom_basins');
@@ -73,4 +77,53 @@ function getComputed(win) {
 assert.equal(getComputed(w), '1');
 w.eval("view='bdeck_stairs';draw()");
 assert.equal(w.document.querySelector('#deckhud-where').textContent.includes('B deck'), true);
+const ctx = {};
+vm.runInNewContext(fs.readFileSync(new URL('./deck-map.js', import.meta.url), 'utf8') + '\nthis.svg=hindenburgDeckSvg;', ctx);
+const svgs = {};
+for (const deck of plan.decks) svgs[deck.id] = ctx.svg(plan, deck.id, null);
+function linesOf(svg) { return [...svg.matchAll(/<line data-link="([^"]+)"/g)].map(m => m[1]); }
+for (const stub of plan.stubs) {
+  assert.ok(linesOf(svgs[stub.deck]).includes(stub.link), 'stub not drawn ' + stub.label);
+}
+for (const id of gameNodes) {
+  for (const dir of ['forward', 'left', 'right']) {
+    const dest = w.eval('nodes[' + JSON.stringify(id) + '].' + dir);
+    if (!dest || placeOf(id) === placeOf(dest)) continue;
+    const link = plan.links.find(l => (l.a === placeOf(id) && l.b === placeOf(dest)) || (l.b === placeOf(id) && l.a === placeOf(dest)));
+    assert.ok(link, 'exit without link ' + id + ' ' + dir);
+    const deck = plan.places[placeOf(id)].deck;
+    assert.ok(linesOf(svgs[deck]).includes(link.id), 'exit without line ' + id + ' ' + dir);
+  }
+}
+for (const [id, place] of Object.entries(plan.places)) {
+  const deck = place.deck;
+  const attached = plan.links.some(l => (l.a === id || l.b === id) && linesOf(svgs[deck]).includes(l.id))
+    || plan.stubs.some(s => s.from === id && s.deck === deck && linesOf(svgs[deck]).includes(s.link));
+  assert.ok(attached, 'floating room ' + id);
+}
+const info = Object.fromEntries(gameNodes.map(id => [id, w.eval('({left:nodes[' + JSON.stringify(id) + '].left,right:nodes[' + JSON.stringify(id) + '].right,forward:nodes[' + JSON.stringify(id) + '].forward,name:nodes[' + JSON.stringify(id) + '].name,facing:nodes[' + JSON.stringify(id) + '].facing})')]));
+const seen = new Set(['washroom_stall']);
+const via = {washroom_stall: 'start'};
+const queue = ['washroom_stall'];
+while (queue.length) {
+  const id = queue.shift();
+  for (const dir of ['left', 'right', 'forward']) {
+    const dest = info[id][dir];
+    if (dest && info[dest] && !seen.has(dest)) { seen.add(dest); via[dest] = id + ' · ' + dir; queue.push(dest); }
+  }
+}
+const free = [...seen];
+if (!seen.has('tour_shoes')) { seen.add('tour_shoes'); via.tour_shoes = 'crew_door · escorted tour (gated)'; queue.push('tour_shoes'); }
+if (!seen.has('girder_nook')) { seen.add('girder_nook'); via.girder_nook = 'keel_back or tour_cells · climb after the glimmer (gated)'; queue.push('girder_nook'); }
+while (queue.length) {
+  const id = queue.shift();
+  for (const dir of ['left', 'right', 'forward']) {
+    const dest = info[id][dir];
+    if (dest && info[dest] && !seen.has(dest)) { seen.add(dest); via[dest] = id + ' · ' + dir; queue.push(dest); }
+  }
+}
+const unreachable = gameNodes.filter(id => !seen.has(id));
+assert.deepEqual(unreachable, []);
+console.log('REACH');
+for (const id of gameNodes.sort()) console.log(id + ' | ' + info[id].name + ' | ' + info[id].facing + ' | ' + via[id] + (free.includes(id) ? '' : ' | GATED'));
 console.log('deck map tests passed', gameNodes.length, 'nodes', plan.decks.length, 'decks');
