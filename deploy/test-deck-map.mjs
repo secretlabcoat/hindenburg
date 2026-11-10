@@ -6,15 +6,18 @@ import assert from 'node:assert/strict';
 
 const html = fs.readFileSync(new URL('./hindenburg-worker.html', import.meta.url), 'utf8');
 const plan = JSON.parse(fs.readFileSync(new URL('./deck-plans/plans.json', import.meta.url), 'utf8'));
+plan.nodes = {};
+for (const ring of plan.rings) {
+  for (const face of ring.faces) {
+    plan.nodes[face.id] = {place: ring.place, heading: face.heading, at: ring.at, stand: ring.stand, forward: face.forward || null};
+  }
+}
+function standOf(id) { return plan.nodes[id].stand; }
 assert.equal(crypto.createHash('sha256').update(html).digest('hex').length, 64);
 assert.equal(html.split('https://hindenburg-ai.secretlabcoat-0ba.workers.dev').length - 1, 1);
-for (const [id, sha] of Object.entries({
-  washroom_stall: '96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2',
-  washroom_basins: '6c5211f4fa640c9421381eab2771f7c3fdb8a41896b032585cee2cdbda340f8d',
-  washroom_door: '10dcbb67392fcbf1453968d630888424b7bc914e25405395a246b357db12c232',
-  washroom_wall: '774de38bf2eba9e7c7ec6ce98d09cc8389e5b91e5721e82f16bbcf213bbb6e6b'
-})) {
-  assert.ok(html.includes(id), id);
+for (const name of ['washroom_stall', 'washroom_basins', 'washroom_door', 'washroom_wall']) {
+  const raw = fs.readFileSync(new URL('./bathroom-harmonized/' + name + '.webp', import.meta.url));
+  assert.ok(html.includes(raw.toString('base64').slice(0, 80)), name + ' harmonized art');
 }
 assert.ok(html.includes('[data-person]{opacity:1!important'));
 
@@ -48,7 +51,8 @@ for (const id of gameNodes) {
 }
 const wash = ['washroom_stall', 'washroom_basins', 'washroom_door', 'washroom_wall'];
 assert.equal(new Set(wash.map(placeOf)).size, 1);
-assert.equal(w.eval('nodes.washroom_door.forward'), 'bdeck_washroom');
+assert.equal(w.eval('nodes.washroom_door.forward'), 'b_north_s');
+assert.equal(standOf(w.eval('nodes.washroom_door.forward')), 'b-north');
 
 w.eval("document.querySelector('#startgame').click()");
 assert.equal(w.eval('view'), 'washroom_stall');
@@ -85,14 +89,15 @@ function getComputed(win) {
 }
 assert.equal(getComputed(w), '1');
 w.eval("view='washroom_door';draw()");
-const door = w.document.querySelector('#scene [data-move="bdeck_washroom"]');
+const door = w.document.querySelector('#scene [data-move="b_north_s"]');
 assert.ok(door, 'washroom door hotspot');
 assert.equal(door.getAttribute('aria-label'), 'Enter B-Deck Corridor');
 assert.equal(door.querySelector('.exit-label').textContent, 'Enter B-Deck Corridor');
 assert.equal(door.style.cursor, 'pointer');
 door.click();
 await new Promise(r => setTimeout(r, 250));
-assert.equal(w.eval('view'), 'bdeck_washroom');
+assert.equal(w.eval('view'), 'b_north_s');
+assert.equal(standOf(w.eval('view')), 'b-north');
 w.eval("view='washroom_door';draw()");
 w.document.querySelector('#deckhud-open').click();
 const mapDoor = w.document.querySelector('#deckhud-full [data-link="bcorridor-washroom"]');
@@ -113,7 +118,7 @@ otherDeck.value = 'B';
 otherDeck.dispatchEvent(new w.Event('change'));
 w.document.querySelector('#deckhud-full [data-link="bcorridor-washroom"]').onclick();
 await new Promise(r => setTimeout(r, 250));
-assert.equal(w.eval('view'), 'bdeck_washroom');
+assert.equal(w.eval('view'), 'b_north_s');
 assert.equal(w.document.querySelector('#deckpop').hidden, true);
 w.eval('ai["Bunny Treemont"].toured = true');
 w.eval("view='crew_door';draw()");
@@ -128,7 +133,7 @@ assert.ok(climbHot, 'gated ladder hotspot');
 climbHot.click();
 assert.equal(w.eval('view'), 'tour_cells');
 assert.ok(w.document.querySelector('#log').textContent.includes('upper rings'));
-w.eval("view='bdeck_stairs';draw()");
+w.eval("view='bdeck_washroom';draw()");
 assert.equal(w.document.querySelector('#deckhud-where').textContent.includes('Washroom') || w.document.querySelector('#deckhud-where').textContent.includes('corridor') || w.document.querySelector('#deckhud-where').textContent.length > 0, true);
 let missingHot = [];
 const audit = [];
@@ -139,12 +144,16 @@ for (const id of gameNodes) {
     const dest = w.eval('nodes[' + JSON.stringify(id) + '].' + dir);
     if (!dest) continue;
     const same = placeOf(id) === placeOf(dest);
-    if (dir !== 'forward' && same) continue;
+    if (dir !== 'forward') {
+      if (!same || standOf(id) !== standOf(dest)) missingHot.push(id + ' turn leaves ' + dir);
+      continue;
+    }
     const hot = w.document.querySelector('#scene [data-move="' + dest + '"]');
     const label = hot && hot.getAttribute('aria-label');
     const hover = hot && hot.querySelector('.exit-label') && hot.querySelector('.exit-label').textContent;
-    if (!hot || hot.style.cursor !== 'pointer' || !label || !label.startsWith('Enter ') || hover !== label) {
-      missingHot.push(id + ' ' + dir + ' -> ' + dest);
+    const good = label && (label.startsWith('Enter ') || label === 'Continue forward');
+    if (!hot || hot.style.cursor !== 'pointer' || !good || hover !== label) {
+      missingHot.push(id + ' ' + dir + ' -> ' + dest + ' ' + label);
     }
     row.exits.push(dir + ' → ' + dest + ' [' + (label || 'MISSING') + ']');
   }
@@ -208,6 +217,59 @@ while (queue.length) {
 }
 const unreachable = gameNodes.filter(id => !seen.has(id));
 assert.deepEqual(unreachable, []);
+const turnBugs = [];
+for (const id of gameNodes) {
+  let cursor = id;
+  for (let step = 0; step < 4; step++) {
+    const nxt = info[cursor].right;
+    if (!nxt || !info[nxt]) { turnBugs.push(id + ' right broken at ' + cursor); break; }
+    if (standOf(nxt) !== standOf(id) || placeOf(nxt) !== placeOf(id)) turnBugs.push(id + ' right leaves stand');
+    cursor = nxt;
+  }
+  if (cursor !== id) turnBugs.push(id + ' 4 rights -> ' + cursor);
+  const dest = info[id].forward;
+  if (!dest || id === 'girder_nook') continue;
+  const backHeading = (plan.nodes[dest].heading + 180) % 360;
+  const back = gameNodes.find(v => standOf(v) === standOf(dest) && plan.nodes[v].heading === backHeading);
+  const ret = back && info[back].forward;
+  if (!ret || standOf(ret) !== standOf(id)) turnBugs.push(id + ' reverse forward -> ' + ret);
+}
+assert.deepEqual(turnBugs, []);
+function segHits(x1, y1, x2, y2, r) {
+  const left = r.x + 0.8, right = r.x + r.w - 0.8, top = r.y + 0.8, bot = r.y + r.h - 0.8;
+  if (Math.abs(y1 - y2) < 0.3) {
+    const y = y1, xlo = Math.min(x1, x2), xhi = Math.max(x1, x2);
+    if (y <= top || y >= bot) return false;
+    return xhi > left && xlo < right;
+  }
+  if (Math.abs(x1 - x2) > 0.3) return true;
+  const x = x1, ylo = Math.min(y1, y2), yhi = Math.max(y1, y2);
+  if (x <= left || x >= right) return false;
+  return yhi > top && ylo < bot;
+}
+const orthoBugs = [];
+for (const deck of plan.decks) {
+  const svg = svgs[deck.id];
+  const rooms = Object.entries(plan.places).filter(([, p]) => p.deck === deck.id).map(([id, p]) => ({id, ...p}));
+  const boxes = rooms.concat(plan.stubs.filter(s => s.deck === deck.id).map(s => ({id: 'stub:' + s.link, ...s})));
+  for (const m of svg.matchAll(/<line data-link="([^"]+)" x1="([^"]+)" y1="([^"]+)" x2="([^"]+)" y2="([^"]+)"/g)) {
+    const [, link, xs1, ys1, xs2, ys2] = m;
+    const x1 = +xs1, y1 = +ys1, x2 = +xs2, y2 = +ys2;
+    if (Math.abs(x1 - x2) > 0.3 && Math.abs(y1 - y2) > 0.3) orthoBugs.push(link + ' diagonal');
+    const linkDef = plan.links.find(l => l.id === link);
+    const allowed = new Set();
+    if (linkDef) {
+      if (plan.places[linkDef.a].deck === deck.id) allowed.add(linkDef.a);
+      if (plan.places[linkDef.b].deck === deck.id) allowed.add(linkDef.b);
+    }
+    for (const s of plan.stubs) if (s.link === link && s.deck === deck.id) allowed.add('stub:' + s.link);
+    for (const box of boxes) {
+      if (allowed.has(box.id)) continue;
+      if (segHits(x1, y1, x2, y2, box)) orthoBugs.push(link + ' crosses ' + box.id);
+    }
+  }
+}
+assert.deepEqual(orthoBugs, []);
 console.log('REACH');
 for (const id of gameNodes.sort()) console.log(id + ' | ' + info[id].name + ' | ' + info[id].facing + ' | ' + via[id] + (free.includes(id) ? '' : ' | GATED'));
 console.log('deck map tests passed', gameNodes.length, 'nodes', plan.decks.length, 'decks');

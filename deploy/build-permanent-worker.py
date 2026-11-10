@@ -19,14 +19,16 @@ BATH = ROOT / 'bathroom-20261108'
 OUT = ROOT / 'hindenburg-worker.html'
 MODULE = ROOT / 'hindenburg-worker-module.mjs'
 
-# Authoritative bathroom WebPs. These replace the older ShareHTML bathroom bytes.
-BATHROOM = {
-    'washroom_basins': '6c5211f4fa640c9421381eab2771f7c3fdb8a41896b032585cee2cdbda340f8d',
-    'washroom_door': '10dcbb67392fcbf1453968d630888424b7bc914e25405395a246b357db12c232',
-    'washroom_wall': '774de38bf2eba9e7c7ec6ce98d09cc8389e5b91e5721e82f16bbcf213bbb6e6b',
-}
-# North curtain. reference.png in the upload decodes to this exact WebP.
+# North curtain WebP kept on disk as the grading source. The embedded
+# washroom pictures are the colour-matched set in bathroom-harmonized/.
 STALL = '96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2'
+HARM = ROOT / 'bathroom-harmonized'
+HARMONIZED = {
+    'washroom_stall': '3048126536f2947c89b9ff53c52946ba0dfc3adcebac67e7ee12b700bbc4811f',
+    'washroom_basins': '6e777ff7cdbb533d16ab3c7fd1472561e9bf7ed75ec06d549f693b0cd6af1a84',
+    'washroom_door': 'a9eca5ea53becf193058572c18902246f2dd8d4062a3ad4139c00b5291885cb6',
+    'washroom_wall': '205b1a3f9acc9af13ab08661abca3a915b4486e86242a0a0b322b55e36c3b8b7',
+}
 OLD_BATHROOM = {
     'washroom_basins': '4cd0b7484391d0fec40bcd7e361744ad2417349fe038f2c99baa2638db385a2b',
     'washroom_door': '0a213e84d96dcecd32e94288bd8c27da289d0604437b8e0941059f7e3aed7134',
@@ -64,23 +66,23 @@ CENTER_EXIT = ['keel_walk', 'tour_end']
 expected = json.loads((ART / 'hashes.json').read_text())
 if expected.get('washroom_stall') != STALL:
     raise SystemExit('north curtain hash drifted')
+if hashlib.sha256((ART / 'washroom_stall.webp').read_bytes()).hexdigest() != STALL:
+    raise SystemExit('north curtain file changed')
 images = {}
 for name, sha in expected.items():
-    if name in BATHROOM:
-        continue  # older ShareHTML bathroom bytes stay on disk for comparison only
+    if name in HARMONIZED:
+        continue  # bathroom walls are the harmonized set, not the older bytes
     raw = (ART / f'{name}.webp').read_bytes()
     got = hashlib.sha256(raw).hexdigest()
     if got != sha:
         raise SystemExit(f'{name} sha256 {got} != ShareHTML {sha}')
     images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
-for name, sha in BATHROOM.items():
-    raw = (BATH / f'{name}.webp').read_bytes()
+for name, sha in HARMONIZED.items():
+    raw = (HARM / f'{name}.webp').read_bytes()
     got = hashlib.sha256(raw).hexdigest()
     if got != sha:
-        raise SystemExit(f'{name} sha256 {got} != uploaded bathroom {sha}')
+        raise SystemExit(f'{name} sha256 {got} != harmonized bathroom {sha}')
     images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
-if hashlib.sha256(base64.b64decode(images['washroom_stall'].split(',',1)[1])).hexdigest() != STALL:
-    raise SystemExit('stall photograph is not the north reference')
 
 payload = {
     'images': images,

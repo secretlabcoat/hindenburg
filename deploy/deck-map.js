@@ -5,26 +5,39 @@ function hindenburgDeckSvg(plan, deckId, marker) {
   const deck = plan.decks.find(d => d.id === deckId);
   const w = plan.width, h = plan.height;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const border = (rect, tx, ty) => {
-    const cx = rect.x + rect.w / 2, cy = rect.y + rect.h / 2;
-    const dx = tx - cx, dy = ty - cy;
-    if (!dx && !dy) return [cx, cy];
-    const sx = dx ? (rect.w / 2) / Math.abs(dx) : Infinity;
-    const sy = dy ? (rect.h / 2) / Math.abs(dy) : Infinity;
-    const s = Math.min(sx, sy);
-    return [cx + dx * s, cy + dy * s];
-  };
   let shapes = '';
+  let gaps = '';
   let lines = '';
   let labels = '';
   const onDeck = id => plan.places[id] && plan.places[id].deck === deckId;
-  const linkLine = (id, a, b, kind) => {
-    const [x1, y1] = border(a, b.x + b.w / 2, b.y + b.h / 2);
-    const [x2, y2] = border(b, a.x + a.w / 2, a.y + a.h / 2);
-    const dash = kind === 'gated' ? ' stroke-dasharray="6 4"' : '';
+  const span = (a0, a1, b0, b1) => Math.min(a1, b1) - Math.max(a0, b0);
+  const doorSegment = (a, b) => {
+    const tries = [[a, b], [b, a]];
+    for (let t = 0; t < tries.length; t++) {
+      const p = tries[t][0], q = tries[t][1];
+      const pr = p.x + p.w, pb = p.y + p.h, qr = q.x + q.w, qb = q.y + q.h;
+      if (Math.abs(pr - q.x) <= 0.8 && span(p.y, pb, q.y, qb) >= 14) {
+        const y = (Math.max(p.y, q.y) + Math.min(pb, qb)) / 2;
+        return [pr - 10, y, pr + 10, y];
+      }
+      if (Math.abs(pb - q.y) <= 0.8 && span(p.x, pr, q.x, qr) >= 14) {
+        const x = (Math.max(p.x, q.x) + Math.min(pr, qr)) / 2;
+        return [x, pb - 10, x, pb + 10];
+      }
+    }
+    return null;
+  };
+  const addDoor = (id, a, b, kind) => {
+    const seg = doorSegment(a, b);
+    if (!seg) return;
+    const x1 = seg[0], y1 = seg[1], x2 = seg[2], y2 = seg[3];
+    const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+    const horiz = Math.abs(y1 - y2) < 0.2;
+    if (horiz) gaps += '<rect x="' + (mx - 4).toFixed(1) + '" y="' + (my - 16).toFixed(1) + '" width="8" height="32" fill="#d6e6f5"/>';
+    else gaps += '<rect x="' + (mx - 16).toFixed(1) + '" y="' + (my - 4).toFixed(1) + '" width="32" height="8" fill="#d6e6f5"/>';
+    const dash = kind === 'gated' ? ' stroke-dasharray="4 3"' : '';
     const coords = ' x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '"';
-    lines += '<line' + coords + ' stroke="#243044" stroke-width="' + (kind === 'stairs' ? 5 : 3) + '"' + dash + '/>';
-    lines += '<line data-link="' + id + '"' + coords + ' stroke="transparent" stroke-width="16"/>';
+    lines += '<line data-link="' + id + '"' + coords + ' stroke="#243044" stroke-width="' + (kind === 'stairs' ? 5 : 4) + '"' + dash + '/>';
   };
   for (const [id, p] of places) {
     const fill = p.label.indexOf('corridor') >= 0 || p.label.indexOf('walkway') >= 0 ? '#e7d2c4' : '#c48b93';
@@ -32,7 +45,7 @@ function hindenburgDeckSvg(plan, deckId, marker) {
     labels += '<text x="' + (p.x + p.w / 2) + '" y="' + (p.y + p.h / 2) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="13">' + esc(p.label) + '</text>';
   }
   for (const link of plan.links) {
-    if (onDeck(link.a) && onDeck(link.b)) linkLine(link.id, plan.places[link.a], plan.places[link.b], link.kind);
+    if (onDeck(link.a) && onDeck(link.b)) addDoor(link.id, plan.places[link.a], plan.places[link.b], link.kind);
   }
   for (const stub of plan.stubs || []) {
     if (stub.deck !== deckId) continue;
@@ -44,9 +57,9 @@ function hindenburgDeckSvg(plan, deckId, marker) {
     shapes += '<g data-transfer="1" data-arrow="shaft"><rect x="' + stub.x + '" y="' + stub.y + '" width="' + stub.w + '" height="' + stub.h + '" fill="#f3d48a" stroke="#243044" stroke-width="3"/>' +
       '<g transform="translate(' + (stub.x + 16) + ' ' + ay + ')">' + shaft + '<polygon points="' + head + '" fill="#1d3557"/></g>' +
       '<text x="' + (stub.x + stub.w / 2 + 8) + '" y="' + (ay + 4) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="11">' + esc(stub.label) + '</text></g>';
-    if (stub.from && onDeck(stub.from)) linkLine(stub.link, plan.places[stub.from], box, (plan.links.find(l => l.id === stub.link) || {}).kind);
+    if (stub.from && onDeck(stub.from)) addDoor(stub.link, plan.places[stub.from], box, (plan.links.find(l => l.id === stub.link) || {}).kind);
   }
-  let body = shapes + lines;
+  let body = shapes + gaps + lines;
   if (marker && plan.places[marker.place] && plan.places[marker.place].deck === deckId) {
     const node = plan.nodes[marker.node] || {};
     const p = plan.places[marker.place];
@@ -73,11 +86,39 @@ function hindenburgDeckSvg(plan, deckId, marker) {
     '<rect width="' + w + '" height="' + h + '" fill="#d6e6f5"/>' +
     '<text x="16" y="18" fill="#1c2430" font-family="Georgia, serif" font-size="14" font-weight="700">' + esc(title) + '</text>' +
     '<text x="16" y="' + (h - 28) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Game schematic · not a measured blueprint</text>' +
-    '<text x="16" y="' + (h - 12) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Bow up · port left · starboard right · line = door · arrow = stair · dashed = gated</text>' +
+    '<text x="16" y="' + (h - 12) + '" fill="#1c2430" font-family="Georgia, serif" font-size="11">Bow up · port left · starboard right · gap = door · arrow = stair · dashed = gated</text>' +
     body + '</svg>';
 }
 
+function hindenburgApplyFacingRings(plan) {
+  if (!plan.rings) return;
+  plan.nodes = plan.nodes || {};
+  for (const ring of plan.rings) {
+    const faces = ring.faces.slice().sort((a, b) => a.heading - b.heading);
+    const ids = faces.map(f => f.id);
+    faces.forEach((face, i) => {
+      if (!nodes[face.id]) {
+        nodes[face.id] = {
+          name: face.name || ring.name,
+          facing: face.facing || 'another wall',
+          left: null,
+          right: null,
+          forward: null,
+          style: face.style || 'plain'
+        };
+      }
+      const n = nodes[face.id];
+      n.left = ids[(i + 3) % 4];
+      n.right = ids[(i + 1) % 4];
+      if (face.keepForward && window.nookReturn) n.forward = window.nookReturn;
+      else n.forward = face.forward || null;
+      plan.nodes[face.id] = {place: ring.place, heading: face.heading, at: ring.at, stand: ring.stand};
+    });
+  }
+}
+
 function hindenburgMountDeckHud(plan) {
+  hindenburgApplyFacingRings(plan);
   if (document.getElementById('deckhud')) return;
   const left = document.querySelector('#navleft');
   const forward = document.querySelector('#navforward');
@@ -123,10 +164,8 @@ function hindenburgMountDeckHud(plan) {
     const here = placeId(view);
     const out = [];
     if (!here || !nodes[view]) return out;
-    for (const dir of ['forward', 'left', 'right']) {
-      const dest = nodes[view][dir];
-      if (!dest || !nodes[dest] || !plan.nodes[dest]) continue;
-      if (placeId(dest) === here) continue;
+    const dest = nodes[view].forward;
+    if (dest && nodes[dest] && plan.nodes[dest] && placeId(dest) !== here) {
       const link = plan.links.find(l => (l.a === here && l.b === placeId(dest)) || (l.b === here && l.a === placeId(dest)));
       if (link) out.push({link: link.id, dest, label: 'Enter ' + nodes[dest].name});
     }
@@ -164,6 +203,7 @@ function hindenburgMountDeckHud(plan) {
     });
   }
   function exitLabel(dest) {
+    if (placeId(dest) && placeId(dest) === placeId(view)) return 'Continue forward';
     return 'Enter ' + nodes[dest].name;
   }
   function labelExit(el, dest) {
@@ -217,13 +257,14 @@ function hindenburgMountDeckHud(plan) {
     const n = nodes[view];
     const paint = document.querySelector('#scene .paint');
     if (!n || !paint) return;
-    for (const dir of ['forward', 'left', 'right']) {
-      const dest = n[dir];
-      if (!dest || !nodes[dest]) continue;
-      if (dir !== 'forward' && samePlace(dest)) continue;
+    const dest = n.forward && nodes[n.forward] ? n.forward : '';
+    paint.querySelectorAll('[data-move]').forEach(el => {
+      if (el.dataset.move !== dest) el.dataset.move = dest;
+    });
+    if (dest) {
       let el = paint.querySelector('[data-move="' + dest + '"]');
       if (!el) {
-        addHotspot(dest, exitLabel(dest), dir === 'forward' ? 'exit-forward' : 'exit-' + dir);
+        addHotspot(dest, exitLabel(dest), 'exit-forward');
         el = paint.querySelector('[data-move="' + dest + '"]');
       }
       if (el) labelExit(el, dest);
@@ -232,6 +273,7 @@ function hindenburgMountDeckHud(plan) {
     if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
   }
   function paintHud() {
+    hindenburgApplyFacingRings(plan);
     const started = document.querySelector('#titleoverlay') && document.querySelector('#titleoverlay').hidden;
     hud.hidden = !started;
     if (!started || !plan.nodes[view]) return;
@@ -274,7 +316,9 @@ function hindenburgMountDeckHud(plan) {
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) setOpen(false); });
   const prevDraw = draw;
   draw = function () {
+    hindenburgApplyFacingRings(plan);
     const result = prevDraw.apply(this, arguments);
+    hindenburgApplyFacingRings(plan);
     paintHud();
     return result;
   };
