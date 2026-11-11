@@ -142,8 +142,14 @@ function hindenburgSceneActions() {
   const paint = document.querySelector('#scene .paint');
   if (!paint) return;
   paint.querySelectorAll('.actbtn').forEach(el => el.remove());
+  const photoPeople = {
+    lounge_people: {'Damina Vontette': 'photo-damina', 'Snardy Vontette': 'photo-snardy'}
+  };
+  const inPhoto = photoPeople[view] || {};
   paint.querySelectorAll('[data-person]').forEach(el => {
     const name = el.dataset.person;
+    if (inPhoto[name]) el.classList.add('in-photo', inPhoto[name]);
+    el.classList.add('exit-hot');
     el.style.cursor = 'pointer';
     el.setAttribute('aria-label', 'Talk to ' + name);
     if (!el.querySelector('.exit-label')) {

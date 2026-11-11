@@ -88,6 +88,23 @@ function getComputed(win) {
   return win.getComputedStyle(win.document.querySelector('[data-person="Captain Swanson Kyle"]')).opacity;
 }
 assert.equal(getComputed(w), '1');
+assert.ok(!w.document.querySelector('[data-person="Captain Swanson Kyle"]').classList.contains('in-photo'));
+w.eval("view='lounge_people';draw()");
+const damina = w.document.querySelector('[data-person="Damina Vontette"]');
+const snardy = w.document.querySelector('[data-person="Snardy Vontette"]');
+assert.ok(damina.classList.contains('in-photo'));
+assert.ok(snardy.classList.contains('in-photo'));
+assert.equal(damina.getAttribute('aria-label'), 'Talk to Damina Vontette');
+assert.equal(snardy.getAttribute('aria-label'), 'Talk to Snardy Vontette');
+damina.click();
+assert.equal(w.eval('who'), 'Damina Vontette');
+w.eval("view='bar_counter';draw()");
+assert.ok(w.document.querySelector('[data-person="Oreo Malloy"]'));
+assert.ok(!w.document.querySelector('[data-person="Oreo Malloy"]').classList.contains('in-photo'));
+w.eval("view='promenade_side';draw()");
+assert.ok(w.document.querySelector('[data-person="Potter McNare"]'));
+assert.ok(!w.document.querySelector('[data-person="Potter McNare"]').classList.contains('in-photo'));
+w.eval("view='control_helm';draw()");
 w.eval("view='washroom_door';draw()");
 const door = w.document.querySelector('#scene [data-move="b_north_s"]');
 assert.ok(door, 'washroom door hotspot');

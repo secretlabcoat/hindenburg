@@ -144,6 +144,17 @@ style = r"""
 .photo-exit span{position:absolute;left:50%;bottom:0;transform:translateX(-50%);background:#23190ee8;color:#f3e2c0;font:12px Georgia,serif;padding:3px 6px;white-space:nowrap;opacity:0;pointer-events:none}
 .photo-exit:hover span,.photo-exit:focus span{opacity:1}
 .scene .paint.has-art [data-person]{opacity:1!important;z-index:6;pointer-events:auto}
+.scene .paint.has-art [data-person].in-photo{background:transparent;filter:none}
+.scene .paint.has-art [data-person].in-photo:before,
+.scene .paint.has-art [data-person].in-photo:after{content:none!important;display:none!important}
+.scene .paint.has-art [data-person].in-photo.photo-damina{left:18%!important;width:24%;top:48%;height:30%;bottom:auto}
+.scene .paint.has-art [data-person].in-photo.photo-snardy{left:56%!important;width:26%;top:46%;height:34%;bottom:auto}
+.scene .paint.has-art [data-person].in-photo>.exit-label{bottom:auto;top:-2px}
+.scene .paint.has-art [data-person].in-photo:hover,
+.scene .paint.has-art [data-person].in-photo:focus-visible{outline:1px solid #f5d89599}
+.scene [data-person]:hover>.exit-label,
+.scene [data-person]:focus>.exit-label,
+.scene [data-person]:focus-visible>.exit-label{opacity:1}
 .scene .paint.has-art .wash-curtain{left:33%;width:34%;top:18%;bottom:28%}
 .scene .paint.has-art .wash-mirror{left:38%;width:24%;top:14%;height:28%}
 .scene .paint.has-art .wash-door{left:40%;width:20%;top:16%;height:62%}
