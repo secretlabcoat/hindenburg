@@ -24,7 +24,7 @@ MODULE = ROOT / 'hindenburg-worker-module.mjs'
 STALL = '96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2'
 HARM = ROOT / 'bathroom-harmonized'
 HARMONIZED = {
-    'washroom_stall': '3048126536f2947c89b9ff53c52946ba0dfc3adcebac67e7ee12b700bbc4811f',
+    'washroom_stall': '81f1de5d504d2f3e3ab373339be83727df3d937ae100d716e5a4a3e635a5493b',
     'washroom_basins': '6e777ff7cdbb533d16ab3c7fd1472561e9bf7ed75ec06d549f693b0cd6af1a84',
     'washroom_door': 'a9eca5ea53becf193058572c18902246f2dd8d4062a3ad4139c00b5291885cb6',
     'washroom_wall': '205b1a3f9acc9af13ab08661abca3a915b4486e86242a0a0b322b55e36c3b8b7',
@@ -57,8 +57,12 @@ VIEW_ART = {
     'office_desk': 'office_desk',
     'bdeck_washroom': 'bdeck_corr_washdoor',
     'bdeck_stairs': 'bdeck_corr_stairs',
+    'bdeck_stairs_up': 'bdeck_stairs_up',
+    'bdeck_stairs_wall': 'bdeck_stairs_wall',
+    'bdeck_stairs_door': 'bdeck_stairs_door',
+    'bdeck_stairs_bar': 'bdeck_stairs_bar',
+    'bdeck_corr_office': 'bdeck_corr_south',
     'b_mid_w': 'bdeck_corr_office',
-    'b_north_s': 'corridor_forward',
     'b_mid_n': 'corridor_forward',
     'b_mid_s': 'corridor_forward',
     'b_cab_n': 'corridor_forward',
@@ -78,7 +82,7 @@ VIEW_ART = {
     'tour_end': 'tour_end',
 }
 # These ready photos have no node in the permanent 36-view game.
-UNMAPPED_READY = ['bdeck_corr_stairs', 'bdeck_corr_office']
+UNMAPPED_READY = ['bdeck_corr_stairs']
 # Painted central opening, and the permanent scene has no data-move hotspot.
 CENTER_EXIT = ['keel_walk', 'tour_end']
 
@@ -107,6 +111,11 @@ FACING = {
     'cabin_door': '8e387bd2cf4a073c9aa8325b033fa509970feef37e9bb11bd7aa51d030683e17',
     'tour_shoes': 'd99b239f7f7be69697870b8616f7446af2ba680ff83fa9167b05640f8eb56cdf',
     'tour_cells': '332249cca5d13a37ee6115e00223bd237b60897c58fed9ef063d27aec481b1d3',
+    'bdeck_stairs_up': 'bd0cf913494ad0eb5b28fc39d1f8cb54f12a2fd063c5b404d3dc30c1f6143878',
+    'bdeck_stairs_wall': '66fa02a84722b59b0554d5f347102cd1abe6aa42bf618a055be4f2e497b00dab',
+    'bdeck_stairs_door': '703902a47d1fa95f98987ab1ff08b66ea7a5b85841b60bcfe6fee69914d5294f',
+    'bdeck_stairs_bar': '3470159d2a2e6cfce8d986a2abec4e90e797aa883b6a68b9ad611cdef9772f68',
+    'bdeck_corr_south': '80ddcbde4a947077e7b9b32ba7a4a1303349ee1fe3eef64e552b32674e28480f',
 }
 for name, sha in FACING.items():
     raw = (FACE / f'{name}.webp').read_bytes()
@@ -155,7 +164,9 @@ style = r"""
 .scene [data-person]:hover>.exit-label,
 .scene [data-person]:focus>.exit-label,
 .scene [data-person]:focus-visible>.exit-label{opacity:1}
-.scene .paint.has-art .wash-curtain{left:33%;width:34%;top:18%;bottom:28%}
+.scene .paint.has-art .wash-curtain{left:34%;width:30%;top:14%;bottom:22%;background:transparent!important;border:0!important}
+.scene .paint.has-art .wash-curtain:before,.scene .paint.has-art .wash-curtain:after{content:none!important}
+.wash-toilet{position:absolute;left:66%;width:16%;top:50%;height:26%;background:transparent;border:0;padding:0;cursor:pointer;z-index:6}
 .scene .paint.has-art .wash-mirror{left:38%;width:24%;top:14%;height:28%}
 .scene .paint.has-art .wash-door{left:40%;width:20%;top:16%;height:62%}
 .scene .paint.has-art .doorway{left:36%;width:28%;top:16%;height:64%}
@@ -242,6 +253,11 @@ deck_css = r"""
 #deckhud-full svg{width:auto;height:min(70vh,640px);max-width:100%;display:block;margin:0 auto}
 .exit-left{left:4%;width:28%}
 .exit-right{left:68%;width:28%}
+.exit-stairs-up{left:28%;width:44%;top:10%;height:78%}
+.exit-stairs-door{left:36%;width:28%;top:14%;height:72%}
+.exit-hall{left:42%;top:78%;width:16%;height:14%}
+.door-crew{left:20%;width:18%;top:16%;height:66%}
+.door-cabin{left:62%;width:18%;top:16%;height:66%}
 .exit-hot{cursor:pointer}
 .exit-label{position:absolute;left:50%;bottom:0;transform:translateX(-50%);background:#23190ee8;color:#f3e2c0;font:12px Georgia,serif;padding:3px 6px;white-space:nowrap;opacity:0;pointer-events:none;z-index:8}
 .exit-hot:hover>.exit-label,.exit-hot:focus>.exit-label{opacity:1}

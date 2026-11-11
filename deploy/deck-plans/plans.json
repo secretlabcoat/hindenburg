@@ -65,6 +65,14 @@
       "h": 90,
       "label": "Washroom"
     },
+    "stairs": {
+      "deck": "B",
+      "x": 250,
+      "y": 106,
+      "w": 130,
+      "h": 74,
+      "label": "Stair landing"
+    },
     "bcorridor": {
       "deck": "B",
       "x": 140,
@@ -172,18 +180,18 @@
       "w": 140,
       "h": 56,
       "label": "To B deck",
-      "link": "acorridor-bcorridor"
+      "link": "acorridor-stairs"
     },
     {
       "deck": "B",
-      "from": "bcorridor",
+      "from": "stairs",
       "dir": "up",
       "x": 250,
-      "y": 120,
+      "y": 46,
       "w": 130,
-      "h": 52,
+      "h": 60,
       "label": "To A deck",
-      "link": "acorridor-bcorridor"
+      "link": "acorridor-stairs"
     },
     {
       "deck": "B",
@@ -319,11 +327,18 @@
       "label": "Door"
     },
     {
-      "id": "acorridor-bcorridor",
+      "id": "acorridor-stairs",
       "a": "acorridor",
-      "b": "bcorridor",
+      "b": "stairs",
       "kind": "stairs",
       "label": "Stairs"
+    },
+    {
+      "id": "bcorridor-stairs",
+      "a": "bcorridor",
+      "b": "stairs",
+      "kind": "door",
+      "label": "Door"
     },
     {
       "id": "bcorridor-washroom",
@@ -499,7 +514,8 @@
         {
           "id": "corridor_right",
           "heading": 90,
-          "forward": "b_north_e"
+          "forward": "bdeck_stairs_door",
+          "facing": "stairs down to B deck"
         },
         {
           "id": "corridor_forward",
@@ -575,11 +591,48 @@
         {
           "id": "washroom_door",
           "heading": 180,
-          "forward": "b_north_s"
+          "forward": "bdeck_corr_office"
         },
         {
           "id": "washroom_wall",
           "heading": 270
+        }
+      ]
+    },
+    {
+      "stand": "stairs",
+      "place": "stairs",
+      "at": [
+        315,
+        143
+      ],
+      "name": "B-Deck Stair Landing",
+      "faces": [
+        {
+          "id": "bdeck_stairs_up",
+          "heading": 0,
+          "forward": "corridor_right",
+          "style": "plain",
+          "facing": "stairs up to A deck"
+        },
+        {
+          "id": "bdeck_stairs_wall",
+          "heading": 90,
+          "style": "plain",
+          "facing": "east wall"
+        },
+        {
+          "id": "bdeck_stairs_door",
+          "heading": 180,
+          "forward": "bdeck_stairs",
+          "style": "plain",
+          "facing": "door to the main corridor"
+        },
+        {
+          "id": "bdeck_stairs_bar",
+          "heading": 270,
+          "style": "plain",
+          "facing": "west wall"
         }
       ]
     },
@@ -595,27 +648,43 @@
         {
           "id": "bdeck_washroom",
           "heading": 0,
-          "forward": "washroom_stall"
+          "forward": "washroom_stall",
+          "name": "B-Deck Main Corridor"
         },
         {
           "id": "b_north_e",
           "heading": 90,
           "style": "corridor",
-          "facing": "starboard wall"
+          "facing": "starboard wall",
+          "name": "B-Deck Main Corridor"
         },
         {
-          "id": "b_north_s",
+          "id": "bdeck_corr_office",
           "heading": 180,
           "forward": "b_mid_s",
-          "style": "corridor",
-          "facing": "aft along the corridor"
+          "style": "plain",
+          "facing": "south wall",
+          "name": "B-Deck Main Corridor",
+          "doors": [
+            {
+              "dest": "b_crew_n",
+              "label": "Enter B-Deck Crew Access",
+              "slot": "exit-left door-crew"
+            },
+            {
+              "dest": "b_cab_n",
+              "label": "Enter B-Deck Cabin Corridor",
+              "slot": "exit-right door-cabin"
+            }
+          ]
         },
         {
           "id": "bdeck_stairs",
           "heading": 270,
-          "forward": "corridor_left",
+          "forward": "bdeck_stairs_up",
           "style": "corridor",
-          "facing": "stairs up to A deck"
+          "facing": "door to the stair landing",
+          "name": "B-Deck Main Corridor"
         }
       ]
     },

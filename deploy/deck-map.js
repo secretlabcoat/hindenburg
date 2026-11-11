@@ -110,6 +110,8 @@ function hindenburgApplyFacingRings(plan) {
       const n = nodes[face.id];
       n.left = ids[(i + 3) % 4];
       n.right = ids[(i + 1) % 4];
+      if (face.name) n.name = face.name;
+      if (face.facing) n.facing = face.facing;
       if (face.keepForward && window.nookReturn) n.forward = window.nookReturn;
       else n.forward = face.forward || null;
       n.doors = face.doors || [];
@@ -157,6 +159,21 @@ function hindenburgSceneActions() {
     lounge_people: {'Damina Vontette': 'photo-damina', 'Snardy Vontette': 'photo-snardy'}
   };
   const inPhoto = photoPeople[view] || {};
+  if (view === 'washroom_stall') {
+    paint.querySelectorAll('.wash-basin, .wash-door, [data-sink], [data-move]').forEach(el => el.remove());
+    let toilet = paint.querySelector('[data-wash="toilet"]');
+    if (!toilet) {
+      toilet = document.createElement('button');
+      toilet.type = 'button';
+      toilet.className = 'wash-toilet';
+      toilet.dataset.wash = 'toilet';
+      toilet.setAttribute('aria-label', 'Toilet');
+      paint.append(toilet);
+    }
+    toilet.onclick = () => narrate('A plain white toilet beside the tub. The curtain is the only place to hide.');
+    const shower = paint.querySelector('[data-wash="shower"]');
+    if (shower) shower.setAttribute('aria-label', 'Shower curtain');
+  }
   paint.querySelectorAll('[data-person]').forEach(el => {
     const name = el.dataset.person;
     if (inPhoto[name]) el.classList.add('in-photo', inPhoto[name]);
@@ -537,11 +554,18 @@ function hindenburgMountDeckHud(plan) {
         if (dest && el.dataset.move !== dest) el.dataset.move = dest;
       });
     }
+    const forwardSlot = {
+      bdeck_stairs_up: 'exit-stairs-up',
+      bdeck_stairs_door: 'exit-stairs-door',
+      bdeck_corr_office: 'exit-hall'
+    };
     if (dest) {
       let el = paint.querySelector('[data-move="' + dest + '"]');
       if (!el) {
-        addHotspot(dest, exitLabel(dest), 'exit-forward');
+        addHotspot(dest, exitLabel(dest), forwardSlot[view] || 'exit-forward');
         el = paint.querySelector('[data-move="' + dest + '"]');
+      } else if (forwardSlot[view]) {
+        forwardSlot[view].split(' ').forEach(c => el.classList.add(c));
       }
       if (el) labelExit(el, dest);
     }
@@ -552,6 +576,41 @@ function hindenburgMountDeckHud(plan) {
     if (view === 'crew_door') addGated('tour', 'Join escorted tour', 'exit-gated');
     if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
   }
+  function placePhotoHits() {
+    const hits = {
+      bdeck_stairs_up: {corridor_right: {x: 0.36, y: 0.02, w: 0.28, h: 0.96}},
+      bdeck_stairs_door: {bdeck_stairs: {x: 0.39, y: 0.06, w: 0.25, h: 0.84}},
+      bdeck_corr_office: {
+        b_crew_n: {x: 0.20, y: 0.08, w: 0.20, h: 0.68},
+        b_cab_n: {x: 0.595, y: 0.08, w: 0.20, h: 0.68},
+        b_mid_s: {x: 0.42, y: 0.80, w: 0.16, h: 0.14}
+      },
+      washroom_stall: {
+        shower: {x: 0.37, y: 0.14, w: 0.26, h: 0.66},
+        toilet: {x: 0.62, y: 0.48, w: 0.11, h: 0.32}
+      }
+    };
+    const spec = hits[view];
+    const paint = document.querySelector('#scene .paint');
+    if (!spec || !paint) return;
+    const boxW = paint.clientWidth;
+    const boxH = paint.clientHeight;
+    if (!boxW || !boxH) return;
+    const scale = Math.max(boxW / 768, boxH / 432);
+    const offX = (boxW - 768 * scale) / 2;
+    const offY = (boxH - 432 * scale) / 2;
+    Object.keys(spec).forEach(key => {
+      const el = paint.querySelector('[data-move="' + key + '"], [data-wash="' + key + '"]');
+      if (!el) return;
+      const r = spec[key];
+      el.style.left = (offX + r.x * 768 * scale) + 'px';
+      el.style.top = (offY + r.y * 432 * scale) + 'px';
+      el.style.width = (r.w * 768 * scale) + 'px';
+      el.style.height = (r.h * 432 * scale) + 'px';
+      el.style.right = 'auto';
+      el.style.bottom = 'auto';
+    });
+  }
   function paintHud() {
     hindenburgApplyFacingRings(plan);
     const started = document.querySelector('#titleoverlay') && document.querySelector('#titleoverlay').hidden;
@@ -559,6 +618,7 @@ function hindenburgMountDeckHud(plan) {
     if (!started || !plan.nodes[view]) return;
     ensureExits();
     hindenburgSceneActions();
+    placePhotoHits();
     const meta = plan.nodes[view];
     const place = plan.places[meta.place];
     if (!chosen || !open) chosen = place.deck;
@@ -595,6 +655,7 @@ function hindenburgMountDeckHud(plan) {
   pop.addEventListener('click', e => { if (e.target === pop) setOpen(false); });
   select.onchange = () => { chosen = select.value; paintHud(); };
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) setOpen(false); });
+  window.addEventListener('resize', () => placePhotoHits());
   const prevDraw = draw;
   draw = function () {
     hindenburgApplyFacingRings(plan);
