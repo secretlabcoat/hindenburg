@@ -123,10 +123,29 @@ for name, sha in FACING.items():
     if got != sha:
         raise SystemExit(f'{name} sha256 {got} != facing art {sha}')
     images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
-steward_png = (FACE / 'steward-portrait.png').read_bytes()
-if hashlib.sha256(steward_png).hexdigest() != '03b94b7a86a8beabc6c5a6dc3c3f9e4e6d1e740147e46a1f14213e2d08779dce':
-    raise SystemExit('steward portrait hash drifted')
-steward_uri = 'data:image/png;base64,' + base64.b64encode(steward_png).decode()
+CAST_ROOT = ROOT / 'cast'
+CAST_MOODS = ('idle', 'smile', 'nod', 'surprised', 'frown', 'shake', 'sad')
+cast_pack = {}
+if CAST_ROOT.is_dir():
+    for folder in sorted(p for p in CAST_ROOT.iterdir() if p.is_dir()):
+        entry = {}
+        portrait = folder / 'portrait.webp'
+        fullbody = folder / 'fullbody.webp'
+        if portrait.is_file():
+            entry['portrait'] = 'data:image/webp;base64,' + base64.b64encode(portrait.read_bytes()).decode()
+        if fullbody.is_file():
+            entry['fullbody'] = 'data:image/webp;base64,' + base64.b64encode(fullbody.read_bytes()).decode()
+        clips = {}
+        for mood in CAST_MOODS:
+            clip = folder / f'{mood}.webm'
+            if clip.is_file():
+                clips[mood] = 'data:video/webm;base64,' + base64.b64encode(clip.read_bytes()).decode()
+        if clips:
+            entry['clips'] = clips
+        if entry:
+            cast_pack[folder.name] = entry
+if 'steward' not in cast_pack or 'portrait' not in cast_pack['steward']:
+    raise SystemExit('cast is missing the steward portrait')
 
 payload = {
     'images': images,
@@ -156,8 +175,6 @@ style = r"""
 .scene .paint.has-art [data-person].in-photo{background:transparent;filter:none}
 .scene .paint.has-art [data-person].in-photo:before,
 .scene .paint.has-art [data-person].in-photo:after{content:none!important;display:none!important}
-.scene .paint.has-art [data-person].in-photo.photo-damina{left:18%!important;width:24%;top:48%;height:30%;bottom:auto}
-.scene .paint.has-art [data-person].in-photo.photo-snardy{left:56%!important;width:26%;top:46%;height:34%;bottom:auto}
 .scene .paint.has-art [data-person].in-photo>.exit-label{bottom:auto;top:-2px}
 .scene .paint.has-art [data-person].in-photo:hover,
 .scene .paint.has-art [data-person].in-photo:focus-visible{outline:1px solid #f5d89599}
@@ -279,8 +296,17 @@ html,body{height:100%;overflow:hidden!important}
 .inv{grid-template-columns:repeat(6,minmax(0,1fr))!important}
 .item{height:36px!important}
 .actbtn{display:none!important}
-.hot-person .steward-portrait{position:absolute;left:0;right:0;bottom:0;width:100%;height:78%;object-fit:cover;object-position:center top;border-radius:2px;pointer-events:none}
-.hot-person:has(.steward-portrait):before,.hot-person:has(.steward-portrait):after{opacity:0}
+#scene .cast-figure{width:15%;height:42%;bottom:1%;top:auto;background:transparent!important;filter:drop-shadow(0 6px 5px #120d0acc);z-index:6}
+#scene .cast-figure.child{width:11%;height:32%}
+#scene .cast-figure:before,#scene .cast-figure:after{content:none!important;display:none!important}
+#scene .cast-figure>span:not(.cast-silhouette):not(.exit-label){display:none}
+.cast-silhouette{position:absolute;left:0;right:0;bottom:0;height:100%;pointer-events:none}
+.cast-head{position:absolute;left:28%;width:44%;top:0;height:18%;border-radius:50%;background:#f0d2b4;box-shadow:0 0 0 2px #2a2118}
+.cast-coat{position:absolute;left:8%;right:8%;top:16%;bottom:0;background:linear-gradient(#5a4638,#241910);clip-path:polygon(20% 0,80% 0,100% 100%,0 100%);box-shadow:inset 0 -8px 0 #c4a36a}
+.cast-body{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;pointer-events:none}
+#cast-stage{position:absolute;inset:0;z-index:8;background:#140f0c;display:flex;align-items:center;justify-content:center}
+#cast-stage[hidden]{display:none!important}
+#cast-stage img,#cast-stage video{width:100%;height:100%;object-fit:cover;object-position:center 18%}
 @media(min-width:750px){
   .bottom{grid-template-columns:88px minmax(0,1fr) 210px!important}
   .inventory{grid-column:auto;max-height:none;overflow:visible}
@@ -292,7 +318,7 @@ html,body{height:100%;overflow:hidden!important}
 """
 plan = json.loads((ROOT / 'deck-plans' / 'plans.json').read_text())
 deck_js = (ROOT / 'deck-map.js').read_text()
-deck_script = '<script id="deck-hud">\nconst DECK_PLAN=' + json.dumps(plan, separators=(',', ':')) + ';\nconst STEWARD_PORTRAIT=' + json.dumps(steward_uri) + ';\n' + deck_js + '\nhindenburgMountDeckHud(DECK_PLAN);\n</script>'
+deck_script = '<script id="deck-hud">\nconst DECK_PLAN=' + json.dumps(plan, separators=(',', ':')) + ';\nconst CAST_PACK=' + json.dumps(cast_pack, separators=(',', ':')) + ';\n' + deck_js + '\nhindenburgMountDeckHud(DECK_PLAN);\n</script>'
 html = BASE.decode('utf-8')
 if '</body>' not in html:
     raise SystemExit('baseline has no body close')
@@ -325,4 +351,5 @@ module = (
 )
 MODULE.write_text(module)
 print(OUT.name, len(data), digest)
+print('cast', ', '.join(name + ':' + '/'.join(sorted((cast_pack[name].get('clips') or {})) or ['still']) for name in cast_pack))
 print('photos', len(images), 'views', len(VIEW_ART), 'unmapped', ','.join(UNMAPPED_READY))

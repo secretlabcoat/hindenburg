@@ -187,15 +187,13 @@ function hindenburgSceneActions() {
       el.append(s);
     }
     el.onclick = () => choose(name);
+    hindenburgDressFigure(el, name);
   });
-  const steward = paint.querySelector('[data-person="Manard Toxu"]');
-  if (steward && typeof STEWARD_PORTRAIT === 'string' && !steward.querySelector('.steward-portrait')) {
-    const img = document.createElement('img');
-    img.className = 'steward-portrait';
-    img.alt = '';
-    img.src = STEWARD_PORTRAIT;
-    steward.append(img);
-  }
+  const figures = [...paint.querySelectorAll('.cast-figure')];
+  figures.forEach((el, i) => {
+    const count = figures.length;
+    el.style.left = (count === 1 ? 40 : (i === 0 ? 24 : 58)) + '%';
+  });
   paint.querySelectorAll('[data-object]').forEach(el => {
     const kind = el.dataset.object || 'object';
     const label = kind === 'trunk' ? 'Examine the trunk' : 'Examine the desk';
@@ -667,4 +665,141 @@ function hindenburgMountDeckHud(plan) {
     return result;
   };
   paintHud();
+  if (!window.hindenburgCastHooked) {
+    window.hindenburgCastHooked = true;
+    let playerLine = '';
+    const previousLine = line;
+    line = function (name, msg, cls) {
+      previousLine(name, msg, cls);
+      if (cls === 'you') { playerLine = msg || ''; return; }
+      if (hindenburgCastId(name)) hindenburgOpenPortrait(name, hindenburgMood(playerLine, msg || ''));
+    };
+    const previousChoose = choose;
+    choose = function (name) {
+      playerLine = '';
+      previousChoose(name);
+    };
+  }
+}
+
+const HINDENBURG_CAST = {
+  'Manard Toxu': 'steward',
+  'Damina Vontette': 'damina',
+  'Snardy Vontette': 'snardy',
+  'Colonel Landry Stoppard': 'colonel',
+  'Vaunice Charles': 'vaunice',
+  'Potter McNare': 'potter',
+  'Bunny Treemont': 'bunny',
+  'Helen Karens': 'helen',
+  'Oreo Malloy': 'oreo',
+  'Captain Swanson Kyle': 'captain',
+  'Emilio Estavant': 'emilio'
+};
+
+function hindenburgCastId(name) {
+  if (!name || /watcher/i.test(name)) return '';
+  return HINDENBURG_CAST[name] || '';
+}
+
+function hindenburgDressFigure(el, name) {
+  const id = hindenburgCastId(name);
+  if (!id) return;
+  el.classList.add('cast-figure');
+  const pack = (typeof CAST_PACK === 'undefined' ? null : CAST_PACK[id]) || {};
+  if (pack.fullbody) {
+    let body = el.querySelector('.cast-body');
+    if (!body) {
+      body = document.createElement('img');
+      body.className = 'cast-body';
+      body.alt = '';
+      el.append(body);
+    }
+    body.src = pack.fullbody;
+    const sil = el.querySelector('.cast-silhouette');
+    if (sil) sil.remove();
+  } else if (!el.querySelector('.cast-silhouette')) {
+    const sil = document.createElement('span');
+    sil.className = 'cast-silhouette';
+    sil.setAttribute('aria-hidden', 'true');
+    const head = document.createElement('i');
+    head.className = 'cast-head';
+    const coat = document.createElement('i');
+    coat.className = 'cast-coat';
+    sil.append(head, coat);
+    el.append(sil);
+  }
+}
+
+function hindenburgMood(playerLine, reply) {
+  const text = ((playerLine || '') + ' ' + (reply || '')).toLowerCase();
+  const words = text.match(/[a-z']+/g) || [];
+  const bag = new Set(words);
+  const has = (...list) => list.some(word => word.includes(' ') ? text.includes(word) : bag.has(word));
+  const scores = [
+    ['surprised', 5, has('fire', 'bomb', 'explosion', 'explode', 'hydrogen', 'disaster', 'crash', 'sabotage', 'danger', 'blaze', 'burn', 'burning', 'doom')],
+    ['sad', 4, has('sorry', 'grief', 'mourn', 'funeral', 'widow', 'heartbroken', 'tragic', 'tears', 'cried', 'cry', 'sad', 'alone')],
+    ['frown', 4, has('liar', 'fool', 'idiot', 'stupid', 'accuse', 'guilt', 'thief', 'spy', 'fraud', 'insult', 'hate', 'coward', 'blame', 'worthless')],
+    ['shake', 3, has('no', 'never', 'deny', 'denied', 'refuse', 'refused', 'cannot', "can't", "don't", "won't", 'impossible', 'nonsense', 'untrue')],
+    ['nod', 3, has('yes', 'agree', 'agreed', 'indeed', 'exactly', 'correct', 'certainly', 'understood', 'course')],
+    ['smile', 3, has('thank', 'thanks', 'joke', 'funny', 'laugh', 'lovely', 'beautiful', 'charming', 'compliment', 'glad', 'wonderful', 'delight', 'amusing', 'kind')]
+  ];
+  let best = 'idle';
+  let bestScore = 0;
+  scores.forEach(([mood, weight, hit]) => {
+    if (hit && weight > bestScore) { best = mood; bestScore = weight; }
+  });
+  return best;
+}
+
+function hindenburgPlayClip(video, still, pack, mood) {
+  const clips = pack.clips || {};
+  const showStill = () => {
+    try { if (video.pause) video.pause(); } catch (err) { /* jsdom has no media playback */ }
+    video.hidden = true;
+    video.removeAttribute('src');
+    still.hidden = false;
+  };
+  const play = (src, loop, done) => {
+    still.hidden = true;
+    video.hidden = false;
+    video.loop = !!loop;
+    video.onended = done || null;
+    video.src = src;
+    try {
+      const started = video.play && video.play();
+      if (started && started.catch) started.catch(showStill);
+    } catch (err) { showStill(); }
+  };
+  const reaction = mood && mood !== 'idle' ? clips[mood] : '';
+  if (reaction) {
+    play(reaction, false, () => { if (clips.idle) play(clips.idle, true, null); else showStill(); });
+    return;
+  }
+  if ((!mood || mood === 'idle') && clips.idle) { play(clips.idle, true, null); return; }
+  showStill();
+}
+
+function hindenburgOpenPortrait(name, mood) {
+  const id = hindenburgCastId(name);
+  const pack = (typeof CAST_PACK === 'undefined' ? null : CAST_PACK[id]) || null;
+  const scene = document.getElementById('scene');
+  if (!id || !pack || !pack.portrait || !scene) return;
+  let stage = document.getElementById('cast-stage');
+  if (!stage) {
+    stage = document.createElement('div');
+    stage.id = 'cast-stage';
+    const still = document.createElement('img');
+    still.alt = '';
+    const video = document.createElement('video');
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute('playsinline', '');
+    video.playsInline = true;
+    stage.append(still, video);
+    scene.append(stage);
+  }
+  stage.hidden = false;
+  const still = stage.querySelector('img');
+  still.src = pack.portrait;
+  hindenburgPlayClip(stage.querySelector('video'), still, pack, mood || 'idle');
 }
