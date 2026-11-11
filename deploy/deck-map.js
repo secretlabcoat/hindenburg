@@ -112,6 +112,7 @@ function hindenburgApplyFacingRings(plan) {
       n.right = ids[(i + 1) % 4];
       if (face.keepForward && window.nookReturn) n.forward = window.nookReturn;
       else n.forward = face.forward || null;
+      n.doors = face.doors || [];
       plan.nodes[face.id] = {place: ring.place, heading: face.heading, at: ring.at, stand: ring.stand};
     });
   }
@@ -128,6 +129,16 @@ function hindenburgPlaceArrows() {
     const button = document.getElementById(id);
     if (button) verbs.append(button);
   });
+  let back = document.getElementById('navback');
+  if (!back) {
+    back = document.createElement('button');
+    back.id = 'navback';
+    back.type = 'button';
+    back.textContent = '↩';
+    back.setAttribute('aria-label', 'Return the way you came');
+  }
+  verbs.append(back);
+  back.onclick = () => hindenburgReturn();
   const label = document.getElementById('viewlabel');
   const dialogue = document.querySelector('.dialogue');
   if (label && dialogue) {
@@ -206,6 +217,52 @@ function hindenburgSceneActions() {
       else ACTS.hatch();
     };
   }
+  const sinks = {
+    washroom_basins: {context: true, label: 'Washbasin tap'},
+    bar_counter: {context: false, label: 'Bar tap', npc: 'Oreo Malloy'}
+  };
+  if (sinks[view] && !paint.querySelector('[data-sink]')) {
+    const spec = sinks[view];
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'photo-exit exit-hot exit-sink';
+    b.dataset.sink = view;
+    b.setAttribute('aria-label', spec.label);
+    const s = document.createElement('span');
+    s.className = 'exit-label';
+    s.textContent = hindenburgSink === view ? 'Turn the tap off' : spec.label;
+    b.append(s);
+    b.onclick = () => {
+      if (hindenburgSink === view) {
+        hindenburgStopWater();
+        s.textContent = spec.label;
+        narrate('You turn the tap off.');
+        return;
+      }
+      hindenburgSink = view;
+      hindenburgStartWater();
+      s.textContent = 'Turn the tap off';
+      if (spec.context) {
+        narrate('You turn on the basin. The stream is thin, more like a siphon than a shower.');
+        return;
+      }
+      narrate('You turn on the tap. Water runs into the bar sink.');
+      const npc = ai[spec.npc];
+      if (!npc) return;
+      const memory = 'the stranger turned on the bar tap and left the water running';
+      npc.heard = npc.heard || [];
+      if (!npc.heard.includes(memory)) {
+        npc.heard.push(memory);
+        npc.heard = npc.heard.slice(-8);
+      }
+      const first = !npc.sinkNoted;
+      npc.sinkNoted = true;
+      line(spec.npc, first
+        ? 'Turn that off. This is a bar, not the washroom.'
+        : 'The tap again? Shut it off before someone slips.');
+    };
+    paint.append(b);
+  }
   if (view === 'tour_end' && !paint.querySelector('[data-act="tourend"]')) {
     const b = document.createElement('button');
     b.type = 'button';
@@ -233,7 +290,106 @@ function hindenburgSceneActions() {
   }
 }
 
+const hindenburgPath = [];
+let hindenburgSink = null;
+let hindenburgWater = null;
+
+function hindenburgAudio() {
+  if (typeof audioOn !== 'undefined' && !audioOn) return null;
+  try {
+    if ((!audioCtx) && typeof beginAudio === 'function') beginAudio();
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx || null;
+  } catch (err) {
+    return null;
+  }
+}
+
+function hindenburgDoorSound() {
+  const ctx = hindenburgAudio();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.16), ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < data.length; i++) {
+    const t = i / ctx.sampleRate;
+    data[i] = (Math.random() * 2 - 1) * Math.exp(-t * 32);
+  }
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 380;
+  const out = master || ctx.destination;
+  [0, 0.2].forEach((when, n) => {
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    const gain = ctx.createGain();
+    gain.gain.value = n ? 0.45 : 0.85;
+    src.connect(filter).connect(gain).connect(out);
+    src.start(now + when);
+  });
+}
+
+function hindenburgStopWater() {
+  hindenburgSink = null;
+  if (!hindenburgWater) return;
+  try { hindenburgWater.stop(); } catch (err) {}
+  hindenburgWater = null;
+}
+
+function hindenburgStartWater() {
+  if (hindenburgWater) {
+    try { hindenburgWater.stop(); } catch (err) {}
+    hindenburgWater = null;
+  }
+  const ctx = hindenburgAudio();
+  if (!ctx) return;
+  const buffer = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  src.loop = true;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'highpass';
+  filter.frequency.value = 800;
+  const gain = ctx.createGain();
+  gain.gain.value = 0.2;
+  src.connect(filter).connect(gain).connect(master || ctx.destination);
+  src.start();
+  hindenburgWater = src;
+}
+
+function hindenburgInstallTravel(plan) {
+  if (travel.hindenburgWrapped) return;
+  const orig = travel;
+  function wrapped(dest) {
+    if (!dest || busy || dest === view) return;
+    const fromPlace = plan.nodes[view] && plan.nodes[view].place;
+    const toPlace = plan.nodes[dest] && plan.nodes[dest].place;
+    if (!wrapped.skipHistory) hindenburgPath.push(view);
+    if (fromPlace && toPlace && fromPlace !== toPlace) hindenburgDoorSound();
+    if (hindenburgSink && hindenburgSink !== dest) hindenburgStopWater();
+    orig(dest);
+  }
+  wrapped.skipHistory = false;
+  wrapped.hindenburgWrapped = true;
+  travel = wrapped;
+}
+
+function hindenburgReturn() {
+  if (typeof busy !== 'undefined' && busy) return;
+  if (!hindenburgPath.length) {
+    narrate('You have not come through a door yet.');
+    return;
+  }
+  const prev = hindenburgPath.pop();
+  travel.skipHistory = true;
+  travel(prev);
+  travel.skipHistory = false;
+}
+
 function hindenburgMountDeckHud(plan) {
+  hindenburgInstallTravel(plan);
   hindenburgApplyFacingRings(plan);
   hindenburgPlaceArrows();
   if (document.getElementById('deckhud')) return;
@@ -375,9 +531,12 @@ function hindenburgMountDeckHud(plan) {
     const paint = document.querySelector('#scene .paint');
     if (!n || !paint) return;
     const dest = n.forward && nodes[n.forward] ? n.forward : '';
-    paint.querySelectorAll('[data-move]').forEach(el => {
-      if (el.dataset.move !== dest) el.dataset.move = dest;
-    });
+    const extras = (n.doors || []).filter(d => d && d.dest && nodes[d.dest] && d.dest !== dest);
+    if (!extras.length) {
+      paint.querySelectorAll('[data-move]').forEach(el => {
+        if (dest && el.dataset.move !== dest) el.dataset.move = dest;
+      });
+    }
     if (dest) {
       let el = paint.querySelector('[data-move="' + dest + '"]');
       if (!el) {
@@ -386,6 +545,10 @@ function hindenburgMountDeckHud(plan) {
       }
       if (el) labelExit(el, dest);
     }
+    extras.forEach(d => {
+      if (paint.querySelector('[data-move="' + d.dest + '"]')) return;
+      addHotspot(d.dest, d.label || exitLabel(d.dest), d.slot || 'exit-left');
+    });
     if (view === 'crew_door') addGated('tour', 'Join escorted tour', 'exit-gated');
     if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
   }

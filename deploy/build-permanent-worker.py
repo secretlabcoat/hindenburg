@@ -247,6 +247,7 @@ deck_css = r"""
 .exit-hot:hover>.exit-label,.exit-hot:focus>.exit-label{opacity:1}
 .exit-gated{left:4%;top:62%;width:28%;height:18%}
 .exit-climb{left:36%;top:4%;width:28%;height:18%}
+.exit-sink{left:8%;top:42%;width:22%;height:22%}
 @media(max-width:700px){#deckhud{width:112px;top:84px}#deckhud.is-collapsed{width:44px}#deckhud-full svg{height:min(62vh,520px)}}
 html,body{height:100%;overflow:hidden!important}
 .shell{height:100dvh!important;max-height:100dvh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;box-sizing:border-box;padding:4px!important;padding-bottom:calc(4px + env(safe-area-inset-bottom))!important;gap:3px!important}
@@ -255,7 +256,7 @@ html,body{height:100%;overflow:hidden!important}
 .navdock{display:none!important}
 .bottom{flex:0 0 auto;margin:0!important;display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;gap:4px!important;align-items:stretch}
 .arrowcol{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:4px}
-.arrowcol button{min-height:44px;font-size:22px;padding:4px}
+.arrowcol button{min-height:36px;font-size:20px;padding:2px 4px}
 .viewlabel{font:12px Georgia,serif;color:#d9bd8d;margin:0 0 4px}
 .dialogue{height:auto!important;max-height:22dvh;min-height:56px}
 .inventory{grid-column:1/-1;max-height:64px;overflow:hidden}

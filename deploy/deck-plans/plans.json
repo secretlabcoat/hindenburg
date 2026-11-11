@@ -52,9 +52,9 @@
     "acabin": {
       "deck": "A",
       "x": 16,
-      "y": 250,
+      "y": 310,
       "w": 134,
-      "h": 110,
+      "h": 86,
       "label": "Cabin (A deck)"
     },
     "washroom": {
@@ -152,6 +152,14 @@
       "w": 300,
       "h": 180,
       "label": "Control car"
+    },
+    "dining": {
+      "deck": "A",
+      "x": 16,
+      "y": 196,
+      "w": 134,
+      "h": 104,
+      "label": "Dining room"
     }
   },
   "stubs": [
@@ -407,6 +415,13 @@
       "b": "nook",
       "kind": "gated",
       "label": "Ladder"
+    },
+    {
+      "id": "acorridor-dining",
+      "a": "acorridor",
+      "b": "dining",
+      "kind": "door",
+      "label": "Door to the dining room"
     }
   ],
   "rings": [
@@ -488,12 +503,21 @@
         },
         {
           "id": "corridor_forward",
-          "heading": 180
+          "heading": 180,
+          "forward": "dining_s",
+          "facing": "door to the dining room"
         },
         {
           "id": "corridor_left",
           "heading": 270,
-          "forward": "adeck_w"
+          "forward": "adeck_w",
+          "doors": [
+            {
+              "dest": "dining_s",
+              "label": "Enter the dining room",
+              "slot": "exit-left"
+            }
+          ]
         }
       ]
     },
@@ -502,7 +526,7 @@
       "place": "acabin",
       "at": [
         80,
-        305
+        350
       ],
       "name": "Passenger Cabin (A deck)",
       "faces": [
@@ -609,7 +633,19 @@
           "heading": 0,
           "forward": "bdeck_washroom",
           "style": "corridor",
-          "facing": "forward along the corridor"
+          "facing": "forward along the corridor",
+          "doors": [
+            {
+              "dest": "office_desk",
+              "label": "Enter the purser’s office",
+              "slot": "exit-left"
+            },
+            {
+              "dest": "bar_e",
+              "label": "Enter the bar",
+              "slot": "exit-right"
+            }
+          ]
         },
         {
           "id": "b_mid_e",
@@ -623,7 +659,19 @@
           "heading": 180,
           "forward": "b_cab_s",
           "style": "corridor",
-          "facing": "aft along the corridor"
+          "facing": "aft along the corridor",
+          "doors": [
+            {
+              "dest": "office_desk",
+              "label": "Enter the purser’s office",
+              "slot": "exit-left"
+            },
+            {
+              "dest": "bar_e",
+              "label": "Enter the bar",
+              "slot": "exit-right"
+            }
+          ]
         },
         {
           "id": "b_mid_w",
@@ -1112,6 +1160,46 @@
           "heading": 270,
           "style": "nook",
           "facing": "port cell"
+        }
+      ]
+    },
+    {
+      "stand": "dining",
+      "place": "dining",
+      "at": [
+        80,
+        248
+      ],
+      "name": "Dining Room",
+      "faces": [
+        {
+          "id": "dining_n",
+          "heading": 0,
+          "forward": "corridor_end",
+          "style": "windows",
+          "facing": "port promenade windows",
+          "name": "Dining Room"
+        },
+        {
+          "id": "dining_e",
+          "heading": 90,
+          "style": "windows",
+          "facing": "along the tables",
+          "name": "Dining Room"
+        },
+        {
+          "id": "dining_s",
+          "heading": 180,
+          "style": "windows",
+          "facing": "the inner wall",
+          "name": "Dining Room"
+        },
+        {
+          "id": "dining_w",
+          "heading": 270,
+          "style": "windows",
+          "facing": "silk-panelled wall",
+          "name": "Dining Room"
         }
       ]
     }
