@@ -180,10 +180,10 @@ script = """
 (function(){
 const PACK=%s;
 function ensureWashroom(){
-  nodes.washroom_wall=nodes.washroom_wall||{name:'B-Deck Washroom',facing:'tiled wall and towel rail',left:'washroom_door',right:'washroom_stall',forward:null,style:'washwall'};
+  nodes.washroom_wall=nodes.washroom_wall||{name:'B-Deck Washroom',facing:'Towel Rail',left:'washroom_door',right:'washroom_stall',forward:null,style:'washwall'};
   const wall=nodes.washroom_wall;
   wall.name='B-Deck Washroom';
-  wall.facing='tiled wall and towel rail';
+  wall.facing='Towel Rail';
   wall.left='washroom_door';
   wall.right='washroom_stall';
   wall.forward=null;

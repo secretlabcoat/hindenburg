@@ -451,20 +451,24 @@
       "faces": [
         {
           "id": "promenade_far",
-          "heading": 0
+          "heading": 0,
+          "facing": "Forward Windows"
         },
         {
           "id": "promenade_side",
-          "heading": 90
+          "heading": 90,
+          "facing": "Promenade Seating"
         },
         {
           "id": "promenade",
           "heading": 180,
-          "forward": "lounge_aft"
+          "forward": "lounge_aft",
+          "facing": "Observation Windows"
         },
         {
           "id": "promenade_aft",
-          "heading": 270
+          "heading": 270,
+          "facing": "Return Passage"
         }
       ]
     },
@@ -480,20 +484,24 @@
         {
           "id": "lounge_windows",
           "heading": 0,
-          "forward": "promenade_far"
+          "forward": "promenade_far",
+          "facing": "Lounge Windows"
         },
         {
           "id": "lounge_people",
-          "heading": 90
+          "heading": 90,
+          "facing": "Passengers"
         },
         {
           "id": "lounge_aft",
           "heading": 180,
-          "forward": "corridor_forward"
+          "forward": "corridor_forward",
+          "facing": "Aft Doorway"
         },
         {
           "id": "lounge_side",
-          "heading": 270
+          "heading": 270,
+          "facing": "Lounge Seating"
         }
       ]
     },
@@ -509,19 +517,20 @@
         {
           "id": "corridor_end",
           "heading": 0,
-          "forward": "lounge_windows"
+          "forward": "lounge_windows",
+          "facing": "Lounge Entrance"
         },
         {
           "id": "corridor_right",
           "heading": 90,
           "forward": "bdeck_stairs_door",
-          "facing": "stairs down to B deck"
+          "facing": "Stairs Down"
         },
         {
           "id": "corridor_forward",
           "heading": 180,
           "forward": "dining_s",
-          "facing": "door to the dining room"
+          "facing": "Dining Room Door"
         },
         {
           "id": "corridor_left",
@@ -533,7 +542,8 @@
               "label": "Enter the dining room",
               "slot": "exit-left"
             }
-          ]
+          ],
+          "facing": "Port Cabins"
         }
       ]
     },
@@ -550,24 +560,25 @@
           "id": "adeck_n",
           "heading": 0,
           "style": "plain",
-          "facing": "berth wall"
+          "facing": "Berth Wall"
         },
         {
           "id": "adeck_cabin",
           "heading": 90,
-          "forward": "corridor_right"
+          "forward": "corridor_right",
+          "facing": "Windowless Cabin"
         },
         {
           "id": "adeck_s",
           "heading": 180,
           "style": "plain",
-          "facing": "desk wall"
+          "facing": "Desk Wall"
         },
         {
           "id": "adeck_w",
           "heading": 270,
           "style": "plain",
-          "facing": "inside wall"
+          "facing": "Inside Wall"
         }
       ]
     },
@@ -582,20 +593,24 @@
       "faces": [
         {
           "id": "washroom_stall",
-          "heading": 0
+          "heading": 0,
+          "facing": "Shower Stall"
         },
         {
           "id": "washroom_basins",
-          "heading": 90
+          "heading": 90,
+          "facing": "Wash Basins"
         },
         {
           "id": "washroom_door",
           "heading": 180,
-          "forward": "bdeck_corr_office"
+          "forward": "bdeck_corr_office",
+          "facing": "Corridor Door"
         },
         {
           "id": "washroom_wall",
-          "heading": 270
+          "heading": 270,
+          "facing": "Towel Rail"
         }
       ]
     },
@@ -613,26 +628,26 @@
           "heading": 0,
           "forward": "corridor_right",
           "style": "plain",
-          "facing": "stairs up to A deck"
+          "facing": "Stairs Up"
         },
         {
           "id": "bdeck_stairs_wall",
           "heading": 90,
           "style": "plain",
-          "facing": "east wall"
+          "facing": "East Wall"
         },
         {
           "id": "bdeck_stairs_door",
           "heading": 180,
           "forward": "bdeck_stairs",
           "style": "plain",
-          "facing": "door to the main corridor"
+          "facing": "Main Corridor Door"
         },
         {
           "id": "bdeck_stairs_bar",
           "heading": 270,
           "style": "plain",
-          "facing": "west wall"
+          "facing": "West Wall"
         }
       ]
     },
@@ -649,13 +664,14 @@
           "id": "bdeck_washroom",
           "heading": 0,
           "forward": "washroom_stall",
-          "name": "B-Deck Main Corridor"
+          "name": "B-Deck Main Corridor",
+          "facing": "Washroom Door"
         },
         {
           "id": "b_north_e",
           "heading": 90,
           "style": "corridor",
-          "facing": "starboard wall",
+          "facing": "Starboard Wall",
           "name": "B-Deck Main Corridor"
         },
         {
@@ -663,7 +679,7 @@
           "heading": 180,
           "forward": "b_mid_s",
           "style": "plain",
-          "facing": "south wall",
+          "facing": "Crew & Cabin Doors",
           "name": "B-Deck Main Corridor",
           "doors": [
             {
@@ -683,7 +699,7 @@
           "heading": 270,
           "forward": "bdeck_stairs_up",
           "style": "corridor",
-          "facing": "door to the stair landing",
+          "facing": "Stair Landing Door",
           "name": "B-Deck Main Corridor"
         }
       ]
@@ -702,7 +718,7 @@
           "heading": 0,
           "forward": "bdeck_washroom",
           "style": "corridor",
-          "facing": "forward along the corridor",
+          "facing": "Forward Corridor",
           "doors": [
             {
               "dest": "office_desk",
@@ -721,14 +737,14 @@
           "heading": 90,
           "forward": "bar_e",
           "style": "corridor",
-          "facing": "door to the bar"
+          "facing": "Bar Door"
         },
         {
           "id": "b_mid_s",
           "heading": 180,
           "forward": "b_cab_s",
           "style": "corridor",
-          "facing": "aft along the corridor",
+          "facing": "Aft Corridor",
           "doors": [
             {
               "dest": "office_desk",
@@ -747,7 +763,7 @@
           "heading": 270,
           "forward": "office_desk",
           "style": "corridor",
-          "facing": "door to the purser’s office"
+          "facing": "Office Door"
         }
       ]
     },
@@ -765,27 +781,27 @@
           "heading": 0,
           "forward": "b_mid_n",
           "style": "corridor",
-          "facing": "forward along the corridor"
+          "facing": "Forward Corridor"
         },
         {
           "id": "b_cab_e",
           "heading": 90,
           "style": "corridor",
-          "facing": "starboard wall"
+          "facing": "Starboard Wall"
         },
         {
           "id": "b_cab_s",
           "heading": 180,
           "forward": "crew_door",
           "style": "corridor",
-          "facing": "aft toward the crew door"
+          "facing": "Crew Door Ahead"
         },
         {
           "id": "bdeck_cabins",
           "heading": 270,
           "forward": "cabin_bunk",
           "style": "corridor",
-          "facing": "door to cabin B-6"
+          "facing": "Cabin Door"
         }
       ]
     },
@@ -803,24 +819,25 @@
           "heading": 0,
           "forward": "b_cab_n",
           "style": "corridor",
-          "facing": "forward along the corridor"
+          "facing": "Forward Corridor"
         },
         {
           "id": "b_crew_e",
           "heading": 90,
           "style": "corridor",
-          "facing": "starboard wall"
+          "facing": "Starboard Wall"
         },
         {
           "id": "crew_door",
           "heading": 180,
-          "forward": "keel_walk"
+          "forward": "keel_walk",
+          "facing": "Keel Door"
         },
         {
           "id": "b_crew_w",
           "heading": 270,
           "style": "corridor",
-          "facing": "port wall"
+          "facing": "Port Wall"
         }
       ]
     },
@@ -837,24 +854,25 @@
           "id": "office_n",
           "heading": 0,
           "style": "office",
-          "facing": "north wall"
+          "facing": "North Wall"
         },
         {
           "id": "office_e",
           "heading": 90,
           "forward": "b_mid_e",
           "style": "office",
-          "facing": "door to the corridor"
+          "facing": "Corridor Door"
         },
         {
           "id": "office_s",
           "heading": 180,
           "style": "office",
-          "facing": "south wall"
+          "facing": "South Wall"
         },
         {
           "id": "office_desk",
-          "heading": 270
+          "heading": 270,
+          "facing": "Purser’s Desk"
         }
       ]
     },
@@ -871,24 +889,25 @@
           "id": "bar_n",
           "heading": 0,
           "style": "bar",
-          "facing": "forward wall"
+          "facing": "Forward Wall"
         },
         {
           "id": "bar_e",
           "heading": 90,
           "style": "bar",
-          "facing": "starboard wall"
+          "facing": "Starboard Wall"
         },
         {
           "id": "bar_s",
           "heading": 180,
           "style": "bar",
-          "facing": "aft wall"
+          "facing": "Aft Wall"
         },
         {
           "id": "bar_counter",
           "heading": 270,
-          "forward": "b_mid_w"
+          "forward": "b_mid_w",
+          "facing": "The Bar"
         }
       ]
     },
@@ -903,20 +922,24 @@
       "faces": [
         {
           "id": "cabin_window",
-          "heading": 0
+          "heading": 0,
+          "facing": "Cabin Window"
         },
         {
           "id": "cabin_door",
           "heading": 90,
-          "forward": "b_cab_e"
+          "forward": "b_cab_e",
+          "facing": "Corridor Door"
         },
         {
           "id": "cabin_desk",
-          "heading": 180
+          "heading": 180,
+          "facing": "Desk & Basin"
         },
         {
           "id": "cabin_bunk",
-          "heading": 270
+          "heading": 270,
+          "facing": "Made-Up Berths"
         }
       ]
     },
@@ -932,25 +955,27 @@
         {
           "id": "keel_back",
           "heading": 0,
-          "forward": "b_crew_n"
+          "forward": "b_crew_n",
+          "facing": "B Deck Door"
         },
         {
           "id": "keel_b_e",
           "heading": 90,
           "forward": "keel_m_e",
           "style": "keel",
-          "facing": "forward along the catwalk"
+          "facing": "Forward Catwalk"
         },
         {
           "id": "keel_walk",
           "heading": 180,
-          "forward": "control_helm"
+          "forward": "control_helm",
+          "facing": "Control Catwalk"
         },
         {
           "id": "keel_b_w",
           "heading": 270,
           "style": "keel",
-          "facing": "the outer cover"
+          "facing": "Outer Cover"
         }
       ]
     },
@@ -965,27 +990,28 @@
       "faces": [
         {
           "id": "keel_hatch",
-          "heading": 0
+          "heading": 0,
+          "facing": "Outer Hatch"
         },
         {
           "id": "keel_m_e",
           "heading": 90,
           "forward": "keel_e_e",
           "style": "keel",
-          "facing": "forward along the catwalk"
+          "facing": "Forward Catwalk"
         },
         {
           "id": "keel_m_s",
           "heading": 180,
           "style": "keel",
-          "facing": "the hull cover"
+          "facing": "Hull Cover"
         },
         {
           "id": "keel_m_w",
           "heading": 270,
           "forward": "keel_b_w",
           "style": "keel",
-          "facing": "back along the catwalk"
+          "facing": "Aft Catwalk"
         }
       ]
     },
@@ -1003,26 +1029,26 @@
           "heading": 0,
           "forward": "tour_end_n",
           "style": "keel",
-          "facing": "passage from the tour"
+          "facing": "Tour Passage"
         },
         {
           "id": "keel_e_e",
           "heading": 90,
           "style": "keel",
-          "facing": "the forward bulkhead"
+          "facing": "Forward Bulkhead"
         },
         {
           "id": "keel_e_s",
           "heading": 180,
           "style": "keel",
-          "facing": "the hull cover"
+          "facing": "Hull Cover"
         },
         {
           "id": "keel_e_w",
           "heading": 270,
           "forward": "keel_m_w",
           "style": "keel",
-          "facing": "back along the catwalk"
+          "facing": "Aft Catwalk"
         }
       ]
     },
@@ -1038,23 +1064,25 @@
         {
           "id": "control_back",
           "heading": 0,
-          "forward": "keel_back"
+          "forward": "keel_back",
+          "facing": "Keel Ladder"
         },
         {
           "id": "control_e",
           "heading": 90,
           "style": "control",
-          "facing": "starboard windows"
+          "facing": "Starboard Windows"
         },
         {
           "id": "control_helm",
-          "heading": 180
+          "heading": 180,
+          "facing": "The Helm"
         },
         {
           "id": "control_w",
           "heading": 270,
           "style": "control",
-          "facing": "port windows"
+          "facing": "Port Windows"
         }
       ]
     },
@@ -1071,24 +1099,25 @@
           "id": "tour_shoes_n",
           "heading": 0,
           "style": "keel",
-          "facing": "back toward the crew door"
+          "facing": "Crew Door"
         },
         {
           "id": "tour_shoes",
           "heading": 90,
-          "forward": "tour_cells"
+          "forward": "tour_cells",
+          "facing": "Felt Overshoes"
         },
         {
           "id": "tour_shoes_s",
           "heading": 180,
           "style": "keel",
-          "facing": "the keel below"
+          "facing": "Keel Below"
         },
         {
           "id": "tour_shoes_w",
           "heading": 270,
           "style": "keel",
-          "facing": "the outer cover"
+          "facing": "Outer Cover"
         }
       ]
     },
@@ -1105,25 +1134,26 @@
           "id": "tour_cells_n",
           "heading": 0,
           "style": "keel",
-          "facing": "up into the rings"
+          "facing": "The Rings"
         },
         {
           "id": "tour_cells",
           "heading": 90,
-          "forward": "tour_tanks"
+          "forward": "tour_tanks",
+          "facing": "Gas Cells"
         },
         {
           "id": "tour_cells_s",
           "heading": 180,
           "style": "keel",
-          "facing": "the keel below"
+          "facing": "Keel Below"
         },
         {
           "id": "tour_cells_w",
           "heading": 270,
           "forward": "tour_shoes_w",
           "style": "keel",
-          "facing": "back toward the overshoes"
+          "facing": "Overshoes"
         }
       ]
     },
@@ -1140,25 +1170,26 @@
           "id": "tour_tanks_n",
           "heading": 0,
           "style": "keel",
-          "facing": "the tanks overhead"
+          "facing": "Tanks Overhead"
         },
         {
           "id": "tour_tanks",
           "heading": 90,
-          "forward": "tour_end_e"
+          "forward": "tour_end_e",
+          "facing": "Fuel Tanks"
         },
         {
           "id": "tour_tanks_s",
           "heading": 180,
           "style": "keel",
-          "facing": "the keel below"
+          "facing": "Keel Below"
         },
         {
           "id": "tour_tanks_w",
           "heading": 270,
           "forward": "tour_cells_w",
           "style": "keel",
-          "facing": "back toward the gas cells"
+          "facing": "Gas Cells"
         }
       ]
     },
@@ -1175,25 +1206,26 @@
           "id": "tour_end_n",
           "heading": 0,
           "style": "keel",
-          "facing": "back toward the tanks"
+          "facing": "Fuel Tanks"
         },
         {
           "id": "tour_end_e",
           "heading": 90,
           "style": "keel",
-          "facing": "the forward bulkhead"
+          "facing": "Forward Bulkhead"
         },
         {
           "id": "tour_end",
           "heading": 180,
-          "forward": "keel_e_s"
+          "forward": "keel_e_s",
+          "facing": "Forward Keel"
         },
         {
           "id": "tour_end_w",
           "heading": 270,
           "forward": "tour_tanks_w",
           "style": "keel",
-          "facing": "the outer cover"
+          "facing": "Outer Cover"
         }
       ]
     },
@@ -1210,25 +1242,26 @@
           "id": "girder_n",
           "heading": 0,
           "style": "nook",
-          "facing": "forward into the rings"
+          "facing": "Forward Rings"
         },
         {
           "id": "girder_e",
           "heading": 90,
           "style": "nook",
-          "facing": "starboard cell"
+          "facing": "Starboard Cell"
         },
         {
           "id": "girder_nook",
           "heading": 180,
           "forward": "keel_back",
-          "keepForward": true
+          "keepForward": true,
+          "facing": "Something Watching"
         },
         {
           "id": "girder_w",
           "heading": 270,
           "style": "nook",
-          "facing": "port cell"
+          "facing": "Port Cell"
         }
       ]
     },
@@ -1246,28 +1279,28 @@
           "heading": 0,
           "forward": "corridor_end",
           "style": "windows",
-          "facing": "port promenade windows",
+          "facing": "Promenade Windows",
           "name": "Dining Room"
         },
         {
           "id": "dining_e",
           "heading": 90,
           "style": "windows",
-          "facing": "along the tables",
+          "facing": "Dining Tables",
           "name": "Dining Room"
         },
         {
           "id": "dining_s",
           "heading": 180,
           "style": "windows",
-          "facing": "the inner wall",
+          "facing": "Inner Wall",
           "name": "Dining Room"
         },
         {
           "id": "dining_w",
           "heading": 270,
           "style": "windows",
-          "facing": "silk-panelled wall",
+          "facing": "Silk Panels",
           "name": "Dining Room"
         }
       ]

@@ -313,6 +313,24 @@ assert.ok(html.includes("'cabin_door':'cabin_door'") || html.includes('"cabin_do
 assert.ok(html.includes('tour_shoes'));
 assert.ok(html.includes('bdeck_corr_office'));
 assert.ok(html.includes('bdeck_corr_stairs'));
+assert.equal(html.includes('tap objects to interact'), false);
+assert.equal(w.document.querySelector('#scene .hint'), null);
+w.eval("view='bdeck_stairs_door';draw()");
+assert.equal(w.eval('nodes.bdeck_stairs_door.facing'), 'Main Corridor Door');
+assert.equal(w.document.querySelector('#viewlabel').textContent, 'B-Deck Stair Landing · Main Corridor Door');
+assert.equal(w.document.querySelector('#scene .hint'), null);
+w.eval("view='washroom_stall';draw()");
+assert.equal(w.eval('nodes.washroom_stall.facing'), 'Shower Stall');
+assert.equal(w.document.querySelector('#viewlabel').textContent, 'B-Deck Washroom · Shower Stall');
+w.eval("view='bdeck_corr_office';draw()");
+assert.equal(w.eval('nodes.bdeck_corr_office.facing'), 'Crew & Cabin Doors');
+const longFacing = [];
+for (const id of gameNodes) {
+  const facing = w.eval('nodes[' + JSON.stringify(id) + '].facing');
+  const words = facing.replace(/&/g, ' ').split(/\s+/).filter(Boolean);
+  if (words.length < 1 || words.length > 3) longFacing.push(id + ' ' + facing);
+}
+assert.deepEqual(longFacing, []);
 w.eval("view='washroom_stall';draw()");
 assert.ok(w.document.querySelector('#scene .scene-art'), 'stall photograph');
 assert.ok(w.document.querySelector('#scene [data-wash="shower"]'), 'shower stays tappable');

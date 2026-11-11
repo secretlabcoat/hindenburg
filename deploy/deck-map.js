@@ -661,6 +661,8 @@ function hindenburgMountDeckHud(plan) {
     hindenburgApplyFacingRings(plan);
     const result = prevDraw.apply(this, arguments);
     hindenburgApplyFacingRings(plan);
+    const label = document.getElementById('viewlabel');
+    if (label && nodes[view]) label.textContent = nodes[view].name + ' · ' + nodes[view].facing;
     paintHud();
     return result;
   };

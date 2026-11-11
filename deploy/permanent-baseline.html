@@ -37,7 +37,7 @@ if(n.style==='promenade'||n.style==='windows'){s+='<div class="viewwindow"><div 
 if(n.style==='corridor'||n.style==='door'){s+='<div class="sidewall left"></div><div class="sidewall right"></div><div class="porthole l"></div><div class="porthole r"></div><div class="doorway" data-move="'+(n.forward||'')+'" title="Approach doorway"></div>'}
 if(n.style==='people'){s+='<div class="painting"></div><div class="furniture a"></div><div class="furniture b"></div>';}s+=castHTML(v);
 if(n.style==='corridor'&&steps>=3&&steps<10&&!window.collectedNote)s+='<div class="notehot" title="Pick up steward’s note"></div>';
-s+='</div><div class="placard">'+n.name+'</div><div class="hint">'+n.facing+' · tap objects to interact</div>';return s}
+s+='</div><div class="placard">'+n.name+'</div>';return s}
 function draw(){let n=nodes[view];scene.innerHTML=scenery(view);$('#viewlabel').textContent=n.name+' · '+n.facing;$('#navleft').disabled=!n.left;$('#navright').disabled=!n.right;$('#navforward').disabled=!n.forward;room=n.name;scene.querySelectorAll('[data-person]').forEach(el=>{el.onclick=()=>choose(el.dataset.person);el.onkeydown=e=>{if(e.key==='Enter')choose(el.dataset.person)}});scene.querySelectorAll('[data-object]').forEach(el=>el.onclick=()=>{if(el.dataset.object==='trunk')narrate('An empty steamer trunk. This cabin is made up for a passenger who is not using it.');else narrate('The writing desk holds a glass of water and an old timetable. Nothing you can take.');});scene.querySelectorAll('[data-move]').forEach(el=>el.onclick=()=>travel(el.dataset.move));let note=scene.querySelector('.notehot');if(note)note.onclick=()=>{window.collectedNote=true;addItem('Steward’s note','✉️');narrate('You take the steward’s note. It reads: “Officer requested at the forward control car before landing.”');draw()}}
 function travel(dest){if(!dest||busy)return;busy=true;scene.classList.add('travel');setTimeout(()=>{view=dest;steps++;who='';$('#speaker').textContent='Select a passenger to speak with them.';draw();scene.classList.remove('travel');busy=false;if(steps===3)narrate('You hear footsteps in the corridor. Passengers are beginning to move about the ship.');},210)}
 $('#navleft').onclick=()=>travel(nodes[view].left);$('#navright').onclick=()=>travel(nodes[view].right);$('#navforward').onclick=()=>travel(nodes[view].forward);
@@ -352,7 +352,7 @@ const ACTS={
   narrate('You sit with your back to a girder and wait. Hours pass in the drone of the engines.');updateClock();checkEndings();saveGame();draw()}}
 const _scenery=scenery
 scenery=function(v){const n=nodes[v];if(!XROOM[n.style])return _scenery(v)
- return '<div class="paint xroom">'+XROOM[n.style](v)+castHTML(v)+'</div><div class="placard">'+n.name+'</div><div class="hint">'+n.facing+' · tap objects to interact</div>'}
+ return '<div class="paint xroom">'+XROOM[n.style](v)+castHTML(v)+'</div><div class="placard">'+n.name+'</div>'}
 const _draw=draw
 draw=function(){_draw();scene.querySelectorAll('[data-act]').forEach(el=>el.onclick=()=>ACTS[el.dataset.act]())
  if(view==='keel_walk'&&!window.keelWarned){window.keelWarned=true;narrate('Crew only. Narrow catwalks, girders and the great silver gas cells. A passenger has no business here.')}}
