@@ -117,8 +117,119 @@ function hindenburgApplyFacingRings(plan) {
   }
 }
 
+function hindenburgPlaceArrows() {
+  const verbs = document.querySelector('.verbs');
+  if (!verbs || verbs.dataset.arrows === '1') return;
+  verbs.dataset.arrows = '1';
+  verbs.classList.add('arrowcol');
+  verbs.setAttribute('aria-label', 'Turn and move');
+  verbs.innerHTML = '';
+  ['navleft', 'navforward', 'navright'].forEach(id => {
+    const button = document.getElementById(id);
+    if (button) verbs.append(button);
+  });
+  const label = document.getElementById('viewlabel');
+  const dialogue = document.querySelector('.dialogue');
+  if (label && dialogue) {
+    label.classList.add('viewlabel');
+    dialogue.parentElement.insertBefore(label, dialogue);
+  }
+  const dock = document.querySelector('.navdock');
+  if (dock) dock.remove();
+}
+
+function hindenburgSceneActions() {
+  const paint = document.querySelector('#scene .paint');
+  if (!paint) return;
+  paint.querySelectorAll('.actbtn').forEach(el => el.remove());
+  paint.querySelectorAll('[data-person]').forEach(el => {
+    const name = el.dataset.person;
+    el.style.cursor = 'pointer';
+    el.setAttribute('aria-label', 'Talk to ' + name);
+    if (!el.querySelector('.exit-label')) {
+      const s = document.createElement('span');
+      s.className = 'exit-label';
+      s.textContent = 'Talk to ' + name;
+      el.append(s);
+    }
+    el.onclick = () => choose(name);
+  });
+  const steward = paint.querySelector('[data-person="Manard Toxu"]');
+  if (steward && typeof STEWARD_PORTRAIT === 'string' && !steward.querySelector('.steward-portrait')) {
+    const img = document.createElement('img');
+    img.className = 'steward-portrait';
+    img.alt = '';
+    img.src = STEWARD_PORTRAIT;
+    steward.append(img);
+  }
+  paint.querySelectorAll('[data-object]').forEach(el => {
+    const kind = el.dataset.object || 'object';
+    const label = kind === 'trunk' ? 'Examine the trunk' : 'Examine the desk';
+    el.style.cursor = 'pointer';
+    el.setAttribute('aria-label', label);
+    if (!el.querySelector('.exit-label')) {
+      const s = document.createElement('span');
+      s.className = 'exit-label';
+      s.textContent = label;
+      el.append(s);
+    }
+    el.onclick = () => {
+      if (typeof selected !== 'undefined' && selected) narrate('You consider using the ' + selected + ' on the ' + kind + '. There is no obvious use for it here.');
+      else if (kind === 'trunk') narrate('An empty steamer trunk. This cabin is made up for a passenger who is not using it.');
+      else narrate('The writing desk holds a glass of water and an old timetable. Nothing you can take.');
+    };
+  });
+  const note = paint.querySelector('.notehot');
+  if (note) {
+    note.style.cursor = 'pointer';
+    note.setAttribute('aria-label', 'Take the steward’s note');
+    if (!note.querySelector('.exit-label')) {
+      const s = document.createElement('span');
+      s.className = 'exit-label';
+      s.textContent = 'Take the steward’s note';
+      note.append(s);
+    }
+  }
+  const hatch = paint.querySelector('.hatch');
+  if (hatch) {
+    hatch.style.cursor = 'pointer';
+    hatch.setAttribute('aria-label', 'The keel hatch');
+    hatch.onclick = () => {
+      const bunny = ai['Bunny Treemont'];
+      if (bunny && bunny.route && gamePhase() !== 'approach') ACTS.wait();
+      else ACTS.hatch();
+    };
+  }
+  if (view === 'tour_end' && !paint.querySelector('[data-act="tourend"]')) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'photo-exit exit-hot';
+    b.dataset.act = 'tourend';
+    b.setAttribute('aria-label', 'Hang back as the group returns');
+    const s = document.createElement('span');
+    s.className = 'exit-label';
+    s.textContent = 'Hang back as the group returns';
+    b.append(s);
+    b.onclick = () => ACTS.tourend();
+    paint.append(b);
+  }
+  const scene = document.querySelector('#scene');
+  if (scene && scene.dataset.examineBound !== '1') {
+    scene.dataset.examineBound = '1';
+    scene.addEventListener('click', e => {
+      const t = e.target;
+      if (!(t.id === 'scene' || t.classList.contains('scene-art') || t.classList.contains('paint') || t.classList.contains('ceiling') || t.classList.contains('perspective-floor'))) return;
+      const n = nodes[view];
+      if (!n) return;
+      if (typeof selected !== 'undefined' && selected) narrate('You consider using the ' + selected + '. There is no obvious use for it here.');
+      else narrate('You examine the ' + n.name.toLowerCase() + '. ' + (n.style === 'corridor' ? 'Narrow passages lead toward the passenger cabins.' : 'Every detail seems ordinary, which makes your knowledge of the approaching disaster harder to bear.'));
+    });
+  }
+}
+
 function hindenburgMountDeckHud(plan) {
   hindenburgApplyFacingRings(plan);
+  hindenburgPlaceArrows();
   if (document.getElementById('deckhud')) return;
   const left = document.querySelector('#navleft');
   const forward = document.querySelector('#navforward');
@@ -278,6 +389,7 @@ function hindenburgMountDeckHud(plan) {
     hud.hidden = !started;
     if (!started || !plan.nodes[view]) return;
     ensureExits();
+    hindenburgSceneActions();
     const meta = plan.nodes[view];
     const place = plan.places[meta.place];
     if (!chosen || !open) chosen = place.deck;

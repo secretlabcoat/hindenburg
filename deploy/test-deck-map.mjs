@@ -270,6 +270,18 @@ for (const deck of plan.decks) {
   }
 }
 assert.deepEqual(orthoBugs, []);
+assert.equal(w.document.querySelector('#talk'), null);
+assert.equal(w.document.querySelector('#examine'), null);
+assert.equal(w.document.querySelector('#take'), null);
+assert.equal(w.document.querySelector('#use'), null);
+assert.equal(w.document.querySelector('#back'), null);
+assert.ok(w.document.querySelector('.arrowcol #navleft'));
+assert.ok(w.document.querySelector('.arrowcol #navforward'));
+assert.ok(w.document.querySelector('.arrowcol #navright'));
+assert.ok(html.includes("'cabin_door':'cabin_door'") || html.includes('"cabin_door":"cabin_door"'));
+assert.ok(html.includes('tour_shoes'));
+assert.ok(html.includes('bdeck_corr_office'));
+assert.ok(html.includes('bdeck_corr_stairs'));
 console.log('REACH');
 for (const id of gameNodes.sort()) console.log(id + ' | ' + info[id].name + ' | ' + info[id].facing + ' | ' + via[id] + (free.includes(id) ? '' : ' | GATED'));
 console.log('deck map tests passed', gameNodes.length, 'nodes', plan.decks.length, 'decks');

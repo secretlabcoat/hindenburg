@@ -44,17 +44,36 @@ VIEW_ART = {
     'cabin_bunk': 'cabin_bunk',
     'cabin_window': 'cabin_window',
     'cabin_desk': 'cabin_desk',
+    'cabin_door': 'cabin_door',
     'lounge_windows': 'lounge_windows',
     'lounge_people': 'lounge_people',
     'promenade_far': 'promenade_far',
+    'promenade_side': 'promenade_far',
     'corridor_forward': 'corridor_forward',
+    'corridor_end': 'corridor_forward',
+    'corridor_left': 'corridor_forward',
+    'corridor_right': 'bdeck_corr_stairs',
     'bar_counter': 'bar_counter',
     'office_desk': 'office_desk',
     'bdeck_washroom': 'bdeck_corr_washdoor',
+    'bdeck_stairs': 'bdeck_corr_stairs',
+    'b_mid_w': 'bdeck_corr_office',
+    'b_north_s': 'corridor_forward',
+    'b_mid_n': 'corridor_forward',
+    'b_mid_s': 'corridor_forward',
+    'b_cab_n': 'corridor_forward',
+    'b_crew_n': 'corridor_forward',
+    'bdeck_cabins': 'corridor_forward',
     'adeck_cabin': 'adeck_cabin',
     'keel_walk': 'keel_walk',
+    'keel_b_e': 'keel_walk',
+    'keel_m_e': 'keel_walk',
+    'keel_m_w': 'keel_walk',
+    'keel_e_w': 'keel_walk',
     'control_helm': 'control_helm',
     'girder_nook': 'girder_nook',
+    'tour_shoes': 'tour_shoes',
+    'tour_cells': 'tour_cells',
     'tour_tanks': 'tour_tanks',
     'tour_end': 'tour_end',
 }
@@ -83,6 +102,22 @@ for name, sha in HARMONIZED.items():
     if got != sha:
         raise SystemExit(f'{name} sha256 {got} != harmonized bathroom {sha}')
     images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+FACE = ROOT / 'facing-art'
+FACING = {
+    'cabin_door': '8e387bd2cf4a073c9aa8325b033fa509970feef37e9bb11bd7aa51d030683e17',
+    'tour_shoes': 'd99b239f7f7be69697870b8616f7446af2ba680ff83fa9167b05640f8eb56cdf',
+    'tour_cells': '332249cca5d13a37ee6115e00223bd237b60897c58fed9ef063d27aec481b1d3',
+}
+for name, sha in FACING.items():
+    raw = (FACE / f'{name}.webp').read_bytes()
+    got = hashlib.sha256(raw).hexdigest()
+    if got != sha:
+        raise SystemExit(f'{name} sha256 {got} != facing art {sha}')
+    images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+steward_png = (FACE / 'steward-portrait.png').read_bytes()
+if hashlib.sha256(steward_png).hexdigest() != '03b94b7a86a8beabc6c5a6dc3c3f9e4e6d1e740147e46a1f14213e2d08779dce':
+    raise SystemExit('steward portrait hash drifted')
+steward_uri = 'data:image/png;base64,' + base64.b64encode(steward_png).decode()
 
 payload = {
     'images': images,
@@ -202,11 +237,34 @@ deck_css = r"""
 .exit-gated{left:4%;top:62%;width:28%;height:18%}
 .exit-climb{left:36%;top:4%;width:28%;height:18%}
 @media(max-width:700px){#deckhud{width:112px;top:84px}#deckhud.is-collapsed{width:44px}#deckhud-full svg{height:min(62vh,520px)}}
+html,body{height:100%;overflow:hidden!important}
+.shell{height:100dvh!important;max-height:100dvh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;box-sizing:border-box;padding:4px!important;padding-bottom:calc(4px + env(safe-area-inset-bottom))!important;gap:3px!important}
+.top{flex:0 0 auto}
+.scene{flex:1 1 auto!important;min-height:0!important;height:auto!important}
+.navdock{display:none!important}
+.bottom{flex:0 0 auto;margin:0!important;display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;gap:4px!important;align-items:stretch}
+.arrowcol{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:4px}
+.arrowcol button{min-height:44px;font-size:22px;padding:4px}
+.viewlabel{font:12px Georgia,serif;color:#d9bd8d;margin:0 0 4px}
+.dialogue{height:auto!important;max-height:22dvh;min-height:56px}
+.inventory{grid-column:1/-1;max-height:64px;overflow:hidden}
+.inv{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+.item{height:36px!important}
+.actbtn{display:none!important}
+.hot-person .steward-portrait{position:absolute;left:0;right:0;bottom:0;width:100%;height:78%;object-fit:cover;object-position:center top;border-radius:2px;pointer-events:none}
+.hot-person:has(.steward-portrait):before,.hot-person:has(.steward-portrait):after{opacity:0}
+@media(min-width:750px){
+  .bottom{grid-template-columns:88px minmax(0,1fr) 210px!important}
+  .inventory{grid-column:auto;max-height:none;overflow:visible}
+  .item{height:49px!important}
+  .dialogue{max-height:140px}
+  .scene{min-height:240px!important}
+}
 </style>
 """
 plan = json.loads((ROOT / 'deck-plans' / 'plans.json').read_text())
 deck_js = (ROOT / 'deck-map.js').read_text()
-deck_script = '<script id="deck-hud">\nconst DECK_PLAN=' + json.dumps(plan, separators=(',', ':')) + ';\n' + deck_js + '\nhindenburgMountDeckHud(DECK_PLAN);\n</script>'
+deck_script = '<script id="deck-hud">\nconst DECK_PLAN=' + json.dumps(plan, separators=(',', ':')) + ';\nconst STEWARD_PORTRAIT=' + json.dumps(steward_uri) + ';\n' + deck_js + '\nhindenburgMountDeckHud(DECK_PLAN);\n</script>'
 html = BASE.decode('utf-8')
 if '</body>' not in html:
     raise SystemExit('baseline has no body close')
