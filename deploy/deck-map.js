@@ -172,7 +172,7 @@ function hindenburgSceneActions() {
     }
     toilet.onclick = () => narrate('A plain white toilet beside the tub. The curtain is the only place to hide.');
     const shower = paint.querySelector('[data-wash="shower"]');
-    if (shower) shower.setAttribute('aria-label', 'Shower curtain');
+    if (shower) shower.setAttribute('aria-label', 'Shower');
   }
   paint.querySelectorAll('[data-person]').forEach(el => {
     const name = el.dataset.person;
@@ -214,7 +214,7 @@ function hindenburgSceneActions() {
   });
   paint.querySelectorAll('[data-object]').forEach(el => {
     const kind = el.dataset.object || 'object';
-    const label = kind === 'trunk' ? 'Examine the trunk' : 'Examine the desk';
+    const label = kind === 'trunk' ? 'Trunk' : 'Desk';
     el.style.cursor = 'pointer';
     el.setAttribute('aria-label', label);
     if (!el.querySelector('.exit-label')) {
@@ -232,18 +232,18 @@ function hindenburgSceneActions() {
   const note = paint.querySelector('.notehot');
   if (note) {
     note.style.cursor = 'pointer';
-    note.setAttribute('aria-label', 'Take the steward’s note');
+    note.setAttribute('aria-label', 'Steward’s Note');
     if (!note.querySelector('.exit-label')) {
       const s = document.createElement('span');
       s.className = 'exit-label';
-      s.textContent = 'Take the steward’s note';
+      s.textContent = 'Steward’s Note';
       note.append(s);
     }
   }
   const hatch = paint.querySelector('.hatch');
   if (hatch) {
     hatch.style.cursor = 'pointer';
-    hatch.setAttribute('aria-label', 'The keel hatch');
+    hatch.setAttribute('aria-label', 'Keel Hatch');
     hatch.onclick = () => {
       const bunny = ai['Bunny Treemont'];
       if (bunny && bunny.route && gamePhase() !== 'approach') ACTS.wait();
@@ -251,8 +251,8 @@ function hindenburgSceneActions() {
     };
   }
   const sinks = {
-    washroom_basins: {context: true, label: 'Washbasin tap'},
-    bar_counter: {context: false, label: 'Bar tap', npc: 'Oreo Malloy'}
+    washroom_basins: {context: true, label: 'Wash Basins'},
+    bar_counter: {context: false, label: 'Bar Counter', npc: 'Oreo Malloy'}
   };
   if (sinks[view] && !paint.querySelector('[data-sink]')) {
     const spec = sinks[view];
@@ -263,7 +263,7 @@ function hindenburgSceneActions() {
     b.setAttribute('aria-label', spec.label);
     const s = document.createElement('span');
     s.className = 'exit-label';
-    s.textContent = hindenburgSink === view ? 'Turn the tap off' : spec.label;
+    s.textContent = hindenburgSink === view ? 'Turn Off' : spec.label;
     b.append(s);
     b.onclick = () => {
       if (hindenburgSink === view) {
@@ -274,7 +274,7 @@ function hindenburgSceneActions() {
       }
       hindenburgSink = view;
       hindenburgStartWater();
-      s.textContent = 'Turn the tap off';
+      s.textContent = 'Turn Off';
       if (spec.context) {
         narrate('You turn on the basin. The stream is thin, more like a siphon than a shower.');
         return;
@@ -301,10 +301,10 @@ function hindenburgSceneActions() {
     b.type = 'button';
     b.className = 'photo-exit exit-hot';
     b.dataset.act = 'tourend';
-    b.setAttribute('aria-label', 'Hang back as the group returns');
+    b.setAttribute('aria-label', 'Hang Back');
     const s = document.createElement('span');
     s.className = 'exit-label';
-    s.textContent = 'Hang back as the group returns';
+    s.textContent = 'Hang Back';
     b.append(s);
     b.onclick = () => ACTS.tourend();
     paint.append(b);

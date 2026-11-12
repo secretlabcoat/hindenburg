@@ -539,7 +539,7 @@
           "doors": [
             {
               "dest": "dining_s",
-              "label": "Enter the dining room",
+              "label": "Enter Dining Room",
               "slot": "exit-left"
             }
           ],
@@ -722,12 +722,12 @@
           "doors": [
             {
               "dest": "office_desk",
-              "label": "Enter the purser’s office",
+              "label": "Enter Purser’s Office",
               "slot": "exit-left"
             },
             {
               "dest": "bar_e",
-              "label": "Enter the bar",
+              "label": "Enter Bar",
               "slot": "exit-right"
             }
           ]
@@ -748,12 +748,12 @@
           "doors": [
             {
               "dest": "office_desk",
-              "label": "Enter the purser’s office",
+              "label": "Enter Purser’s Office",
               "slot": "exit-left"
             },
             {
               "dest": "bar_e",
-              "label": "Enter the bar",
+              "label": "Enter Bar",
               "slot": "exit-right"
             }
           ]

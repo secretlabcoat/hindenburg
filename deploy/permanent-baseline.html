@@ -34,7 +34,7 @@ let view='cabin_bunk',steps=0, busy=false;const scene=$('#scene');
 function scenery(v){let n=nodes[v],s='<div class="paint"><div class="ceiling"></div><div class="perspective-floor"></div>';
 if(n.style==='cabin'||n.style==='cabinwindow'||n.style==='cabindoor'||n.style==='cabindesk'){s+='<div class="cabinwall"></div><div class="cabinlamp"></div>';if(n.style==='cabindesk')s+='<div class="cabindesk"></div>';if(n.style==='cabin')s+='<div class="cabinbed"></div><div class="cabintrunk" data-object="trunk" title="Inspect trunk"></div>';if(n.style==='cabinwindow')s+='<div class="cabinport"></div><div class="cabindesk" data-object="desk" title="Inspect desk"></div>';if(n.style==='cabindoor'||n.style==='cabindesk')s+='<div class="cabindoorobj" data-move="corridor_left" title="Open cabin door"></div>';}
 if(n.style==='promenade'||n.style==='windows'){s+='<div class="viewwindow"><div class="cloud"></div></div><div class="rail"></div>';if(n.style==='windows')s+='<div class="furniture a"></div><div class="furniture b"></div>'}
-if(n.style==='corridor'||n.style==='door'){s+='<div class="sidewall left"></div><div class="sidewall right"></div><div class="porthole l"></div><div class="porthole r"></div><div class="doorway" data-move="'+(n.forward||'')+'" title="Approach doorway"></div>'}
+if(n.style==='corridor'||n.style==='door'){s+='<div class="sidewall left"></div><div class="sidewall right"></div><div class="porthole l"></div><div class="porthole r"></div><div class="doorway" data-move="'+(n.forward||'')+'" title="Door"></div>'}
 if(n.style==='people'){s+='<div class="painting"></div><div class="furniture a"></div><div class="furniture b"></div>';}s+=castHTML(v);
 if(n.style==='corridor'&&steps>=3&&steps<10&&!window.collectedNote)s+='<div class="notehot" title="Pick up steward’s note"></div>';
 s+='</div><div class="placard">'+n.name+'</div>';return s}
@@ -550,7 +550,7 @@ nodes.bdeck_stairs.left='bdeck_washroom';nodes.office_desk.right='bdeck_washroom
 nodes.bdeck_stairs.name='B-Deck Corridor';nodes.crew_door.name='B-Deck Corridor'
 // A-deck cabins belong to paying passengers; the stowaway has none. The old start room is now an unused cabin.
 ;['cabin_bunk','cabin_window','cabin_door','cabin_desk'].forEach(k=>nodes[k].name='Empty Cabin (A deck)');nodes.cabin_bunk.facing='a made-up bunk nobody is using'
-XROOM.washshower=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-rail"></div><div class="wash-head"></div><div class="wash-curtain" data-wash="shower" title="Shower curtain"></div>'
+XROOM.washshower=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-rail"></div><div class="wash-head"></div><div class="wash-curtain" data-wash="shower" title="Shower"></div>'
 XROOM.washbasin=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-mirror" data-wash="mirror" title="Mirror"></div><div class="wash-basin a"></div><div class="wash-basin b"></div>'
 XROOM.washdoor=()=>'<div class="wash-wall"></div><div class="wash-floor"></div><div class="wash-door" data-move="bdeck_washroom" title="Step out into the corridor"></div>'
 const WASH_TEXT={shower:'The only shower aboard any airship, and the one place nobody looks twice at a closed curtain. You have been hiding behind it since Frankfurt.',
