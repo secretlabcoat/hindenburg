@@ -190,9 +190,27 @@ function hindenburgSceneActions() {
     hindenburgDressFigure(el, name);
   });
   const figures = [...paint.querySelectorAll('.cast-figure')];
+  const stand = ({
+    lounge_people: {'Damina Vontette': ['12%', '46%', '0'], 'Snardy Vontette': ['40%', '31%', '0']},
+    lounge_side: {'Colonel Landry Stoppard': ['10%', '58%', '0'], 'Vaunice Charles': ['44%', '56%', '0']},
+    corridor_forward: {'Manard Toxu': ['34%', '56%', '0']},
+    promenade_side: {'Potter McNare': ['62%', '46%', '0']},
+    office_desk: {'Helen Karens': ['54%', '48%', '0']},
+    bar_counter: {'Oreo Malloy': ['36%', '38%', '0']},
+    keel_walk: {'Bunny Treemont': ['40%', '42%', '7%']},
+    control_helm: {'Captain Swanson Kyle': ['18%', '50%', '0'], 'Emilio Estavant': ['48%', '48%', '0']}
+  })[view] || {};
   figures.forEach((el, i) => {
-    const count = figures.length;
-    el.style.left = (count === 1 ? 40 : (i === 0 ? 24 : 58)) + '%';
+    const spec = stand[el.dataset.person];
+    if (spec) {
+      el.style.left = spec[0];
+      el.style.height = spec[1];
+      el.style.bottom = spec[2];
+      el.style.width = '24%';
+    } else {
+      const count = figures.length;
+      el.style.left = (count === 1 ? 40 : (i === 0 ? 24 : 58)) + '%';
+    }
   });
   paint.querySelectorAll('[data-object]').forEach(el => {
     const kind = el.dataset.object || 'object';
