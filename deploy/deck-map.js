@@ -552,6 +552,8 @@ function hindenburgMountDeckHud(plan) {
     el.classList.add('exit-hot', 'exit-shown');
     el.style.cursor = 'pointer';
     el.setAttribute('aria-label', label);
+    if (el.tabIndex < 0) el.tabIndex = 0;
+    if (el.tagName !== 'BUTTON' && !el.getAttribute('role')) el.setAttribute('role', 'button');
     let s = el.querySelector(':scope > .exit-label');
     if (!s) {
       s = document.createElement('span');
