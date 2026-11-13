@@ -349,7 +349,8 @@ html,body{height:100%;overflow:hidden!important}
 .examine-card .exam-icon{font-size:40px}
 .examine-actions{display:flex;gap:8px;margin-top:10px}
 .examine-actions button,#examineclose{min-height:40px;background:#243044;color:#f4efe6;border:0;font:14px Georgia,serif;padding:6px 10px}
-#log{scroll-behavior:smooth}
+#log{scroll-behavior:auto}
+.placard{left:auto!important;right:12px;top:10px;max-width:42%;z-index:7}
 .dialogue{height:auto!important;max-height:22dvh;min-height:56px}
 .inventory{grid-column:1/-1;max-height:64px;overflow:hidden}
 .inv{grid-template-columns:repeat(6,minmax(0,1fr))!important}

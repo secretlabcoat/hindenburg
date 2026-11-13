@@ -198,11 +198,11 @@ function hindenburgSceneActions() {
   const stand = ({
     lounge_people: {'Damina Vontette': ['16%', '30%', '12%'], 'Snardy Vontette': ['46%', '22%', '12%']},
     lounge_side: {'Colonel Landry Stoppard': ['14%', '46%', '0'], 'Vaunice Charles': ['50%', '46%', '0']},
-    corridor_forward: {'Manard Toxu': ['36%', '48%', '2%']},
+    corridor_forward: {'Manard Toxu': ['16%', '48%', '2%']},
     promenade_side: {'Potter McNare': ['60%', '44%', '2%']},
     office_desk: {'Helen Karens': ['20%', '50%', '2%']},
     bar_counter: {'Oreo Malloy': ['20%', '28%', '14%']},
-    keel_walk: {'Bunny Treemont': ['40%', '46%', '10%']},
+    keel_walk: {'Bunny Treemont': ['70%', '40%', '6%']},
     control_helm: {'Captain Swanson Kyle': ['14%', '36%', '2%'], 'Emilio Estavant': ['56%', '34%', '2%']}
   })[view] || {};
   figures.forEach((el, i) => {
@@ -634,36 +634,65 @@ function hindenburgMountDeckHud(plan) {
     if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
   }
   function placePhotoHits() {
+    // Fractions of the source photograph. object-fit:cover uses the same scale.
     const hits = {
-      bdeck_stairs_up: {corridor_right: {x: 0.36, y: 0.02, w: 0.28, h: 0.96}},
-      bdeck_stairs_door: {bdeck_stairs: {x: 0.39, y: 0.06, w: 0.25, h: 0.84}},
+      washroom_door: {bdeck_corr_office: [0.408, 0.11, 0.175, 0.68]},
+      bdeck_washroom: {washroom_stall: [0.39, 0.13, 0.22, 0.70]},
+      bdeck_stairs_door: {bdeck_stairs: [0.37, 0.10, 0.26, 0.80]},
+      bdeck_stairs_up: {corridor_right: [0.36, 0.00, 0.28, 0.98]},
+      bdeck_stairs: {bdeck_stairs_up: [0.41, 0.22, 0.18, 0.46]},
+      corridor_right: {bdeck_stairs_door: [0.41, 0.22, 0.18, 0.46]},
       bdeck_corr_office: {
-        b_crew_n: {x: 0.20, y: 0.08, w: 0.20, h: 0.68},
-        b_cab_n: {x: 0.595, y: 0.08, w: 0.20, h: 0.68},
-        b_mid_s: {x: 0.42, y: 0.80, w: 0.16, h: 0.14}
+        b_crew_n: [0.175, 0.13, 0.20, 0.66],
+        b_cab_n: [0.63, 0.13, 0.21, 0.66],
+        b_mid_s: [0.40, 0.84, 0.20, 0.13]
       },
-      washroom_stall: {
-        shower: {x: 0.37, y: 0.14, w: 0.26, h: 0.66},
-        toilet: {x: 0.62, y: 0.48, w: 0.11, h: 0.32}
-      }
+      b_mid_w: {office_desk: [0.37, 0.15, 0.26, 0.68]},
+      cabin_door: {b_cab_e: [0.41, 0.24, 0.18, 0.58]},
+      office_desk: {b_mid_w: [0.00, 0.18, 0.14, 0.70]},
+      corridor_forward: {dining_s: [0.42, 0.60, 0.16, 0.14]},
+      corridor_end: {lounge_windows: [0.42, 0.60, 0.16, 0.14]},
+      corridor_left: {adeck_w: [0.07, 0.32, 0.16, 0.40], dining_s: [0.42, 0.60, 0.16, 0.14]},
+      b_mid_n: {bdeck_washroom: [0.42, 0.60, 0.16, 0.14], office_desk: [0.07, 0.32, 0.16, 0.40], bar_e: [0.78, 0.32, 0.16, 0.40]},
+      b_mid_s: {b_cab_s: [0.42, 0.60, 0.16, 0.14], office_desk: [0.07, 0.32, 0.16, 0.40], bar_e: [0.78, 0.32, 0.16, 0.40]},
+      b_cab_n: {b_mid_n: [0.42, 0.60, 0.16, 0.14]},
+      b_crew_n: {b_cab_n: [0.42, 0.60, 0.16, 0.14]},
+      bdeck_cabins: {cabin_bunk: [0.07, 0.32, 0.16, 0.40]},
+      keel_walk: {control_helm: [0.44, 0.46, 0.12, 0.14]},
+      keel_b_e: {keel_m_e: [0.44, 0.46, 0.12, 0.14]},
+      keel_m_e: {keel_e_e: [0.44, 0.46, 0.12, 0.14]},
+      keel_m_w: {keel_b_w: [0.44, 0.46, 0.12, 0.14]},
+      keel_e_w: {keel_m_w: [0.44, 0.46, 0.12, 0.14]},
+      lounge_windows: {promenade_far: [0.28, 0.78, 0.44, 0.16]},
+      bar_counter: {b_mid_w: [0.34, 0.86, 0.32, 0.12]},
+      adeck_cabin: {corridor_right: [0.36, 0.84, 0.28, 0.13]},
+      tour_shoes: {tour_cells: [0.34, 0.20, 0.32, 0.60]},
+      tour_cells: {tour_tanks: [0.34, 0.18, 0.32, 0.62]},
+      tour_tanks: {tour_end_e: [0.34, 0.18, 0.32, 0.62]},
+      tour_end: {keel_e_s: [0.38, 0.30, 0.24, 0.40]},
+      girder_nook: {keel_back: [0.36, 0.28, 0.28, 0.46]},
+      washroom_stall: {shower: [0.34, 0.12, 0.30, 0.70], toilet: [0.66, 0.48, 0.16, 0.32]}
     };
     const spec = hits[view];
     const paint = document.querySelector('#scene .paint');
-    if (!spec || !paint) return;
+    const img = paint && paint.querySelector('.scene-art');
+    if (!spec || !paint || !img) return;
     const boxW = paint.clientWidth;
     const boxH = paint.clientHeight;
     if (!boxW || !boxH) return;
-    const scale = Math.max(boxW / 768, boxH / 432);
-    const offX = (boxW - 768 * scale) / 2;
-    const offY = (boxH - 432 * scale) / 2;
+    const imgW = img.naturalWidth || 768;
+    const imgH = img.naturalHeight || 432;
+    const scale = Math.max(boxW / imgW, boxH / imgH);
+    const offX = (boxW - imgW * scale) / 2;
+    const offY = (boxH - imgH * scale) / 2;
     Object.keys(spec).forEach(key => {
       const el = paint.querySelector('[data-move="' + key + '"], [data-wash="' + key + '"]');
       if (!el) return;
       const r = spec[key];
-      el.style.left = (offX + r.x * 768 * scale) + 'px';
-      el.style.top = (offY + r.y * 432 * scale) + 'px';
-      el.style.width = (r.w * 768 * scale) + 'px';
-      el.style.height = (r.h * 432 * scale) + 'px';
+      el.style.left = (offX + r[0] * imgW * scale) + 'px';
+      el.style.top = (offY + r[1] * imgH * scale) + 'px';
+      el.style.width = (r[2] * imgW * scale) + 'px';
+      el.style.height = (r[3] * imgH * scale) + 'px';
       el.style.right = 'auto';
       el.style.bottom = 'auto';
     });
@@ -727,6 +756,7 @@ function hindenburgMountDeckHud(plan) {
     hindenburgExitLine();
     hindenburgSpeakPrompt();
     hindenburgGuideTick();
+    if (typeof hindenburgSnapLog === 'function') hindenburgSnapLog();
     return result;
   };
   paintHud();
@@ -911,6 +941,32 @@ function hindenburgShowItem(item) {
   narrate(who.split(' ')[0] + ' studies the ' + item.name + '.');
 }
 
+function hindenburgSnapLog() {
+  const log = document.getElementById('log');
+  if (!log) return;
+  const previous = log.style.scrollBehavior;
+  log.style.scrollBehavior = 'auto';
+  const room = log.scrollHeight - log.clientHeight;
+  if (room < 22) { log.scrollTop = 0; log.style.scrollBehavior = previous; return; }
+  log.scrollTop = room;
+  const box = log.getBoundingClientRect();
+  const kids = [...log.children];
+  for (const el of kids) {
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom <= box.top + 1) continue;
+    if (rect.top < box.top - 2) {
+      const next = el.nextElementSibling;
+      if (next) {
+        const jump = next.getBoundingClientRect().top - box.top;
+        const last = kids[kids.length - 1].getBoundingClientRect();
+        if (last.bottom - jump <= box.bottom + 4) log.scrollTop += jump;
+      }
+    }
+    break;
+  }
+  log.style.scrollBehavior = previous;
+}
+
 function hindenburgFootstep() {
   const ctx = hindenburgAudio();
   if (!ctx) return;
@@ -1091,6 +1147,16 @@ function hindenburgOpenPortrait(name, mood) {
 if (typeof document !== 'undefined') (function hindenburgPlaytest() {
   const log = document.getElementById('log');
   if (log) { log.setAttribute('aria-live', 'polite'); log.setAttribute('role', 'log'); }
+  if (typeof line === 'function' && !line.hindenburgSnap) {
+    const previousLine = line;
+    line = function () {
+      const result = previousLine.apply(this, arguments);
+      hindenburgSnapLog();
+      return result;
+    };
+    line.hindenburgSnap = true;
+  }
+  hindenburgSnapLog();
   const forward = document.getElementById('navforward');
   if (forward) forward.onclick = () => { if (forward.dataset.dest) travel(forward.dataset.dest); };
   document.addEventListener('keydown', e => {
