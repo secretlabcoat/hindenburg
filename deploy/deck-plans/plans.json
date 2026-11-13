@@ -462,7 +462,8 @@
         {
           "id": "promenade",
           "heading": 180,
-          "forward": "lounge_aft",
+          "forward": "lounge_side",
+          "style": "door",
           "facing": "Observation Windows"
         },
         {
@@ -484,7 +485,6 @@
         {
           "id": "lounge_windows",
           "heading": 0,
-          "forward": "promenade_far",
           "facing": "Lounge Windows"
         },
         {
@@ -501,6 +501,8 @@
         {
           "id": "lounge_side",
           "heading": 270,
+          "forward": "promenade",
+          "style": "door",
           "facing": "Lounge Seating"
         }
       ]
@@ -565,7 +567,6 @@
         {
           "id": "adeck_cabin",
           "heading": 90,
-          "forward": "corridor_right",
           "facing": "Windowless Cabin"
         },
         {
@@ -577,7 +578,8 @@
         {
           "id": "adeck_w",
           "heading": 270,
-          "style": "plain",
+          "forward": "corridor_left",
+          "style": "door",
           "facing": "Inside Wall"
         }
       ]
@@ -670,14 +672,14 @@
         {
           "id": "b_north_e",
           "heading": 90,
-          "style": "corridor",
+          "forward": "b_mid_n",
+          "style": "door",
           "facing": "Starboard Wall",
           "name": "B-Deck Main Corridor"
         },
         {
           "id": "bdeck_corr_office",
           "heading": 180,
-          "forward": "b_mid_s",
           "style": "plain",
           "facing": "Crew & Cabin Doors",
           "name": "B-Deck Main Corridor",
@@ -894,7 +896,8 @@
         {
           "id": "bar_e",
           "heading": 90,
-          "style": "bar",
+          "forward": "b_mid_e",
+          "style": "door",
           "facing": "Starboard Wall"
         },
         {
@@ -906,7 +909,6 @@
         {
           "id": "bar_counter",
           "heading": 270,
-          "forward": "b_mid_w",
           "facing": "The Bar"
         }
       ]
@@ -1098,13 +1100,13 @@
         {
           "id": "tour_shoes_n",
           "heading": 0,
-          "style": "keel",
+          "forward": "tour_cells",
+          "style": "door",
           "facing": "Crew Door"
         },
         {
           "id": "tour_shoes",
           "heading": 90,
-          "forward": "tour_cells",
           "facing": "Felt Overshoes"
         },
         {

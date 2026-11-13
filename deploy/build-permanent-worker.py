@@ -293,7 +293,26 @@ html,body{height:100%;overflow:hidden!important}
 .arrowcol button{min-height:36px;font-size:20px;padding:2px 4px}
 .viewlabel{font:12px Georgia,serif;color:#d9bd8d;margin:0}
 #exitline{font:12px Georgia,serif;color:#f6e7c8;margin:0 0 4px;min-height:1.2em}
-.exit-shown>.exit-label{opacity:1;white-space:normal;text-align:center;line-height:1.15;max-width:148px}
+.exit-shown>.exit-label{opacity:1;white-space:normal;text-align:center;line-height:1.15;max-width:9.2em}
+.scene .paint [data-gated="tour"]{animation:none!important;box-shadow:none!important;outline:none!important;background:#23190ee8!important;color:#f3e2c0!important;border:1px solid #c4a36a!important;left:8px!important;top:auto!important;bottom:12px!important;width:auto!important;height:auto!important;min-width:8em!important;padding:4px 8px!important;font:12px Georgia,serif!important}
+.scene .paint [data-gated="tour"]>.exit-label{position:static!important;transform:none!important;opacity:1!important;background:transparent!important;max-width:none!important;white-space:nowrap!important}
+.scene .doorway{background:transparent!important;border:0!important;color:transparent}
+.scene .doorway:before,.scene .doorway:after{content:none!important}
+.scene .paint:not(.has-art) .doorway{left:41%;width:18%;height:38%;top:auto;bottom:8%}
+.scene .paint.has-art .r11-berth,
+.scene .paint.has-art .r11-basin,
+.scene .paint.has-art .r11-desk,
+.scene .paint.has-art .r11-wardrobe,
+.scene .paint.has-art .r11-bell,
+.scene .paint.has-art .r11-shoes,
+.scene .paint.has-art .r11-sheet,
+.scene .paint.has-art .r11-card,
+.scene .paint.has-art .r11-door,
+.scene .paint.has-art [data-x11]{background:transparent!important;border:0!important;box-shadow:none!important;color:transparent!important;outline:none!important}
+.scene .paint.has-art .r11-door:before,
+.scene .paint.has-art .r11-door:after,
+.scene .paint.has-art [data-x11]:before,
+.scene .paint.has-art [data-x11]:after{content:none!important}
 .exit-hot{transition:outline-color .12s,filter .12s}
 .exit-hot:hover,.exit-hot:focus-visible{outline:2px solid #f5d895;outline-offset:1px}
 .exit-hot:active{filter:brightness(1.35)}

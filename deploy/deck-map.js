@@ -548,6 +548,7 @@ function hindenburgMountDeckHud(plan) {
     return 'Enter ' + nodes[dest].name;
   }
   function visibleExit(label) {
+    if (label === 'Exit to B-deck corridor') return 'B-deck corridor';
     if (!label || label === 'Continue forward' || label.startsWith('Exit ')) return label;
     return label.replace(/^Enter /, '').replace(/^(?:B-Deck|A-Deck) /, '');
   }
@@ -630,47 +631,51 @@ function hindenburgMountDeckHud(plan) {
       if (paint.querySelector('[data-move="' + d.dest + '"]')) return;
       addHotspot(d.dest, d.label || exitLabel(d.dest), d.slot || 'exit-left');
     });
+    paint.querySelectorAll('.doorway').forEach(el => { if (!el.dataset.move) el.remove(); });
+    if (paint.classList.contains('has-art') || paint.querySelector('.scene-art')) {
+      paint.querySelectorAll('.r11-berth,.r11-basin,.r11-desk,.r11-wardrobe,.r11-bell,.r11-shoes,.r11-sheet,.r11-card,.r11-rules,.r11-door').forEach(el => {
+        const keep = el.dataset.move && nodes[view] && el.dataset.move === nodes[view].forward;
+        if (!keep) el.remove();
+      });
+    }
     if (view === 'crew_door') addGated('tour', 'Join escorted tour', 'exit-gated');
     if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
   }
   function placePhotoHits() {
     // Fractions of the source photograph. object-fit:cover uses the same scale.
+    const far = [0.455, 0.38, 0.09, 0.16];
+    const leftDoor = [0.30, 0.32, 0.11, 0.40];
+    const rightDoor = [0.60, 0.32, 0.11, 0.40];
     const hits = {
-      washroom_door: {bdeck_corr_office: [0.408, 0.11, 0.175, 0.68]},
-      bdeck_washroom: {washroom_stall: [0.39, 0.13, 0.22, 0.70]},
+      washroom_door: {bdeck_corr_office: [0.400, 0.22, 0.195, 0.57]},
+      bdeck_washroom: {washroom_stall: [0.385, 0.14, 0.24, 0.68]},
       bdeck_stairs_door: {bdeck_stairs: [0.37, 0.10, 0.26, 0.80]},
-      bdeck_stairs_up: {corridor_right: [0.36, 0.00, 0.28, 0.98]},
-      bdeck_stairs: {bdeck_stairs_up: [0.41, 0.22, 0.18, 0.46]},
-      corridor_right: {bdeck_stairs_door: [0.41, 0.22, 0.18, 0.46]},
+      bdeck_stairs_up: {corridor_right: [0.36, 0.02, 0.28, 0.94]},
+      bdeck_stairs: {bdeck_stairs_up: [0.41, 0.24, 0.18, 0.42]},
+      corridor_right: {bdeck_stairs_door: [0.41, 0.24, 0.18, 0.42]},
       bdeck_corr_office: {
         b_crew_n: [0.175, 0.13, 0.20, 0.66],
-        b_cab_n: [0.63, 0.13, 0.21, 0.66],
-        b_mid_s: [0.40, 0.84, 0.20, 0.13]
+        b_cab_n: [0.63, 0.13, 0.21, 0.66]
       },
-      b_mid_w: {office_desk: [0.37, 0.15, 0.26, 0.68]},
+      b_mid_w: {office_desk: [0.37, 0.14, 0.26, 0.70]},
       cabin_door: {b_cab_e: [0.41, 0.24, 0.18, 0.58]},
-      office_desk: {b_mid_w: [0.00, 0.18, 0.14, 0.70]},
-      corridor_forward: {dining_s: [0.42, 0.60, 0.16, 0.14]},
-      corridor_end: {lounge_windows: [0.42, 0.60, 0.16, 0.14]},
-      corridor_left: {adeck_w: [0.07, 0.32, 0.16, 0.40], dining_s: [0.42, 0.60, 0.16, 0.14]},
-      b_mid_n: {bdeck_washroom: [0.42, 0.60, 0.16, 0.14], office_desk: [0.07, 0.32, 0.16, 0.40], bar_e: [0.78, 0.32, 0.16, 0.40]},
-      b_mid_s: {b_cab_s: [0.42, 0.60, 0.16, 0.14], office_desk: [0.07, 0.32, 0.16, 0.40], bar_e: [0.78, 0.32, 0.16, 0.40]},
-      b_cab_n: {b_mid_n: [0.42, 0.60, 0.16, 0.14]},
-      b_crew_n: {b_cab_n: [0.42, 0.60, 0.16, 0.14]},
-      bdeck_cabins: {cabin_bunk: [0.07, 0.32, 0.16, 0.40]},
-      keel_walk: {control_helm: [0.44, 0.46, 0.12, 0.14]},
-      keel_b_e: {keel_m_e: [0.44, 0.46, 0.12, 0.14]},
-      keel_m_e: {keel_e_e: [0.44, 0.46, 0.12, 0.14]},
-      keel_m_w: {keel_b_w: [0.44, 0.46, 0.12, 0.14]},
-      keel_e_w: {keel_m_w: [0.44, 0.46, 0.12, 0.14]},
-      lounge_windows: {promenade_far: [0.28, 0.78, 0.44, 0.16]},
-      bar_counter: {b_mid_w: [0.34, 0.86, 0.32, 0.12]},
-      adeck_cabin: {corridor_right: [0.36, 0.84, 0.28, 0.13]},
-      tour_shoes: {tour_cells: [0.34, 0.20, 0.32, 0.60]},
-      tour_cells: {tour_tanks: [0.34, 0.18, 0.32, 0.62]},
-      tour_tanks: {tour_end_e: [0.34, 0.18, 0.32, 0.62]},
-      tour_end: {keel_e_s: [0.38, 0.30, 0.24, 0.40]},
-      girder_nook: {keel_back: [0.36, 0.28, 0.28, 0.46]},
+      corridor_forward: {dining_s: far},
+      corridor_end: {lounge_windows: far},
+      corridor_left: {adeck_w: leftDoor, dining_s: rightDoor},
+      b_mid_n: {bdeck_washroom: far, office_desk: leftDoor, bar_e: rightDoor},
+      b_mid_s: {b_cab_s: far, office_desk: leftDoor, bar_e: rightDoor},
+      b_cab_n: {b_mid_n: far},
+      b_crew_n: {b_cab_n: far},
+      bdeck_cabins: {cabin_bunk: leftDoor},
+      keel_walk: {control_helm: [0.45, 0.44, 0.10, 0.12]},
+      keel_b_e: {keel_m_e: [0.45, 0.44, 0.10, 0.12]},
+      keel_m_e: {keel_e_e: [0.45, 0.44, 0.10, 0.12]},
+      keel_m_w: {keel_b_w: [0.45, 0.44, 0.10, 0.12]},
+      keel_e_w: {keel_m_w: [0.45, 0.44, 0.10, 0.12]},
+      tour_cells: {tour_tanks: [0.40, 0.70, 0.20, 0.18], climb: [0.46, 0.08, 0.08, 0.10]},
+      tour_tanks: {tour_end_e: [0.44, 0.20, 0.12, 0.20]},
+      tour_end: {keel_e_s: [0.42, 0.36, 0.16, 0.22]},
+      girder_nook: {keel_back: [0.42, 0.46, 0.16, 0.32]},
       washroom_stall: {shower: [0.34, 0.12, 0.30, 0.70], toilet: [0.66, 0.48, 0.16, 0.32]}
     };
     const spec = hits[view];
@@ -686,7 +691,7 @@ function hindenburgMountDeckHud(plan) {
     const offX = (boxW - imgW * scale) / 2;
     const offY = (boxH - imgH * scale) / 2;
     Object.keys(spec).forEach(key => {
-      const el = paint.querySelector('[data-move="' + key + '"], [data-wash="' + key + '"]');
+      const el = paint.querySelector('[data-move="' + key + '"], [data-wash="' + key + '"], [data-gated="' + key + '"]');
       if (!el) return;
       const r = spec[key];
       el.style.left = (offX + r[0] * imgW * scale) + 'px';
@@ -697,6 +702,20 @@ function hindenburgMountDeckHud(plan) {
       el.style.bottom = 'auto';
     });
   }
+  function placeVectorHits() {
+    const paint = document.querySelector('#scene .paint');
+    if (!paint || paint.classList.contains('has-art') || paint.querySelector('.scene-art')) return;
+    paint.querySelectorAll('[data-move]').forEach(el => {
+      el.style.left = '41%';
+      el.style.width = '18%';
+      el.style.height = '26%';
+      el.style.top = 'auto';
+      el.style.bottom = '6%';
+      el.style.right = 'auto';
+      el.style.background = 'transparent';
+      el.style.border = '0';
+    });
+  }
   function paintHud() {
     hindenburgApplyFacingRings(plan);
     const started = document.querySelector('#titleoverlay') && document.querySelector('#titleoverlay').hidden;
@@ -705,6 +724,7 @@ function hindenburgMountDeckHud(plan) {
     ensureExits();
     hindenburgSceneActions();
     placePhotoHits();
+    placeVectorHits();
     hindenburgFitCaptions();
     const meta = plan.nodes[view];
     const place = plan.places[meta.place];

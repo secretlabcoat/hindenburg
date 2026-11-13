@@ -109,7 +109,7 @@ w.eval("view='washroom_door';draw()");
 const door = w.document.querySelector('#scene [data-move="bdeck_corr_office"]');
 assert.ok(door, 'washroom door hotspot');
 assert.equal(door.getAttribute('aria-label'), 'Exit to B-deck corridor');
-assert.equal(door.querySelector('.exit-label').textContent, 'Exit to B-deck corridor');
+assert.equal(door.querySelector('.exit-label').textContent, 'B-deck corridor');
 assert.equal(w.document.querySelector('#navforward').disabled, false);
 assert.equal(door.style.cursor, 'pointer');
 door.click();
