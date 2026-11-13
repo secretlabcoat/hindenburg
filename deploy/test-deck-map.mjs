@@ -108,8 +108,9 @@ w.eval("view='control_helm';draw()");
 w.eval("view='washroom_door';draw()");
 const door = w.document.querySelector('#scene [data-move="bdeck_corr_office"]');
 assert.ok(door, 'washroom door hotspot');
-assert.equal(door.getAttribute('aria-label'), 'Enter B-Deck Main Corridor');
-assert.equal(door.querySelector('.exit-label').textContent, 'Enter B-Deck Main Corridor');
+assert.equal(door.getAttribute('aria-label'), 'Exit to B-deck corridor');
+assert.equal(door.querySelector('.exit-label').textContent, 'Exit to B-deck corridor');
+assert.equal(w.document.querySelector('#navforward').disabled, false);
 assert.equal(door.style.cursor, 'pointer');
 door.click();
 await new Promise(r => setTimeout(r, 250));
@@ -168,7 +169,7 @@ for (const id of gameNodes) {
     const hot = w.document.querySelector('#scene [data-move="' + dest + '"]');
     const label = hot && hot.getAttribute('aria-label');
     const hover = hot && hot.querySelector('.exit-label') && hot.querySelector('.exit-label').textContent;
-    const good = label && (label.startsWith('Enter ') || label === 'Continue forward');
+    const good = label && (label.startsWith('Enter ') || label.startsWith('Exit ') || label === 'Continue forward');
     if (!hot || hot.style.cursor !== 'pointer' || !good || hover !== label) {
       missingHot.push(id + ' ' + dir + ' -> ' + dest + ' ' + label);
     }

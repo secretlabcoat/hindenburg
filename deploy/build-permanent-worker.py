@@ -291,7 +291,27 @@ html,body{height:100%;overflow:hidden!important}
 .bottom{flex:0 0 auto;margin:0!important;display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;gap:4px!important;align-items:stretch}
 .arrowcol{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:4px}
 .arrowcol button{min-height:36px;font-size:20px;padding:2px 4px}
-.viewlabel{font:12px Georgia,serif;color:#d9bd8d;margin:0 0 4px}
+.viewlabel{font:12px Georgia,serif;color:#d9bd8d;margin:0}
+#exitline{font:12px Georgia,serif;color:#f6e7c8;margin:0 0 4px;min-height:1.2em}
+.exit-shown>.exit-label{opacity:1}
+.exit-hot{transition:outline-color .12s,filter .12s}
+.exit-hot:hover,.exit-hot:focus-visible{outline:2px solid #f5d895;outline-offset:1px}
+.exit-hot:active{filter:brightness(1.35)}
+.scene.travel{opacity:.4;transition:opacity .2s,filter .2s}
+#guidebar{position:absolute;left:8px;right:8px;bottom:8px;z-index:9;background:#23190ef2;color:#f6e7c8;border:1px solid #d4b483;padding:8px;font:14px Georgia,serif;display:flex;gap:8px;align-items:center}
+#guidebar[hidden]{display:none!important}
+#guidebar p{margin:0;flex:1}
+#guideskip{min-height:36px;background:#243044;color:#f4efe6;border:0;font:14px Georgia,serif}
+.guide-pulse{animation:guidepulse 1.1s ease-in-out infinite}
+@keyframes guidepulse{50%{outline:3px solid #f5d895;outline-offset:2px}}
+#examinepop{position:fixed;inset:0;z-index:60;background:#0c0a0880;display:flex;align-items:center;justify-content:center;padding:16px}
+#examinepop[hidden]{display:none!important}
+.examine-card{background:#241910;color:#f6e7c8;border:3px solid #d4b483;width:min(360px,calc(100vw - 32px));padding:12px;font:15px Georgia,serif}
+.examine-card strong{display:block;font-size:18px;margin:6px 0}
+.examine-card .exam-icon{font-size:40px}
+.examine-actions{display:flex;gap:8px;margin-top:10px}
+.examine-actions button,#examineclose{min-height:40px;background:#243044;color:#f4efe6;border:0;font:14px Georgia,serif;padding:6px 10px}
+#log{scroll-behavior:smooth}
 .dialogue{height:auto!important;max-height:22dvh;min-height:56px}
 .inventory{grid-column:1/-1;max-height:64px;overflow:hidden}
 .inv{grid-template-columns:repeat(6,minmax(0,1fr))!important}
