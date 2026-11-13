@@ -192,14 +192,14 @@ function hindenburgSceneActions() {
   });
   const figures = [...paint.querySelectorAll('.cast-figure')];
   const stand = ({
-    lounge_people: {'Damina Vontette': ['12%', '46%', '0'], 'Snardy Vontette': ['40%', '31%', '0']},
-    lounge_side: {'Colonel Landry Stoppard': ['10%', '56%', '2%'], 'Vaunice Charles': ['44%', '56%', '2%']},
-    corridor_forward: {'Manard Toxu': ['34%', '56%', '0']},
-    promenade_side: {'Potter McNare': ['62%', '46%', '0']},
-    office_desk: {'Helen Karens': ['54%', '48%', '0']},
-    bar_counter: {'Oreo Malloy': ['36%', '38%', '0']},
-    keel_walk: {'Bunny Treemont': ['40%', '42%', '7%']},
-    control_helm: {'Captain Swanson Kyle': ['18%', '50%', '0'], 'Emilio Estavant': ['48%', '48%', '0']}
+    lounge_people: {'Damina Vontette': ['16%', '30%', '12%'], 'Snardy Vontette': ['46%', '22%', '12%']},
+    lounge_side: {'Colonel Landry Stoppard': ['14%', '46%', '0'], 'Vaunice Charles': ['50%', '46%', '0']},
+    corridor_forward: {'Manard Toxu': ['36%', '48%', '2%']},
+    promenade_side: {'Potter McNare': ['60%', '44%', '2%']},
+    office_desk: {'Helen Karens': ['20%', '50%', '2%']},
+    bar_counter: {'Oreo Malloy': ['20%', '28%', '14%']},
+    keel_walk: {'Bunny Treemont': ['40%', '46%', '10%']},
+    control_helm: {'Captain Swanson Kyle': ['14%', '36%', '2%'], 'Emilio Estavant': ['56%', '34%', '2%']}
   })[view] || {};
   figures.forEach((el, i) => {
     const spec = stand[el.dataset.person];

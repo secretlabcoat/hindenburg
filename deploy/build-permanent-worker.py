@@ -116,6 +116,7 @@ FACING = {
     'bdeck_stairs_door': '703902a47d1fa95f98987ab1ff08b66ea7a5b85841b60bcfe6fee69914d5294f',
     'bdeck_stairs_bar': '3470159d2a2e6cfce8d986a2abec4e90e797aa883b6a68b9ad611cdef9772f68',
     'bdeck_corr_south': '80ddcbde4a947077e7b9b32ba7a4a1303349ee1fe3eef64e552b32674e28480f',
+    'lounge_people': '43e8e4b503da6f2151249b6e66dd4780ee217fb88f83e3cca83e281aad854a55',
 }
 for name, sha in FACING.items():
     raw = (FACE / f'{name}.webp').read_bytes()
