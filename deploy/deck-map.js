@@ -344,6 +344,35 @@ function hindenburgAudio() {
   }
 }
 
+function hindenburgRattle() {
+  const ctx = hindenburgAudio();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.035), ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < data.length; i++) {
+    const t = i / ctx.sampleRate;
+    data[i] = (Math.random() * 2 - 1) * Math.exp(-t * 90);
+  }
+  const out = master || ctx.destination;
+  [0, 0.045, 0.085, 0.13].forEach((when, n) => {
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 720 + n * 90;
+    const gain = ctx.createGain();
+    gain.gain.value = 0.5;
+    src.connect(filter).connect(gain).connect(out);
+    src.start(now + when);
+  });
+}
+
+function hindenburgLocked() {
+  hindenburgRattle();
+  narrate('It\'s locked.');
+}
+
 function hindenburgDoorSound() {
   const ctx = hindenburgAudio();
   if (!ctx) return;
@@ -631,15 +660,33 @@ function hindenburgMountDeckHud(plan) {
       if (paint.querySelector('[data-move="' + d.dest + '"]')) return;
       addHotspot(d.dest, d.label || exitLabel(d.dest), d.slot || 'exit-left');
     });
-    paint.querySelectorAll('.doorway').forEach(el => { if (!el.dataset.move) el.remove(); });
+    if (view === 'crew_door') addGated('tour', 'Join escorted tour', 'exit-gated');
+    if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
+    paint.querySelectorAll('[data-move]').forEach(el => {
+      const dest = el.dataset.move;
+      el.style.cursor = 'pointer';
+      if (!dest || !nodes[dest]) {
+        el.onclick = ev => { ev.stopPropagation(); hindenburgLocked(); };
+        return;
+      }
+      el.onclick = ev => { ev.stopPropagation(); travel(dest); };
+    });
+    paint.querySelectorAll('[data-gated]').forEach(el => {
+      const kind = el.dataset.gated;
+      el.style.cursor = 'pointer';
+      el.onclick = ev => {
+        ev.stopPropagation();
+        const open = kind === 'tour' ? (typeof tourOpen === 'function' && tourOpen()) : !!paint.querySelector('[data-act="climb"]');
+        if (open) { useExit({gated: kind, dest: null, label: el.getAttribute('aria-label') || ''}); return; }
+        hindenburgLocked();
+      };
+    });
     if (paint.classList.contains('has-art') || paint.querySelector('.scene-art')) {
       paint.querySelectorAll('.r11-berth,.r11-basin,.r11-desk,.r11-wardrobe,.r11-bell,.r11-shoes,.r11-sheet,.r11-card,.r11-rules,.r11-door').forEach(el => {
         const keep = el.dataset.move && nodes[view] && el.dataset.move === nodes[view].forward;
         if (!keep) el.remove();
       });
     }
-    if (view === 'crew_door') addGated('tour', 'Join escorted tour', 'exit-gated');
-    if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
   }
   function placePhotoHits() {
     // Fractions of the source photograph. object-fit:cover uses the same scale.
@@ -905,7 +952,6 @@ function hindenburgGuideTick() {
     if (view === 'washroom_door') {
       const door = document.querySelector('#scene [data-move]');
       const forward = document.getElementById('navforward');
-      if (door) door.classList.add('guide-pulse');
       if (forward) forward.classList.add('guide-pulse');
     }
   } else {
