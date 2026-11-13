@@ -1,0 +1,23 @@
+{
+  "adeck_cabin": "db5ab1a1676759892e1ee9ac78bd56ec2679cf3fb456d6cf3cbd856679b293fb",
+  "bar_counter": "13ecb8972cdecbddd8cc7d0435cab095f56f7b6e5d87238bd5d58f7a2dd201e3",
+  "bdeck_corr_office": "b395b0a9b6af995e2b49d9dec0f0cc53f00ff3effc08c96364f8a19cf8e39b16",
+  "bdeck_corr_stairs": "c8d1e2368327030898c0ff7f3577ee8cffa7726abce152a43210b5115f32e485",
+  "bdeck_corr_washdoor": "4f9b83cbedcb4f576503a47572e22f489a260728d23f2b925a146b587136cf90",
+  "cabin_bunk": "0acd6adc9377e3362c99c8f9911beddd7396da978ceb88bbd8b6751c7ac76422",
+  "cabin_desk": "6e59ac050f5dcdec1eac5f1e7e7a7153b6a5956fa30fd10815c75d5301ba90f1",
+  "cabin_window": "d33d69d21bd0124dfb8cb2df4e8d7ea56c30c9bdd1a95b5f4271dbf1ef0cd7e1",
+  "control_helm": "fd0fdd40f6cf0e154e1df1519df1eba447d762945141c6fe26ee7f07916f29c6",
+  "corridor_forward": "c35ba4adc1172e27297547e615688f9d0cbc0b210557736b7af8da4c3dd04627",
+  "girder_nook": "88adc467588eaa7fd1b76ca5fe327ee35e41b6adc624f8f4f4eef9ef49a8faa5",
+  "keel_walk": "1da0d3df0cddd75a59b729d77053bbd39c1f4c620fed9fa8e1571ee4666da5fd",
+  "lounge_people": "334d35e090d4267aac2860cb381e1b2e4b37fd13e1bd2d1cf24b314cca24c439",
+  "lounge_windows": "12051cb909b404f5a3c28a6cacb78ac32939011d270136db8e4e3e7081154fed",
+  "office_desk": "216e71e0072a427b551af48acefa84773ffe8817c2f14f563b3a030aeb8fde2c",
+  "promenade_far": "1ed8bc15f8ae109b27e15ad225dd72afd33cc7309be0a50020a953bf0f4637cf",
+  "tour_end": "76df41d4f14289e0acd0cc619ad8223efafab470648d58942f8dcda0015fca46",
+  "tour_tanks": "80b38be14e78e4f22d14cbb38f7b06e5fa0a5e7c851b39b68a37bdf317f45cae",
+  "washroom_basins": "4cd0b7484391d0fec40bcd7e361744ad2417349fe038f2c99baa2638db385a2b",
+  "washroom_door": "0a213e84d96dcecd32e94288bd8c27da289d0604437b8e0941059f7e3aed7134",
+  "washroom_stall": "96135f0dfdc0b28b5aaef817c027a6c03703108588592610a2fd9fde4ab313f2"
+}
