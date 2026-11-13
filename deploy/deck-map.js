@@ -547,6 +547,10 @@ function hindenburgMountDeckHud(plan) {
     if (placeId(dest) && placeId(dest) === placeId(view)) return 'Continue forward';
     return 'Enter ' + nodes[dest].name;
   }
+  function visibleExit(label) {
+    if (!label || label === 'Continue forward' || label.startsWith('Exit ')) return label;
+    return label.replace(/^Enter /, '').replace(/^(?:B-Deck|A-Deck) /, '');
+  }
   function labelExit(el, dest) {
     const label = exitLabel(dest);
     el.classList.add('exit-hot', 'exit-shown');
@@ -560,7 +564,7 @@ function hindenburgMountDeckHud(plan) {
       s.className = 'exit-label';
       el.append(s);
     }
-    s.textContent = label;
+    s.textContent = visibleExit(label);
   }
   function addHotspot(dest, label, extraClass) {
     const paint = document.querySelector('#scene .paint') || document.querySelector('#scene');
@@ -572,7 +576,7 @@ function hindenburgMountDeckHud(plan) {
     b.setAttribute('aria-label', label);
     const s = document.createElement('span');
     s.className = 'exit-label';
-    s.textContent = label;
+    s.textContent = visibleExit(label);
     b.append(s);
     b.onclick = () => travel(dest);
     paint.append(b);
@@ -672,6 +676,7 @@ function hindenburgMountDeckHud(plan) {
     ensureExits();
     hindenburgSceneActions();
     placePhotoHits();
+    hindenburgFitCaptions();
     const meta = plan.nodes[view];
     const place = plan.places[meta.place];
     if (!chosen || !open) chosen = place.deck;
@@ -932,15 +937,46 @@ function hindenburgFigureCaption(name) {
 function hindenburgFitCaptions() {
   const scene = document.querySelector('#scene');
   if (!scene) return;
-  const bound = scene.getBoundingClientRect();
+  const outer = scene.getBoundingClientRect();
+  if (outer.width < 20) return;
+  const bound = {
+    left: outer.left + scene.clientLeft,
+    top: outer.top + scene.clientTop,
+    right: outer.left + scene.clientLeft + scene.clientWidth,
+    bottom: outer.top + scene.clientTop + scene.clientHeight,
+    width: scene.clientWidth
+  };
   const pad = 6;
-  scene.querySelectorAll('[data-person] > .exit-label').forEach(label => {
+  scene.querySelectorAll('.exit-label').forEach(label => {
+    const person = label.parentElement && label.parentElement.hasAttribute('data-person');
     label.style.marginLeft = '0px';
-    const rect = label.getBoundingClientRect();
+    label.style.bottom = '';
+    label.style.transform = 'translateX(-50%)';
+    if (!person) {
+      label.style.whiteSpace = 'normal';
+      label.style.textAlign = 'center';
+      label.style.lineHeight = '1.15';
+      label.style.maxWidth = Math.min(148, Math.max(72, bound.width - pad * 2)) + 'px';
+    }
+    let rect = label.getBoundingClientRect();
     let shift = 0;
     if (rect.left < bound.left + pad) shift += (bound.left + pad) - rect.left;
     if (rect.right + shift > bound.right - pad) shift -= (rect.right + shift) - (bound.right - pad);
-    if (shift) label.style.marginLeft = shift.toFixed(1) + 'px';
+    const nudge = () => {
+      rect = label.getBoundingClientRect();
+      let extra = 0;
+      if (rect.left < bound.left + pad) extra += (bound.left + pad) - rect.left;
+      if (rect.right + extra > bound.right - pad) extra -= (rect.right + extra) - (bound.right - pad);
+      if (extra) {
+        shift += extra;
+        label.style.transform = 'translateX(calc(-50% + ' + shift.toFixed(1) + 'px))';
+      }
+    };
+    if (shift) label.style.transform = 'translateX(calc(-50% + ' + shift.toFixed(1) + 'px))';
+    nudge();
+    rect = label.getBoundingClientRect();
+    if (rect.bottom > bound.bottom - pad) label.style.bottom = (rect.bottom - (bound.bottom - pad)).toFixed(1) + 'px';
+    else if (rect.top < bound.top + pad) label.style.bottom = (-((bound.top + pad) - rect.top)).toFixed(1) + 'px';
   });
 }
 

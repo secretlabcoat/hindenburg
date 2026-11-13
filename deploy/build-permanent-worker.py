@@ -293,7 +293,7 @@ html,body{height:100%;overflow:hidden!important}
 .arrowcol button{min-height:36px;font-size:20px;padding:2px 4px}
 .viewlabel{font:12px Georgia,serif;color:#d9bd8d;margin:0}
 #exitline{font:12px Georgia,serif;color:#f6e7c8;margin:0 0 4px;min-height:1.2em}
-.exit-shown>.exit-label{opacity:1}
+.exit-shown>.exit-label{opacity:1;white-space:normal;text-align:center;line-height:1.15;max-width:148px}
 .exit-hot{transition:outline-color .12s,filter .12s}
 .exit-hot:hover,.exit-hot:focus-visible{outline:2px solid #f5d895;outline-offset:1px}
 .exit-hot:active{filter:brightness(1.35)}

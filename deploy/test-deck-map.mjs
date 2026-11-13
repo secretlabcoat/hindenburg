@@ -170,7 +170,8 @@ for (const id of gameNodes) {
     const label = hot && hot.getAttribute('aria-label');
     const hover = hot && hot.querySelector('.exit-label') && hot.querySelector('.exit-label').textContent;
     const good = label && (label.startsWith('Enter ') || label.startsWith('Exit ') || label === 'Continue forward');
-    if (!hot || hot.style.cursor !== 'pointer' || !good || hover !== label) {
+    const hoverOk = hover && (hover === label || label.includes(hover));
+    if (!hot || hot.style.cursor !== 'pointer' || !good || !hoverOk) {
       missingHot.push(id + ' ' + dir + ' -> ' + dest + ' ' + label);
     }
     row.exits.push(dir + ' → ' + dest + ' [' + (label || 'MISSING') + ']');
