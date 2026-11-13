@@ -180,12 +180,13 @@ function hindenburgSceneActions() {
     el.classList.add('exit-hot');
     el.style.cursor = 'pointer';
     el.setAttribute('aria-label', 'Talk to ' + name);
-    if (!el.querySelector('.exit-label')) {
-      const s = document.createElement('span');
-      s.className = 'exit-label';
-      s.textContent = 'Talk to ' + name;
-      el.append(s);
+    let caption = el.querySelector(':scope > .exit-label');
+    if (!caption) {
+      caption = document.createElement('span');
+      caption.className = 'exit-label';
+      el.append(caption);
     }
+    caption.textContent = hindenburgFigureCaption(name);
     el.onclick = () => choose(name);
     hindenburgDressFigure(el, name);
   });
@@ -212,6 +213,7 @@ function hindenburgSceneActions() {
       el.style.left = (count === 1 ? 40 : (i === 0 ? 24 : 58)) + '%';
     }
   });
+  hindenburgFitCaptions();
   paint.querySelectorAll('[data-object]').forEach(el => {
     const kind = el.dataset.object || 'object';
     const label = kind === 'trunk' ? 'Trunk' : 'Desk';
@@ -671,7 +673,7 @@ function hindenburgMountDeckHud(plan) {
   pop.addEventListener('click', e => { if (e.target === pop) setOpen(false); });
   select.onchange = () => { chosen = select.value; paintHud(); };
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) setOpen(false); });
-  window.addEventListener('resize', () => placePhotoHits());
+  window.addEventListener('resize', () => { placePhotoHits(); hindenburgFitCaptions(); });
   const prevDraw = draw;
   draw = function () {
     hindenburgApplyFacingRings(plan);
@@ -713,6 +715,28 @@ const HINDENBURG_CAST = {
   'Captain Swanson Kyle': 'captain',
   'Emilio Estavant': 'emilio'
 };
+
+function hindenburgFigureCaption(name) {
+  if (typeof SHORT !== 'undefined' && SHORT[name]) return SHORT[name];
+  const parts = String(name || '').split(' ').filter(Boolean);
+  if (parts.length > 2) return parts[0] + ' ' + parts[parts.length - 1];
+  return name;
+}
+
+function hindenburgFitCaptions() {
+  const scene = document.querySelector('#scene');
+  if (!scene) return;
+  const bound = scene.getBoundingClientRect();
+  const pad = 6;
+  scene.querySelectorAll('[data-person] > .exit-label').forEach(label => {
+    label.style.marginLeft = '0px';
+    const rect = label.getBoundingClientRect();
+    let shift = 0;
+    if (rect.left < bound.left + pad) shift += (bound.left + pad) - rect.left;
+    if (rect.right + shift > bound.right - pad) shift -= (rect.right + shift) - (bound.right - pad);
+    if (shift) label.style.marginLeft = shift.toFixed(1) + 'px';
+  });
+}
 
 function hindenburgCastId(name) {
   if (!name || /watcher/i.test(name)) return '';
