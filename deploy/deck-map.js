@@ -192,7 +192,7 @@ function hindenburgSceneActions() {
   const figures = [...paint.querySelectorAll('.cast-figure')];
   const stand = ({
     lounge_people: {'Damina Vontette': ['12%', '46%', '0'], 'Snardy Vontette': ['40%', '31%', '0']},
-    lounge_side: {'Colonel Landry Stoppard': ['10%', '58%', '0'], 'Vaunice Charles': ['44%', '56%', '0']},
+    lounge_side: {'Colonel Landry Stoppard': ['10%', '56%', '2%'], 'Vaunice Charles': ['44%', '56%', '2%']},
     corridor_forward: {'Manard Toxu': ['34%', '56%', '0']},
     promenade_side: {'Potter McNare': ['62%', '46%', '0']},
     office_desk: {'Helen Karens': ['54%', '48%', '0']},
