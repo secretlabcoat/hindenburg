@@ -124,6 +124,17 @@ for name, sha in FACING.items():
     if got != sha:
         raise SystemExit(f'{name} sha256 {got} != facing art {sha}')
     images[name] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+UNIQ = FACE / 'unique'
+DOOR_MANIFEST = json.loads((UNIQ / 'doors.json').read_text())['views']
+seen_art = {}
+for face_id, rects in DOOR_MANIFEST.items():
+    raw = (UNIQ / f'{face_id}.webp').read_bytes()
+    digest = hashlib.sha256(raw).hexdigest()
+    if digest in seen_art:
+        raise SystemExit(f'{face_id} art duplicates {seen_art[digest]}')
+    seen_art[digest] = face_id
+    images[face_id] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+    VIEW_ART[face_id] = face_id
 CAST_ROOT = ROOT / 'cast'
 CAST_MOODS = ('idle', 'smile', 'nod', 'surprised', 'frown', 'shake', 'sad')
 cast_pack = {}
@@ -229,7 +240,7 @@ draw=function(){
   img.className='scene-art';
   img.alt='';
   img.decoding='sync';
-  const mark=()=>{if(img.isConnected&&img.naturalWidth>0)paint.classList.add('has-art')};
+  const mark=()=>{if(img.isConnected)paint.classList.add('has-art')};
   img.onload=mark;
   img.onerror=()=>{img.remove();paint.classList.remove('has-art')};
   img.src=PACK.images[artId];
@@ -367,7 +378,7 @@ html,body{height:100%;overflow:hidden!important}
 """
 plan = json.loads((ROOT / 'deck-plans' / 'plans.json').read_text())
 deck_js = (ROOT / 'deck-map.js').read_text()
-deck_script = '<script id="deck-hud">\nconst DECK_PLAN=' + json.dumps(plan, separators=(',', ':')) + ';\nconst CAST_PACK=' + json.dumps(cast_pack, separators=(',', ':')) + ';\n' + deck_js + '\nhindenburgMountDeckHud(DECK_PLAN);\n</script>'
+deck_script = '<script id="deck-hud">\nconst DECK_PLAN=' + json.dumps(plan, separators=(',', ':')) + ';\nconst CAST_PACK=' + json.dumps(cast_pack, separators=(',', ':')) + ';\nconst HINDENBURG_DOORS=' + json.dumps(DOOR_MANIFEST, separators=(',', ':')) + ';\n' + deck_js + '\nhindenburgMountDeckHud(DECK_PLAN);\n</script>'
 html = BASE.decode('utf-8')
 if '</body>' not in html:
     raise SystemExit('baseline has no body close')

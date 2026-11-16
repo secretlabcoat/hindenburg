@@ -398,6 +398,26 @@ assert.ok(steward.querySelector('.cast-body'));
 steward.click();
 assert.ok(String(w.eval('CAST_PACK.steward.clips.idle')).startsWith('data:video/webm'));
 assert.ok(w.document.querySelector('#cast-stage'));
+const artSeen = new Map();
+const doorBugs = [];
+for (const id of gameNodes) {
+  w.eval('view=' + JSON.stringify(id) + ';draw()');
+  const img = w.document.querySelector('#scene .scene-art');
+  if (!img) doorBugs.push(id + ' missing art');
+  else {
+    const src = img.getAttribute('src');
+    if (artSeen.has(src)) doorBugs.push(id + ' shares art with ' + artSeen.get(src));
+    else artSeen.set(src, id);
+  }
+  const moves = [...w.document.querySelectorAll('#scene [data-move]')].filter(el => el.dataset.move);
+  const gated = [...w.document.querySelectorAll('#scene [data-gated]')];
+  const spec = w.eval('HINDENBURG_DOORS[' + JSON.stringify(id) + ']') || {};
+  const wantMove = Object.keys(spec).filter(k => k !== 'tour' && k !== 'climb');
+  const wantGate = Object.keys(spec).filter(k => k === 'tour' || k === 'climb');
+  if (moves.length !== wantMove.length) doorBugs.push(id + ' exits ' + moves.length + ' doors ' + wantMove.length);
+  if (gated.length !== wantGate.length) doorBugs.push(id + ' gates ' + gated.length + ' painted ' + wantGate.length);
+}
+assert.deepEqual(doorBugs, []);
 console.log('REACH');
 for (const id of gameNodes.sort()) console.log(id + ' | ' + info[id].name + ' | ' + info[id].facing + ' | ' + via[id] + (free.includes(id) ? '' : ' | GATED'));
 console.log('deck map tests passed', gameNodes.length, 'nodes', plan.decks.length, 'decks');

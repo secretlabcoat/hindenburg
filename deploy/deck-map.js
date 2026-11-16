@@ -689,43 +689,9 @@ function hindenburgMountDeckHud(plan) {
     }
   }
   function placePhotoHits() {
-    // Fractions of the source photograph. object-fit:cover uses the same scale.
-    const far = [0.455, 0.38, 0.09, 0.16];
-    const leftDoor = [0.30, 0.32, 0.11, 0.40];
-    const rightDoor = [0.60, 0.32, 0.11, 0.40];
-    const hits = {
-      washroom_door: {bdeck_corr_office: [0.400, 0.22, 0.195, 0.57]},
-      bdeck_washroom: {washroom_stall: [0.385, 0.14, 0.24, 0.68]},
-      bdeck_stairs_door: {bdeck_stairs: [0.37, 0.10, 0.26, 0.80]},
-      bdeck_stairs_up: {corridor_right: [0.36, 0.02, 0.28, 0.94]},
-      bdeck_stairs: {bdeck_stairs_up: [0.41, 0.24, 0.18, 0.42]},
-      corridor_right: {bdeck_stairs_door: [0.41, 0.24, 0.18, 0.42]},
-      bdeck_corr_office: {
-        b_crew_n: [0.175, 0.13, 0.20, 0.66],
-        b_cab_n: [0.63, 0.13, 0.21, 0.66]
-      },
-      b_mid_w: {office_desk: [0.37, 0.14, 0.26, 0.70]},
-      cabin_door: {b_cab_e: [0.41, 0.24, 0.18, 0.58]},
-      corridor_forward: {dining_s: far},
-      corridor_end: {lounge_windows: far},
-      corridor_left: {adeck_w: leftDoor, dining_s: rightDoor},
-      b_mid_n: {bdeck_washroom: far, office_desk: leftDoor, bar_e: rightDoor},
-      b_mid_s: {b_cab_s: far, office_desk: leftDoor, bar_e: rightDoor},
-      b_cab_n: {b_mid_n: far},
-      b_crew_n: {b_cab_n: far},
-      bdeck_cabins: {cabin_bunk: leftDoor},
-      keel_walk: {control_helm: [0.45, 0.44, 0.10, 0.12]},
-      keel_b_e: {keel_m_e: [0.45, 0.44, 0.10, 0.12]},
-      keel_m_e: {keel_e_e: [0.45, 0.44, 0.10, 0.12]},
-      keel_m_w: {keel_b_w: [0.45, 0.44, 0.10, 0.12]},
-      keel_e_w: {keel_m_w: [0.45, 0.44, 0.10, 0.12]},
-      tour_cells: {tour_tanks: [0.40, 0.70, 0.20, 0.18], climb: [0.46, 0.08, 0.08, 0.10]},
-      tour_tanks: {tour_end_e: [0.44, 0.20, 0.12, 0.20]},
-      tour_end: {keel_e_s: [0.42, 0.36, 0.16, 0.22]},
-      girder_nook: {keel_back: [0.42, 0.46, 0.16, 0.32]},
-      washroom_stall: {shower: [0.34, 0.12, 0.30, 0.70], toilet: [0.66, 0.48, 0.16, 0.32]}
-    };
-    const spec = hits[view];
+    const hits = (typeof HINDENBURG_DOORS === 'undefined' ? null : HINDENBURG_DOORS[view]) || {};
+    const shower = view === 'washroom_stall' ? {shower: [0.34, 0.12, 0.30, 0.70], toilet: [0.66, 0.48, 0.16, 0.32]} : {};
+    const spec = Object.assign({}, hits, shower);
     const paint = document.querySelector('#scene .paint');
     const img = paint && paint.querySelector('.scene-art');
     if (!spec || !paint || !img) return;
