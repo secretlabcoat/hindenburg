@@ -1279,7 +1279,6 @@
         {
           "id": "dining_n",
           "heading": 0,
-          "forward": "corridor_end",
           "style": "windows",
           "facing": "Promenade Windows",
           "name": "Dining Room"
@@ -1289,7 +1288,8 @@
           "heading": 90,
           "style": "windows",
           "facing": "Dining Tables",
-          "name": "Dining Room"
+          "name": "Dining Room",
+          "forward": "corridor_end"
         },
         {
           "id": "dining_s",

@@ -443,15 +443,15 @@
    ]
   },
   "girder_w": {},
-  "dining_n": {
+  "dining_n": {},
+  "dining_e": {
    "corridor_end": [
-    0.4,
-    0.16,
-    0.2,
-    0.66
+    0.31,
+    0.09,
+    0.178,
+    0.745
    ]
   },
-  "dining_e": {},
   "dining_s": {},
   "dining_w": {}
  }
