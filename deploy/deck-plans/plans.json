@@ -748,13 +748,13 @@
           "facing": "Aft Corridor",
           "doors": [
             {
-              "dest": "office_desk",
-              "label": "Enter Purser’s Office",
+              "dest": "bar_counter",
+              "label": "Enter Bar",
               "slot": "exit-left"
             },
             {
-              "dest": "bar_counter",
-              "label": "Enter Bar",
+              "dest": "office_desk",
+              "label": "Enter Purser’s Office",
               "slot": "exit-right"
             }
           ]

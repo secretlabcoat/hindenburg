@@ -82,7 +82,7 @@ VIEW_ART = {
     'tour_end': 'tour_end',
 }
 # These ready photos have no node in the permanent 36-view game.
-UNMAPPED_READY = ['bdeck_corr_stairs']
+UNMAPPED_READY = []
 # Painted central opening, and the permanent scene has no data-move hotspot.
 CENTER_EXIT = ['keel_walk', 'tour_end']
 
