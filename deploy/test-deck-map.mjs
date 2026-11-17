@@ -158,6 +158,13 @@ const stayedLounge = w.eval('view');
 lockedHot.click();
 assert.equal(w.eval('view'), stayedLounge);
 assert.ok(w.document.querySelector('#log').textContent.includes("It's locked."));
+w.eval("view='promenade_far';draw()");
+const farLocked = w.document.querySelector('#scene [data-move="locked"]');
+assert.ok(farLocked, 'promenade_far locked opening hotspot');
+const stayedFar = w.eval('view');
+farLocked.click();
+assert.equal(w.eval('view'), stayedFar);
+assert.ok(w.document.querySelector('#log').textContent.includes("It's locked."));
 w.eval("view='bdeck_washroom';draw()");
 assert.equal(w.document.querySelector('#deckhud-where').textContent.includes('Washroom') || w.document.querySelector('#deckhud-where').textContent.includes('corridor') || w.document.querySelector('#deckhud-where').textContent.length > 0, true);
 let missingHot = [];
@@ -221,14 +228,25 @@ for (const [id, place] of Object.entries(plan.places)) {
   assert.ok(attached, 'floating room ' + id);
 }
 const info = Object.fromEntries(gameNodes.map(id => [id, w.eval('({left:nodes[' + JSON.stringify(id) + '].left,right:nodes[' + JSON.stringify(id) + '].right,forward:nodes[' + JSON.stringify(id) + '].forward,name:nodes[' + JSON.stringify(id) + '].name,facing:nodes[' + JSON.stringify(id) + '].facing})')]));
+function walkDests(id) {
+  const out = [];
+  for (const dir of ['left', 'right', 'forward']) {
+    const dest = info[id][dir];
+    if (dest && info[dest]) out.push([dir, dest]);
+  }
+  const doors = w.eval('(nodes[' + JSON.stringify(id) + '] && nodes[' + JSON.stringify(id) + '].doors) || []');
+  for (const d of doors) {
+    if (d && d.dest && info[d.dest] && !out.some(pair => pair[1] === d.dest)) out.push(['door', d.dest]);
+  }
+  return out;
+}
 const seen = new Set(['washroom_stall']);
 const via = {washroom_stall: 'start'};
 const queue = ['washroom_stall'];
 while (queue.length) {
   const id = queue.shift();
-  for (const dir of ['left', 'right', 'forward']) {
-    const dest = info[id][dir];
-    if (dest && info[dest] && !seen.has(dest)) { seen.add(dest); via[dest] = id + ' · ' + dir; queue.push(dest); }
+  for (const [dir, dest] of walkDests(id)) {
+    if (!seen.has(dest)) { seen.add(dest); via[dest] = id + ' · ' + dir; queue.push(dest); }
   }
 }
 const free = [...seen];
@@ -236,9 +254,8 @@ if (!seen.has('tour_shoes')) { seen.add('tour_shoes'); via.tour_shoes = 'crew_do
 if (!seen.has('girder_nook')) { seen.add('girder_nook'); via.girder_nook = 'keel_back or tour_cells · climb after the glimmer (gated)'; queue.push('girder_nook'); }
 while (queue.length) {
   const id = queue.shift();
-  for (const dir of ['left', 'right', 'forward']) {
-    const dest = info[id][dir];
-    if (dest && info[dest] && !seen.has(dest)) { seen.add(dest); via[dest] = id + ' · ' + dir; queue.push(dest); }
+  for (const [dir, dest] of walkDests(id)) {
+    if (!seen.has(dest)) { seen.add(dest); via[dest] = id + ' · ' + dir; queue.push(dest); }
   }
 }
 const unreachable = gameNodes.filter(id => !seen.has(id));
@@ -257,10 +274,16 @@ for (const id of gameNodes) {
   if (!dest || id === 'girder_nook') continue;
   const backHeading = (plan.nodes[dest].heading + 180) % 360;
   const back = gameNodes.find(v => standOf(v) === standOf(dest) && plan.nodes[v].heading === backHeading);
-  const ret = back && info[back].forward;
-  const oppositeOk = ret && standOf(ret) === standOf(id);
-  const anyBack = gameNodes.some(v => standOf(v) === standOf(dest) && info[v].forward && standOf(info[v].forward) === standOf(id));
-  if (!oppositeOk && !anyBack) turnBugs.push(id + ' reverse forward -> ' + ret);
+  const exitsFrom = nid => {
+    const out = [];
+    if (info[nid] && info[nid].forward && info[info[nid].forward]) out.push(info[nid].forward);
+    const doors = w.eval('(nodes[' + JSON.stringify(nid) + '] && nodes[' + JSON.stringify(nid) + '].doors) || []');
+    for (const d of doors) if (d && d.dest && info[d.dest] && !out.includes(d.dest)) out.push(d.dest);
+    return out;
+  };
+  const oppositeOk = back && exitsFrom(back).some(d => standOf(d) === standOf(id));
+  const anyBack = gameNodes.some(v => standOf(v) === standOf(dest) && exitsFrom(v).some(d => standOf(d) === standOf(id)));
+  if (!oppositeOk && !anyBack) turnBugs.push(id + ' reverse forward -> ' + dest);
 }
 assert.deepEqual(turnBugs, []);
 function segHits(x1, y1, x2, y2, r) {
@@ -307,11 +330,11 @@ assert.ok(w.document.querySelector('.arrowcol #navleft'));
 assert.ok(w.document.querySelector('.arrowcol #navforward'));
 assert.ok(w.document.querySelector('.arrowcol #navright'));
 assert.equal(w.document.querySelector('#navback').getAttribute('aria-label'), 'Return the way you came');
-w.eval("view='corridor_forward';draw()");
-assert.ok(w.document.querySelector('#scene [data-move="dining_s"]'), 'dining door from the corridor');
+w.eval("view='corridor_left';draw()");
+assert.ok(w.document.querySelector('#scene [data-move="dining_w"]'), 'dining door from the corridor');
 w.eval("view='b_mid_n';draw()");
 assert.ok(w.document.querySelector('#scene [data-move="office_desk"]'), 'office door along the hall');
-assert.ok(w.document.querySelector('#scene [data-move="bar_e"]'), 'bar door along the hall');
+assert.ok(w.document.querySelector('#scene [data-move="bar_counter"]'), 'bar door along the hall');
 w.eval("view='bar_counter';draw()");
 const tap = w.document.querySelector('#scene [data-sink="bar_counter"]');
 assert.ok(tap, 'bar tap');
@@ -350,10 +373,10 @@ assert.equal(w.document.querySelector('#scene .wash-basin'), null);
 assert.equal(w.document.querySelector('#scene .wash-door'), null);
 w.eval("view='bdeck_stairs_up';draw()");
 assert.ok(w.document.querySelector('#scene .scene-art'), 'stairs north photograph');
-assert.equal(w.eval('nodes.bdeck_stairs_up.forward'), 'corridor_right');
-assert.ok(w.document.querySelector('#scene [data-move="corridor_right"].exit-stairs-up'));
+assert.equal(w.eval('nodes.bdeck_stairs_up.forward'), 'corridor_left');
+assert.ok(w.document.querySelector('#scene [data-move="corridor_left"].exit-stairs-up'));
 w.eval("view='bdeck_stairs_door';draw()");
-const stairDoor = w.document.querySelector('#scene [data-move="bdeck_stairs"].exit-stairs-door');
+const stairDoor = w.document.querySelector('#scene [data-move="b_north_e"].exit-stairs-door');
 assert.ok(stairDoor, 'centre door to the main corridor');
 assert.equal(stairDoor.getAttribute('aria-label'), 'Enter B-Deck Main Corridor');
 assert.equal(w.document.querySelector('#scene .doorway'), null);
@@ -435,11 +458,12 @@ const headingOf = id => {
   const node = plan.nodes[id];
   return node && typeof node.heading === 'number' ? node.heading : null;
 };
+const standOfFace = id => plan.nodes[id] && plan.nodes[id].stand;
 const oppositeOf = id => {
-  const place = placeOfFace(id);
+  const stand = standOfFace(id);
   const heading = headingOf(id);
-  if (place == null || heading == null) return null;
-  return gameNodes.find(v => placeOfFace(v) === place && (headingOf(v) + 180) % 360 === heading) || null;
+  if (stand == null || heading == null) return null;
+  return gameNodes.find(v => standOfFace(v) === stand && (headingOf(v) + 180) % 360 === heading) || null;
 };
 const exitsOf = id => {
   const face = info[id] || {};
@@ -486,10 +510,11 @@ for (const id of gameNodes) {
       const link = plan.links.find(l => (l.a === srcPlace && l.b === destPlace) || (l.b === srcPlace && l.a === destPlace));
       if (link && link.kind === 'door') structural.push(id + ' -> ' + dest + ' has no return door from ' + destPlace + ' back to ' + srcPlace);
       else notes.push(id + ' -> ' + dest + ': no door-type return from ' + destPlace + ' (link kind ' + ((link && link.kind) || 'none') + ')');
-    } else if (!returnOnArrival && !returnOnOpposite) {
-      notes.push(id + ' -> ' + dest + ': return door is in ' + destPlace + ' but not on the arrival facing or its opposite wall');
-    } else if (!returnOnArrival && returnOnOpposite) {
-      notes.push(id + ' -> ' + dest + ': turn around on ' + opp + ' to see the return door (arrival facing has no door)');
+    } else if (!returnOnOpposite) {
+      const why = opp
+        ? (returnOnArrival ? 'door is on the arrival facing, not behind you on ' + opp : 'return is not on opposite facing ' + opp)
+        : 'no opposite facing';
+      structural.push(id + ' -> ' + dest + ': turning around does not show the door back to ' + srcPlace + ' (' + why + ')');
     }
   }
 }

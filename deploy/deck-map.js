@@ -199,7 +199,7 @@ function hindenburgSceneActions() {
     lounge_people: {'Damina Vontette': ['16%', '30%', '12%'], 'Snardy Vontette': ['46%', '22%', '12%']},
     lounge_side: {'Colonel Landry Stoppard': ['2%', '46%', '0'], 'Vaunice Charles': ['50%', '46%', '0']},
     corridor_forward: {'Manard Toxu': ['16%', '48%', '2%']},
-    promenade_side: {'Potter McNare': ['60%', '44%', '2%']},
+    promenade_side: {'Potter McNare': ['74%', '44%', '2%']},
     office_desk: {'Helen Karens': ['20%', '50%', '2%']},
     bar_counter: {'Oreo Malloy': ['20%', '28%', '14%']},
     keel_walk: {'Bunny Treemont': ['70%', '40%', '6%']},

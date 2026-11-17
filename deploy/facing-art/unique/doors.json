@@ -1,13 +1,20 @@
 {
  "views": {
-  "promenade_far": {},
+  "promenade_far": {
+   "locked": [
+    0.468,
+    0.378,
+    0.058,
+    0.148
+   ]
+  },
   "promenade_side": {},
   "promenade": {
-   "lounge_side": [
-    0.4,
-    0.16,
-    0.2,
-    0.66
+   "lounge_people": [
+    0.418,
+    0.225,
+    0.137,
+    0.575
    ]
   },
   "promenade_aft": {},
@@ -29,7 +36,7 @@
    ]
   },
   "lounge_side": {
-   "promenade": [
+   "promenade_far": [
     0.302,
     0.098,
     0.162,
@@ -53,7 +60,7 @@
    ]
   },
   "corridor_forward": {
-   "dining_s": [
+   "locked": [
     0.44,
     0.2,
     0.12,
@@ -61,13 +68,13 @@
    ]
   },
   "corridor_left": {
-   "adeck_w": [
+   "adeck_cabin": [
     0.15,
     0.16,
     0.18,
     0.66
    ],
-   "dining_s": [
+   "dining_w": [
     0.67,
     0.16,
     0.18,
@@ -75,10 +82,17 @@
    ]
   },
   "adeck_n": {},
-  "adeck_cabin": {},
+  "adeck_cabin": {
+   "locked": [
+    0.9,
+    0.0,
+    0.1,
+    1.0
+   ]
+  },
   "adeck_s": {},
   "adeck_w": {
-   "corridor_left": [
+   "corridor_right": [
     0.4,
     0.16,
     0.2,
@@ -97,7 +111,7 @@
   },
   "washroom_wall": {},
   "bdeck_stairs_up": {
-   "corridor_right": [
+   "corridor_left": [
     0.36,
     0.02,
     0.28,
@@ -106,7 +120,7 @@
   },
   "bdeck_stairs_wall": {},
   "bdeck_stairs_door": {
-   "bdeck_stairs": [
+   "b_north_e": [
     0.37,
     0.1,
     0.26,
@@ -165,7 +179,7 @@
     0.18,
     0.66
    ],
-   "bar_e": [
+   "bar_counter": [
     0.67,
     0.16,
     0.18,
@@ -173,7 +187,7 @@
    ]
   },
   "b_mid_e": {
-   "bar_e": [
+   "bar_counter": [
     0.4,
     0.16,
     0.2,
@@ -193,7 +207,7 @@
     0.18,
     0.66
    ],
-   "bar_e": [
+   "bar_counter": [
     0.67,
     0.16,
     0.18,
@@ -267,10 +281,17 @@
    ]
   },
   "office_s": {},
-  "office_desk": {},
+  "office_desk": {
+   "locked": [
+    0.0,
+    0.12,
+    0.07,
+    0.88
+   ]
+  },
   "bar_n": {},
   "bar_e": {
-   "b_mid_e": [
+   "b_mid_w": [
     0.4,
     0.16,
     0.2,
@@ -279,7 +300,14 @@
   },
   "bar_s": {},
   "bar_counter": {},
-  "cabin_window": {},
+  "cabin_window": {
+   "locked": [
+    0.0,
+    0.0,
+    0.095,
+    0.95
+   ]
+  },
   "cabin_door": {
    "b_cab_e": [
     0.41,
@@ -288,8 +316,28 @@
     0.58
    ]
   },
-  "cabin_desk": {},
-  "cabin_bunk": {},
+  "cabin_desk": {
+   "locked": [
+    0.425,
+    0.175,
+    0.2,
+    0.56
+   ],
+   "locked2": [
+    0.71,
+    0.175,
+    0.135,
+    0.68
+   ]
+  },
+  "cabin_bunk": {
+   "locked": [
+    0.915,
+    0.0,
+    0.085,
+    0.88
+   ]
+  },
   "keel_back": {
    "b_crew_n": [
     0.4,
@@ -376,7 +424,20 @@
     0.66
    ]
   },
-  "tour_shoes": {},
+  "tour_shoes": {
+   "locked": [
+    0.0,
+    0.075,
+    0.12,
+    0.745
+   ],
+   "locked2": [
+    0.8,
+    0.12,
+    0.2,
+    0.7
+   ]
+  },
   "tour_shoes_s": {},
   "tour_shoes_w": {},
   "tour_cells_n": {},
@@ -396,7 +457,7 @@
   },
   "tour_cells_s": {},
   "tour_cells_w": {
-   "tour_shoes_w": [
+   "tour_shoes_s": [
     0.4,
     0.16,
     0.2,
@@ -452,7 +513,7 @@
   "girder_w": {},
   "dining_n": {},
   "dining_e": {
-   "corridor_end": [
+   "corridor_right": [
     0.31,
     0.09,
     0.178,

@@ -462,14 +462,14 @@
         {
           "id": "promenade",
           "heading": 180,
-          "forward": "lounge_side",
+          "forward": "lounge_people",
           "style": "door",
           "facing": "Observation Windows"
         },
         {
           "id": "promenade_aft",
           "heading": 270,
-          "facing": "Return Passage"
+          "facing": "Window Railing"
         }
       ]
     },
@@ -501,7 +501,7 @@
         {
           "id": "lounge_side",
           "heading": 270,
-          "forward": "promenade",
+          "forward": "promenade_far",
           "style": "door",
           "facing": "Lounge Seating"
         }
@@ -531,16 +531,15 @@
         {
           "id": "corridor_forward",
           "heading": 180,
-          "forward": "dining_s",
-          "facing": "Dining Room Door"
+          "facing": "Aft Hall"
         },
         {
           "id": "corridor_left",
           "heading": 270,
-          "forward": "adeck_w",
+          "forward": "adeck_cabin",
           "doors": [
             {
-              "dest": "dining_s",
+              "dest": "dining_w",
               "label": "Enter Dining Room",
               "slot": "exit-left"
             }
@@ -578,7 +577,7 @@
         {
           "id": "adeck_w",
           "heading": 270,
-          "forward": "corridor_left",
+          "forward": "corridor_right",
           "style": "door",
           "facing": "Inside Wall"
         }
@@ -628,7 +627,7 @@
         {
           "id": "bdeck_stairs_up",
           "heading": 0,
-          "forward": "corridor_right",
+          "forward": "corridor_left",
           "style": "plain",
           "facing": "Stairs Up"
         },
@@ -641,7 +640,7 @@
         {
           "id": "bdeck_stairs_door",
           "heading": 180,
-          "forward": "bdeck_stairs",
+          "forward": "b_north_e",
           "style": "plain",
           "facing": "Main Corridor Door"
         },
@@ -728,7 +727,7 @@
               "slot": "exit-left"
             },
             {
-              "dest": "bar_e",
+              "dest": "bar_counter",
               "label": "Enter Bar",
               "slot": "exit-right"
             }
@@ -737,7 +736,7 @@
         {
           "id": "b_mid_e",
           "heading": 90,
-          "forward": "bar_e",
+          "forward": "bar_counter",
           "style": "corridor",
           "facing": "Bar Door"
         },
@@ -754,7 +753,7 @@
               "slot": "exit-left"
             },
             {
-              "dest": "bar_e",
+              "dest": "bar_counter",
               "label": "Enter Bar",
               "slot": "exit-right"
             }
@@ -896,7 +895,7 @@
         {
           "id": "bar_e",
           "heading": 90,
-          "forward": "b_mid_e",
+          "forward": "b_mid_w",
           "style": "door",
           "facing": "Starboard Wall"
         },
@@ -1153,7 +1152,7 @@
         {
           "id": "tour_cells_w",
           "heading": 270,
-          "forward": "tour_shoes_w",
+          "forward": "tour_shoes_s",
           "style": "keel",
           "facing": "Overshoes"
         }
@@ -1289,7 +1288,7 @@
           "style": "windows",
           "facing": "Dining Tables",
           "name": "Dining Room",
-          "forward": "corridor_end"
+          "forward": "corridor_right"
         },
         {
           "id": "dining_s",
