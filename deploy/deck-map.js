@@ -197,7 +197,7 @@ function hindenburgSceneActions() {
   const figures = [...paint.querySelectorAll('.cast-figure')];
   const stand = ({
     lounge_people: {'Damina Vontette': ['16%', '30%', '12%'], 'Snardy Vontette': ['46%', '22%', '12%']},
-    lounge_side: {'Colonel Landry Stoppard': ['14%', '46%', '0'], 'Vaunice Charles': ['50%', '46%', '0']},
+    lounge_side: {'Colonel Landry Stoppard': ['2%', '46%', '0'], 'Vaunice Charles': ['50%', '46%', '0']},
     corridor_forward: {'Manard Toxu': ['16%', '48%', '2%']},
     promenade_side: {'Potter McNare': ['60%', '44%', '2%']},
     office_desk: {'Helen Karens': ['20%', '50%', '2%']},
@@ -627,6 +627,21 @@ function hindenburgMountDeckHud(plan) {
     b.onclick = () => useExit({gated: kind, dest: null, label: label});
     paint.append(b);
   }
+  function addLockedHotspot(key) {
+    const paint = document.querySelector('#scene .paint') || document.querySelector('#scene');
+    if (!paint || !key || paint.querySelector('[data-move="' + key + '"]')) return;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'photo-exit exit-hot exit-shown exit-locked';
+    b.dataset.move = key;
+    b.setAttribute('aria-label', "It's locked.");
+    const s = document.createElement('span');
+    s.className = 'exit-label';
+    s.textContent = "It's locked.";
+    b.append(s);
+    b.onclick = ev => { ev.stopPropagation(); hindenburgLocked(); };
+    paint.append(b);
+  }
   function samePlace(dest) {
     return plan.nodes[view] && plan.nodes[dest] && plan.nodes[dest].place === plan.nodes[view].place;
   }
@@ -636,8 +651,11 @@ function hindenburgMountDeckHud(plan) {
     if (!n || !paint) return;
     const dest = n.forward && nodes[n.forward] ? n.forward : '';
     const extras = (n.doors || []).filter(d => d && d.dest && nodes[d.dest] && d.dest !== dest);
+    const hits = (typeof HINDENBURG_DOORS === 'undefined' ? null : HINDENBURG_DOORS[view]) || {};
+    const lockedKeys = Object.keys(hits).filter(key => key !== 'tour' && key !== 'climb' && !nodes[key]);
     if (!extras.length) {
       paint.querySelectorAll('[data-move]').forEach(el => {
+        if (lockedKeys.includes(el.dataset.move)) return;
         if (dest && el.dataset.move !== dest) el.dataset.move = dest;
       });
     }
@@ -662,6 +680,7 @@ function hindenburgMountDeckHud(plan) {
     });
     if (view === 'crew_door') addGated('tour', 'Join escorted tour', 'exit-gated');
     if (view === 'tour_cells' || view === 'keel_back') addGated('climb', 'Climb to the upper rings', 'exit-climb');
+    lockedKeys.forEach(key => addLockedHotspot(key));
     paint.querySelectorAll('[data-move]').forEach(el => {
       const dest = el.dataset.move;
       el.style.cursor = 'pointer';

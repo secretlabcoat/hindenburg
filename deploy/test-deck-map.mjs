@@ -151,6 +151,13 @@ assert.ok(climbHot, 'gated ladder hotspot');
 climbHot.click();
 assert.equal(w.eval('view'), 'tour_cells');
 assert.ok(w.document.querySelector('#log').textContent.includes("It's locked."));
+w.eval("view='lounge_people';draw()");
+const lockedHot = w.document.querySelector('#scene [data-move="locked"]');
+assert.ok(lockedHot, 'lounge_people locked door hotspot');
+const stayedLounge = w.eval('view');
+lockedHot.click();
+assert.equal(w.eval('view'), stayedLounge);
+assert.ok(w.document.querySelector('#log').textContent.includes("It's locked."));
 w.eval("view='bdeck_washroom';draw()");
 assert.equal(w.document.querySelector('#deckhud-where').textContent.includes('Washroom') || w.document.querySelector('#deckhud-where').textContent.includes('corridor') || w.document.querySelector('#deckhud-where').textContent.length > 0, true);
 let missingHot = [];
@@ -420,4 +427,87 @@ for (const id of gameNodes) {
 assert.deepEqual(doorBugs, []);
 console.log('REACH');
 for (const id of gameNodes.sort()) console.log(id + ' | ' + info[id].name + ' | ' + info[id].facing + ' | ' + via[id] + (free.includes(id) ? '' : ' | GATED'));
+
+// Door / arrival consistency across the whole map.
+const doorManifest = w.eval('HINDENBURG_DOORS');
+const placeOfFace = id => plan.nodes[id] && plan.nodes[id].place;
+const headingOf = id => {
+  const node = plan.nodes[id];
+  return node && typeof node.heading === 'number' ? node.heading : null;
+};
+const oppositeOf = id => {
+  const place = placeOfFace(id);
+  const heading = headingOf(id);
+  if (place == null || heading == null) return null;
+  return gameNodes.find(v => placeOfFace(v) === place && (headingOf(v) + 180) % 360 === heading) || null;
+};
+const exitsOf = id => {
+  const face = info[id] || {};
+  const out = [];
+  if (face.forward && nodesExist(face.forward)) out.push(face.forward);
+  const doors = w.eval('(nodes[' + JSON.stringify(id) + '] && nodes[' + JSON.stringify(id) + '].doors) || []');
+  for (const d of doors) {
+    if (d && d.dest && nodesExist(d.dest) && !out.includes(d.dest)) out.push(d.dest);
+  }
+  return out;
+};
+function nodesExist(id) { return !!info[id]; }
+const structural = [];
+const notes = [];
+for (const id of gameNodes) {
+  const exits = exitsOf(id);
+  const spec = doorManifest[id] || {};
+  const painted = Object.keys(spec).filter(k => k !== 'tour' && k !== 'climb');
+  for (const dest of exits) {
+    if (!spec[dest]) structural.push(id + ' exit to ' + dest + ' has no painted door rect');
+  }
+  for (const key of painted) {
+    const r = spec[key];
+    if (!Array.isArray(r) || r.length !== 4) structural.push(id + ' ' + key + ' rect is not [x,y,w,h]');
+    else {
+      const [x, y, rw, rh] = r;
+      if (x < 0 || y < 0 || rw <= 0 || rh <= 0 || x + rw > 1.01 || y + rh > 1.01) {
+        structural.push(id + ' ' + key + ' rect out of bounds ' + JSON.stringify(r));
+      }
+    }
+    if (key !== 'locked' && !exits.includes(key) && info[key]) {
+      structural.push(id + ' painted door to ' + key + ' is not an exit on this facing');
+    }
+  }
+  for (const dest of exits) {
+    if (placeOfFace(dest) === placeOfFace(id)) continue;
+    const destPlace = placeOfFace(dest);
+    const srcPlace = placeOfFace(id);
+    const returnOnArrival = exitsOf(dest).some(d => placeOfFace(d) === srcPlace);
+    const opp = oppositeOf(dest);
+    const returnOnOpposite = opp && exitsOf(opp).some(d => placeOfFace(d) === srcPlace);
+    const anyReturn = gameNodes.some(v => placeOfFace(v) === destPlace && exitsOf(v).some(d => placeOfFace(d) === srcPlace));
+    if (!anyReturn) {
+      const link = plan.links.find(l => (l.a === srcPlace && l.b === destPlace) || (l.b === srcPlace && l.a === destPlace));
+      if (link && link.kind === 'door') structural.push(id + ' -> ' + dest + ' has no return door from ' + destPlace + ' back to ' + srcPlace);
+      else notes.push(id + ' -> ' + dest + ': no door-type return from ' + destPlace + ' (link kind ' + ((link && link.kind) || 'none') + ')');
+    } else if (!returnOnArrival && !returnOnOpposite) {
+      notes.push(id + ' -> ' + dest + ': return door is in ' + destPlace + ' but not on the arrival facing or its opposite wall');
+    } else if (!returnOnArrival && returnOnOpposite) {
+      notes.push(id + ' -> ' + dest + ': turn around on ' + opp + ' to see the return door (arrival facing has no door)');
+    }
+  }
+}
+for (const link of plan.links) {
+  if (link.kind === 'gated') continue;
+  const a = link.a, b = link.b;
+  const aHas = gameNodes.some(id => placeOfFace(id) === a && exitsOf(id).some(d => placeOfFace(d) === b));
+  const bHas = gameNodes.some(id => placeOfFace(id) === b && exitsOf(id).some(d => placeOfFace(d) === a));
+  if (aHas && !bHas) structural.push('link ' + link.id + ': ' + a + ' can enter ' + b + ' but no door back');
+  if (bHas && !aHas) structural.push('link ' + link.id + ': ' + b + ' can enter ' + a + ' but no door back');
+}
+console.log('DOOR CONSISTENCY');
+if (structural.length) console.log('STRUCTURAL', structural.join(' | '));
+else console.log('STRUCTURAL none');
+if (notes.length) {
+  console.log('ARRIVAL NOTES');
+  for (const n of notes) console.log('  ' + n);
+} else console.log('ARRIVAL NOTES none');
+assert.deepEqual(structural, []);
+
 console.log('deck map tests passed', gameNodes.length, 'nodes', plan.decks.length, 'decks');
