@@ -127,7 +127,14 @@
         0.8
       ]
     },
-    "bdeck_stairs_bar": {},
+    "bdeck_stairs_bar": {
+      "locked": [
+        0.1,
+        0.22,
+        0.13,
+        0.64
+      ]
+    },
     "bdeck_washroom": {
       "washroom_stall": [
         0.385,
@@ -521,7 +528,7 @@
     },
     "tour_cells_s": {},
     "tour_cells_w": {
-      "tour_shoes_s": [
+      "tour_shoes_w": [
         0.4,
         0.22,
         0.2,

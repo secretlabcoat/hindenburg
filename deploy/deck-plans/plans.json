@@ -1064,7 +1064,7 @@
       "faces": [
         {
           "id": "control_back",
-          "heading": 0,
+          "heading": 180,
           "forward": "keel_back",
           "facing": "Keel Ladder"
         },
@@ -1076,7 +1076,7 @@
         },
         {
           "id": "control_helm",
-          "heading": 180,
+          "heading": 0,
           "facing": "The Helm"
         },
         {
@@ -1098,14 +1098,14 @@
       "faces": [
         {
           "id": "tour_shoes_n",
-          "heading": 0,
+          "heading": 90,
           "forward": "tour_cells",
           "style": "door",
-          "facing": "Crew Door"
+          "facing": "Tour Passage"
         },
         {
           "id": "tour_shoes",
-          "heading": 90,
+          "heading": 0,
           "facing": "Felt Overshoes"
         },
         {
@@ -1152,7 +1152,7 @@
         {
           "id": "tour_cells_w",
           "heading": 270,
-          "forward": "tour_shoes_s",
+          "forward": "tour_shoes_w",
           "style": "keel",
           "facing": "Overshoes"
         }
