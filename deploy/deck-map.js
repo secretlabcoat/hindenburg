@@ -11,39 +11,68 @@ function hindenburgDeckSvg(plan, deckId, marker) {
   let labels = '';
   const onDeck = id => plan.places[id] && plan.places[id].deck === deckId;
   const span = (a0, a1, b0, b1) => Math.min(a1, b1) - Math.max(a0, b0);
-  const doorSegment = (a, b) => {
-    const tries = [[a, b], [b, a]];
+  const rectsOf = p => (p && p.rects && p.rects.length) ? p.rects : [{x: p.x, y: p.y, w: p.w, h: p.h}];
+  const doorSegmentRects = (p, q) => {
+    const tries = [[p, q], [q, p]];
     for (let t = 0; t < tries.length; t++) {
-      const p = tries[t][0], q = tries[t][1];
-      const pr = p.x + p.w, pb = p.y + p.h, qr = q.x + q.w, qb = q.y + q.h;
-      if (Math.abs(pr - q.x) <= 0.8 && span(p.y, pb, q.y, qb) >= 14) {
-        const y = (Math.max(p.y, q.y) + Math.min(pb, qb)) / 2;
-        return [pr - 10, y, pr + 10, y];
+      const a = tries[t][0], b = tries[t][1];
+      const ar = a.x + a.w, ab = a.y + a.h, br = b.x + b.w, bb = b.y + b.h;
+      if (Math.abs(ar - b.x) <= 0.8 && span(a.y, ab, b.y, bb) >= 14) {
+        const y = (Math.max(a.y, b.y) + Math.min(ab, bb)) / 2;
+        return [ar - 10, y, ar + 10, y];
       }
-      if (Math.abs(pb - q.y) <= 0.8 && span(p.x, pr, q.x, qr) >= 14) {
-        const x = (Math.max(p.x, q.x) + Math.min(pr, qr)) / 2;
-        return [x, pb - 10, x, pb + 10];
+      if (Math.abs(ab - b.y) <= 0.8 && span(a.x, ar, b.x, br) >= 14) {
+        const x = (Math.max(a.x, b.x) + Math.min(ar, br)) / 2;
+        return [x, ab - 10, x, ab + 10];
       }
     }
     return null;
   };
-  const addDoor = (id, a, b, kind) => {
-    const seg = doorSegment(a, b);
-    if (!seg) return;
+  const doorSegment = (a, b) => {
+    const ar = rectsOf(a), br = rectsOf(b);
+    for (let i = 0; i < ar.length; i++) {
+      for (let j = 0; j < br.length; j++) {
+        const seg = doorSegmentRects(ar[i], br[j]);
+        if (seg) return seg;
+      }
+    }
+    return null;
+  };
+  const addGap = seg => {
     const x1 = seg[0], y1 = seg[1], x2 = seg[2], y2 = seg[3];
     const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
     const horiz = Math.abs(y1 - y2) < 0.2;
     if (horiz) gaps += '<rect x="' + (mx - 4).toFixed(1) + '" y="' + (my - 16).toFixed(1) + '" width="8" height="32" fill="#d6e6f5"/>';
     else gaps += '<rect x="' + (mx - 16).toFixed(1) + '" y="' + (my - 4).toFixed(1) + '" width="32" height="8" fill="#d6e6f5"/>';
+  };
+  const addDoor = (id, a, b, kind) => {
+    const seg = doorSegment(a, b);
+    if (!seg) return;
+    addGap(seg);
+    const x1 = seg[0], y1 = seg[1], x2 = seg[2], y2 = seg[3];
     const dash = kind === 'gated' ? ' stroke-dasharray="4 3"' : '';
     const coords = ' x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '"';
     lines += '<line data-link="' + id + '"' + coords + ' stroke="#243044" stroke-width="' + (kind === 'stairs' ? 5 : 4) + '"' + dash + '/>';
   };
   for (const [id, p] of places) {
     const fill = p.label.indexOf('corridor') >= 0 || p.label.indexOf('walkway') >= 0 ? '#e7d2c4' : '#c48b93';
-    shapes += '<g data-place="' + id + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + p.h + '" rx="2" fill="' + fill + '" stroke="#243044" stroke-width="4"/></g>';
-    labels += '<text x="' + (p.x + p.w / 2) + '" y="' + (p.y + p.h / 2) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="13">' + esc(p.label) + '</text>';
+    const rs = rectsOf(p);
+    shapes += '<g data-place="' + id + '">';
+    for (let i = 0; i < rs.length; i++) {
+      const r = rs[i];
+      shapes += '<rect x="' + r.x + '" y="' + r.y + '" width="' + r.w + '" height="' + r.h + '" rx="2" fill="' + fill + '" stroke="#243044" stroke-width="4"/>';
+    }
+    shapes += '</g>';
+    const lab = rs[0];
+    labels += '<text x="' + (lab.x + lab.w / 2) + '" y="' + (lab.y + lab.h / 2) + '" text-anchor="middle" fill="#1c2430" font-family="Georgia, serif" font-size="13">' + esc(p.label) + '</text>';
+    for (let i = 0; i < rs.length; i++) {
+      for (let j = i + 1; j < rs.length; j++) {
+        const inner = doorSegmentRects(rs[i], rs[j]);
+        if (inner) addGap(inner);
+      }
+    }
   }
+
   for (const link of plan.links) {
     if (onDeck(link.a) && onDeck(link.b)) addDoor(link.id, plan.places[link.a], plan.places[link.b], link.kind);
   }

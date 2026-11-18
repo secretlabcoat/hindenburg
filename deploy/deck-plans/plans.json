@@ -67,10 +67,14 @@
     },
     "stairs": {
       "deck": "B",
-      "x": 250,
-      "y": 106,
-      "w": 130,
-      "h": 74,
+      "x": 16,
+      "y": 64,
+      "w": 124,
+      "h": 42,
+      "rects": [
+        {"x": 16, "y": 64, "w": 124, "h": 42},
+        {"x": 80, "y": 106, "w": 60, "h": 74}
+      ],
       "label": "Stair landing"
     },
     "bcorridor": {
@@ -186,10 +190,10 @@
       "deck": "B",
       "from": "stairs",
       "dir": "up",
-      "x": 250,
-      "y": 46,
-      "w": 130,
-      "h": 60,
+      "x": 16,
+      "y": 22,
+      "w": 124,
+      "h": 42,
       "label": "To A deck",
       "link": "acorridor-stairs"
     },
@@ -619,8 +623,8 @@
       "stand": "stairs",
       "place": "stairs",
       "at": [
-        315,
-        143
+        78,
+        85
       ],
       "name": "B-Deck Stair Landing",
       "faces": [
