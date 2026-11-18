@@ -462,7 +462,7 @@
         {
           "id": "promenade",
           "heading": 180,
-          "forward": "lounge_people",
+          "forward": "lounge_aft",
           "style": "door",
           "facing": "Observation Windows"
         },
@@ -484,7 +484,7 @@
       "faces": [
         {
           "id": "lounge_windows",
-          "heading": 0,
+          "heading": 270,
           "facing": "Lounge Windows"
         },
         {
@@ -500,10 +500,10 @@
         },
         {
           "id": "lounge_side",
-          "heading": 270,
+          "heading": 0,
           "forward": "promenade_far",
           "style": "door",
-          "facing": "Lounge Seating"
+          "facing": "Promenade Door"
         }
       ]
     },
@@ -519,7 +519,7 @@
         {
           "id": "corridor_end",
           "heading": 0,
-          "forward": "lounge_windows",
+          "forward": "lounge_side",
           "facing": "Lounge Entrance"
         },
         {
@@ -565,8 +565,8 @@
         },
         {
           "id": "adeck_cabin",
-          "heading": 90,
-          "facing": "Windowless Cabin"
+          "heading": 270,
+          "facing": "Cabin Window"
         },
         {
           "id": "adeck_s",
@@ -576,10 +576,10 @@
         },
         {
           "id": "adeck_w",
-          "heading": 270,
+          "heading": 90,
           "forward": "corridor_right",
           "style": "door",
-          "facing": "Inside Wall"
+          "facing": "Corridor Door"
         }
       ]
     },
@@ -894,10 +894,10 @@
         },
         {
           "id": "bar_e",
-          "heading": 90,
+          "heading": 270,
           "forward": "b_mid_w",
           "style": "door",
-          "facing": "Starboard Wall"
+          "facing": "Corridor Door"
         },
         {
           "id": "bar_s",
@@ -907,7 +907,7 @@
         },
         {
           "id": "bar_counter",
-          "heading": 270,
+          "heading": 90,
           "facing": "The Bar"
         }
       ]
@@ -1226,7 +1226,7 @@
           "heading": 270,
           "forward": "tour_tanks_w",
           "style": "keel",
-          "facing": "Outer Cover"
+          "facing": "Tank Passage"
         }
       ]
     },
